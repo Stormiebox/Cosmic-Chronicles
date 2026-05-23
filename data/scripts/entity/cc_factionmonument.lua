@@ -9,7 +9,7 @@ function CosmicChroniclesMonument.interactionPossible(playerIndex, option)
 end
 
 function CosmicChroniclesMonument.initUI()
-    ScriptUI():registerInteraction("Read Inscription", "onInteract")
+    ScriptUI():registerInteraction("Read Inscription"%_t, "onInteract")
 end
 
 function CosmicChroniclesMonument.onInteract()
@@ -26,20 +26,18 @@ function CosmicChroniclesMonument.readLore()
     local fName = faction.name
 
     -- Procedurally generate the monument's text based on the AI's internal traits
-    local trait1 = faction:getTrait("aggressive") and "unyielding strength and conquest" or "diplomacy and unity"
-    local trait2 = faction:getTrait("wealthy") and "endless prosperity" or "scavenging the ashes of the old world"
+    local trait1 = faction:getTrait("aggressive") and "unyielding strength and conquest"%_T or "diplomacy and unity"%_T
+    local trait2 = faction:getTrait("wealthy") and "endless prosperity"%_T or "scavenging the ashes of the old world"%_T
 
-    local text = "=== CULTURAL MONUMENT OF THE " .. fName:upper() .. " ===\n\n"
-    text = text .. "We survived the Great Darkness through " .. trait1 .. ".\n"
-    text = text .. "Our future among the stars is paved with " .. trait2 .. ".\n\n"
-    text = text .. "Let all who pass through this system know that we stand eternal against the Xsotan threat."
-
-    invokeClientFunction(player, "showLoreDialog", text)
+    invokeClientFunction(player, "showLoreDialog", fName, trait1, trait2)
 end
 callable(CosmicChroniclesMonument, "readLore")
 
-function CosmicChroniclesMonument.showLoreDialog(text)
+function CosmicChroniclesMonument.showLoreDialog(fName, trait1, trait2)
     if not onClient() then return end
-    local dialog = {text = text, answers = {{answer = "Fascinating."}}}
+
+    local text = "=== CULTURAL MONUMENT OF THE ${faction} ===\n\nWe survived the Great Darkness through ${trait1}.\nOur future among the stars is paved with ${trait2}.\n\nLet all who pass through this system know that we stand eternal against the Xsotan threat."%_t % {faction = fName:upper(), trait1 = trait1%_t, trait2 = trait2%_t}
+
+    local dialog = {text = text, answers = {{answer = "Fascinating."%_t}}}
     ScriptUI():showDialog(dialog)
 end

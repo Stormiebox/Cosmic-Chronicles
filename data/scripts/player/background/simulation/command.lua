@@ -13,7 +13,7 @@ function Command:sendMail(sender, header, text, formatArgs, items)
     if log then
         -- Avorion mail requires format string parameters for translations to work correctly
         text = text .. "\n\n${ccLogHeader}\n\"${ccLogText}\""
-        formatArgs.ccLogHeader = "Captain's Log:"%_t
+        formatArgs.ccLogHeader = "Captain's Log:"%_T
         formatArgs.ccLogText = log
     end
 

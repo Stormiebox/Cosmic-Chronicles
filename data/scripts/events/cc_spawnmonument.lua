@@ -17,7 +17,7 @@ function initialize()
     desc.factionIndex = faction.index
     desc:setMovePlan(plan)
     desc.position = Matrix() -- Spawn it perfectly in the center (0,0,0)
-    desc.title = "Cultural Monument"%_t
+    desc.title = "Cultural Monument"%_T
 
     local station = sector:createEntity(desc)
     station:addScriptOnce("entity/cc_factionmonument.lua")

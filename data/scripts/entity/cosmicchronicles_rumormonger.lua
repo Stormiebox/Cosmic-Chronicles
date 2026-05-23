@@ -101,7 +101,7 @@ end
 
 -- Initializes the client-side interaction menu
 function CosmicChroniclesRumormonger.initUI()
-    ScriptUI():registerInteraction("Any rumors?", "onAskRumors")
+    ScriptUI():registerInteraction("Any rumors?"%_t, "onAskRumors")
 end
 
 -- Triggered on the Client when the player clicks the menu option
@@ -136,7 +136,7 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
     local rumor = CosmicVaultDialogue.getValidLine("rumor", context)
 
     if not rumor then
-        rumor = "I don't have any gossip right now, friend. The sector has been quiet."
+        rumor = "I don't have any gossip right now, friend. The sector has been quiet."%_T
     end
 
     invokeClientFunction(player, "showRumorDialog", rumor)
@@ -144,10 +144,10 @@ end
 callable(CosmicChroniclesRumormonger, "getRumorFromServer")
 
 -- Triggered on the Client. Receives the string from the server and renders the text box.
-function CosmicChroniclesRumormonger.showRumorDialog(text)
+function CosmicChroniclesRumormonger.showRumorDialog(rumor)
     if not onClient() then return end
 
-    local dialog = { text = text, answers = { {answer = "Interesting. Thanks."} } }
+    local dialog = { text = rumor%_t, answers = { {answer = "Interesting. Thanks."%_t} } }
 
     -- Render the Avorion dialogue UI
     ScriptUI():showDialog(dialog)

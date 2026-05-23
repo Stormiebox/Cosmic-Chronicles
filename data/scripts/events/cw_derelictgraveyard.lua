@@ -23,12 +23,12 @@ function initialize()
     local generator = SectorGenerator(sector:getCoordinates())
     local position = MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(math.random(-50, 50), math.random(-50, 50), math.random(-50, 50)))
     local stash = generator:createStash(position)
-    stash.title = "Flight Recorder (Black Box)"%_t
+    stash.title = "Flight Recorder (Black Box)"%_T
     stash:removeScript("stash.lua")
     stash:addScriptOnce("entity/cc_blackbox.lua")
 
     -- Add atmospheric warning
-    Sector():broadcastChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Warning: Massive debris field detected. Sensor profiles match recent military casualties."%_t)
+    Sector():broadcastChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Warning: Massive debris field detected. Sensor profiles match recent military casualties."%_T)
 
     terminate()
 end

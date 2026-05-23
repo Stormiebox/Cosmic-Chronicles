@@ -12,7 +12,7 @@ function CosmicChroniclesRefugee.interactionPossible(playerIndex, option)
 end
 
 function CosmicChroniclesRefugee.initUI()
-    ScriptUI():registerInteraction("Offer Assistance", "onInteract")
+    ScriptUI():registerInteraction("Offer Assistance"%_t, "onInteract")
 end
 
 function CosmicChroniclesRefugee.onInteract()
@@ -21,7 +21,7 @@ end
 
 function CosmicChroniclesRefugee.getDialog()
     local dialog = {}
-    dialog.text = "Thank the stars you stopped! We barely escaped the last sector and our engines are damaged. We are critically low on supplies. Do you have any Food or Medical Supplies to spare?"
+    dialog.text = "Thank the stars you stopped! We barely escaped the last sector and our engines are damaged. We are critically low on supplies. Do you have any Food or Medical Supplies to spare?"%_t
     dialog.answers = {}
 
     local player = Player()
@@ -32,17 +32,17 @@ function CosmicChroniclesRefugee.getDialog()
         local meds = ship:getCargoAmount("Medical Supplies")
 
         if food >= 50 then
-            table.insert(dialog.answers, {answer = "Here is 50 Food.", onSelect = "onDonateFood"})
+            table.insert(dialog.answers, {answer = "Here is 50 Food."%_t, onSelect = "onDonateFood"})
         end
         if meds >= 50 then
-            table.insert(dialog.answers, {answer = "Here is 50 Medical Supplies.", onSelect = "onDonateMeds"})
+            table.insert(dialog.answers, {answer = "Here is 50 Medical Supplies."%_t, onSelect = "onDonateMeds"})
         end
     end
 
     if #dialog.answers == 0 then
-        table.insert(dialog.answers, {answer = "I'm sorry, I don't have anything to spare right now."})
+        table.insert(dialog.answers, {answer = "I'm sorry, I don't have anything to spare right now."%_t})
     else
-        table.insert(dialog.answers, {answer = "I can't help you right now."})
+        table.insert(dialog.answers, {answer = "I can't help you right now."%_t})
     end
 
     return dialog
@@ -67,18 +67,18 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
         if faction then Galaxy():changeFactionRelations(player.index, faction.index, 10000) end
 
         local context = { warHeat = 100 }
-        local rumor = CosmicVaultDialogue.getValidLine("rumor", context) or "The enemy is ruthless... stay safe out there."
-        local text = "Thank you so much! You saved our lives. By the way, be careful... " .. rumor
+        local rumor = CosmicVaultDialogue.getValidLine("rumor", context) or "The enemy is ruthless... stay safe out there."%_T
 
-        invokeClientFunction(player, "showThanksDialog", text)
+        invokeClientFunction(player, "showThanksDialog", rumor)
         deferredCallback(10, "jumpAway") -- Jump to safety after 10 seconds
     end
 end
 callable(CosmicChroniclesRefugee, "donate")
 
-function CosmicChroniclesRefugee.showThanksDialog(text)
+function CosmicChroniclesRefugee.showThanksDialog(rumor)
     if not onClient() then return end
-    local dialog = {text = text, answers = {{answer = "Safe travels."}}}
+    local text = "Thank you so much! You saved our lives. By the way, be careful... ${rumor}"%_t % {rumor = rumor%_t}
+    local dialog = {text = text, answers = {{answer = "Safe travels."%_t}}}
     ScriptUI():showDialog(dialog)
 end
 
