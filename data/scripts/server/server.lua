@@ -1,8 +1,8 @@
-include("cosmicchronicles")
+local CosmicChronicles_old_init = initialize
 
--- Capture the original initialize function (if any) and inject our own
-local CosmicChronicles_old_initialize = initialize
 function initialize(...)
-    if CosmicChronicles_old_initialize then CosmicChronicles_old_initialize(...) end
-    CosmicChronicles.initialize()
+    if CosmicChronicles_old_init then CosmicChronicles_old_init(...) end
+
+    local CosmicChronicles = include("cosmicchronicles")
+    if CosmicChronicles and CosmicChronicles.initialize then CosmicChronicles.initialize() end
 end

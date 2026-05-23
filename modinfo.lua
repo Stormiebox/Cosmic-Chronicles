@@ -17,7 +17,7 @@ meta =
 
     -- Description of your mod that will be displayed to players
     description =
-    "",
+    "The narrative and lore expansion module for the Cosmic series. Adds dynamic rumors, background chatter, captain's logs, and narrative events driven by the state of the galaxy.",
 
     -- Insert all authors into this list
     authors = { "Stormbox" },
@@ -44,7 +44,9 @@ meta =
     --      {id = "OptionalMod", min = "0.2", optional = true}, -- we support OptionalMod optionally, starting at version 0.2
     -- },
     dependencies = {
-        { id = "3727542782", min = "1.0" },
+        { id = "3727542782", min = "1.0" }, -- Cosmic Vault (Core Required Cosmic Mod)
+        { id = "3315794988", min = "1.0" }, -- Cosmic Overhaul (Required Cosmic Mod)
+        { id = "3727544356", min = "1.0"}, -- Cosmic War (Required Cosmic Mod)
         { id = "Avorion",    min = "1.0", max = "5.0" }
     },
 

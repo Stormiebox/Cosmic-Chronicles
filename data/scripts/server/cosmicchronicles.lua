@@ -773,3 +773,5 @@ function CosmicChronicles.registerLore()
         conditions = { stationType = "fighterfactory" }
     })
 end
+
+return CosmicChronicles
