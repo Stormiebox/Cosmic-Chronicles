@@ -16,6 +16,37 @@ end
 
 function CosmicChronicles.registerLore()
     -- ==========================================
+    -- CAPTAIN'S LOGS (COSMIC OVERHAUL SYNERGY)
+    -- ==========================================
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "captain_log",
+        text = "The crew has been uneasy since the last jump. The scanners are picking up phantom signatures just outside sensor range. I've doubled the watch shifts.",
+        conditions = { }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "captain_log",
+        text = "We passed a massive, ancient derelict drifting near the border today. It didn't match any known Xsotan or Faction profiles. We kept our distance.",
+        conditions = { }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "captain_log",
+        text = "Operations are running smoothly, but the local military patrols have been aggressively scanning us. Tensions in this sector are palpable.",
+        conditions = { minWarHeat = 30 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "captain_log",
+        text = "Found a hidden cache of smuggled goods floating near an asteroid field. I logged it in the manifest and told the crew to keep their mouths shut.",
+        conditions = { minReputation = -10000 }
+    })
+
+    -- ==========================================
     -- ORIGINAL AMBIENT & RUMORS
     -- ==========================================
     -- Ambient: Dock workers complaining (shows to almost anyone, generic rep)

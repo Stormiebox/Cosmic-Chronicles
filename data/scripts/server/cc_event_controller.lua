@@ -1,0 +1,46 @@
+package.path = package.path .. ";data/scripts/lib/?.lua"
+
+-- Helper to fetch the highest local War Heat from the sector's factions
+local function getSectorWarHeat()
+    local sector = Sector()
+    local factions = {sector:getPresentFactions()}
+    local heat = 0
+
+    for _, f in pairs(factions) do
+        local faction = Faction(f)
+        if faction and faction.isAIFaction then
+            local success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
+            if success and CosmicWarBridge and CosmicWarBridge.getWarHeat then
+                local rawHeat = CosmicWarBridge.getWarHeat(faction.index) or 0
+                heat = math.max(heat, math.floor(rawHeat * 100))
+            elseif faction:getValue("cw_enabled") then
+                local rawHeat = faction:getValue("cw_war_heat") or 0
+                heat = math.max(heat, math.floor(rawHeat * 100))
+            end
+        end
+    end
+    return heat
+end
+
+function onSectorEntered(playerIndex, x, y, sectorChangeType)
+    if not onServer() then return end
+
+    local sector = Sector()
+    -- Only trigger these specific narrative events in empty or deep space sectors
+    if #sector:getEntitiesByComponent(ComponentType.Station) > 0 then return end
+
+    local heat = getSectorWarHeat()
+
+    -- 25% chance to spawn Graveyard if Heat > 80
+    if heat > 80 and random():getInt(1, 100) <= 25 then
+        sector:addScriptOnce("events/cw_derelictgraveyard.lua")
+    -- 25% chance to spawn Refugees if Heat > 40
+    elseif heat > 40 and random():getInt(1, 100) <= 25 then
+        sector:addScriptOnce("events/cw_refugeeconvoy.lua")
+    end
+end
+
+function initialize()
+    -- Listen to the global sector jump callback
+    Player():registerCallback("onSectorEntered", "onSectorEntered")
+end
