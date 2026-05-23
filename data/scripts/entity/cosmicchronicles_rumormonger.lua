@@ -49,6 +49,12 @@ function CosmicChroniclesRumormonger.updateServer(timeStep)
     if random():getInt(1, 100) > 30 then return end
 
     local sector = Sector()
+    local currentTime = Server().unpausedRuntime
+    local lastChatter = sector:getValue("cc_last_chatter") or 0
+
+    -- GLOBAL SECTOR COOLDOWN: Ensure at least 45 seconds of silence between ANY station talking.
+    if currentTime - lastChatter < 45 then return end
+
     local players = {sector:getPlayers()}
 
     -- Save performance: don't calculate lore if no one is in the sector
@@ -76,6 +82,9 @@ function CosmicChroniclesRumormonger.updateServer(timeStep)
     local ambientLine = CosmicVaultDialogue.getValidLine("ambient", context)
 
     if ambientLine then
+        -- Lock the token bucket so no other station can speak for the next 45 seconds
+        sector:setValue("cc_last_chatter", currentTime)
+
         -- Broadcast as Chatter. In Avorion, this automatically appears as overhead floating text above the sender!
         sector:broadcastChatMessage(station, ChatMessageType.Chatter, ambientLine)
     end

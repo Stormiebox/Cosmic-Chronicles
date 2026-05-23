@@ -37,6 +37,27 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
     -- 25% chance to spawn Refugees if Heat > 40
     elseif heat > 40 and random():getInt(1, 100) <= 25 then
         sector:addScriptOnce("events/cw_refugeeconvoy.lua")
+    else
+        -- Determine if we are deep inside AI territory
+        local controllingFaction = nil
+        for _, f in pairs({sector:getPresentFactions()}) do
+            local faction = Faction(f)
+            if faction and faction.isAIFaction then
+                controllingFaction = faction
+                break
+            end
+        end
+
+        if controllingFaction then
+            local hx, hy = controllingFaction:getHomeSectorCoordinates()
+            if hx and hy then
+                local dist = math.sqrt((x - hx)^2 + (y - hy)^2)
+                -- If we are in the "Inner Area" (<= 15 distance from home), 15% chance to find a Monument
+                if dist <= 15 and random():getInt(1, 100) <= 15 then
+                    sector:addScriptOnce("events/cc_spawnmonument.lua")
+                end
+            end
+        end
     end
 end
 
