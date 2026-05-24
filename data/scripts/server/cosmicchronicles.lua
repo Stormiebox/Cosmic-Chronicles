@@ -3,6 +3,7 @@ package.path = package.path .. ";data/scripts/server/?.lua"
 
 -- Including Cosmic Vault's API dialogue
 include("cosmicvaultdialogue")
+include("stringutility")
 
 -- namespace CosmicChronicles
 CosmicChronicles = {}

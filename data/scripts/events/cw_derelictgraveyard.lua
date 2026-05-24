@@ -1,5 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 local ShipGenerator = include("shipgenerator")
+include("stringutility")
 
 function initialize()
     if onClient() then return end

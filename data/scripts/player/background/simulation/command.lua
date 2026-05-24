@@ -1,4 +1,5 @@
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
+include("stringutility")
 
 if not Command then Command = {} end
 local cc_old_sendMail = Command.sendMail

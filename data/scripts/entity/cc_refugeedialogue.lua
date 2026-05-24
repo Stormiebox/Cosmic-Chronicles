@@ -1,6 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
 include("cosmicvaultdialogue")
+include("stringutility")
 
 -- namespace CosmicChroniclesRefugee
 CosmicChroniclesRefugee = {}

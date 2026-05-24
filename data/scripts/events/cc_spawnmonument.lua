@@ -1,5 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 local PlanGenerator = include("plangenerator")
+include("stringutility")
 
 function initialize()
     if onClient() then return end

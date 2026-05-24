@@ -10,8 +10,8 @@ local function getFactionWarHeat(faction)
     local realWarHeat = 0
     local success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
 
-    if success and CosmicWarBridge and CosmicWarBridge.getWarHeat then
-        local rawHeat = CosmicWarBridge.getWarHeat(faction.index) or 0
+    if success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
+        local rawHeat = CosmicWarBridge.getFactionWarHeat(faction.index) or 0
         realWarHeat = math.floor(rawHeat * 100)
     elseif faction:getValue("cw_enabled") then
         local rawHeat = faction:getValue("cw_war_heat") or 0
