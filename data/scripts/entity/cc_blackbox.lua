@@ -32,6 +32,7 @@ function CosmicChroniclesBlackBox.extract()
     invokeClientFunction(player, "showLogDialog", log)
 
     -- Give valuable rewards
+    -- TODO: Furthe testing required if values need to be lowered or increased
     local amount = random():getInt(100000, 250000)
     player:receive("Recovered Credits"%_t, amount)
 

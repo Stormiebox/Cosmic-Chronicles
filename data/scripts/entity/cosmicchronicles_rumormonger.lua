@@ -39,6 +39,7 @@ local function getStationType(entity)
 end
 
 -- Set a low update frequency so we don't spam the server or the chat (ticks every 60 seconds)
+-- TODO: Continue testing if frequency needs to be increased or lowered
 function CosmicChroniclesRumormonger.getUpdateInterval()
     return 60
 end
