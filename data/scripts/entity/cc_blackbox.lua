@@ -37,7 +37,7 @@ function CosmicChroniclesBlackBox.extract()
 
     local UpgradeGenerator = include("upgradegenerator")
     if UpgradeGenerator and UpgradeGenerator.generateSystemUpgrade then
-        local upgrade = UpgradeGenerator.generateSystemUpgrade(false, Rarity(RarityType.Rare))
+        local upgrade = UpgradeGenerator.generateSystemUpgrade(random():createSeed(), Rarity(RarityType.Rare))
         player:getInventory():add(upgrade)
     end
 

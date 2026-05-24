@@ -29,13 +29,18 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
     -- Only trigger these specific narrative events in empty or deep space sectors
     if #sector:getEntitiesByComponent(ComponentType.Station) > 0 then return end
 
+    -- Prevent infinite farming: ensure narrative events only spawn once per sector
+    if sector:getValue("cc_event_spawned") then return end
+
     local heat = getSectorWarHeat()
 
     -- 25% chance to spawn Graveyard if Heat > 80
     if heat > 80 and random():getInt(1, 100) <= 25 then
+        sector:setValue("cc_event_spawned", true)
         sector:addScriptOnce("events/cw_derelictgraveyard.lua")
     -- 25% chance to spawn Refugees if Heat > 40
     elseif heat > 40 and random():getInt(1, 100) <= 25 then
+        sector:setValue("cc_event_spawned", true)
         sector:addScriptOnce("events/cw_refugeeconvoy.lua")
     else
         -- Determine if we are deep inside AI territory
@@ -54,6 +59,7 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
                 local dist = math.sqrt((x - hx)^2 + (y - hy)^2)
                 -- If we are in the "Inner Area" (<= 15 distance from home), 15% chance to find a Monument
                 if dist <= 15 and random():getInt(1, 100) <= 15 then
+                    sector:setValue("cc_event_spawned", true)
                     sector:addScriptOnce("events/cc_spawnmonument.lua")
                 end
             end

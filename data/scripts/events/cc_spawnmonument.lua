@@ -16,17 +16,17 @@ function initialize()
     local desc = StationDescriptor()
     desc.factionIndex = faction.index
     desc:setMovePlan(plan)
-    desc.position = Matrix() -- Spawn it perfectly in the center (0,0,0)
+
+    -- Spawn it slightly off-center to prevent players hyperspacing directly inside it
+    local offset = vec3(math.random(-1500, 1500), math.random(-1500, 1500), math.random(-1500, 1500))
+    desc.position = MatrixLookUpPosition(vec3(0,1,0), vec3(1,0,0), offset)
     desc.title = "Cultural Monument"%_T
 
     local station = sector:createEntity(desc)
     station:addScriptOnce("entity/cc_factionmonument.lua")
 
-    -- Ensure it cannot be destroyed by stray pirate attacks
-    local durability = Durability(station.index)
-    if durability then
-        durability.invincibility = 1.0
-    end
+    -- Use the vanilla API property to ensure it cannot be destroyed by stray pirate attacks
+    station.invincible = true
 
     terminate()
 end

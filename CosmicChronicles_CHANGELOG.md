@@ -31,3 +31,7 @@ and this project adheres to Semantic Versioning.
 
 ### Fixed
 - Restructured file paths to perfectly align with Avorion's strict VM boundaries (`entity/`, `events/`, `player/`).
+- **cc_event_controller.lua**: Prevented an infinite event farming loop by setting a persistent vanilla `cc_event_spawned` flag to the sector.
+- **cw_derelictgraveyard.lua**: Fixed an issue where derelict ships disappeared instantly by reverting to proper C++ physics engine destruction, leaving behind standard wreckage and explosion VFX.
+- **cc_spawnmonument.lua**: Fixed hyperspace collisions by adding a randomized offset to the spawn coordinates, and corrected the invulnerability hook to use the proper Avorion API (`station.invincible = true`).
+- **cc_blackbox.lua**: Resolved a silent Lua C++ Type crash by correctly passing `random():createSeed()` instead of a boolean to `UpgradeGenerator`.

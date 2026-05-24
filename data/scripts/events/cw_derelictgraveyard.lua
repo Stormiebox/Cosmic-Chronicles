@@ -14,9 +14,8 @@ function initialize()
     local count = random():getInt(3, 5)
     for i = 1, count do
         local ship = ShipGenerator.createMilitaryShip(faction, MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(math.random(-300, 300), math.random(-300, 300), math.random(-300, 300))))
-        ship.durability = 1 -- Ensure it explodes instantly
-        sector:deleteEntity(ship) -- Cleanup base just in case
-        ship:destroy(ship.index) -- Boom! Instant derelict graveyard
+        ship.durability = 1
+        ship:destroy(ship.index) -- Instantly destroy the ship to generate standard wreckage and explosion VFX
     end
 
     -- Spawn a Black Box stash for players to recover the final log
