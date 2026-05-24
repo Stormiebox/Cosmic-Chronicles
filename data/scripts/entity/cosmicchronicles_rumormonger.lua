@@ -45,15 +45,17 @@ end
 
 -- Background loop to randomly broadcast ambient chatter overhead
 function CosmicChroniclesRumormonger.updateServer(timeStep)
-    -- Only talk ~30% of the time per minute to make it feel natural and not repetitive
-    if random():getInt(1, 100) > 30 then return end
+    -- Increased to 50% so custom Cosmic Chronicles lore surfaces more often to compete with vanilla chatter
+    -- TODO: Continue testing to ensure it isn't overshadowing vanilla dialogue lines
+    if random():getInt(1, 100) > 50 then return end
 
     local sector = Sector()
     local currentTime = Server().unpausedRuntime
     local lastChatter = sector:getValue("cc_last_chatter") or 0
 
-    -- GLOBAL SECTOR COOLDOWN: Ensure at least 45 seconds of silence between ANY station talking.
-    if currentTime - lastChatter < 45 then return end
+    -- GLOBAL SECTOR COOLDOWN: Reduced from 45s to 30s to increase frequency of background world-building
+    -- TODO: Continue testing to ensure it isn't spamming
+    if currentTime - lastChatter < 30 then return end
 
     local players = {sector:getPlayers()}
 
@@ -91,11 +93,18 @@ function CosmicChroniclesRumormonger.updateServer(timeStep)
 end
 
 -- Determines if the "Ask for rumors" option shows up when interacting with the station
+-- TODO: Ensure this guard actually functions often and in high populated servers and server runtime
 function CosmicChroniclesRumormonger.interactionPossible(playerIndex, option)
     local player = Player(playerIndex)
     local craft = player.craft
     -- Don't show the dialogue if the player is somehow trying to talk to their own ship
     if craft and craft.index == Entity().index then return false end
+
+    -- Vanilla Standard: Prevent casually asking for rumors from fiercely hostile stations (-30k rep)
+    -- TODO: Look for other means for when players ask for rumors.
+    local faction = Faction(Entity().factionIndex)
+    if faction and player:getRelations(faction.index) <= -30000 then return false end
+
     return true
 end
 
