@@ -7,7 +7,7 @@ and this project adheres to Semantic Versioning.
 
 ---
 
-## [v0.1.0] - Alpha Bootstrap (In Development)
+## [v1.0.0] - Ready For Launch - Development Continues
 
 ### Added
 - **Core Architecture:** Setup the initial mod structure, dependencies, and `init.lua` hooks.
@@ -24,6 +24,10 @@ and this project adheres to Semantic Versioning.
 - **Event: Refugee Convoy:** Spawns fleeing civilian ships in high-tension regions. Includes a custom interactive dialogue script (`cc_refugeedialogue.lua`) allowing players to donate Food/Medicine for rewards.
 - **Event: Echoes of the Frontline:** Spawns massive, persistent wreckage fields in sectors with extreme War Heat (`cw_derelictgraveyard.lua`).
 - **Black Box Extraction:** Added a custom stash script (`cc_blackbox.lua`) inside graveyards that allows players to extract the final narrative logs of doomed fleets alongside rare loot.
+
+### Localization
+
+- **Translation .po files:** Added and translate all dialogues, events, lore and logs for all supported languages. Chinese, German, Russian, Portuguese, French, Japanese and Spanish.
 
 ### Fixed
 - Restructured file paths to perfectly align with Avorion's strict VM boundaries (`entity/`, `events/`, `player/`).
