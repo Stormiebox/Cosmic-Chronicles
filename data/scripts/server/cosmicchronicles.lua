@@ -23,28 +23,28 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "captain_log",
         text = "The crew has been uneasy since the last jump. The scanners are picking up phantom signatures just outside sensor range. I've doubled the watch shifts."%_T,
-        conditions = { }
+        conditions = { minDistanceToCenter = 150 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "captain_log",
         text = "We passed a massive, ancient derelict drifting near the border today. It didn't match any known Xsotan or Faction profiles. We kept our distance."%_T,
-        conditions = { }
+        conditions = { minDistanceToCenter = 250 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "captain_log",
         text = "Operations are running smoothly, but the local military patrols have been aggressively scanning us. Tensions in this sector are palpable."%_T,
-        conditions = { minWarHeat = 30 }
+        conditions = { minWarHeat = 15 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "captain_log",
         text = "Found a hidden cache of smuggled goods floating near an asteroid field. I logged it in the manifest and told the crew to keep their mouths shut."%_T,
-        conditions = { minReputation = -10000 }
+        conditions = { minReputation = 0 }
     })
 
     -- ==========================================
@@ -56,7 +56,7 @@ function CosmicChronicles.registerLore()
         category = "ambient",
         text = "Careful around the docking bays, section 4 lost gravity plating again."%_T,
         conditions = {
-            minReputation = -10000
+            minReputation = 0
         }
     })
 
@@ -75,7 +75,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Another shift in the asteroid fields. At least the pay is decent."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Ambient: Security guard on duty
@@ -83,7 +83,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Keep your ship's transponder active. We've had reports of smugglers in this sector."%_T,
-        conditions = { minReputation = 5000 }
+        conditions = { minReputation = 0 }
     })
 
     -- Ambient: Off-duty pilot
@@ -91,7 +91,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Just finished a long haul from the rim. The bar is calling my name."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Ambient: Station engineer
@@ -99,7 +99,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "The main reactor is humming a bit louder than usual. I'm sure it's fine."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Rumor: Pirate activity
@@ -107,7 +107,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Pirates have been getting bold, hitting trade convoys just a few sectors from here."%_T,
-        conditions = { }
+        conditions = { minReputation = -5000 }
     })
 
     -- Rumor: Economic boom
@@ -115,7 +115,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "A new trade route just opened up. They say there are fortunes to be made in processor trading."%_T,
-        conditions = { minReputation = 15000 }
+        conditions = { minReputation = 5000 }
     })
 
     -- Rumor: Strange signals
@@ -123,7 +123,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Some deep space explorers picked up a repeating signal from a dead sector. No one knows what it is."%_T,
-        conditions = { }
+        conditions = { minDistanceToCenter = 300 }
     })
 
     -- Ambient: Casual station life
@@ -131,7 +131,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "I swear, the replicator in section C makes everything taste like refined iron."%_T,
-        conditions = { minReputation = -20000 }
+        conditions = { minReputation = 0 }
     })
 
     -- Ambient: Traffic control
@@ -139,7 +139,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Clear the docking lanes! We've got a heavy freighter inbound with failing stabilizers!"%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Ambient: Merchant haggling
@@ -155,7 +155,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Attention: The shuttle to the inner sphere will be departing from Docking Port 7 in 15 minutes."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Rumor: Faction politics
@@ -171,7 +171,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "I heard a rumor about a derelict research station from before the war, supposedly full of lost tech."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Rumor: Aggressive faction preparing for war
@@ -180,7 +180,7 @@ function CosmicChronicles.registerLore()
         category = "rumor",
         text = "I heard the local military is mobilizing. War heat is off the charts."%_T,
         conditions = {
-            minWarHeat = 75,
+            minWarHeat = 50,
             factionTrait = "aggressive"
         }
     })
@@ -191,7 +191,7 @@ function CosmicChronicles.registerLore()
         category = "rumor",
         text = "Smugglers have been using the asteroid fields near the inner barrier again. Keep your cargo hidden."%_T,
         conditions = {
-            minReputation = 10000
+            minReputation = 5000
         }
     })
 
@@ -200,7 +200,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "A scout came through babbling about giant alien structures near the center of the galaxy... probably space madness."%_T,
-        conditions = { }
+        conditions = { minDistanceToCenter = 200 }
     })
 
     -- Rumor: Xsotan activity (Universal, almost anyone hears it)
@@ -208,7 +208,7 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "They say the Xsotan are getting bolder in the outer rim..."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- Ambient: Wealthy Faction
@@ -266,77 +266,77 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Tensions are boiling over. I heard command is authorizing a Decapitation Strike if the enemy flagship shows its face."%_T,
-        conditions = { minWarHeat = 80 }
+        conditions = { minWarHeat = 65 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Keep your eyes on the bulletin boards. The military is handing out massive bounties for anyone willing to dive into the warzone."%_T,
-        conditions = { minWarHeat = 25 }
-    })
-
-    CosmicVaultDialogue.registerLine({
-        modId = "CosmicChronicles",
-        category = "rumor",
-        text = "Diplomatic sanctions are bleeding the border sectors dry. It's getting harder to find anyone willing to trade across enemy lines."%_T,
-        conditions = { factionTrait = "aggressive" }
-    })
-
-    CosmicVaultDialogue.registerLine({
-        modId = "CosmicChronicles",
-        category = "rumor",
-        text = "A buddy of mine took a 'Force Recon' contract. Said the pay was good, but he hasn't been back in a week."%_T,
         conditions = { minWarHeat = 15 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
+        text = "Diplomatic sanctions are bleeding the border sectors dry. It's getting harder to find anyone willing to trade across enemy lines."%_T,
+        conditions = { factionTrait = "aggressive", minWarHeat = 20 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "A buddy of mine took a 'Force Recon' contract. Said the pay was good, but he hasn't been back in a week."%_T,
+        conditions = { minWarHeat = 10 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
         text = "Watch out for arms deals going down in deep space. Interrupting one could be profitable... or fatal."%_T,
-        conditions = { minWarHeat = 20 }
+        conditions = { minWarHeat = 15 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "The war pressure in this region is getting intense. It feels like one wrong move could ignite the whole sector."%_T,
-        conditions = { minWarHeat = 50 }
-    })
-
-    CosmicVaultDialogue.registerLine({
-        modId = "CosmicChronicles",
-        category = "rumor",
-        text = "Some extremists tried to sabotage a peace envoy. If you see a diplomatic ship under fire, helping them out pays big in reputation."%_T,
-        conditions = { minWarHeat = 20 }
-    })
-
-    CosmicVaultDialogue.registerLine({
-        modId = "CosmicChronicles",
-        category = "rumor",
-        text = "Civilian freighters are being ambushed by hunter fleets near the border. If you have the guns, the refugees need help."%_T,
         conditions = { minWarHeat = 40 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
+        text = "Some extremists tried to sabotage a peace envoy. If you see a diplomatic ship under fire, helping them out pays big in reputation."%_T,
+        conditions = { minWarHeat = 15 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Civilian freighters are being ambushed by hunter fleets near the border. If you have the guns, the refugees need help."%_T,
+        conditions = { minWarHeat = 30 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
         text = "I saw massive strike fleets jumping into the active warzones. It's an absolute bloodbath out there."%_T,
-        conditions = { minWarHeat = 60 }
+        conditions = { minWarHeat = 50 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "There are whispers of a ceasefire, but only if the frontline commanders can swallow their pride."%_T,
-        conditions = { minWarHeat = 70 }
+        conditions = { minWarHeat = 55 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Prices are through the roof. Diplomatic sanctions are hurting us more than the actual fighting."%_T,
-        conditions = { minWarHeat = 30, factionTrait = "aggressive" }
+        conditions = { minWarHeat = 20, factionTrait = "aggressive" }
     })
 
     -- ==========================================
@@ -353,77 +353,77 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Ever since they overhauled the transporter block regulations, my cargo runners haven't had to physically dock to a station once."%_T,
-        conditions = { minReputation = -10000 }
+        conditions = { minReputation = 0 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Scrap limiters are gone, friend. You can spend all day in the scrapyards without command breathing down your neck, provided you buy the license."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "I used to run the old trade lanes, but these days you need an escort fleet just to run a Scout operation through the inner barriers."%_T,
-        conditions = { }
+        conditions = { minWarHeat = 15 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "I managed to unbrand some stolen tech modules. Cost a pretty penny, but the Smuggler's Market payout was worth it."%_T,
-        conditions = { minReputation = -50000 }
+        conditions = { minReputation = 500 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "The Command Center terminal tracks every ship in the fleet now. Makes logistics a breeze, as long as the captains don't go rogue."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "ambient",
         text = "Logistics is backed up again. The new shuttle volume capacity is great, but we still need more physical docking ports!"%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "I've been using the new universal bulletin board. It's so much easier to find work without having to dock at every single station."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "My captain says his new ship orders are persistent. He can finally finish a trade run without me having to re-issue the command every time I log in."%_T,
-        conditions = { minReputation = 5000 }
+        conditions = { minReputation = 0 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "ambient",
         text = "With the new factory overview, I finally figured out my energy cell plant was losing money. Switched it to solar panels and now I'm in the green."%_T,
-        conditions = { minReputation = 10000 }
+        conditions = { minReputation = 5000 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "ambient",
         text = "It's nice that being friendly with a faction actually means something now. They're much more willing to help out an ally."%_T,
-        conditions = { minReputation = 25000 }
+        conditions = { minReputation = 15000 }
     })
 
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles",
         category = "rumor",
         text = "Don't ignore your friends for too long. Reputation isn't permanent anymore; you have to maintain those relationships."%_T,
-        conditions = { }
+        conditions = { minReputation = 0 }
     })
 
     -- ==========================================
@@ -437,7 +437,7 @@ function CosmicChronicles.registerLore()
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "rumor",
         text = "Did you see the size of that dreadnought they laid down in dock 4? The faction is definitely gearing up for a strike."%_T,
-        conditions = { stationType = "shipyard", minWarHeat = 30 }
+        conditions = { stationType = "shipyard", minWarHeat = 20 }
     })
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "ambient",
@@ -461,7 +461,7 @@ function CosmicChronicles.registerLore()
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "ambient",
         text = "The plasma burns on that last freighter were nasty. Almost melted right through the armor blocks."%_T,
-        conditions = { stationType = "repairdock", minWarHeat = 20 }
+        conditions = { stationType = "repairdock", minWarHeat = 15 }
     })
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "ambient",
@@ -534,7 +534,7 @@ function CosmicChronicles.registerLore()
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "rumor",
         text = "I overheard the general talking about a preemptive decapitation strike on the rival faction's HQ."%_T,
-        conditions = { stationType = "militaryoutpost", minWarHeat = 70 }
+        conditions = { stationType = "militaryoutpost", minWarHeat = 55 }
     })
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "ambient",
@@ -553,7 +553,7 @@ function CosmicChronicles.registerLore()
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "ambient",
         text = "I've got three crates of unbranded targeting systems, if you've got the credits."%_T,
-        conditions = { stationType = "smugglersmarket", minReputation = -20000 }
+        conditions = { stationType = "smugglersmarket", minReputation = 1000 }
     })
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "rumor",
@@ -684,7 +684,7 @@ function CosmicChronicles.registerLore()
     CosmicVaultDialogue.registerLine({
         modId = "CosmicChronicles", category = "ambient",
         text = "The assembly line is running hot today. Lots of custom military orders coming in from the border."%_T,
-        conditions = { stationType = "turretfactory", minWarHeat = 30 }
+        conditions = { stationType = "turretfactory", minWarHeat = 20 }
     })
 
     -- ==========================================
