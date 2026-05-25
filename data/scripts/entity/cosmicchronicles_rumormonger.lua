@@ -20,22 +20,8 @@ local function getFactionWarHeat(faction)
     return realWarHeat
 end
 
--- Identify the type of station by checking its active vanilla scripts
-local function getStationType(entity)
-    if not entity then return "generic" end
-    if entity:hasScript("shipyard.lua") then return "shipyard" end
-    if entity:hasScript("repairdock.lua") then return "repairdock" end
-    if entity:hasScript("equipmentdock.lua") then return "equipmentdock" end
-    if entity:hasScript("militaryoutpost.lua") then return "militaryoutpost" end
-    if entity:hasScript("smugglersmarket.lua") then return "smugglersmarket" end
-    if entity:hasScript("casino.lua") then return "casino" end
-    if entity:hasScript("scrapyard.lua") then return "scrapyard" end
-    if entity:hasScript("researchstation.lua") then return "researchstation" end
-    if entity:hasScript("turretfactory.lua") then return "turretfactory" end
-    if entity:hasScript("tradingpost.lua") then return "tradingpost" end
-    if entity:hasScript("resourcedepot.lua") then return "resourcedepot" end
-    if entity:hasScript("fighterfactory.lua") then return "fighterfactory" end
-    return "generic"
+local function getCachedStationType(entity)
+    return entity:getValue("cc_station_type") or "generic"
 end
 
 -- Lowered update frequency so players see custom Cosmic chatter more often (ticks every 35 seconds)
@@ -79,7 +65,7 @@ function CosmicChroniclesRumormonger.updateServer(timeStep)
         factionWealth = faction:getTrait("wealthy") and "wealthy" or (faction:getTrait("poor") and "poor" or "average"),
         distanceToCenter = distance,
         warHeat = getFactionWarHeat(faction),
-        stationType = getStationType(station)
+        stationType = getCachedStationType(station)
     }
 
     local ambientLine = CosmicVaultDialogue.getValidLine("ambient", context)
@@ -140,7 +126,7 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
         factionWealth = faction:getTrait("wealthy") and "wealthy" or (faction:getTrait("poor") and "poor" or "average"),
         distanceToCenter = distance,
         warHeat = getFactionWarHeat(faction),
-        stationType = getStationType(station)
+        stationType = getCachedStationType(station)
     }
 
     local rumor = CosmicVaultDialogue.getValidLine("rumor", context)

@@ -5,11 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+## [v1.1.1] - 2026-05-25
+
+### Fixed
+
+- **Translation Scaling:** Verified and corrected all string format injections across the event scripts to ensure variables resolve dynamically without breaking the `.po` scanner.
+
+## [v1.1.0] - 2026-05-25
+
+### Changed
+
+- **Rumormonger Rebalance:** Increased the frequency of custom lore chatter to better compete with vanilla dialogue. The background loop now ticks every 35 seconds (down from 60), global sector cooldown is reduced to 30 seconds, and speech probability increased to 50%.
+- **Lore Conditions:** Added baseline reputation (`minReputation`) and geographic (`minDistanceToCenter`) conditions to several generic rumors to prevent hostile military outposts or deep-core stations from offering out-of-character dialogue.
+- **Performance Optimization:** Pre-cached station script types in `init.lua` to prevent expensive `hasScript()` calls during every Rumormonger tick.
+- **Black Box Scaling:** Credits and system upgrades recovered from Derelict Graveyard black boxes now correctly scale based on distance from the galactic core.
+
 ---
 
 ## [v1.0.0] - Ready For Launch - Development Continues
 
 ### Added
+
 - **Core Architecture:** Setup the initial mod structure, dependencies, and `init.lua` hooks.
 - **Vault API Integration:** Hooked into `CosmicVaultDialogue` to support rich context filtering for lore strings.
 - **The Rumormonger:** Added `cosmicchronicles_rumormonger.lua` to stations. Features a 60-second interval background chatter loop (overhead floating text) and a direct interaction dialogue menu.
@@ -30,6 +46,7 @@ and this project adheres to Semantic Versioning.
 - **Translation .po files:** Added and translate all dialogues, events, lore and logs for all supported languages. Chinese, German, Russian, Portuguese, French, Japanese and Spanish.
 
 ### Fixed
+
 - Restructured file paths to perfectly align with Avorion's strict VM boundaries (`entity/`, `events/`, `player/`).
 - **cc_event_controller.lua**: Prevented an infinite event farming loop by setting a persistent vanilla `cc_event_spawned` flag to the sector.
 - **cw_derelictgraveyard.lua**: Fixed an issue where derelict ships disappeared instantly by reverting to proper C++ physics engine destruction, leaving behind standard wreckage and explosion VFX.

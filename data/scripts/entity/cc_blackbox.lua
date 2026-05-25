@@ -31,15 +31,21 @@ function CosmicChroniclesBlackBox.extract()
     local log = CosmicVaultDialogue.getValidLine("captain_log", context) or "Mayday! Shields are failing! They're coming from everywhere!"%_T
 
     invokeClientFunction(player, "showLogDialog", log)
-
+    -- TODO: Further testing required if values need to be lowered or increased
     -- Give valuable rewards
-    -- TODO: Furthe testing required if values need to be lowered or increased
-    local amount = random():getInt(100000, 250000)
+    local x, y = Sector():getCoordinates()
+    local balancing = include("galaxy")
+    local rewardFactor = balancing.GetSectorRewardFactor(x, y)
+
+    local amount = math.floor(random():getInt(75000, 150000) * rewardFactor)
     player:receive("Recovered Credits"%_t, amount)
 
     local UpgradeGenerator = include("upgradegenerator")
     if UpgradeGenerator and UpgradeGenerator.generateSystemUpgrade then
-        local upgrade = UpgradeGenerator.generateSystemUpgrade(random():createSeed(), Rarity(RarityType.Rare))
+        local rarityValue = RarityType.Rare
+        -- 25% chance to get an exceptional upgrade, scaled by distance from core
+        if random():test(0.25 * rewardFactor) then rarityValue = RarityType.Exceptional end
+        local upgrade = UpgradeGenerator.generateSystemUpgrade(random():createSeed(), Rarity(rarityValue))
         player:getInventory():add(upgrade)
     end
 
