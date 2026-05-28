@@ -8,10 +8,10 @@ CosmicChroniclesRumormonger = {}
 -- Helper function to fetch War Heat safely
 local function getFactionWarHeat(faction)
     local realWarHeat = 0
-    local success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
+    local success = pcall(include, "cosmicwarbridge")
 
-    if success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
-        local rawHeat = CosmicWarBridge.getFactionWarHeat(faction.index) or 0
+    if success and _G.CosmicWarBridge and _G.CosmicWarBridge.getFactionWarHeat then
+        local rawHeat = _G.CosmicWarBridge.getFactionWarHeat(faction.index) or 0
         realWarHeat = math.floor(rawHeat * 100)
     elseif faction:getValue("cw_enabled") then
         local rawHeat = faction:getValue("cw_war_heat") or 0

@@ -5,13 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
-## [v1.1.1] - 2026-05-25
+## [v1.1.0] - 2026-05-28
 
 ### Fixed
 
+- **Virtual File System Compliance:** Fixed an architectural flaw where `pcall(require)` was bypassing Avorion's VFS to check for *Cosmic War* in background scripts. All cross-mod bridges now correctly use `pcall(include)`.
 - **Translation Scaling:** Verified and corrected all string format injections across the event scripts to ensure variables resolve dynamically without breaking the `.po` scanner.
-
-## [v1.1.0] - 2026-05-25
 
 ### Changed
 

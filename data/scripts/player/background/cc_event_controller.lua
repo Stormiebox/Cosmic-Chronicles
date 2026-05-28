@@ -9,9 +9,9 @@ local function getSectorWarHeat()
     for _, f in pairs(factions) do
         local faction = Faction(f)
         if faction and faction.isAIFaction then
-            local success, CosmicWarBridge = pcall(require, "cosmicwarbridge")
-            if success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
-                local rawHeat = CosmicWarBridge.getFactionWarHeat(faction.index) or 0
+            local success = pcall(include, "cosmicwarbridge")
+            if success and _G.CosmicWarBridge and _G.CosmicWarBridge.getFactionWarHeat then
+                local rawHeat = _G.CosmicWarBridge.getFactionWarHeat(faction.index) or 0
                 heat = math.max(heat, math.floor(rawHeat * 100))
             elseif faction:getValue("cw_enabled") then
                 local rawHeat = faction:getValue("cw_war_heat") or 0
