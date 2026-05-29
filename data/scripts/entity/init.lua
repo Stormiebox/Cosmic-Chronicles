@@ -24,7 +24,7 @@ function initialize(...)
                 elseif entity:hasScript("fighterfactory.lua") then stationType = "fighterfactory" end
                 entity:setValue("cc_station_type", stationType)
             end
-            entity:addScriptOnce("entity/cosmicchronicles_rumormonger.lua")
+            entity:addScriptOnce("data/scripts/entity/cosmicchronicles_rumormonger.lua")
         end
     end
 end
