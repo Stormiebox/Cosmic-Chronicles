@@ -9,8 +9,10 @@ and this project adheres to Semantic Versioning.
 
 ### Fixed
 
-- **Virtual File System Compliance:** Fixed an architectural flaw where `pcall(require)` was bypassing Avorion's VFS to check for *Cosmic War* in background scripts. All cross-mod bridges now correctly use `pcall(include)`.
+- **Virtual File System Compliance:** Fixed an architectural flaw where `pcall(require)` was bypassing Avorion's VFS to check for *Cosmic War* in background scripts. All cross-mod bridges now correctly use `pcall(include)`. In case cosmic mods like *Cosmic War* isn't loaded.
 - **Translation Scaling:** Verified and corrected all string format injections across the event scripts to ensure variables resolve dynamically without breaking the `.po` scanner.
+- **Broken Event Path:** Fixed a critical bug where the `cc_event_controller.lua` was failing to correctly identify and trigger events due to an incorrect path in the `Player():addScriptOnce` call inside `player/init.lua` for the `cc_event_controller.lua` script, causing events to never trigger. This was due to a missing leading slash in the script path, which prevented the script from being found.
+
 
 ### Changed
 
