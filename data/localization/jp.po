@@ -1,633 +1,633 @@
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua:
+# ========== /data/scripts/entity/cc_blackbox.lua ==========
+#: /data/scripts/entity/cc_blackbox.lua:
 msgid "Extract Data"
 msgstr "データを抽出する"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua:
+#: /data/scripts/entity/cc_blackbox.lua:
 msgid "Mayday! Shields are failing! They're coming from everywhere!"
 msgstr "メーデー！シールドが低下しています！至る所から敵がやって来ます！"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua:
+#: /data/scripts/entity/cc_blackbox.lua:
 msgid "Recovered Credits"
 msgstr "回収されたクレジット"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua:
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_derelictgraveyard.lua:
+#: /data/scripts/entity/cc_blackbox.lua:
+#: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Ship Computer"
 msgstr "シップコンピュータ"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua:
+#: /data/scripts/entity/cc_blackbox.lua:
 msgid "Extracted data and recovered credits from the black box."
 msgstr "ブラックボックスからデータを抽出し、クレジットを回収しました。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_blackbox.lua:
+#: /data/scripts/entity/cc_blackbox.lua:
 msgid "Black Box Recording:\n\n\"${log}\"\n\n*Recording Ends*"
 msgstr "ブラックボックスの記録:\n\n\"${log}\"\n\n*記録終了*"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+# ========== /data/scripts/entity/cc_factionmonument.lua ==========
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "Read Inscription"
 msgstr "碑文を読む"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "unyielding strength and conquest"
 msgstr "不屈の強さと征服"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "diplomacy and unity"
 msgstr "外交と結束"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "endless prosperity"
 msgstr "終わりのない繁栄"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "scavenging the ashes of the old world"
 msgstr "旧世界の灰をあさること"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "=== CULTURAL MONUMENT OF THE ${faction} ===\n\nWe survived the Great Darkness through ${trait1}.\nOur future among the stars is paved with ${trait2}.\n\nLet all who pass through this system know that we stand eternal against the Xsotan threat."
 msgstr "=== ${faction}の文化記念碑 ===\n\n我々は${trait1}によって大いなる暗闇を生き延びた。\n星々における我々の未来は${trait2}で舗装されている。\n\nこの星系を通過するすべての者に、我々がクスオタンの脅威に対して永遠に立ち向かうことを知らせよう。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "Fascinating."
 msgstr "魅力的だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+#: /data/scripts/entity/cc_factionmonument.lua:
 msgid "You paid your respects to the faction's history. Reputation improved."
 msgstr "派閥の歴史に敬意を表しました。評判が向上しました。"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+# ========== /data/scripts/entity/cc_refugeedialogue.lua ==========
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Offer Assistance"
 msgstr "援助を申し出る"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Thank the stars you stopped! We barely escaped the last sector and our engines are damaged. We are critically low on supplies. Do you have any Food or Medical Supplies to spare?"
 msgstr "星に感謝します、止まってくれて！我々は最後のセクターからかろうじて脱出し、エンジンが損傷しています。物資が危機的に不足しています。食料や医療物資を分けていただけませんか？"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Here is 50 Food."
 msgstr "ここに50の食料があります。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Here is 50 Medical Supplies."
 msgstr "ここに50の医療物資があります。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "I'm sorry, I don't have anything to spare right now."
 msgstr "申し訳ありませんが、今は何も分けられるものがありません。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "I can't help you right now."
 msgstr "今はあなたを助けることはできません。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "The enemy is ruthless... stay safe out there."
 msgstr "敵は無慈悲だ...外では安全に気を付けて。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Thank you so much! You saved our lives. By the way, be careful... ${rumor}"
 msgstr "本当にありがとうございます！あなたは我々の命を救ってくれました。ところで、気をつけてください... ${rumor}"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Safe travels."
 msgstr "安全な旅を。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Hazard Pay"
 msgstr "危険手当"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Your Merchant captain negotiated a 75,000 credit hazard pay fee for the supplies."
 msgstr "あなたの商人キャプテンは、物資に対する75,000クレジットの危険手当を交渉しました。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Smuggled Goods"
 msgstr "密輸品"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+#: /data/scripts/entity/cc_refugeedialogue.lua:
 msgid "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."
 msgstr "あなたの密輸業者キャプテンは、移送中に難民の船団から100,000クレジット相当の貴重品を密かにかすめ取りました。"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua:
+# ========== /data/scripts/entity/cosmicchronicles_rumormonger.lua ==========
+#: /data/scripts/entity/cosmicchronicles_rumormonger.lua:
 msgid "Any rumors?"
 msgstr "何か噂は？"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua:
+#: /data/scripts/entity/cosmicchronicles_rumormonger.lua:
 msgid "I don't have any gossip right now, friend. The sector has been quiet."
 msgstr "今は何の噂もないよ、友よ。セクターは静かだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua:
+#: /data/scripts/entity/cosmicchronicles_rumormonger.lua:
 msgid "Interesting. Thanks."
 msgstr "興味深い。ありがとう。"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua:
+# ========== /data/scripts/events/cc_spawnmonument.lua ==========
+#: /data/scripts/events/cc_spawnmonument.lua:
 msgid "Cultural Monument"
 msgstr "文化記念碑"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua:
+#: /data/scripts/events/cc_spawnmonument.lua:
 msgid "Sensors are detecting a massive, ancient architectural structure in this sector."
 msgstr "センサーが、このセクターで巨大な古代の建築構造物を検出しています。"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_derelictgraveyard.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_derelictgraveyard.lua:
+# ========== /data/scripts/events/cw_derelictgraveyard.lua ==========
+#: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Flight Recorder (Black Box)"
 msgstr "フライトレコーダー（ブラックボックス）"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_derelictgraveyard.lua:
+#: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Warning: Massive debris field detected. Sensor profiles match recent military casualties."
 msgstr "警告：大規模なデブリフィールドが検出されました。センサープロファイルは最近の軍事的犠牲者と一致します。"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_refugeeconvoy.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_refugeeconvoy.lua:
+# ========== /data/scripts/events/cw_refugeeconvoy.lua ==========
+#: /data/scripts/events/cw_refugeeconvoy.lua:
 msgid "Refugee Transport"
 msgstr "難民輸送船"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_refugeeconvoy.lua:
+#: /data/scripts/events/cw_refugeeconvoy.lua:
 msgid "Refugee Convoy"
 msgstr "難民船団"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_refugeeconvoy.lua:
+#: /data/scripts/events/cw_refugeeconvoy.lua:
 msgid "Mayday! Our hyperdrives are offline and we are fleeing the frontline! Is anyone out there?"
 msgstr "メーデー！ハイパードライブがオフラインで、最前線から逃げています！誰かいませんか？"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/player/background/simulation/command.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/player/background/simulation/command.lua:
+# ========== /data/scripts/player/background/simulation/command.lua ==========
+#: /data/scripts/player/background/simulation/command.lua:
 msgid "Captain's Log:"
 msgstr "船長の日誌:"
 
 
-# ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua ==========
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+# ========== /data/scripts/server/cosmicchronicles.lua ==========
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The crew has been uneasy since the last jump. The scanners are picking up phantom signatures just outside sensor range. I've doubled the watch shifts."
 msgstr "前回のジャンプ以来、乗組員は不安を感じている。スキャナーがセンサーの範囲外でファントムシグネチャを検出している。監視シフトを2倍にした。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We passed a massive, ancient derelict drifting near the border today. It didn't match any known Xsotan or Faction profiles. We kept our distance."
 msgstr "今日、国境付近を漂流する巨大で古代の遺棄船を通過した。既知のクスオタンや派閥のプロファイルとは一致しなかった。我々は距離を保った。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Operations are running smoothly, but the local military patrols have been aggressively scanning us. Tensions in this sector are palpable."
 msgstr "作戦は順調に進んでいるが、現地の軍事パトロールが我々を攻撃的にスキャンしている。このセクターの緊張は明白だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Found a hidden cache of smuggled goods floating near an asteroid field. I logged it in the manifest and told the crew to keep their mouths shut."
 msgstr "小惑星帯の近くに浮かんでいる密輸品の隠しキャッシュを発見した。それをマニフェストに記録し、乗組員には口を閉ざすように伝えた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Careful around the docking bays, section 4 lost gravity plating again."
 msgstr "ドッキングベイの周りに注意しろ、セクション4の重力メッキがまた失われた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Another load of Energy Cells, another day closer to retirement."
 msgstr "エネルギーセルをまた一積み、引退にまた一日近づいた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Another shift in the asteroid fields. At least the pay is decent."
 msgstr "小惑星帯でのまたのシフトだ。少なくとも給料はまともだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep your ship's transponder active. We've had reports of smugglers in this sector."
 msgstr "船のトランスポンダをアクティブにしておいてください。このセクターで密輸業者の報告があります。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Just finished a long haul from the rim. The bar is calling my name."
 msgstr "辺境からの長旅が終わったばかりだ。バーが俺の名前を呼んでいる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The main reactor is humming a bit louder than usual. I'm sure it's fine."
 msgstr "メインリアクターがいつもより少し大きな音を立てている。まあ大丈夫だろう。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Pirates have been getting bold, hitting trade convoys just a few sectors from here."
 msgstr "海賊は大胆になってきており、ここからわずか数セクター先の交易船団を襲撃している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A new trade route just opened up. They say there are fortunes to be made in processor trading."
 msgstr "新しい交易ルートが開かれた。プロセッサー取引で一財産築けるそうだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Some deep space explorers picked up a repeating signal from a dead sector. No one knows what it is."
 msgstr "深宇宙の探検家たちが、死んだセクターから繰り返される信号を傍受した。それが何なのか誰も知らない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I swear, the replicator in section C makes everything taste like refined iron."
 msgstr "誓って言うが、セクションCのレプリケーターは何でも精製鉄のような味にする。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Clear the docking lanes! We've got a heavy freighter inbound with failing stabilizers!"
 msgstr "ドッキングレーンを空けろ！スタビライザーが故障した大型貨物船が入ってくるぞ！"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I can't go any lower on the price! These turret parts are top quality!"
 msgstr "これ以上価格は下げられない！このタレット部品は最高品質だ！"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Attention: The shuttle to the inner sphere will be departing from Docking Port 7 in 15 minutes."
 msgstr "お知らせ：内部天球へのシャトルは15分後にドッキングポート7から出発します。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The local faction leader is getting paranoid. They've doubled the security patrols."
 msgstr "地元の派閥のリーダーはパラノイアになっている。彼らはセキュリティパトロールを倍増させた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I heard a rumor about a derelict research station from before the war, supposedly full of lost tech."
 msgstr "戦前の放棄された研究ステーションの噂を聞いた。失われたテクノロジーが詰まっているらしい。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I heard the local military is mobilizing. War heat is off the charts."
 msgstr "現地の軍隊が動員されていると聞いた。戦争の熱気は尋常ではない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Smugglers have been using the asteroid fields near the inner barrier again. Keep your cargo hidden."
 msgstr "密輸業者が再び内部バリア付近の小惑星帯を使用している。貨物を隠しておけ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A scout came through babbling about giant alien structures near the center of the galaxy... probably space madness."
 msgstr "スカウトが銀河の中心近くの巨大なエイリアンの構造物について戯言を言いながらやって来た...おそらく宇宙の狂気だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "They say the Xsotan are getting bolder in the outer rim..."
 msgstr "クスオタンがアウターリムでより大胆になっていると言われている..."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The luxury tax in this sector is absurd, but I guess it pays for the shiny stations."
 msgstr "このセクターの贅沢税はばかげているが、ピカピカのステーションの代償なのだろう。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Rich folks around here are paying top credit for exotic goods. If you've got rare tech, now's the time to sell."
 msgstr "この辺りの金持ちはエキゾチックな商品にトップクレジットを支払っている。珍しいテクノロジーを持っているなら、今が売り時だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Half the docking clamps are broken. They say the faction leadership has gone bankrupt."
 msgstr "ドッキングクランプの半分が壊れている。派閥の指導部は破産したらしい。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Scavengers are picking the local asteroid fields clean. The local economy is entirely reliant on scraps."
 msgstr "スカベンジャーが地元の小惑星帯をきれいに拾い集めている。地域経済は完全にスクラップに依存している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Living inside the barrier changes a man. The Avorion hums... you can almost hear it."
 msgstr "バリアの中で生活すると人が変わる。アボリオンがハミングしている...ほとんど聞こえるほどだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Out here on the rim, you gotta watch your own back. Nobody's coming to save you."
 msgstr "ここアウターリムでは、自分の背中に気を付けなければならない。誰もあなたを救いに来ない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Tensions are boiling over. I heard command is authorizing a Decapitation Strike if the enemy flagship shows its face."
 msgstr "緊張が沸騰している。敵の旗艦が姿を現した場合、司令部が斬首攻撃を許可すると聞いた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep your eyes on the bulletin boards. The military is handing out massive bounties for anyone willing to dive into the warzone."
 msgstr "掲示板から目を離すな。軍は、戦争地帯に飛び込む意志のある者に莫大な報奨金を出している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Diplomatic sanctions are bleeding the border sectors dry. It's getting harder to find anyone willing to trade across enemy lines."
 msgstr "外交制裁が国境セクターの血を流している。敵の戦線を越えて取引しようとする者を見つけるのが難しくなっている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A buddy of mine took a 'Force Recon' contract. Said the pay was good, but he hasn't been back in a week."
 msgstr "私の相棒が「武力偵察」の契約を受けた。給料はいいと言っていたが、もう一週間も戻ってきていない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Watch out for arms deals going down in deep space. Interrupting one could be profitable... or fatal."
 msgstr "深宇宙で行われている武器取引に気をつけろ。それを妨害することは利益になるかもしれない...または致命的になるかもしれない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The war pressure in this region is getting intense. It feels like one wrong move could ignite the whole sector."
 msgstr "この地域の戦争の圧力は激しくなっている。一歩間違えればセクター全体に火がつくかもしれない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Some extremists tried to sabotage a peace envoy. If you see a diplomatic ship under fire, helping them out pays big in reputation."
 msgstr "一部の過激派が平和特使を妨害しようとした。攻撃を受けている外交船を見かけたら、彼らを助けると名声が大きく上がる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Civilian freighters are being ambushed by hunter fleets near the border. If you have the guns, the refugees need help."
 msgstr "民間貨物船が国境付近でハンター艦隊に待ち伏せされている。武器を持っているなら、難民が助けを求めている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I saw massive strike fleets jumping into the active warzones. It's an absolute bloodbath out there."
 msgstr "大規模な攻撃艦隊がアクティブな戦争地帯にジャンプするのを見た。そこは絶対的な血の海だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "There are whispers of a ceasefire, but only if the frontline commanders can swallow their pride."
 msgstr "停戦の噂があるが、それは最前線の指揮官がプライドを飲み込むことができた場合のみだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Prices are through the roof. Diplomatic sanctions are hurting us more than the actual fighting."
 msgstr "価格は天井知らずだ。外交制裁は実際の戦闘よりも我々を傷つけている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep your transponders clean. The Smuggler's Market is paying a huge premium for unbranded, illegal goods lately."
 msgstr "トランスポンダをクリーンに保て。最近、密輸業者の市場はブランドのない違法品に莫大なプレミアムを支払っている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Ever since they overhauled the transporter block regulations, my cargo runners haven't had to physically dock to a station once."
 msgstr "彼らがトランスポーターブロックの規制を見直して以来、私の貨物船は一度もステーションに物理的にドッキングする必要がなくなった。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Scrap limiters are gone, friend. You can spend all day in the scrapyards without command breathing down your neck, provided you buy the license."
 msgstr "スクラップリミッターはなくなったよ、友よ。ライセンスを購入すれば、司令部から監視されることなく、一日中スクラップヤードで過ごすことができる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I used to run the old trade lanes, but these days you need an escort fleet just to run a Scout operation through the inner barriers."
 msgstr "昔は古い交易レーンを走っていたが、最近は内部バリアを抜けてスカウト作戦を実行するだけでも護衛艦隊が必要だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I managed to unbrand some stolen tech modules. Cost a pretty penny, but the Smuggler's Market payout was worth it."
 msgstr "盗まれた技術モジュールのブランドをなんとか消した。かなりの費用がかかったが、密輸業者の市場の支払いはそれだけの価値があった。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The Command Center terminal tracks every ship in the fleet now. Makes logistics a breeze, as long as the captains don't go rogue."
 msgstr "コマンドセンターの端末は、現在フリート内のすべての船を追跡している。船長が反逆しない限り、ロジスティクスが簡単になる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Logistics is backed up again. The new shuttle volume capacity is great, but we still need more physical docking ports!"
 msgstr "ロジスティクスが再びバックアップされた。新しいシャトルの容量は素晴らしいが、物理的なドッキングポートがまだ足りない！"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I've been using the new universal bulletin board. It's so much easier to find work without having to dock at every single station."
 msgstr "新しいユニバーサル掲示板を使っている。すべてのステーションにドッキングしなくても仕事を見つけるのがずっと簡単になった。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "My captain says his new ship orders are persistent. He can finally finish a trade run without me having to re-issue the command every time I log in."
 msgstr "私の船長は、彼の新しい船の命令は永続的だと言っている。私がログインするたびにコマンドを再発行しなくても、彼はついにトレードランを終えることができる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "With the new factory overview, I finally figured out my energy cell plant was losing money. Switched it to solar panels and now I'm in the green."
 msgstr "新しい工場の概要で、ついにエネルギーセルプラントが赤字であることに気づいた。ソーラーパネルに切り替えて、今は黒字だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "It's nice that being friendly with a faction actually means something now. They're much more willing to help out an ally."
 msgstr "派閥と友好的であることが実際に意味を持つようになったのは素晴らしいことだ。彼らは同盟国を喜んで助けてくれる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Don't ignore your friends for too long. Reputation isn't permanent anymore; you have to maintain those relationships."
 msgstr "友達を長期間無視しないでください。評判はもはや永続的なものではありません。その関係を維持する必要があります。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We're backed up on hull plate welding for another three cycles. Logistics is a nightmare."
 msgstr "船体プレートの溶接がさらに3サイクル遅れている。ロジスティクスは悪夢だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Did you see the size of that dreadnought they laid down in dock 4? The faction is definitely gearing up for a strike."
 msgstr "ドック4に置かれたドレッドノートの大きさを見たか？派閥は間違いなくストライキの準備をしている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Captains always ask for more processing power, but never want to pay for the assembly cores..."
 msgstr "船長は常に処理能力を求めてくるが、アセンブリコアにお金を払おうとは決してしない..."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I hear the chief architect was bribed to leak the blueprints of our new cruiser class to the enemy."
 msgstr "チーフアーキテクトが賄賂を受け取って、新しい巡洋艦クラスの設計図を敵に漏らしたそうだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "If you need a fast scout, the new interceptor frames just finished their stress testing."
 msgstr "高速スカウトが必要なら、新しい迎撃機のフレームがストレステストを終えたばかりだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The plasma burns on that last freighter were nasty. Almost melted right through the armor blocks."
 msgstr "最後の貨物船のプラズマの焦げ跡はひどかった。装甲ブロックを突き抜けてほとんど溶けていた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We're out of cohesive field generators again. Temporary patches only until the next supply run."
 msgstr "凝集フィールドジェネレーターがまた品切れだ。次の補給の実行までの間だけの一時的なパッチだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Some folks bring their ships in held together by nothing but duct tape and prayers."
 msgstr "ダクトテープと祈りだけでつなぎ合わされた船を持ち込む人たちもいる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I heard a captain tried to fly through a rift without a dampener. Their ship... it was inside out."
 msgstr "船長がダンパーなしで亀裂を通り抜けようとしたらしい。彼らの船は...裏返しになっていた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Don't tell command, but we've been using surplus scrap to fix up civilian transports off the books."
 msgstr "司令部には内緒だが、我々は帳簿外で民間の輸送機関を修理するために余剰スクラップを使用している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Another crate of low-grade mining lasers. Who even buys these anymore?"
 msgstr "低グレードのマイニングレーザーの別の木箱。今時こんなもの誰が買うんだ？"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep an eye on the prototype shield boosters. I think one of the clerks is skimming inventory."
 msgstr "プロトタイプのシールドブースターから目を離さないでください。事務員の一人が在庫をかすめ取っていると思います。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I finally managed to snag an exceptional transporter software module. Cost me a year's wages."
 msgstr "ついに並外れたトランスポーターソフトウェアモジュールを手に入れた。1年分の給料がかかった。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Rumor has it a trader sold us a cursed radar system. Every ship that equips it goes missing."
 msgstr "噂によると、商人が呪われたレーダーシステムを売ったそうだ。それを装備した船はすべて行方不明になる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "If you're looking for high-end fire control systems, you're out of luck. The shipment got delayed by pirates."
 msgstr "ハイエンドの火器管制システムを探しているなら、運がない。出荷は海賊によって遅れた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep your sidearm loaded. Tensions are running high since the last border skirmish."
 msgstr "サイドアームを装填しておいてください。最後の国境の小競り合い以来、緊張が高まっています。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Command is authorizing live-fire drills in sector 4. Best avoid that route."
 msgstr "司令部はセクター4での実弾訓練を許可している。そのルートは避けたほうがいい。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We just got a fresh batch of torpedoes. Someone is preparing for a long fight."
 msgstr "新しい魚雷のバッチが届いたところだ。誰かが長期戦の準備をしている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I overheard the general talking about a preemptive decapitation strike on the rival faction's HQ."
 msgstr "将軍がライバル派閥のHQに対する先制斬首攻撃について話しているのを立ち聞きした。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Leave the recruits alone, they're jumpy enough as it is after the last Xsotan raid."
 msgstr "新兵は放っておいてくれ、彼らは前回のクスオタンの襲撃の後、ただでさえ神経質になっている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep your voice down. The local patrol ships have been poking their noses around the docking clamps."
 msgstr "声を落として。地元のパトロール船がドッキングクランプの周りを嗅ぎ回っている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I've got three crates of unbranded targeting systems, if you've got the credits."
 msgstr "クレジットがあるなら、ブランドなしのターゲティングシステムが3箱ある。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Someone's moving stolen military goods through the asteroid fields. Big payout if you can hijack the haul."
 msgstr "誰かが小惑星帯を通って盗まれた軍事物資を動かしている。その運搬をハイジャックできれば大きな見返りがある。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Don't ask where the cargo came from, and I won't ask where it's going. That's the rule."
 msgstr "貨物がどこから来たか聞かないでくれ、そして私はそれがどこへ行くのか聞かない。それがルールだ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The Syndicate is putting a bounty on anyone who undercuts their illegal goods prices. Watch your margins."
 msgstr "シンジケートは、彼らの違法な商品の価格を切り下げる者に報奨金をかけている。マージンに気をつけろ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I lost three months of mining wages on a single hand of Cosmic Hold'em. The house always wins."
 msgstr "コズミックホールデムの一手で、採掘の給料を3か月分失ったよ。胴元は常に勝つ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Watch the dealer at table four. I swear they're using a micro grav-manipulator on the dice."
 msgstr "テーブル4のディーラーに気をつけろ。誓って言うが、彼らはサイコロにマイクロ重力マニピュレーターを使用している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A wealthy merchant just bought out the VIP lounge. Could be a good mark for a... business proposition."
 msgstr "裕福な商人がVIPラウンジを買い取ったばかりだ。...ビジネスの提案のための良いターゲットになるかもしれない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Free drinks as long as you're playing, friend! Just don't check your credit balance tomorrow."
 msgstr "あなたがプレイしている限り、飲み物は無料だ、友よ！ただ明日、クレジット残高を確認しないように。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Some hotshot pilot just bet their entire cruiser on a roulette spin. Didn't end well for them."
 msgstr "ある腕利きのパイロットが、ルーレットの回転に自分の巡洋艦全体を賭けた。彼らにとって良い終わり方ではなかった。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "You'd be amazed what people leave behind in these wrecks. Found a pristine energy core yesterday."
 msgstr "これらの難破船に人々が残していくものに驚くでしょう。昨日、無傷のエネルギーコアを見つけた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Watch your thrusters near sector 7. The debris field shifted and tore up a scout ship."
 msgstr "セクター7の近くではスラスターに気をつけろ。デブリフィールドが移動してスカウト船を引き裂いた。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "You want to buy a license? Fine, but anything you break out there is on you."
 msgstr "ライセンスを購入したいですか？結構ですが、そこで壊したものはあなたの責任です。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I swear I heard a transmission coming from that ancient dreadnought wreck on the edge of the yard..."
 msgstr "誓って言うが、ヤードの端にある古代のドレッドノートの残骸から送信が来るのを聞いた..."
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We've got plenty of scrap iron, but Trinium parts are getting harder and harder to find."
 msgstr "スクラップの鉄はたくさんあるが、トリニウムの部品はますます見つけるのが難しくなっている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The latest scans from the barrier are showing massive energy spikes. Something big is moving in there."
 msgstr "バリアからの最新のスキャンは、大規模なエネルギースパイクを示しています。そこで何か大きなものが動いています。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Don't touch that console! I've been running that simulation for three weeks uninterrupted!"
 msgstr "そのコンソールに触るな！私はそのシミュレーションを3週間中断することなく実行しているんだ！"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We're always looking for Xsotan artifacts. The science division pays top credit for them."
 msgstr "我々は常にクスオタンのアーティファクトを探している。科学部門はそれらに最高のクレジットを支払う。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A scout probe returned from a rift anomaly. The data it brought back... it doesn't make any logical sense."
 msgstr "スカウトプローブが亀裂の異常から戻ってきた。それが持ち帰ったデータは...論理的に意味が通らない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Funding got cut again. They want military applications, not theoretical physics."
 msgstr "また資金が削減された。彼らは軍事応用を望んでおり、理論物理学ではない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We need more servo motors if we're going to meet the quota for the double-barrel plasma cannons."
 msgstr "ダブルバレルプラズマキャノンのクォータを満たすつもりなら、もっとサーボモーターが必要だ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I know a guy who can override the safety limiters on railguns, for a small fee of course."
 msgstr "もちろん少額の料金で、レールガンの安全リミッターをオーバーライドできる男を知っている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Quality control rejected the last batch of coaxial cables. Scrap 'em and start over."
 msgstr "品質管理は、同軸ケーブルの最後のバッチを拒否した。それらをスクラップしてやり直せ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "They say the new coaxial artillery designs can punch straight through a station's shielding in one volley."
 msgstr "彼らは、新しい同軸砲の設計は1回の一斉射撃でステーションのシールドをまっすぐに貫通できると言っている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The assembly line is running hot today. Lots of custom military orders coming in from the border."
 msgstr "今日、組立ラインは熱を帯びている。国境から多くのカスタム軍事注文が入ってきている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Market fluctuations have driven the price of processors through the roof today."
 msgstr "今日の市場の変動により、プロセッサの価格は天井知らずに高騰している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A heavily-guarded convoy of luxury goods is arriving tomorrow. Get your buy orders ready."
 msgstr "高級品の厳重に警備された船団が明日到着する。買い注文の準備をしておけ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I've been trading between these three sectors for years, but the margins are getting terrifyingly thin."
 msgstr "私は何年もこれらの3つのセクター間で取引を行ってきたが、利益幅は恐ろしいほど薄くなっている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Someone is artificially inflating the price of Energy Cells by stockpiling them in deep space."
 msgstr "誰かが深宇宙に備蓄することでエネルギーセルの価格を人為的に吊り上げている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Always read the fine print on the manifest. Some of these merchants will swindle you blind if you let them."
 msgstr "マニフェストの小さな文字は常に読んでください。これらの商人の一部は、もしあなたが彼らにそうさせるなら、あなたを盲目に騙すでしょう。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "We just took in a massive haul of raw Ogonite. Must have been a good strike out in the outer belt."
 msgstr "生のオゴナイトを大量に手に入れたところだ。外側のベルトで良いストライキがあったに違いない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Prices on Titanium are dropping. Market's flooded with cheap mining yields right now."
 msgstr "チタンの価格が下落している。現在、市場は安価な採掘の産出物で溢れている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "There's a massive asteroid cluster out past the nebula, completely untouched. Ripe for the taking if you have the lasers."
 msgstr "星雲を過ぎたところに巨大な小惑星の星団があり、完全に手つかずだ。レーザーを持っていれば、手に入れるのに熟している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Keep the loaders moving! We have three freighters waiting for their cargo hold transfers."
 msgstr "ローダーを動かし続けろ！貨物倉の移送を待っている貨物船が3隻あるぞ。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Some miners found a strange glowing ore near the core, but it irradiated their hold and ruined the engines."
 msgstr "一部の鉱夫がコアの近くで奇妙に光る鉱石を発見したが、それは彼らのホールドを照射し、エンジンを台無しにした。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The new Mk-IV interceptor chassis is finally ready for mass production."
 msgstr "新しいMk-IV迎撃機のシャーシがついに量産の準備が整いました。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Command wants more bomber squadrons deployed, but we don't have enough high-capacity warheads in stock."
 msgstr "司令部はもっと多くの爆撃機飛行隊の配備を望んでいるが、大容量の弾頭の在庫が足りない。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "I heard a test pilot blacked out pulling 15 Gs in the new prototype fighter. They're still scraping him out of the cockpit."
 msgstr "テストパイロットが新しいプロトタイプ戦闘機で15Gを引いて気を失ったと聞いた。彼らはまだ彼をコクピットから削り出している。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "If you need a reliable escort, our heavy fighters are the best in the sector. Pricey, but worth it."
 msgstr "信頼できる護衛が必要なら、我々の重戦闘機はこのセクターで最高だ。高価だが、それだけの価値はある。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "The experimental stealth fighters went missing during a training exercise... maybe their cloaks actually work."
 msgstr "実験的なステルス戦闘機が訓練演習中に行方不明になった...おそらく彼らのクロークは実際に機能するのだろう。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "If you're doing bulk trading, put a licensed Merchant in the captain's chair. They know how to squeeze a 15% bonus out of any station manager."
 msgstr "大量の取引をするなら、公認の商人をキャプテンの席に座らせろ。彼らはステーションのマネージャーから15%のボーナスを絞り出す方法を知っている。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Need to fence stolen goods? Let a Smuggler do the talking. They get much better payouts at the Black Market than honest pilots do."
 msgstr "盗品をさばきたいか？密輸業者に話をさせろ。彼らは正直なパイロットよりも闇市場でずっと良い支払いを得る。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "A good Scavenger captain can read a debris field like a book. Check your tactical map—they can identify exactly what ship was destroyed just by looking at the wreckage."
 msgstr "優秀なスカベンジャーのキャプテンは、デブリフィールドを本のように読むことができる。戦術マップを確認しろ。彼らは残骸を見るだけで、どの船が破壊されたかを正確に特定できる。"
 
-#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+#: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "船のインベントリフィルターを必ず使用しろ。お気に入りの装備を保護せずにトラッシュマンに大量売却するのは、初心者の間違いだ。"
