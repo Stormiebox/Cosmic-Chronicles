@@ -426,6 +426,34 @@ function CosmicChronicles.registerLore()
         conditions = { minReputation = 0 }
     })
 
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "If you're doing bulk trading, put a licensed Merchant in the captain's chair. They know how to squeeze a 15% bonus out of any station manager."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Need to fence stolen goods? Let a Smuggler do the talking. They get much better payouts at the Black Market than honest pilots do."%_T,
+        conditions = { stationType = "smugglersmarket" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "A good Scavenger captain can read a debris field like a book. Check your tactical map—they can identify exactly what ship was destroyed just by looking at the wreckage."%_T,
+        conditions = { stationType = "scrapyard" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."%_T,
+        conditions = { minReputation = 0 }
+    })
+
     -- ==========================================
     -- STATION SPECIFIC LORE: SHIPYARD
     -- ==========================================

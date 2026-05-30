@@ -54,6 +54,10 @@ msgstr "=== KULTURDENKMAL DER ${faction} ===\n\nWir haben die Große Dunkelheit 
 msgid "Fascinating."
 msgstr "Faszinierend."
 
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+msgid "You paid your respects to the faction's history. Reputation improved."
+msgstr "Sie haben der Geschichte der Fraktion Ihren Respekt erwiesen. Ruf verbessert."
+
 
 # ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua ==========
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
@@ -92,6 +96,22 @@ msgstr "Vielen Dank! Sie haben unsere Leben gerettet. Übrigens, seien Sie vorsi
 msgid "Safe travels."
 msgstr "Sichere Reise."
 
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Hazard Pay"
+msgstr "Gefahrenzulage"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Your Merchant captain negotiated a 75,000 credit hazard pay fee for the supplies."
+msgstr "Ihr Kaufmann-Kapitän hat eine Gefahrenzulage von 75.000 Credits für die Vorräte ausgehandelt."
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Smuggled Goods"
+msgstr "Schmuggelware"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."
+msgstr "Ihr Schmuggler-Kapitän hat während des Transfers klammheimlich Wertsachen im Wert von 100.000 Credits aus dem Flüchtlingskonvoi abgezweigt."
+
 
 # ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua ==========
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua:
@@ -111,6 +131,10 @@ msgstr "Interessant. Danke."
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua:
 msgid "Cultural Monument"
 msgstr "Kulturdenkmal"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua:
+msgid "Sensors are detecting a massive, ancient architectural structure in this sector."
+msgstr "Sensoren erfassen eine massive, uralte architektonische Struktur in diesem Sektor."
 
 
 # ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_derelictgraveyard.lua ==========
@@ -591,3 +615,19 @@ msgstr "Wenn Sie eine zuverlässige Eskorte brauchen, sind unsere schweren Jäge
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
 msgid "The experimental stealth fighters went missing during a training exercise... maybe their cloaks actually work."
 msgstr "Die experimentellen Tarnkappenjäger sind während einer Trainingsübung verschwunden... vielleicht funktionieren ihre Tarnungen ja wirklich."
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "If you're doing bulk trading, put a licensed Merchant in the captain's chair. They know how to squeeze a 15% bonus out of any station manager."
+msgstr "Wenn Sie im großen Stil handeln, setzen Sie einen lizenzierten Kaufmann in den Sessel des Kapitäns. Sie wissen, wie man jedem Stationsmanager einen 15%-Bonus herausquetscht."
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "Need to fence stolen goods? Let a Smuggler do the talking. They get much better payouts at the Black Market than honest pilots do."
+msgstr "Müssen Sie gestohlene Waren absetzen? Lassen Sie einen Schmuggler das Reden übernehmen. Sie bekommen auf dem Schwarzmarkt viel bessere Auszahlungen als ehrliche Piloten."
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "A good Scavenger captain can read a debris field like a book. Check your tactical map—they can identify exactly what ship was destroyed just by looking at the wreckage."
+msgstr "Ein guter Plünderer-Kapitän kann ein Trümmerfeld wie ein Buch lesen. Überprüfen Sie Ihre Taktikkarte – sie können allein durch einen Blick auf die Wrackteile genau identifizieren, welches Schiff zerstört wurde."
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
+msgstr "Stellen Sie sicher, dass Sie die Inventarfilter Ihres Schiffes nutzen. Der Massenverkauf an den Schrotthändler ohne den Schutz Ihrer Lieblingsausrüstung ist ein Anfängerfehler."

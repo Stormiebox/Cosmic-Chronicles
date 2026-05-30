@@ -67,6 +67,19 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
         local faction = Faction(Entity().factionIndex)
         if faction then Galaxy():changeFactionRelations(player.index, faction.index, 10000) end
 
+        -- Cosmic Overhaul Synergy: Merchants and Smugglers extract monetary value from the crisis
+        local captain = ship:getCaptain()
+        if captain then
+            local CaptainClass = include("captainclass")
+            if captain:hasClass(CaptainClass.Merchant) then
+                player:receive("Hazard Pay"%_t, 75000)
+                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 75,000 credit hazard pay fee for the supplies."%_T)
+            elseif captain:hasClass(CaptainClass.Smuggler) then
+                player:receive("Smuggled Goods"%_t, 100000)
+                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
+            end
+        end
+
         local context = { warHeat = 100 }
         local rumor = CosmicVaultDialogue.getValidLine("rumor", context) or "The enemy is ruthless... stay safe out there."%_T
 
@@ -78,7 +91,7 @@ callable(CosmicChroniclesRefugee, "donate")
 
 function CosmicChroniclesRefugee.showThanksDialog(rumor)
     if not onClient() then return end
-    local text = "Thank you so much! You saved our lives. By the way, be careful... ${rumor}"%_t % {rumor = rumor%_t}
+    local text = "Thank you so much! You saved our lives. By the way, be careful... ${rumor}"%_t % {rumor = rumor}
     local dialog = {text = text, answers = {{answer = "Safe travels."%_t}}}
     ScriptUI():showDialog(dialog)
 end

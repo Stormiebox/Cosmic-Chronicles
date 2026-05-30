@@ -13,13 +13,14 @@ function initialize()
 
     -- Generate a massive procedural station based on the faction's architectural style
     local plan = PlanGenerator.makeStationPlan(faction)
+    plan:scale(vec3(2.5, 2.5, 2.5)) -- Scale it up so it is genuinely massive and awe-inspiring
 
     local desc = StationDescriptor()
     desc.factionIndex = faction.index
     desc:setMovePlan(plan)
 
-    -- Spawn it slightly off-center to prevent players hyperspacing directly inside it
-    local offset = vec3(math.random(-1500, 1500), math.random(-1500, 1500), math.random(-1500, 1500))
+    -- Spawn it close enough to ping on radar, but far enough to prevent hyperspace collisions
+    local offset = vec3(math.random(-1000, 1000), math.random(-1000, 1000), math.random(-1000, 1000))
     desc.position = MatrixLookUpPosition(vec3(0,1,0), vec3(1,0,0), offset)
     desc.title = "Cultural Monument"%_T
 
@@ -28,6 +29,9 @@ function initialize()
 
     -- Use the vanilla API property to ensure it cannot be destroyed by stray pirate attacks
     station.invincible = true
+
+    -- Alert the player that something interesting is in the sector
+    Sector():broadcastChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Sensors are detecting a massive, ancient architectural structure in this sector."%_T)
 
     terminate()
 end

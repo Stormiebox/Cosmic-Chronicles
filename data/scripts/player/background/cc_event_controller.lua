@@ -1,5 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
+local cw_success = pcall(include, "cosmicwarbridge")
+
 -- Helper to fetch the highest local War Heat from the sector's factions
 local function getSectorWarHeat()
     local sector = Sector()
@@ -9,9 +11,8 @@ local function getSectorWarHeat()
     for _, f in pairs(factions) do
         local faction = Faction(f)
         if faction and faction.isAIFaction then
-            local success = pcall(include, "cosmicwarbridge")
-            if success and _G.CosmicWarBridge and _G.CosmicWarBridge.getFactionWarHeat then
-                local rawHeat = _G.CosmicWarBridge.getFactionWarHeat(faction.index) or 0
+            if cw_success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
+                local rawHeat = CosmicWarBridge.getFactionWarHeat(faction.index) or 0
                 heat = math.max(heat, math.floor(rawHeat * 100))
             elseif faction:getValue("cw_enabled") then
                 local rawHeat = faction:getValue("cw_war_heat") or 0
@@ -37,11 +38,11 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
     -- 25% chance to spawn Graveyard if Heat > 80
     if heat > 80 and random():getInt(1, 100) <= 25 then
         sector:setValue("cc_event_spawned", true)
-        sector:addScriptOnce("events/cw_derelictgraveyard.lua")
+        sector:addScriptOnce("events/cc_derelictgraveyard.lua")
     -- 25% chance to spawn Refugees if Heat > 40
     elseif heat > 40 and random():getInt(1, 100) <= 25 then
         sector:setValue("cc_event_spawned", true)
-        sector:addScriptOnce("events/cw_refugeeconvoy.lua")
+        sector:addScriptOnce("events/cc_refugeeconvoy.lua")
     else
         -- Determine if we are deep inside AI territory
         local controllingFaction = nil

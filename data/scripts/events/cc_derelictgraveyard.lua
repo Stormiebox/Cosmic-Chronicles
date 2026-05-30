@@ -1,5 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 local ShipGenerator = include("shipgenerator")
+local SectorGenerator = include("SectorGenerator")
 include("stringutility")
 
 function initialize()
@@ -14,14 +15,14 @@ function initialize()
     -- Spawn ships and immediately destroy them to let Avorion's physics engine handle the wreckage scatter
     local count = random():getInt(3, 5)
     for i = 1, count do
-        local ship = ShipGenerator.createMilitaryShip(faction, MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(math.random(-300, 300), math.random(-300, 300), math.random(-300, 300))))
+        local ship = ShipGenerator.createMilitaryShip(faction, MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(random():getInt(-500, 500), random():getInt(-500, 500), random():getInt(-500, 500))))
         ship.durability = 1
         ship:destroy(ship.index) -- Instantly destroy the ship to generate standard wreckage and explosion VFX
     end
 
     -- Spawn a Black Box stash for players to recover the final log
     local generator = SectorGenerator(sector:getCoordinates())
-    local position = MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(math.random(-50, 50), math.random(-50, 50), math.random(-50, 50)))
+    local position = MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(random():getInt(-50, 50), random():getInt(-50, 50), random():getInt(-50, 50)))
     local stash = generator:createStash(position)
     stash.title = "Flight Recorder (Black Box)"%_T
     stash:removeScript("stash.lua")

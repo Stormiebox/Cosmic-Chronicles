@@ -5,13 +5,14 @@ include("cosmicvaultdialogue")
 -- namespace CosmicChroniclesRumormonger
 CosmicChroniclesRumormonger = {}
 
+local cw_success = pcall(include, "cosmicwarbridge")
+
 -- Helper function to fetch War Heat safely
 local function getFactionWarHeat(faction)
     local realWarHeat = 0
-    local success = pcall(include, "cosmicwarbridge")
 
-    if success and _G.CosmicWarBridge and _G.CosmicWarBridge.getFactionWarHeat then
-        local rawHeat = _G.CosmicWarBridge.getFactionWarHeat(faction.index) or 0
+    if cw_success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
+        local rawHeat = CosmicWarBridge.getFactionWarHeat(faction.index) or 0
         realWarHeat = math.floor(rawHeat * 100)
     elseif faction:getValue("cw_enabled") then
         local rawHeat = faction:getValue("cw_war_heat") or 0
@@ -87,10 +88,23 @@ function CosmicChroniclesRumormonger.interactionPossible(playerIndex, option)
     -- Don't show the dialogue if the player is somehow trying to talk to their own ship
     if craft and craft.index == Entity().index then return false end
 
-    -- Vanilla Standard: Prevent casually asking for rumors from fiercely hostile stations (-30k rep)
-    -- TODO: Look for other means for when players ask for rumors.
+    -- Base Threshold: Prevent casually asking for rumors from fiercely hostile stations (-30k rep)
+    local threshold = -30000
+
+    -- Cosmic Overhaul Synergy: Smugglers and Explorers know how to quietly buy drinks and extract
+    -- information even in hostile ports, extending their rumor access significantly.
+    if craft then
+        local captain = craft:getCaptain()
+        if captain then
+            local CaptainClass = include("captainclass")
+            if captain:hasClass(CaptainClass.Smuggler) or captain:hasClass(CaptainClass.Explorer) then
+                threshold = -60000
+            end
+        end
+    end
+
     local faction = Faction(Entity().factionIndex)
-    if faction and player:getRelations(faction.index) <= -30000 then return false end
+    if faction and player:getRelations(faction.index) <= threshold then return false end
 
     return true
 end
@@ -143,7 +157,7 @@ callable(CosmicChroniclesRumormonger, "getRumorFromServer")
 function CosmicChroniclesRumormonger.showRumorDialog(rumor)
     if not onClient() then return end
 
-    local dialog = { text = rumor%_t, answers = { {answer = "Interesting. Thanks."%_t} } }
+    local dialog = { text = rumor, answers = { {answer = "Interesting. Thanks."%_t} } }
 
     -- Render the Avorion dialogue UI
     ScriptUI():showDialog(dialog)

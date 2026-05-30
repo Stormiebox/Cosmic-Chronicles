@@ -37,15 +37,35 @@ function CosmicChroniclesBlackBox.extract()
     local balancing = include("galaxy")
     local rewardFactor = balancing.GetSectorRewardFactor(x, y)
 
-    local amount = math.floor(random():getInt(75000, 150000) * rewardFactor)
+    -- Cosmic Overhaul Synergy: Scavengers and Explorers extract far more value from black boxes
+    local ship = player.craft
+    local bonusMultiplier = 1.0
+    if ship then
+        local captain = ship:getCaptain()
+        if captain then
+            local CaptainClass = include("captainclass")
+            if captain:hasClass(CaptainClass.Scavenger) then
+                bonusMultiplier = 1.5
+            elseif captain:hasClass(CaptainClass.Explorer) then
+                bonusMultiplier = 1.25
+            end
+        end
+    end
+
+    local amount = math.floor(random():getInt(75000, 150000) * rewardFactor * bonusMultiplier)
     player:receive("Recovered Credits"%_t, amount)
 
-    local UpgradeGenerator = include("upgradegenerator")
-    if UpgradeGenerator and UpgradeGenerator.generateSystemUpgrade then
-        local rarityValue = RarityType.Rare
-        -- 25% chance to get an exceptional upgrade, scaled by distance from core
-        if random():test(0.25 * rewardFactor) then rarityValue = RarityType.Exceptional end
-        local upgrade = UpgradeGenerator.generateSystemUpgrade(random():createSeed(), Rarity(rarityValue))
+    local generator = include("upgradegenerator")()
+    local rarityValue = RarityType.Rare
+    if random():test(0.25 * rewardFactor * bonusMultiplier) then rarityValue = RarityType.Exceptional end
+
+    local ok, upgrade = pcall(function() return generator:generateSectorSystem(x, y, nil, {[rarityValue] = 1}) end)
+    if ok and upgrade then
+        -- Safely handle both Prototype tables and instantiated SystemUpgradeTemplates
+        if type(upgrade) == "table" and upgrade.script then
+            local seed = generator:getUpgradeSeed(x, y, upgrade.script, upgrade.rarity)
+            upgrade = SystemUpgradeTemplate(upgrade.script, upgrade.rarity, seed)
+        end
         player:getInventory():add(upgrade)
     end
 
@@ -56,7 +76,7 @@ callable(CosmicChroniclesBlackBox, "extract")
 
 function CosmicChroniclesBlackBox.showLogDialog(log)
     if not onClient() then return end
-    local text = "Black Box Recording:\n\n\"${log}\"\n\n*Recording Ends*"%_t % {log = log%_t}
+    local text = "Black Box Recording:\n\n\"${log}\"\n\n*Recording Ends*"%_t % {log = log}
     local dialog = {text = text, answers = {{answer = "Close"%_t}}}
     ScriptUI():showDialog(dialog)
 end

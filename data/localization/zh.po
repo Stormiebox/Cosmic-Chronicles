@@ -54,6 +54,10 @@ msgstr "=== ${faction} 文化纪念碑 ===\n\n我们凭借 ${trait1} 熬过了�
 msgid "Fascinating."
 msgstr "令人着迷。"
 
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_factionmonument.lua:
+msgid "You paid your respects to the faction's history. Reputation improved."
+msgstr "你向该派系的历史致敬。声望提升了。"
+
 
 # ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua ==========
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
@@ -92,6 +96,22 @@ msgstr "非常感谢！你救了我们的命。顺便说一句，小心点……
 msgid "Safe travels."
 msgstr "一路平安。"
 
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Hazard Pay"
+msgstr "危险津贴"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Your Merchant captain negotiated a 75,000 credit hazard pay fee for the supplies."
+msgstr "你的商人船长为物资谈判获得了 75,000 星币的危险津贴。"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Smuggled Goods"
+msgstr "走私货物"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cc_refugeedialogue.lua:
+msgid "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."
+msgstr "你的走私者船长在转移过程中悄悄从难民船队中顺走了价值 100,000 星币的贵重物品。"
+
 
 # ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua ==========
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/entity/cosmicchronicles_rumormonger.lua:
@@ -111,6 +131,10 @@ msgstr "有意思。谢谢。"
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua:
 msgid "Cultural Monument"
 msgstr "文化纪念碑"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cc_spawnmonument.lua:
+msgid "Sensors are detecting a massive, ancient architectural structure in this sector."
+msgstr "传感器检测到该星区存在一个巨大的古老建筑结构。"
 
 
 # ========== C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/events/cw_derelictgraveyard.lua ==========
@@ -591,3 +615,19 @@ msgstr "如果你需要可靠的护卫，我们的重型战斗机是这个星系
 #: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
 msgid "The experimental stealth fighters went missing during a training exercise... maybe their cloaks actually work."
 msgstr "实验性隐形战斗机在一次训练演习中失踪了……也许它们的隐形装置真的有用。"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "If you're doing bulk trading, put a licensed Merchant in the captain's chair. They know how to squeeze a 15% bonus out of any station manager."
+msgstr "如果你在进行大宗贸易，请让一位有执照的商人在船长椅上就座。他们知道如何从任何空间站经理那里榨取 15% 的额外利润。"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "Need to fence stolen goods? Let a Smuggler do the talking. They get much better payouts at the Black Market than honest pilots do."
+msgstr "需要销赃吗？让走私者去谈吧。他们在黑市上能得到比诚实飞行员好得多的报酬。"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "A good Scavenger captain can read a debris field like a book. Check your tactical map—they can identify exactly what ship was destroyed just by looking at the wreckage."
+msgstr "一位优秀的拾荒者船长能像看书一样解读碎片区。检查你的战术地图——他们仅凭残骸就能准确判断出被摧毁的是什么飞船。"
+
+#: C:/Users/erikf/AppData/Roaming/Avorion/mods/Cosmic Chronicles/data/scripts/server/cosmicchronicles.lua:
+msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
+msgstr "确保你使用了飞船的库存过滤器。不保护自己最喜欢的装备就向垃圾回收员批量出售是新手的错误。"
