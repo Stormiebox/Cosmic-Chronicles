@@ -20,7 +20,7 @@ function initialize()
     desc:setMovePlan(plan)
 
     -- Spawn it close enough to ping on radar, but far enough to prevent hyperspace collisions
-    local offset = vec3(math.random(-1000, 1000), math.random(-1000, 1000), math.random(-1000, 1000))
+    local offset = vec3(random():getInt(-1000, 1000), random():getInt(-1000, 1000), random():getInt(-1000, 1000))
     desc.position = MatrixLookUpPosition(vec3(0,1,0), vec3(1,0,0), offset)
     desc.title = "Cultural Monument"%_T
 

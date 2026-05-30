@@ -1,6 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
 include("stringutility")
+include("relations")
 
 -- namespace CosmicChroniclesMonument
 CosmicChroniclesMonument = {}
@@ -34,7 +35,7 @@ function CosmicChroniclesMonument.readLore()
     local readKey = "cc_monument_read_" .. player.index
     if not Entity():getValue(readKey) then
         Entity():setValue(readKey, true)
-        Galaxy():changeFactionRelations(player.index, faction.index, 1500)
+        changeRelations(player, faction, 1500, RelationChangeType.General)
         player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "You paid your respects to the faction's history. Reputation improved."%_T)
     end
 

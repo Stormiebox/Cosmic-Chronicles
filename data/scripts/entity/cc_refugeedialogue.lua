@@ -2,6 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
 include("cosmicvaultdialogue")
 include("stringutility")
+include("relations")
 
 -- namespace CosmicChroniclesRefugee
 CosmicChroniclesRefugee = {}
@@ -65,7 +66,7 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
         helped = true
 
         local faction = Faction(Entity().factionIndex)
-        if faction then Galaxy():changeFactionRelations(player.index, faction.index, 10000) end
+        if faction then changeRelations(player, faction, 10000, RelationChangeType.General) end
 
         -- Cosmic Overhaul Synergy: Merchants and Smugglers extract monetary value from the crisis
         local captain = ship:getCaptain()

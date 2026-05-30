@@ -2,6 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
 include("cosmicvaultdialogue")
 include("stringutility")
+include("galaxy")
 
 -- namespace CosmicChroniclesBlackBox
 CosmicChroniclesBlackBox = {}
@@ -34,8 +35,7 @@ function CosmicChroniclesBlackBox.extract()
     -- TODO: Further testing required if values need to be lowered or increased
     -- Give valuable rewards
     local x, y = Sector():getCoordinates()
-    local balancing = include("galaxy")
-    local rewardFactor = balancing.GetSectorRewardFactor(x, y)
+    local rewardFactor = Balancing_GetSectorRewardFactor(x, y)
 
     -- Cosmic Overhaul Synergy: Scavengers and Explorers extract far more value from black boxes
     local ship = player.craft
