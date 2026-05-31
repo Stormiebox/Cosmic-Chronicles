@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
-## [v1.1.0] - 2026-05-30 In Sync with Cosmic Overhaul v4.0.0 Development
+## [v2.0.0] - 2026-05-30 In Sync with Cosmic Overhaul v4.0.0 Development
 
 ### Added
 
@@ -16,6 +16,7 @@ and this project adheres to Semantic Versioning.
 - **Monument Reputation Synergy:** Reading a faction's Cultural Monument for the first time now grants a +1500 reputation boost and a satisfying ship computer notification.
 - **Immersive Tutorialization:** Added brand new highly-thematic rumors and ambient chatter lines to naturally teach players about the new v4.0.0 Cosmic Overhaul mechanics (Merchant/Smuggler synergies, Trash Man filters, and Scavenger Wreckage intel).
 - **Localization Expansion:** Updated the translation template and all 7 supported language `.po` files with the new event interactions and synergy rumors.
+- **Native Radio Chatter Integration:** Hooked directly into Avorion's native radio chatter engine! NPC Freighters, Miners, and Military Patrols will now seamlessly broadcast dynamic Cosmic lore based on their local economy, war heat, and your reputation, bringing the entire galaxy to life without the need for heavy custom background loops.
 
 ### Fixed
 
