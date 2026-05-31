@@ -66,7 +66,8 @@ Adds dynamic background chatter and interactive rumor-gathering to all NPC stati
   - **War Heat:** Pulls live conflict data from the `Cosmic War` bridge.
   - **Faction Wealth:** Differentiates between `wealthy` and `poor` economies.
   - **Geography:** Deep Core vs. Outer Rim lore.
-  - **Player Reputation:** Smugglers and outlaws won't talk to cops.
+  - **Player Reputation:** Station inhabitants generally refuse to gossip with outlaws (cuts off at -30,000 rep).
+  - **Captain Synergy:** Smuggler and Explorer captains know how to quietly buy drinks and extract information even in highly hostile ports (extends interaction threshold down to -60,000 reputation).
 
 </details>
 
@@ -89,9 +90,10 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 
 **Available Events:**
 
-1. **Refugee Convoys:** *(Triggers when War Heat > 40)*. Fleeing civilian ships appear with damaged hyperdrives. Players can open comms (`cc_refugeedialogue.lua`) and donate Food or Medical Supplies to rescue them, receiving massive reputation boosts and insider rumors in return.
-2. **Echoes of the Frontline (Graveyards):** *(Triggers when War Heat > 80)*. Players jumping into an empty sector may stumble upon massive, persistent wreckage fields (`cw_derelictgraveyard.lua`)—the immediate, blazing aftermath of a massive macro-faction fleet clash.
-3. **Black Box Extraction:** Spawns via a custom stash script (`cc_blackbox.lua`) inside Derelict Graveyards. Players can interact with the Stash to extract the doomed captain's final audio log, alongside high-tier System Upgrades and credits.
+1. **Refugee Convoys:** *(Triggers when War Heat > 40)*. Fleeing civilian ships appear with damaged hyperdrives. Players can open comms (`cc_refugeedialogue.lua`) and donate Food or Medical Supplies to rescue them, receiving massive reputation boosts and insider rumors in return. *(Captain Synergy: Merchant captains can aggressively negotiate Hazard Pay; Smugglers can quietly skim supplies for massive credit payouts).*
+2. **Echoes of the Frontline (Graveyards):** *(Triggers when War Heat > 80)*. Players jumping into an empty sector may stumble upon massive, persistent wreckage fields (`cc_derelictgraveyard.lua`)—the immediate, blazing aftermath of a massive macro-faction fleet clash.
+3. **Black Box Extraction:** Spawns via a custom stash script (`cc_blackbox.lua`) inside Derelict Graveyards. Players can interact with the Stash to extract the doomed captain's final audio log, alongside high-tier System Upgrades and credits that scale based on distance to the core. *(Captain Synergy: Scavenger and Explorer captains extract up to 50% more credits and have a higher chance of pulling Exceptional rarity upgrades).*
+4. **Cultural Monuments:** *(Triggers deep inside AI territory)*. Spawns massive, awe-inspiring procedural monuments. Paying your respects by reading the inscription (`cc_factionmonument.lua`) grants a permanent +1500 reputation boost with the local faction.
 
 </details>
 
