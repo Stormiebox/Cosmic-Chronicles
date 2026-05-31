@@ -32,7 +32,7 @@ Every 35 seconds, the mod wakes up and asks a series of questions about the curr
 4. **Is there a War?** (It asks the *Cosmic War* mod exactly how high the political tension is right now).
 5. **Who is speaking?** (Is this a Casino, a Shipyard, or a Smuggler's Market?)
 
-Once it gathers this "Context", it looks into the massive **Cosmic Vault** database of lore. It throws out every single piece of dialogue that doesn't make sense for the current situation, and then broadcasts a perfectly tailored piece of ambient chatter.
+Once it gathers this "Context", it looks into the massive database of lore with the help of **Cosmic Vault.**. It throws out every single piece of dialogue that doesn't make sense for the current situation, and then broadcasts a perfectly tailored piece of ambient chatter. Sometimes, it will even broadcast helpful tips to naturally teach you how to use deeper mechanics (like the Trash Manager or Captain Synergies) without breaking immersion!
 
 ### The Result: True Immersion
 
@@ -42,7 +42,7 @@ Because of this context-awareness, the galaxy actually reacts to you and the wor
 * **If you have Bad Reputation:** Smugglers will give you tips on unbranding stolen goods, while security forces will tell you to keep your transponders clean.
 * **If the Faction is Poor:** Repair docks will complain about holding ships together with duct tape because they can't afford cohesive field generators.
 
-And the best part? It works *alongside* the vanilla game. You'll still hear the classic Avorion chatter, but it is beautifully interwoven with deep, reactive world-building.
+And the best part? It works *alongside* the vanilla game. You'll still see the classic Avorion chatter, but it is beautifully interwoven with deep, reactive world-building.
 
 ---
 
@@ -52,19 +52,19 @@ The Rumormonger system doesn't just stop at stations. Cosmic Chronicles extends 
 
 ### Dynamic Deep Space Events
 
-When you jump into an empty sector, the mod checks the local political climate. If "War Heat" is boiling over, you might stumble into a **Derelict Graveyard**—the immediate, smoking aftermath of a massive fleet battle where you can recover doomed Black Box recordings. If tensions are rising, you might intercept a **Refugee Convoy** begging for food and medical supplies to repair their hyperdrives before a hunter fleet arrives.
+When you jump into an empty sector, the mod checks the local political climate. If "War Heat" is boiling over, you might stumble into a **Derelict Graveyard**—the immediate, smoking aftermath of a massive fleet battle where you can recover doomed Black Box recordings and system upgrades that actively scale in value the closer you get to the galactic core. If tensions are rising, you might intercept a **Refugee Convoy** begging for food and medical supplies to repair their hyperdrives before a hunter fleet arrives.
 
-If you venture deep into the heart of an ancient faction's territory, you might discover a colossal **Cultural Monument**. Taking the time to read its inscriptions and learn about their history will earn you a permanent boost to their respect.
+If you venture deep into the heart of an ancient faction's territory, your ship's computer might warn you about a colossal, cinematic **Cultural Monument**. Taking the time to approach it and read its inscriptions will earn you a massive, permanent (+1500) reputation boost with that faction.
 
 These aren't just random events; they only happen *because* of the state of the galaxy.
 
 ### Your Crew Matters (Captain Synergies)
 
-Cosmic Chronicles also knows *who* is sitting in the captain's chair, and it actively changes how events unfold:
+Cosmic Chronicles also knows *who* is sitting in the captain's chair, and it actively changes how events unfold based on their class:
 
 * **Smugglers & Explorers** know how to keep a low profile. They can subtly extract rumors from stations even when the local faction actively hates you.
-* When rescuing a refugee convoy, a **Merchant** captain can aggressively negotiate a hefty "Hazard Pay" reward for the supplies, while a **Smuggler** might quietly skim valuable goods from their cargo holds during the transfer.
-* When extracting a Black Box from a graveyard, **Scavenger** and **Explorer** captains are far more skilled at decrypting the data, recovering significantly more credits and a higher chance of rare system upgrades.
+* When rescuing a refugee convoy, a **Merchant** captain can aggressively negotiate a hefty "Hazard Pay" reward for the supplies, while a **Smuggler** might quietly skim valuable smuggled goods from their cargo holds (yielding up to 100,000 credits) during the transfer.
+* When extracting a Black Box from a graveyard, **Scavenger** and **Explorer** captains are far more skilled at decrypting the data, recovering up to 50% more credits and earning a higher chance to pull *Exceptional* rarity system upgrades.
 
 ### Captain's Logs
 

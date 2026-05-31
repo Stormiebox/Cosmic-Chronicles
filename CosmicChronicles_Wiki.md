@@ -44,7 +44,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 The mod utilizes a centralized dialogue API (`CosmicVaultDialogue`) to register localized strings categorized by type (e.g., `ambient`, `rumor`, `captain_log`).
 
-When an event or interaction occurs, the mod builds a **Context Table** containing data about the current sector (e.g., `warHeat = 80`, `stationType = "shipyard"`, `economy = "wealthy"`) and requests a valid string from the Vault API. The Vault filters out any lore that doesn't match the context, returning a perfectly tailored narrative snippet.
+When an event or interaction occurs, the mod builds a **Context Table** containing data about the current sector (e.g., `warHeat = 80`, `stationType = "shipyard"`, `economy = "wealthy"`) and requests a valid string from the Vault API. The Vault filters out any lore that doesn't match the context, returning a perfectly tailored narrative snippet. All hard hooks are wrapped in robust virtual file system compliance (`pcall(include)`) to ensure engine stability.
 
 </details>
 
@@ -55,18 +55,19 @@ When an event or interaction occurs, the mod builds a **Context Table** containi
 <details>
 <summary><h3>The Rumormonger System</h3></summary>
 
-Adds dynamic background chatter and interactive rumor-gathering to all NPC stations in the game. Currently features over 60+ unique lore strings.
+Adds dynamic background chatter and interactive rumor-gathering to all NPC stations in the game. Features a rapidly expanding registry of over 60+ unique, localized lore strings.
 
 **Key Mechanics:**
 
-- **Ambient Chatter:** Stations run a 60-second background chatter loop, periodically broadcasting floating overhead text based on their specific type (e.g., Shipyards complaining about hull plate shortages, Casinos boasting about high rollers).
+- **Ambient Chatter:** Stations run a highly optimized 35-second background chatter loop, periodically broadcasting floating overhead text based on their specific type and current situation. (Global sector cooldown is 30 seconds with a 50% speech probability).
 - **Interaction:** Players can dock and access a direct dialogue menu to ask "Any rumors?" and receive a dynamic tip.
+- **Tutorialization:** The Rumormonger now acts as an immersive guide, occasionally broadcasting tips to teach players about complex mechanics (e.g., Merchant synergies, Trash Man filters) naturally through gameplay.
 - **Contextual Awareness:** The Rumormonger actively parses and adapts to:
-  - **Station Type:** Dynamically identifies 12+ vanilla station scripts.
+  - **Station Type:** Dynamically identifies 12+ vanilla station scripts (Pre-cached in `init.lua` for performance).
   - **War Heat:** Pulls live conflict data from the `Cosmic War` bridge.
   - **Faction Wealth:** Differentiates between `wealthy` and `poor` economies.
-  - **Geography:** Deep Core vs. Outer Rim lore.
-  - **Player Reputation:** Station inhabitants generally refuse to gossip with outlaws (cuts off at -30,000 rep).
+  - **Geography:** Certain rumors (like Deep Core lore) will not spawn near the Outer Rim.
+  - **Player Reputation:** Station inhabitants generally refuse to gossip with outlaws (cuts off at -30,000 rep), preventing hostile military outposts from offering out-of-character dialogue.
   - **Captain Synergy:** Smuggler and Explorer captains know how to quietly buy drinks and extract information even in highly hostile ports (extends interaction threshold down to -60,000 reputation).
 
 </details>
@@ -74,26 +75,28 @@ Adds dynamic background chatter and interactive rumor-gathering to all NPC stati
 <details>
 <summary><h3>Captain's Logs</h3></summary>
 
-Hooks directly into the **Cosmic Overhaul** background command simulation (`command.lua`).
+Hooks directly into the **Cosmic Overhaul** background command simulation.
 
 **Key Mechanics:**
 
 - When a captain completes a map command (Scout, Mine, Trade, etc.) and sends the player a mail report, a narrative "Captain's Log" is dynamically appended to the bottom of the message.
-- Logs react to the sector they operated in. For example, if they traded in a high `War Heat` sector, the captain will log complaints about aggressive military patrols or close calls with blockades.
+- **Context Validation:** Logs react directly to the parent faction and sector data where the operation took place. For example, trading in a high `War Heat` sector triggers logs detailing aggressive military patrols or close calls with blockades.
 
 </details>
 
 <details>
-<summary><h3>Dynamic Narrative Events</h3></summary>
+<summary><h3>Dynamic Narrative Events & Interactions</h3></summary>
 
 A global event controller (`cc_event_controller.lua`) listens for hyperspace jumps and spawns immersive, world-building events based on the local geopolitical climate.
 
 **Available Events:**
 
-1. **Refugee Convoys:** *(Triggers when War Heat > 40)*. Fleeing civilian ships appear with damaged hyperdrives. Players can open comms (`cc_refugeedialogue.lua`) and donate Food or Medical Supplies to rescue them, receiving massive reputation boosts and insider rumors in return. *(Captain Synergy: Merchant captains can aggressively negotiate Hazard Pay; Smugglers can quietly skim supplies for massive credit payouts).*
-2. **Echoes of the Frontline (Graveyards):** *(Triggers when War Heat > 80)*. Players jumping into an empty sector may stumble upon massive, persistent wreckage fields (`cc_derelictgraveyard.lua`)—the immediate, blazing aftermath of a massive macro-faction fleet clash.
-3. **Black Box Extraction:** Spawns via a custom stash script (`cc_blackbox.lua`) inside Derelict Graveyards. Players can interact with the Stash to extract the doomed captain's final audio log, alongside high-tier System Upgrades and credits that scale based on distance to the core. *(Captain Synergy: Scavenger and Explorer captains extract up to 50% more credits and have a higher chance of pulling Exceptional rarity upgrades).*
-4. **Cultural Monuments:** *(Triggers deep inside AI territory)*. Spawns massive, awe-inspiring procedural monuments. Paying your respects by reading the inscription (`cc_factionmonument.lua`) grants a permanent +1500 reputation boost with the local faction.
+1. **Refugee Convoys:** *(Triggers when War Heat > 40)*. Fleeing civilian ships appear with damaged hyperdrives. Players can open comms and donate Food or Medical Supplies to rescue them, receiving massive reputation boosts and insider rumors in return.
+   - **Captain Synergy:** Merchant captains can aggressively negotiate Hazard Pay; Smugglers can quietly skim supplies for massive credit payouts (75,000-100,000 credits).
+2. **Echoes of the Frontline (Graveyards):** *(Triggers when War Heat > 80)*. Players jumping into an empty sector may stumble upon massive, persistent wreckage fields—the immediate, blazing aftermath of a massive macro-faction fleet clash.
+3. **Black Box Extraction:** Spawns via a custom stash script inside Derelict Graveyards. Players can interact with the Stash to extract the doomed captain's final audio log, alongside high-tier System Upgrades and credits that dynamically scale based on distance to the core.
+   - **Captain Synergy:** Scavenger and Explorer captains extract 25-50% more value and have a higher chance to pull *Exceptional* system upgrades.
+4. **Cinematic Monuments:** *(Triggers deep inside AI territory)*. Spawns colossal, 2.5x scaled procedural monuments. A Ship Computer broadcast warns players upon entry. Paying your respects by reading the inscription grants a permanent **+1500 reputation boost** with the local faction.
 
 </details>
 
@@ -106,7 +109,7 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 
 - **Avorion**
 - **Cosmic Vault:** Core dependency for the Dialogue API and context parser.
-- **Cosmic Overhaul:** Required for background Captain's Log hooks.
+- **Cosmic Overhaul:** Required for background Captain's Log hooks, Dynamic Economy statistics and Class Synergy detection.
 - **Cosmic War:** Required for War Heat synergy and conflict events.
 
 </details>
@@ -115,7 +118,8 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 <summary><h3>Compatibility Notes</h3></summary>
 
 - File paths are strictly aligned with Avorion's VM boundaries (`entity/`, `events/`, `player/`).
-- Failsafes (`pcall`) are built into all hard-hooks to prevent crashes if a dependency is temporarily missing, but the narrative experience will be heavily degraded without the core Cosmic suite.
+- Engine-safe randomization (`random():getInt()`) is enforced universally to guarantee multiplayer sync.
+- Event controllers are uniquely prefixed (`cc_`) to prevent Virtual File System overlap with companion mods.
 - Seamlessly supports custom stations and modded factions by falling back to `generic` lore categories when unique traits cannot be identified.
 
 </details>
