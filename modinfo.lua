@@ -3,7 +3,7 @@ meta =
     -- ID of your mod; Make sure this is unique!
     -- Will be used for identifying the mod in dependency lists
     -- Will be changed to workshop ID (ensuring uniqueness) when you upload the mod to the workshop
-    id = "CosmicChronicles",
+    id = "3732507615",
 
     -- Name of your mod; You may want this to be unique, but it's not absolutely necessary.
     -- This is an additional helper attribute for you to easily identify your mod in the Mods() list
@@ -16,11 +16,10 @@ meta =
     type = "mod",
 
     -- Description of your mod that will be displayed to players
-    description =
-    "The narrative and lore expansion module for the Cosmic series. Adds dynamic rumors, background chatter, captain's logs, and narrative events driven by the state of the galaxy.",
+    description = "The narrative and lore expansion module for the Cosmic series. Adds dynamic rumors, background chatter, captain's logs, and narrative events driven by the state of the galaxy.",
 
     -- Insert all authors into this list
-    authors = { "Stormbox" },
+    authors = {"Stormbox"},
 
     -- Version of your mod, should be in format 1.0.0 (major.minor.patch) or 1.0 (major.minor)
     -- This will be used to check for unmet dependencies or incompatibilities, and to check compatibility between clients and dedicated servers with mods.
