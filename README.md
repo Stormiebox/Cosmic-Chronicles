@@ -8,7 +8,7 @@ This mod acts as a dynamic "Living Galaxy" text system, feeding atmospheric dial
 
 ---
 
-## 🚀 Core Features (v2.0.0)
+## 🚀 Core Features (v1.1.0)
 
 - **The Rumormonger System:** Dynamic dialogue and ambient chatter injected into stations and merchants that react live to Faction Wealth, Geography, and War Heat.
 - **Captain's Logs:** Narrative event logs appended to operation report mails, reacting to the dangers and anomalies your captains encounter during background commands.
