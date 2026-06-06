@@ -1,5 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
+include("utility")
 
 -- namespace CosmicChroniclesNewsBoard
 CosmicChroniclesNewsBoard = {}
@@ -13,23 +14,23 @@ local currentNewsArray = {}
 
 function CosmicChroniclesNewsBoard.initialize()
     if onClient() then
+        local menu = PlayerWindow()
+        
+        -- Create a tab inside the Player Window
+        tab = menu:createTab("News", "data/textures/icons/cc_galacticnews_rss.png", "Galactic News")
+        tab.onShowFunction = "onShowWindow"
+        tab.onSelectedFunction = "onShowWindow"
+        
+        local split = UIVerticalSplitter(Rect(vec2(0, 0), tab.size), 10, 0, 0.35)
+        
+        headlineList = tab:createListBox(split.left)
+        contentTextBox = tab:createTextBox(split.right, "")
+        contentTextBox.active = false -- read only
+        contentTextBox.fontSize = 14
+
         -- Request news from server upon load
         invokeServerFunction("requestNewsSync")
     end
-end
-
-function CosmicChroniclesNewsBoard.initUI()
-    local menu = PlayerWindow()
-    
-    -- Create a tab inside the Player Window
-    tab = menu:createTab("News", "data/textures/icons/cc_galacticnews_rss.png", "Galactic News")
-    
-    local split = UIVerticalSplitter(Rect(vec2(0, 0), tab.size), 10, 0, 0.35)
-    
-    headlineList = tab:createListBox(split.left)
-    contentTextBox = tab:createTextBox(split.right, "")
-    contentTextBox.active = false -- read only
-    contentTextBox.fontSize = 14
 end
 
 function CosmicChroniclesNewsBoard.onShowWindow()
@@ -77,3 +78,4 @@ function CosmicChroniclesNewsBoard.receiveNews(newsArray)
         headlineList:addEntry("[" .. article.category .. "] " .. article.title)
     end
 end
+

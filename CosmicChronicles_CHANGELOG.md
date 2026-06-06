@@ -6,6 +6,9 @@ The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
 ## [v1.2.0] - Release Date TBD (Work In Progress)
+### Fixed
+- **Galactic News UI Rendering:** Fixed a bug where the Galactic News tab failed to render. The UI generation logic was moved from initUI() (which never automatically triggers for Player scripts) into the initialize() callback. The tab will now seamlessly appear and request data upon click.
+- **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
 
 ### Added
 - **Galactic News Board:** A brand new dedicated "News" tab has been added to the Player Window!
@@ -91,3 +94,4 @@ and this project adheres to Semantic Versioning.
 - **cw_derelictgraveyard.lua**: Fixed an issue where derelict ships disappeared instantly by reverting to proper C++ physics engine destruction, leaving behind standard wreckage and explosion VFX.
 - **cc_spawnmonument.lua**: Fixed hyperspace collisions by adding a randomized offset to the spawn coordinates, and corrected the invulnerability hook to use the proper Avorion API (`station.invincible = true`).
 - **cc_blackbox.lua**: Resolved a silent Lua C++ Type crash by correctly passing `random():createSeed()` instead of a boolean to `UpgradeGenerator`.
+
