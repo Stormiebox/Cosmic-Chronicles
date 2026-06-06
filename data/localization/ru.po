@@ -631,3 +631,24 @@ msgstr "Хороший капитан-Мусорщик может читать �
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "Обязательно используйте фильтры инвентаря вашего корабля. Массовая продажа Мусорщику без защиты вашего любимого снаряжения — ошибка новичка."
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr "Галактические новости"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr "   Репортер: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr "   Категория: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr "Новости"
+

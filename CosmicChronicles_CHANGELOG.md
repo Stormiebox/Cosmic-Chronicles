@@ -20,6 +20,8 @@ and this project adheres to Semantic Versioning.
   - **Vanilla Avorion Synergy:** Tracks core progression. The moment a server defeats Swoks, the AI, the MAD Science Lab, or the Guardian, a massive server-wide breaking news article is permanently published.
   - Keeps a rolling server-wide buffer of the latest 30 articles, broadcasting them directly to all players to deeply immerse them in the ecosystem's background math.
 
+- **Translation Additions:** Added in new translation strings in all .po files for all available languages. Spanish, German, French, Japanese, Chinese, Russian and Portuguese.
+
 ### Changed
 - **Event Reward Re-balancing (Compliance Fix):** To strictly comply with the mod's core philosophy as a pure "Lore and Narrative" expansion, the heavy material payouts from dynamic events have been significantly balanced to prevent economy inflation:
   - **Black Box Extracts:** Reduced the massive credit payouts from 75k-150k down to a balanced 15k-35k. Upgrades dropped are now guaranteed Uncommon (with a 15% chance to be Rare) rather than guaranteed Rare/Exceptional. Scavenger/Explorer Captain synergies still apply to these new baselines.

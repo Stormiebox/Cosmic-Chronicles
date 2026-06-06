@@ -631,3 +631,24 @@ msgstr "一位优秀的拾荒者船长能像看书一样解读碎片区。检查
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "确保你使用了飞船的库存过滤器。不保护自己最喜欢的装备就向垃圾回收员批量出售是新手的错误。"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr "银河新闻"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr "未知"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr "   报道者: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr "   分类: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr "新闻"
+

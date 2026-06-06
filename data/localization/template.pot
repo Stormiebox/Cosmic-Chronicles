@@ -631,3 +631,24 @@ msgstr ""
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr ""
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr ""
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr ""
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr ""
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr ""
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr ""
+

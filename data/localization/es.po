@@ -631,3 +631,24 @@ msgstr "Un buen capitán Chatarrero puede leer un campo de escombros como un lib
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "Asegúrate de usar los filtros de inventario de tu nave. Vender en masa al Basurero sin proteger tu equipo favorito es un error de novato."
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr "Noticias Galácticas"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr "   Reportado por: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr "   Categoría: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr "Noticias"
+

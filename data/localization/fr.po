@@ -631,3 +631,24 @@ msgstr "Un bon capitaine Pilleur peut lire un champ de débris comme un livre. V
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "Assurez-vous d'utiliser les filtres d'inventaire de votre vaisseau. Vendre en masse au Ferrailleur sans protéger votre équipement préféré est une erreur de débutant."
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr "Nouvelles Galactiques"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr "   Rapporté par : "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr "   Catégorie : "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr "Nouvelles"
+

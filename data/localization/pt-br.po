@@ -631,3 +631,24 @@ msgstr "Um bom capitão Sucateiro pode ler um campo de destroços como um livro.
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "Certifique-se de usar os filtros de inventário da sua nave. Vender em massa para o Lixeiro sem proteger seu equipamento favorito é erro de principiante."
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr "Notícias Galácticas"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr "   Reportado por: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr "   Categoria: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr "Notícias"
+

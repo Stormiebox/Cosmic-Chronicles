@@ -631,3 +631,24 @@ msgstr "Ein guter Plünderer-Kapitän kann ein Trümmerfeld wie ein Buch lesen. 
 #: /data/scripts/server/cosmicchronicles.lua:
 msgid "Make sure you use your ship's inventory filters. Mass-selling to the Trash Man without protecting your favorite gear is a rookie mistake."
 msgstr "Stellen Sie sicher, dass Sie die Inventarfilter Ihres Schiffes nutzen. Der Massenverkauf an den Schrotthändler ohne den Schutz Ihrer Lieblingsausrüstung ist ein Anfängerfehler."
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Galactic News"
+msgstr "Galaktische Nachrichten"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Reported by: "
+msgstr "   Berichtet von: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "   Category: "
+msgstr "   Kategorie: "
+
+#: /data/scripts/player/ui/cc_newsboard.lua:
+msgid "News"
+msgstr "Nachrichten"
+
