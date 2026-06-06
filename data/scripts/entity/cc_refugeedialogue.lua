@@ -65,19 +65,22 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
         ship:removeCargo(goodName, amount)
         helped = true
 
+        -- Balanced from 10000 relation gain to 2500
         local faction = Faction(Entity().factionIndex)
-        if faction then changeRelations(player, faction, 10000, RelationChangeType.General) end
+        if faction then changeRelations(player, faction, 2500, RelationChangeType.General) end
 
         -- Cosmic Overhaul Synergy: Merchants and Smugglers extract monetary value from the crisis
         local captain = ship:getCaptain()
         if captain then
             local CaptainClass = include("captainclass")
             if captain:hasClass(CaptainClass.Merchant) then
-                player:receive("Hazard Pay"%_t, 75000)
-                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 75,000 credit hazard pay fee for the supplies."%_T)
+                -- Balanced from 75k to 25k
+                player:receive("Hazard Pay"%_t, 25000)
+                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 25,000 credit hazard pay fee for the supplies."%_T)
             elseif captain:hasClass(CaptainClass.Smuggler) then
-                player:receive("Smuggled Goods"%_t, 100000)
-                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
+                -- Balanced from 100k to 35k
+                player:receive("Smuggled Goods"%_t, 35000)
+                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 35,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
             end
         end
 

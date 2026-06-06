@@ -6,4 +6,6 @@ function initialize(...)
     if onServer() then
         Player():addScriptOnce("data/scripts/player/background/cc_event_controller.lua")
     end
+    
+    Player():addScriptOnce("player/ui/cc_newsboard.lua")
 end

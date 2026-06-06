@@ -12,6 +12,7 @@ function CosmicChronicles.initialize()
     -- Ensure this dialogue population only runs in the server VM
     if onServer() then
         CosmicChronicles.registerLore()
+        Server():addScriptOnce("server/cc_newsgenerator.lua")
     end
 end
 

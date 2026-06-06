@@ -32,8 +32,7 @@ function CosmicChroniclesBlackBox.extract()
     local log = CosmicVaultDialogue.getValidLine("captain_log", context) or "Mayday! Shields are failing! They're coming from everywhere!"%_T
 
     invokeClientFunction(player, "showLogDialog", log)
-    -- TODO: Further testing required if values need to be lowered or increased
-    -- Give valuable rewards
+    -- Give valuable but balanced rewards
     local x, y = Sector():getCoordinates()
     local rewardFactor = Balancing_GetSectorRewardFactor(x, y)
 
@@ -52,16 +51,17 @@ function CosmicChroniclesBlackBox.extract()
         end
     end
 
-    local amount = math.floor(random():getInt(75000, 150000) * rewardFactor * bonusMultiplier)
+    -- Balanced from 75k-150k down to 15k-35k base
+    local amount = math.floor(random():getInt(15000, 35000) * rewardFactor * bonusMultiplier)
     player:receive("Recovered Credits"%_t, amount)
 
     local generator = include("upgradegenerator")()
-    local rarityValue = RarityType.Rare
-    if random():test(0.25 * rewardFactor * bonusMultiplier) then rarityValue = RarityType.Exceptional end
+    -- Balanced from guaranteed Rare/Exceptional to guaranteed Uncommon with a chance for Rare
+    local rarityValue = RarityType.Uncommon
+    if random():test(0.15 * rewardFactor * bonusMultiplier) then rarityValue = RarityType.Rare end
 
     local ok, upgrade = pcall(function() return generator:generateSectorSystem(x, y, nil, {[rarityValue] = 1}) end)
     if ok and upgrade then
-        -- Safely handle both Prototype tables and instantiated SystemUpgradeTemplates
         if type(upgrade) == "table" and upgrade.script then
             local seed = generator:getUpgradeSeed(x, y, upgrade.script, upgrade.rarity)
             upgrade = SystemUpgradeTemplate(upgrade.script, upgrade.rarity, seed)

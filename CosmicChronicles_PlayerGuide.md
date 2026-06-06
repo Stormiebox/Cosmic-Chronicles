@@ -46,6 +46,20 @@ And the best part? It works *alongside* the vanilla game. You'll still see the c
 
 ---
 
+## The Galactic News Board
+
+If listening to ambient chatter isn't enough, you can also keep your finger on the pulse of the galaxy using the brand new **Galactic News** tab.
+
+Located right inside your standard Player Window (alongside your Fleet and Alliance tabs), the Galactic News Board acts as a constantly updating digital newspaper. Every 15 minutes, the mod's background simulator checks the pulse of the entire galaxy and generates an article.
+
+* Did a faction's economy suddenly boom, lowering industrial prices? **It will be on the News Board.**
+* Did heavy border skirmishes break out between two AI factions on the other side of the map? **It will be on the News Board.**
+* Are independent scouts reporting massive spikes in Xsotan sightings near the core? **It will be on the News Board.**
+
+You can use the News Board to actively hunt for profitable war-zones, find cheap markets, or simply immerse yourself in the living ecosystem.
+
+---
+
 ## Beyond Stations: A Connected Universe
 
 The Rumormonger system doesn't just stop at stations. Cosmic Chronicles extends this dynamic awareness into the dark reaches of space:

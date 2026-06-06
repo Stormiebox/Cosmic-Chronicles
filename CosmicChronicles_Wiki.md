@@ -53,6 +53,20 @@ When an event or interaction occurs, the mod builds a **Context Table** containi
 ## Full Feature Breakdown
 
 <details>
+<summary><h3>The Galactic News Board</h3></summary>
+
+The beating heart of the Cosmic Chronicles information network. The Galactic News Board acts as an in-game digital newspaper that keeps players constantly updated on the shifting background math of the entire Cosmic ecosystem without ever breaking immersion.
+
+**Key Mechanics:**
+- **Player UI Tab:** Fully integrated into the standard Player Window menu as a dedicated tab with a split-pane interface (Headlines on the left, Articles on the right).
+- **Dynamic News Generator:** A dedicated background server script runs a simulation cycle every 15 real-time minutes, rolling for major galactic events.
+- **Cosmic War Synergy:** Generates real-time "Conflict" articles reporting on border skirmishes, invasions, and war heat spikes happening between NPC factions across the galaxy.
+- **Economy Synergy:** Generates "Economic" articles detailing market booms or crashes based on the wealth level and traits of random NPC factions.
+- **Server Sync Buffer:** The system safely buffers the latest 30 articles globally, instantly broadcasting the array to any player who logs in or checks their news board.
+
+</details>
+
+<details>
 <summary><h3>The Rumormonger System</h3></summary>
 
 Adds dynamic background chatter and interactive rumor-gathering to all NPC stations in the game. Features a rapidly expanding registry of over 60+ unique, localized lore strings.
