@@ -8,7 +8,7 @@ and this project adheres to Semantic Versioning.
 ## [v1.2.0] - Release Date TBD (Work In Progress)
 
 ### Added
-- **Galactic News Board:** A brand new dedicated "News" tab has been added to the Player Window! 
+- **Galactic News Board:** A brand new dedicated "News" tab has been added to the Player Window!
   - Generates random, dynamic news articles every 15 real-time minutes based on the current state of the galaxy.
   - **Cosmic War Synergy:** Tracks local War Heat. If heat hits critical levels, it publishes High-Value Bounties (giving players a target to hunt). Otherwise, it reports on frontline sector shifts.
   - **Cosmic Overhaul Synergy:** Actively tracks faction wealth levels to publish "Trade Crises" (shortages) and "Market Booms", guiding Merchant captains to profitable sectors. Occasionally spotlights the feats of a random online player's Captain!
@@ -19,6 +19,9 @@ and this project adheres to Semantic Versioning.
 - **Event Reward Re-balancing (Compliance Fix):** To strictly comply with the mod's core philosophy as a pure "Lore and Narrative" expansion, the heavy material payouts from dynamic events have been significantly balanced to prevent economy inflation:
   - **Black Box Extracts:** Reduced the massive credit payouts from 75k-150k down to a balanced 15k-35k. Upgrades dropped are now guaranteed Uncommon (with a 15% chance to be Rare) rather than guaranteed Rare/Exceptional. Scavenger/Explorer Captain synergies still apply to these new baselines.
   - **Refugee Convoys:** The instant reputation reward for donating supplies has been reduced from +10,000 to a more reasonable +2,500. Merchant and Smuggler hazard pay synergies have been lowered from 75k/100k to 25k/35k.
+
+### Removed
+- **Texture Folder:** All textures were removed and migrated into `Cosmic Vault`.
 
 ## [v1.1.0] - 2026-05-30 In Sync with Cosmic Overhaul v4.0.0 Development
 
