@@ -46,7 +46,7 @@ function CosmicChroniclesNewsBoard.updateClient(timeStep)
     local selected = headlineList.selected
     if selected and currentNewsArray[selected + 1] then
         local article = currentNewsArray[selected + 1]
-        local displayString = "   ===== "... article.title ... "\n\n"
+        local displayString = "   ===== " .. article.title .. "\n\n"
         displayString = displayString .. "   Reported by: " .. article.author .. "\n"
         displayString = displayString .. "   Category: " .. article.category .. "\n\n"
         displayString = displayString .. article.content
@@ -77,3 +77,4 @@ end
 callable(CosmicChroniclesNewsBoard, "requestNewsSync")
 
 return CosmicChroniclesNewsBoard
+
