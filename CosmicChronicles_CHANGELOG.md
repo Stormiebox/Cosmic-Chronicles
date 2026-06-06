@@ -7,7 +7,9 @@ and this project adheres to Semantic Versioning.
 
 ## [v1.2.0] - 2026-06-06
 ### Fixed
-- **Galactic News UI Rendering:** Fixed a bug where the Galactic News tab failed to render. The UI generation logic was moved from initUI() (which never automatically triggers for Player scripts) into the initialize() callback. The tab will now seamlessly appear and request data upon click.
+- **Engine Bootstrap Compliance:** Removed invalid `initialize()` wrappers inside `player/init.lua` and `entity/init.lua`. Wrapping the payload inside a function was causing the UI hooks and rumormonger logic to fail to inject on fresh saves.
+- **Galactic News Network Crash:** Refactored `cc_newsboard.lua` to stop calling `Server().invokeFunction` (which doesn't exist in the Avorion API). Communication with the Vault news server now securely passes through Avorion's native global event bus via `Server():sendCallback()`.
+- **UI Crash:** Removed an invalid `fontSize` assignment on a TextBox component in `cc_newsboard.lua` that was causing the client to instantly crash when attempting to render the Galactic News tab.
 - **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
 
 ### Added
