@@ -5,7 +5,6 @@ include("callable")
 CosmicChroniclesNewsBoard = {}
 local self = CosmicChroniclesNewsBoard
 
-local window
 local tab
 local headlineList
 local contentTextBox
@@ -20,17 +19,10 @@ function CosmicChroniclesNewsBoard.initialize()
 end
 
 function CosmicChroniclesNewsBoard.initUI()
-    local res = getResolution()
-    local size = vec2(800, 600)
-
-    local menu = ScriptUI()
-    window = menu:createWindow(Rect(res * 0.5 - size * 0.5, res * 0.5 + size * 0.5))
-    window.caption = "Galactic News Board"%_t
-    window.showCloseButton = 1
-    window.moveable = 1
-
+    local menu = PlayerWindow()
+    
     -- Create a tab inside the Player Window
-    tab = menu:registerTab("News", "data/textures/icons/newspaper.png", "Galactic News")
+    tab = menu:createTab("News", "data/textures/icons/cc_galacticnews_rss.png", "Galactic News")
     
     local split = UIVerticalSplitter(Rect(vec2(0, 0), tab.size), 10, 0, 0.35)
     
