@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
-## [v1.2.0] - Release Date TBD (Work In Progress)
+## [v1.2.0] - 2026-06-06
 ### Fixed
 - **Galactic News UI Rendering:** Fixed a bug where the Galactic News tab failed to render. The UI generation logic was moved from initUI() (which never automatically triggers for Player scripts) into the initialize() callback. The tab will now seamlessly appear and request data upon click.
 - **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
