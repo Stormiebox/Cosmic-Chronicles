@@ -21,8 +21,13 @@ function CosmicChroniclesNewsBoard.initialize()
     
     local split = UIVerticalSplitter(Rect(self.tab.size), 10, 0, 0.35)
     
-    self.headlineList = self.tab:createListBox(split.left)
+    local leftSplit = UIHorizontalSplitter(split.left, 10, 0, 0.5)
+    leftSplit.bottomSize = 40
+    
+    self.headlineList = self.tab:createListBox(leftSplit.top)
     self.headlineList.onSelectFunction = "onNewsSelected"
+    
+    self.refreshButton = self.tab:createButton(leftSplit.bottom, "Refresh"%_t, "onRefreshClicked")
     
     self.contentTextBox = self.tab:createMultiLineTextBox(split.right)
     
@@ -35,6 +40,10 @@ function CosmicChroniclesNewsBoard.onShowWindow()
     invokeServerFunction("requestNewsSync")
 end
 
+function CosmicChroniclesNewsBoard.onRefreshClicked()
+    invokeServerFunction("requestNewsSync")
+end
+
 function CosmicChroniclesNewsBoard.onNewsSelected(index)
     if not self.headlineList then return end
     
@@ -44,7 +53,8 @@ function CosmicChroniclesNewsBoard.onNewsSelected(index)
     local article = self.currentNewsArray[selectedValue]
     if article then
         local displayString = "   ===== " .. (article.title or "Unknown"%_t) .. " =====\n\n"
-        displayString = displayString .. "   Reported by: "%_t .. (article.author or "Unknown"%_t) .. "\n"
+        displayString = displayString .. "   Reported By: "%_t .. (article.author or "Unknown"%_t) .. "\n"
+        displayString = displayString .. "   Galactic News Network\n"
         displayString = displayString .. "   Category: "%_t .. (article.category or "Unknown"%_t) .. "\n\n"
         displayString = displayString .. (article.content or "")
 
