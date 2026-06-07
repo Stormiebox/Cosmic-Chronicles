@@ -13,6 +13,7 @@ function CosmicChronicles.initialize()
     if onServer() then
         CosmicChronicles.registerLore()
         Server():addScriptOnce("server/cc_newsgenerator.lua")
+        Server():addScriptOnce("server/cc_vanillanews.lua")
     end
 end
 
