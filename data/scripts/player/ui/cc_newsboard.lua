@@ -24,8 +24,16 @@ function CosmicChroniclesNewsBoard.initUI()
     local split = UIVerticalSplitter(Rect(self.tab.size), 10, 0, 0.35)
     headlineList = self.tab:createListBox(split.left)
     headlineList.onSelectFunction = "onNewsSelected"
-    contentTextBox = self.tab:createTextBox(split.right, "")
+    
+    contentTextBox = self.tab:createMultiLineTextBox(split.right)
     contentTextBox.active = false
+    
+    headlineList:addEntry("Connecting to Galactic News Network..."%_t, 0)
+    
+    if Client() then
+        Client():registerCallback("onCosmicVaultNewsUpdated", "receiveNews")
+    end
+    
     invokeServerFunction("requestNewsSync")
 end
 

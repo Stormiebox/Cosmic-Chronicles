@@ -27,6 +27,10 @@ and this project adheres to Semantic Versioning.
   - **Black Box Extracts:** Reduced the massive credit payouts from 75k-150k down to a balanced 15k-35k. Upgrades dropped are now guaranteed Uncommon (with a 15% chance to be Rare) rather than guaranteed Rare/Exceptional. Scavenger/Explorer Captain synergies still apply to these new baselines.
   - **Refugee Convoys:** The instant reputation reward for donating supplies has been reduced from +10,000 to a more reasonable +2,500. Merchant and Smuggler hazard pay synergies have been lowered from 75k/100k to 25k/35k.
 
+- **Galactic News UI Overhaul:** Upgraded the News Board UI from a standard text box to a native Avorion `MultiLineTextBox`. Articles now word-wrap perfectly and support vertical scrolling, significantly improving readability.
+- **Real-Time News Synchronization:** The News Board now actively listens for the `onCosmicVaultNewsUpdated` client callback from the Vault. Players can leave the Galactic News tab open and watch articles pop into the list in real-time.
+- **Graceful Loading:** Added a "Connecting to Galactic News Network..." fallback message while the client waits for the initial asynchronous server data fetch.
+
 ### Removed
 - **Texture Folder:** All textures were removed and migrated into `Cosmic Vault`.
 

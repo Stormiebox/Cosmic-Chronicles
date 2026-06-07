@@ -63,6 +63,7 @@ The beating heart of the Cosmic Chronicles information network. The Galactic New
 - **Cosmic War Synergy:** Generates real-time "Conflict" articles reporting on border skirmishes, invasions, and war heat spikes happening between NPC factions across the galaxy.
 - **Economy Synergy:** Generates "Economic" articles detailing market booms or crashes based on the wealth level and traits of random NPC factions.
 - **Server Sync Buffer:** The system safely buffers the latest 30 articles globally, instantly broadcasting the array to any player who logs in or checks their news board.
+- **Real-Time UI Updates:** The News Board natively integrates with the Vault's client-side callbacks, instantly refreshing your display the moment a breaking news article is published without needing to close and reopen the tab.
 
 </details>
 
