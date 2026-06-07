@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
-local cv_success = pcall(include, "cosmicvaultnews")
+-- local cv_success = pcall(include, "cosmicvaultnews")
 
 local CC_SpawnBehemoth_finish = SpawnBehemoth.finish
 function SpawnBehemoth.finish()
@@ -24,20 +24,20 @@ function SpawnBehemoth.finish()
         elseif data.quadrant == 3 then quadName = "South"
         elseif data.quadrant == 4 then quadName = "West" end
 
-        if cv_success and CosmicVaultNews then
-            if survived then
-                CosmicVaultNews.publishArticle({
-                    title = "Behemoth Assault Repelled!",
-                    content = "Incredible news! Independent captains have successfully driven the Behemoth of the " .. quadName .. " out of sector [" .. x .. ":" .. y .. "]. The sector has been saved from total annihilation.",
-                    category = "Galactic Threat"
-                })
-            else
-                CosmicVaultNews.publishArticle({
-                    title = "Sector Obliterated by Behemoth",
-                    content = "Tragedy strikes. The Behemoth of the " .. quadName .. " has completely wiped out all life and infrastructure in sector [" .. x .. ":" .. y .. "]. The beast has moved on, leaving nothing but ruin in its wake.",
-                    category = "Galactic Threat"
-                })
-            end
+        if survived then
+            local article = {
+                title = "Behemoth Assault Repelled!",
+                content = "Incredible news! Independent captains have successfully driven the Behemoth of the " .. quadName .. " out of sector [" .. x .. ":" .. y .. "]. The sector has been saved from total annihilation.",
+                category = "Galactic Threat"
+            }
+            Server():sendCallback("onCCNewsPublishArticle", article)
+        else
+            local article = {
+                title = "Sector Obliterated by Behemoth",
+                content = "Tragedy strikes. The Behemoth of the " .. quadName .. " has completely wiped out all life and infrastructure in sector [" .. x .. ":" .. y .. "]. The beast has moved on, leaving nothing but ruin in its wake.",
+                category = "Galactic Threat"
+            }
+            Server():sendCallback("onCCNewsPublishArticle", article)
         end
     end
 

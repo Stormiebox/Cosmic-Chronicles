@@ -33,14 +33,12 @@ function initialize()
     -- Alert the player that something interesting is in the sector
     Sector():broadcastChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Sensors are detecting a massive, ancient architectural structure in this sector."%_T)
 
-    local cv_success = pcall(include, "cosmicvaultnews")
-    if cv_success and CosmicVaultNews then
-        CosmicVaultNews.publishArticle({
-            title = "Ancient Cultural Monument Sighted",
-            content = "Sensors have picked up massive architectural signatures emitting strange energy patterns from sector [" .. x .. ":" .. y .. "]. Historians and explorers are rushing to the sector to analyze the ancient " .. faction.name .. " structure.",
-            category = "Exploration"
-        })
-    end
+    local article = {
+        title = "Ancient Cultural Monument Sighted",
+        content = "Sensors have picked up massive architectural signatures emitting strange energy patterns from sector [" .. x .. ":" .. y .. "]. Historians and explorers are rushing to the sector to analyze the ancient " .. faction.name .. " structure.",
+        category = "Exploration"
+    }
+    Server():sendCallback("onCCNewsPublishArticle", article)
 
     terminate()
 end

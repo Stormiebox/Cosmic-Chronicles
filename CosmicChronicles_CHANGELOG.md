@@ -36,6 +36,7 @@ and this project adheres to Semantic Versioning.
 - **Galactic News UI Overhaul:** Upgraded the News Board UI from a standard text box to a native Avorion `MultiLineTextBox`. Articles now word-wrap perfectly and support vertical scrolling, significantly improving readability.
 - **Real-Time News Synchronization:** The News Board now actively listens for the `onCosmicVaultNewsUpdated` client callback from the Vault. Players can leave the Galactic News tab open and watch articles pop into the list in real-time.
 - **Graceful Loading:** Added a "Connecting to Galactic News Network..." fallback message while the client waits for the initial asynchronous server data fetch.
+- **Event Stability & Standardization:** Bypassed the brittle `CosmicVaultNews` library wrapper entirely across all dynamic events and Vanilla Behemoth DLC hooks. The mod now natively pushes news straight to the engine via `Server():sendCallback("onCCNewsPublishArticle")`, guaranteeing perfectly stable article delivery regardless of load order.
 
 ### Removed
 - **Texture Folder:** All textures were removed and migrated into `Cosmic Vault`.

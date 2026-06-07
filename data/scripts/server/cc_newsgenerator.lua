@@ -2,7 +2,12 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("randomext")
 
 -- Load APIs
-local cv_success = pcall(include, "cosmicvaultnews")
+local cv_success = true
+local CosmicVaultNews = {
+    publishArticle = function(article)
+        Server():sendCallback("onCCNewsPublishArticle", article)
+    end
+}
 local cw_success = pcall(include, "cosmicwarbridge")
 
 -- namespace CosmicChroniclesNewsGenerator

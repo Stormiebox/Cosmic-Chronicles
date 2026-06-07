@@ -21,14 +21,12 @@ function initialize()
     end
 
     Sector():broadcastChatMessage("Refugee Convoy"%_T, ChatMessageType.Chatter, "Mayday! Our hyperdrives are offline and we are fleeing the frontline! Is anyone out there?"%_T)
-    local cv_success = pcall(include, "cosmicvaultnews")
-    if cv_success and CosmicVaultNews then
-        CosmicVaultNews.publishArticle({
-            title = "Mass Exodus Intercepted",
-            content = "A massive convoy of civilian refugees has broadcasted a distress signal from sector [" .. x .. ":" .. y .. "]. The convoy claims to be fleeing severe hostilities in their home sectors. Relief ships are en route.",
-            category = "Humanitarian"
-        })
-    end
+    local article = {
+        title = "Mass Exodus Intercepted",
+        content = "A massive convoy of civilian refugees has broadcasted a distress signal from sector [" .. x .. ":" .. y .. "]. The convoy claims to be fleeing severe hostilities in their home sectors. Relief ships are en route.",
+        category = "Humanitarian"
+    }
+    Server():sendCallback("onCCNewsPublishArticle", article)
 
     terminate()
 end
