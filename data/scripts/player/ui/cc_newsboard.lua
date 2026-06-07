@@ -77,7 +77,7 @@ end -- end onClient
 -- Server function that fetches the vault news and sends it to this specific player
 function CosmicChroniclesNewsBoard.requestNewsSync()
     if not onServer() then return end
-
+    print("[CCNewsBoard] Server VM received requestNewsSync from player " .. tostring(callingPlayer))
     -- Send a callback to the global Server. The vault news script listens to this!
     Server():sendCallback("onCCNewsSyncRequest", callingPlayer)
 end
@@ -86,9 +86,12 @@ callable(CosmicChroniclesNewsBoard, "requestNewsSync")
 -- Server function that receives a pushed update from the Vault and sends it to the client
 function CosmicChroniclesNewsBoard.pushNewsSync(playerIndex, newsData)
     if not onServer() then return end
+    print("[CCNewsBoard] Server VM received pushNewsSync from Vault! News count: " .. tostring(#(newsData or {})))
     local player = Player(playerIndex)
     if player then
         invokeClientFunction(player, "receiveNews", newsData)
+    else
+        print("[CCNewsBoard] Player object not found for index " .. tostring(playerIndex))
     end
 end
 

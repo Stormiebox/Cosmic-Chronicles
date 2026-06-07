@@ -20,19 +20,17 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
         local inflictor = Entity(lastDamageInflictor)
         local inflictorName = "Unknown Forces"
         
-        if inflictor then
-            if inflictor.isPlayer then
-                inflictorName = "a hostile Independent Pilot"
-            else
-                local faction = Faction(inflictor.factionIndex)
-                if faction then
-                    if faction.isAIFaction and faction.name == "Pirates"%_t then
-                        inflictorName = "Pirate Raiders"
-                    elseif faction.isAIFaction and faction.name == "Xsotan"%_t then
-                        inflictorName = "the Xsotan Swarm"
-                    else
-                        inflictorName = "the " .. faction.name
-                    end
+        if inflictor and inflictor.factionIndex then
+            local faction = Faction(inflictor.factionIndex)
+            if faction then
+                if faction.isPlayer then
+                    inflictorName = "a hostile Independent Pilot"
+                elseif faction.isAIFaction and faction.name == "Pirates"%_t then
+                    inflictorName = "Pirate Raiders"
+                elseif faction.isAIFaction and faction.name == "Xsotan"%_t then
+                    inflictorName = "the Xsotan Swarm"
+                else
+                    inflictorName = "the " .. faction.name
                 end
             end
         end
@@ -46,4 +44,8 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
 
         Server():sendCallback("onCCNewsPublishArticle", article)
     end
+end
+
+function initialize()
+    CCDestructionTracker.initialize()
 end

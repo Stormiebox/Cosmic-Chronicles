@@ -56,3 +56,7 @@ function CCVanillaNews.onSeedNews()
         end
     end
 end
+
+function initialize()
+    CCVanillaNews.initialize()
+end
