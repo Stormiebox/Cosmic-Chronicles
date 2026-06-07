@@ -4,6 +4,6 @@ if onServer() then
     local sector = Sector()
 
     if sector then
-        sector():addScriptOnce("sector/cc_destructiontracker.lua")
+        sector:addScriptOnce("data/scripts/sector/cc_destructiontracker.lua")
     end
 end
