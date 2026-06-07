@@ -11,6 +11,8 @@ and this project adheres to Semantic Versioning.
 - **Galactic News Network Crash:** Refactored `cc_newsboard.lua` to stop calling `Server().invokeFunction` (which doesn't exist in the Avorion API). Communication with the Vault news server now securely passes through Avorion's native global event bus via `Server():sendCallback()`.
 - **UI Crash:** Removed an invalid `fontSize` assignment on a TextBox component in `cc_newsboard.lua` that was causing the client to instantly crash when attempting to render the Galactic News tab.
 - **Compliance Fix:** Wrapped core injection files (init.lua) safely to prevent them from wiping out vanilla initialization scripts.
+- **Procedural News State Persistence:** Fixed a bug in `cc_newsgenerator.lua` where the generator would spam duplicate Boss Kill articles after every server restart. The generator now correctly uses `secure()` and `restore()` lifecycle functions to remember which bosses it has already reported on.
+- **Vanilla Boss Variables:** Fixed a bug in `cc_newsgenerator.lua` that was querying incorrect internal variable names (e.g. `swoks_defeated`), preventing it from tracking boss kills dynamically during gameplay. It now queries the correct native Avorion variables.
 
 ### Added
 - **Galactic News Board:** A brand new dedicated "News" tab has been added to the Player Window!
@@ -18,6 +20,7 @@ and this project adheres to Semantic Versioning.
   - **Cosmic War Synergy:** Tracks local War Heat. If heat hits critical levels, it publishes High-Value Bounties (giving players a target to hunt). Otherwise, it reports on frontline sector shifts.
   - **Cosmic Overhaul Synergy:** Actively tracks faction wealth levels to publish "Trade Crises" (shortages) and "Market Booms", guiding Merchant captains to profitable sectors. Occasionally spotlights the feats of a random online player's Captain!
   - **Vanilla Avorion Synergy:** Tracks core progression. The moment a server defeats Swoks, the AI, the MAD Science Lab, or the Guardian, a massive server-wide breaking news article is permanently published.
+  - **Historical Backfilling (Self-Healing):** When installed mid-playthrough, the system intelligently scans the `Server` and `Player` database for previously killed vanilla bosses (Swoks, Big AI, Project Beta, Bottan, MAD Scientist, The 4, Guardian, Pirate Hideouts) and backfills them into the news history so older saves don't miss out on past lore.
   - Keeps a rolling server-wide buffer of the latest 30 articles, broadcasting them directly to all players to deeply immerse them in the ecosystem's background math.
 
 - **Translation Additions:** Added in new translation strings in all .po files for all available languages. Spanish, German, French, Japanese, Chinese, Russian and Portuguese.
