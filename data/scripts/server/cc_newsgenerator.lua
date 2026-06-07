@@ -37,20 +37,48 @@ function CosmicChroniclesNewsGenerator.updateServer(timeStep)
 end
 
 function CosmicChroniclesNewsGenerator.checkBossDefeats()
-    local bosses = {
-        { id = "swoks_defeated", title = "Pirate Warlord Swoks Eliminated", content = "Independent bounty hunters have confirmed the destruction of the infamous pirate lord Swoks. The outer rim breathes a sigh of relief as his blockades dissolve." },
-        { id = "ai_destroyed", title = "Rogue AI Core Shattered", content = "A massive spatial anomaly has collapsed near the inner rim. Reports confirm that the rogue Artificial Intelligence construct threatening navigational arrays has been completely neutralized." },
-        { id = "mad_science_lab_destroyed", title = "M.A.D. Science Lab Destroyed", content = "A highly dangerous, unauthorized weapons research facility known as the M.A.D. Science Lab has been eradicated. Authorities caution scavengers against approaching the irradiated wreckage." },
-        { id = "guardian_destroyed", title = "The Core is Open!", content = "A shockwave of unimaginable scale has echoed across the galaxy. The Xsotan Wormhole Guardian blockading the galactic core has fallen! A new era of exploration and danger has begun." }
-    }
+    local server = Server()
     
-    for _, boss in pairs(bosses) do
-        if Server():getValue(boss.id) and not reportedBosses[boss.id] then
-            reportedBosses[boss.id] = true
-            CosmicVaultNews.publishArticle({ title = boss.title, content = boss.content, category = "Galactic Milestone" })
+    local function publish(id, title, content)
+        if not reportedBosses[id] then
+            reportedBosses[id] = true
+            CosmicVaultNews.publishArticle({ title = title, content = content, category = "Galactic Milestone" })
             return true
         end
+        return false
     end
+
+    if server:getValue("swoks_beaten") then
+        if publish("swoks", "Pirate Warlord Swoks Eliminated", "Independent bounty hunters have confirmed the destruction of the infamous pirate lord Swoks. The outer rim breathes a sigh of relief as his blockades dissolve.") then return true end
+    end
+    
+    if server:getValue("big_ai_kill_counter") and server:getValue("big_ai_kill_counter") > 0 then
+        if publish("big_ai", "Rogue AI Core Shattered", "A massive spatial anomaly has collapsed near the inner rim. Reports confirm that the rogue Artificial Intelligence construct threatening navigational arrays has been completely neutralized.") then return true end
+    end
+    
+    if server:getValue("last_killed_laser_boss") then
+        if publish("laser_boss", "Project Beta Neutralized", "A massive experimental laser dreadnought known as 'Project Beta' has been destroyed. Authorities are investigating its origins.") then return true end
+    end
+
+    -- For player-specific bosses, we iterate over online players
+    for _, player in pairs({server:getOnlinePlayers()}) do
+        if player:getValue("last_killed_scientist") then
+            if publish("scientist", "M.A.D. Science Lab Destroyed", "A secretive mobile laboratory conducting deeply unethical experiments has been eradicated. Authorities caution scavengers against approaching the irradiated wreckage.") then return true end
+        end
+        
+        if player:getValue("last_killed_bottan") then
+            if publish("bottan", "Bottan's Smuggling Ring Busted!", "The infamous smuggler Bottan has finally been brought to justice. Faction security forces report a massive drop in black market shipments.") then return true end
+        end
+        
+        if player:getValue("last_killed_the4") then
+            if publish("the4", "The Brotherhood Shattered", "The elusive cult known as 'The Brotherhood', or 'The 4', has been decimated. Their mysterious artifact has been recovered.") then return true end
+        end
+
+        if player:getValue("wormhole_guardian_destroyed") then
+            if publish("guardian", "The Core is Open!", "A shockwave of unimaginable scale has echoed across the galaxy. The Xsotan Wormhole Guardian blockading the galactic core has fallen! A new era of exploration and danger has begun.") then return true end
+        end
+    end
+    
     return false
 end
 
@@ -133,4 +161,14 @@ function CosmicChroniclesNewsGenerator.generateCaptainNews()
         content = "Famed " .. capClass .. " captain, " .. playerName .. ", has recently made headlines across the coreward sectors after successfully completing a massive and highly dangerous operation.\n\nLocal authorities have praised their efforts, and their reputation continues to grow among the stars.",
         category = "Captain Feats"
     })
+end
+
+function CosmicChroniclesNewsGenerator.secure()
+    return {
+        reportedBosses = reportedBosses
+    }
+end
+
+function CosmicChroniclesNewsGenerator.restore(data)
+    reportedBosses = data.reportedBosses or {}
 end
