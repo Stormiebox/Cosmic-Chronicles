@@ -42,7 +42,7 @@ Because of this context-awareness, the galaxy actually reacts to you and the wor
 * **If you have Bad Reputation:** Smugglers will give you tips on unbranding stolen goods, while security forces will tell you to keep your transponders clean.
 * **If the Faction is Poor:** Repair docks will complain about holding ships together with duct tape because they can't afford cohesive field generators.
 
-And the best part? It works *alongside* the vanilla game. You'll still see the classic Avorion chatter, but it is beautifully interwoven with deep, reactive world-building.
+And the best part? It works *alongside* the vanilla game. You'll still see the classic Avorion chatter, but it is beautifully interwoven with deep, reactive world-building. We even securely hooked into the core vanilla systems! If you use the standard "Anything interesting around here?" dialogue option, the NPC has a high chance to whisper Cosmic Chronicles lore. Furthermore, all standard vanilla civilian and military ships will seamlessly mix Cosmic lore into their background radio broadcasts!
 
 ---
 

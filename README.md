@@ -11,7 +11,7 @@ This mod acts as a dynamic "Living Galaxy" text system, feeding atmospheric dial
 ## 🚀 Core Features (v2.0.0)
 
 - **The Galactic News Board:** A fully interactive, real-time UI tab in the Player Window that broadcasts massive ecosystem shifts (Trade Crises, Fleet Clashes, Boss Defeats, Vanilla Events, and Behemoth DLC Incursions) directly to you.
-- **The Rumormonger System:** Dynamic dialogue and ambient chatter injected into stations and merchants that react live to Faction Wealth, Geography, and War Heat.
+- **The Rumormonger System:** Hooks directly into the vanilla `storyhints.lua` and `radiochatter.lua` scripts to inject dynamic dialogue and ambient chatter into stations and civilian/military ships that reacts live to Faction Wealth, Geography, and War Heat.
 - **Captain's Logs:** Narrative event logs appended to operation report mails, reacting to the dangers and anomalies your captains encounter during background commands.
 - **Dynamic Events:** Experience deep-space flashpoints like *Refugee Convoys* and *Derelict Graveyards* complete with Black Box extractions.
 - **Vault Powered:** Built seamlessly on top of the shared `Cosmic Vault` dialogue API framework, making it highly modular and extensible for other modders.

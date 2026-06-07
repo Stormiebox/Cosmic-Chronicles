@@ -25,6 +25,8 @@ and this project adheres to Semantic Versioning.
 - **Galactic News Expansion (Narrative Events):** Narrative events (Derelict Graveyard, Refugee Convoy Exodus, Monument Discovery) now push immersive lore articles to the Galactic News Network when triggered.
 - **Galactic News Expansion (Vanilla Events):** Safely integrated proxy hooks into standard Vanilla Avorion events without overwriting base game files. The News Network now tracks and reports on Xsotan Invasions, Smuggler Outpost Raids, Traveling Merchant Caravans, and Bounty Hunter deployments.
 - **Galactic News Expansion (Vanilla DLC):** Safely integrated proxy hooks for the Behemoth DLC. The News Network now broadcasts massive warnings when a Behemoth spawns, and will report on either the sector's total destruction or the Behemoth's defeat.
+- **Vanilla Rumormonger Integration:** Hooked into Avorion's native `storyhints.lua` script. When players ask station NPCs "Anything interesting around here?", there is now a 60% chance they will dispense context-aware Cosmic Chronicles lore (based on war heat, local wealth, and distance to the core) instead of a generic vanilla rumor.
+- **Vanilla Ambient Chatter Integration:** Hooked into Avorion's native `radiochatter.lua` script. Context-aware Cosmic Chronicles ambient lines are now seamlessly injected into the background chatter pools of all vanilla civilian, military, and event ships across the galaxy.
 
 - **Translation Additions:** Added in new translation strings in all .po files for all available languages. Spanish, German, French, Japanese, Chinese, Russian and Portuguese.
 

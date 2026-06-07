@@ -77,7 +77,9 @@ Adds dynamic background chatter and interactive rumor-gathering to all NPC stati
 
 **Key Mechanics:**
 
-- **Ambient Chatter:** Stations run a highly optimized 35-second background chatter loop, periodically broadcasting floating overhead text based on their specific type and current situation. (Global sector cooldown is 30 seconds with a 50% speech probability).
+- **Vanilla Rumormonger Integration:** Hooked seamlessly into Avorion's native `storyhints.lua`. When you ask a station NPC "Anything interesting around here?", there is a 60% chance they will dispense a Cosmic Chronicles context-aware rumor instead of a generic vanilla tip.
+- **Vanilla Ambient Chatter Integration:** Hooked seamlessly into Avorion's native `radiochatter.lua`. Custom ambient lines are perfectly injected into the background chatter pools of all vanilla civilian, military, and event ships across the galaxy.
+- **Ambient Chatter (Stations):** Stations run a highly optimized 35-second background chatter loop, periodically broadcasting floating overhead text based on their specific type and current situation. (Global sector cooldown is 30 seconds with a 50% speech probability).
 - **Interaction:** Players can dock and access a direct dialogue menu to ask "Any rumors?" and receive a dynamic tip.
 - **Tutorialization:** The Rumormonger now acts as an immersive guide, occasionally broadcasting tips to teach players about complex mechanics (e.g., Merchant synergies, Trash Man filters) naturally through gameplay.
 - **Contextual Awareness:** The Rumormonger actively parses and adapts to:
