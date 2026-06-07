@@ -31,5 +31,14 @@ function initialize()
     -- Add atmospheric warning
     Sector():broadcastChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Warning: Massive debris field detected. Sensor profiles match recent military casualties."%_T)
 
+    local cv_success = pcall(include, "cosmicvaultnews")
+    if cv_success and CosmicVaultNews then
+        CosmicVaultNews.publishArticle({
+            title = "Derelict Graveyard Discovered",
+            content = "A massive graveyard of derelict ships has been located by an independent captain in sector [" .. x .. ":" .. y .. "]. Scavengers are warned that the area may still contain live munitions or hostile drones.",
+            category = "Exploration"
+        })
+    end
+
     terminate()
 end

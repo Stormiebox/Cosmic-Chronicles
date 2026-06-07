@@ -15,6 +15,22 @@ end
 
 function CosmicChroniclesNewsGenerator.initialize()
     if not onServer() then return end
+    Galaxy():registerCallback("onBehemothAttackStart", "onBehemothAttackStart")
+end
+
+function CosmicChroniclesNewsGenerator.onBehemothAttackStart(quadrant, x, y)
+    if not cv_success then return end
+    local quadName = "Unknown"
+    if quadrant == 1 then quadName = "North"
+    elseif quadrant == 2 then quadName = "East"
+    elseif quadrant == 3 then quadName = "South"
+    elseif quadrant == 4 then quadName = "West" end
+
+    CosmicVaultNews.publishArticle({
+        title = "BEHEMOTH INCURSION DETECTED",
+        content = "Warning! A catastrophic spatial anomaly has been detected! The Behemoth of the " .. quadName .. " has dropped out of hyperspace and is currently assaulting sector [" .. x .. ":" .. y .. "]. All available captains are urged to defend the sector immediately!",
+        category = "Galactic Threat"
+    })
 end
 
 local reportedBosses = {}

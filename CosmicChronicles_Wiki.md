@@ -63,6 +63,7 @@ The beating heart of the Cosmic Chronicles information network. The Galactic New
 - **Cosmic War Synergy:** Generates real-time "Conflict" articles reporting on border skirmishes, invasions, and war heat spikes happening between NPC factions across the galaxy.
 - **Economy Synergy:** Generates "Economic" articles detailing market booms or crashes based on the wealth level and traits of random NPC factions.
 - **Vanilla Progression Synergy:** Tracks major vanilla milestones (Boss kills like Swoks or the AI, Pirate Hideout destruction) and publishes massive server-wide breaking news.
+- **Vanilla Event & DLC Hooks:** Safely intercepts and reports on Xsotan Incursions, Traveling Merchants, Smuggler Raids, Bounty Hunters, and Behemoth DLC sector destructions via non-destructive proxy scripts.
 - **Historical Backfilling (Self-Healing):** Safely retrofits into existing saves by automatically scanning server and player variables to backfill past boss defeats into the news buffer.
 - **Server Sync Buffer:** The system safely buffers the latest 30 articles globally, instantly broadcasting the array to any player who logs in or checks their news board.
 - **Real-Time UI Updates:** The News Board natively integrates with the Vault's client-side callbacks, instantly refreshing your display the moment a breaking news article is published without needing to close and reopen the tab.

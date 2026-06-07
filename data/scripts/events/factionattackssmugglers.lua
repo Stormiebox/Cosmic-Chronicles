@@ -1,0 +1,17 @@
+package.path = package.path .. ";data/scripts/lib/?.lua"
+
+local cv_success = pcall(include, "cosmicvaultnews")
+
+local CC_Original_spawnDefenders = FactionAttacksSmugglers.spawnDefenders
+function FactionAttacksSmugglers.spawnDefenders()
+    if CC_Original_spawnDefenders then CC_Original_spawnDefenders() end
+    
+    if onServer() and cv_success and CosmicVaultNews then
+        local x, y = Sector():getCoordinates()
+        CosmicVaultNews.publishArticle({
+            title = "Major Sting Operation!",
+            content = "Breaking news! Local military forces have cracked down on a major Black Market operation in sector [" .. x .. ":" .. y .. "]. A massive shootout has ensued as smugglers refuse to surrender to the authorities.",
+            category = "Conflict"
+        })
+    end
+end

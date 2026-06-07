@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
-## [v1.2.0] - 2026-06-06
+## [v2.0.0] - 2026-06-07
 ### Fixed
 - **Engine Bootstrap Compliance:** Removed invalid `initialize()` wrappers inside `player/init.lua` and `entity/init.lua`. Wrapping the payload inside a function was causing the UI hooks and rumormonger logic to fail to inject on fresh saves.
 - **Galactic News Network Crash:** Refactored `cc_newsboard.lua` to stop calling `Server().invokeFunction` (which doesn't exist in the Avorion API). Communication with the Vault news server now securely passes through Avorion's native global event bus via `Server():sendCallback()`.
@@ -22,6 +22,9 @@ and this project adheres to Semantic Versioning.
   - **Vanilla Avorion Synergy:** Tracks core progression. The moment a server defeats Swoks, the AI, the MAD Science Lab, or the Guardian, a massive server-wide breaking news article is permanently published.
   - **Historical Backfilling (Self-Healing):** When installed mid-playthrough, the system intelligently scans the `Server` and `Player` database for previously killed vanilla bosses (Swoks, Big AI, Project Beta, Bottan, MAD Scientist, The 4, Guardian, Pirate Hideouts) and backfills them into the news history so older saves don't miss out on past lore.
   - Keeps a rolling server-wide buffer of the latest 30 articles, broadcasting them directly to all players to deeply immerse them in the ecosystem's background math.
+- **Galactic News Expansion (Narrative Events):** Narrative events (Derelict Graveyard, Refugee Convoy Exodus, Monument Discovery) now push immersive lore articles to the Galactic News Network when triggered.
+- **Galactic News Expansion (Vanilla Events):** Safely integrated proxy hooks into standard Vanilla Avorion events without overwriting base game files. The News Network now tracks and reports on Xsotan Invasions, Smuggler Outpost Raids, Traveling Merchant Caravans, and Bounty Hunter deployments.
+- **Galactic News Expansion (Vanilla DLC):** Safely integrated proxy hooks for the Behemoth DLC. The News Network now broadcasts massive warnings when a Behemoth spawns, and will report on either the sector's total destruction or the Behemoth's defeat.
 
 - **Translation Additions:** Added in new translation strings in all .po files for all available languages. Spanish, German, French, Japanese, Chinese, Russian and Portuguese.
 

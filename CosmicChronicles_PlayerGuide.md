@@ -55,6 +55,7 @@ Located right inside your standard Player Window (alongside your Fleet and Allia
 * Did a faction's economy suddenly boom, lowering industrial prices? **It will be on the News Board.**
 * Did heavy border skirmishes break out between two AI factions on the other side of the map? **It will be on the News Board.**
 * Are independent scouts reporting massive spikes in Xsotan sightings near the core? **It will be on the News Board.**
+* Did an ancient Behemoth suddenly obliterate an entire sector? **It will be on the News Board.**
 
 **Self-Healing History:** Did you install Cosmic Chronicles in the middle of a playthrough? No problem! The News Board will automatically scan your galaxy's history and backfill major past events (like the defeat of Swoks or the Rogue AI) so you don't miss out on the lore!
 
