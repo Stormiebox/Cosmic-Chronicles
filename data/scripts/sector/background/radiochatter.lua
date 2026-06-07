@@ -504,8 +504,8 @@ function RadioChatter.updateStationChatter()
     if xsotanChatter and self.dist < 150 and random():test(0.2) then
         displaySpeechBubble(station, randomEntry(random(), self.XsotanSwarmChatter[xsotanChatter]))
     else
-            -- Cosmic Chronicles: Increased ping chance from 15% to 40% to surface custom lore more frequently
-            if random():test(0.60) then
+        -- Cosmic Chronicles: Increased ping chance to 80% to surface custom lore more frequently
+        if random():test(0.20) then
             displaySpeechBubble(station, self.selectLine(station, self.GeneralStationChatter))
         else
             invokeServerFunction("displayStateFormSpecificChatter", station)
@@ -549,8 +549,8 @@ function RadioChatter.updateShipChatter()
         end
     end
 
-        -- Cosmic Chronicles: Increased ping chance from 15% to 40% to surface custom lore more frequently
-        if random():test(0.60) then
+        -- Cosmic Chronicles: Increased ping chance to 80% to surface custom lore more frequently
+        if random():test(0.20) then
         displaySpeechBubble(ship, self.selectLine(ship, lines))
     else
         invokeServerFunction("displayStateFormSpecificChatter", ship)
