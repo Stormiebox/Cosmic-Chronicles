@@ -30,10 +30,6 @@ function CosmicChroniclesNewsBoard.initUI()
     
     headlineList:addEntry("Connecting to Galactic News Network..."%_t, 0)
     
-    if Client() then
-        Client():registerCallback("onCosmicVaultNewsUpdated", "receiveNews")
-    end
-    
     invokeServerFunction("requestNewsSync")
 end
 
@@ -66,20 +62,33 @@ function CosmicChroniclesNewsBoard.receiveNews(newsArray)
     currentNewsArray = newsArray or {}
 
     headlineList:clear()
-    for i, article in ipairs(currentNewsArray) do
-        headlineList:addEntry("[" .. (article.category or "News"%_t) .. "] " .. (article.title or ""), i)
+    
+    if #currentNewsArray == 0 then
+        headlineList:addEntry("No broadcasts available at this time."%_t, 0)
+    else
+        for i, article in ipairs(currentNewsArray) do
+            headlineList:addEntry("[" .. (article.category or "News"%_t) .. "] " .. (article.title or ""), i)
+        end
     end
 end
 
 end -- end onClient
 
--- Server function that forwards the vault news to this specific player
+-- Server function that fetches the vault news and sends it to this specific player
 function CosmicChroniclesNewsBoard.requestNewsSync()
     if not onServer() then return end
 
-    -- Broadcast a server-wide callback. The cosmicvaultnews_server.lua script
-    -- is listening for this callback and will automatically push the news list back to us.
+    -- Send a callback to the global Server. The vault news script listens to this!
     Server():sendCallback("onCCNewsSyncRequest", callingPlayer)
 end
 callable(CosmicChroniclesNewsBoard, "requestNewsSync")
+
+-- Server function that receives a pushed update from the Vault and sends it to the client
+function CosmicChroniclesNewsBoard.pushNewsSync(playerIndex, newsData)
+    if not onServer() then return end
+    local player = Player(playerIndex)
+    if player then
+        invokeClientFunction(player, "receiveNews", newsData)
+    end
+end
 

@@ -116,11 +116,14 @@ end
 
 -- Triggered on the Client when the player clicks the menu option
 function CosmicChroniclesRumormonger.onAskRumors()
+    -- Show a waiting dialog to prevent the interaction window from closing!
+    local dialog = { text = "Let me think for a moment..."%_t, answers = {} }
+    ScriptUI():showDialog(dialog)
+
     -- Ping the server to find an appropriate rumor based on secret server-side states
     invokeServerFunction("getRumorFromServer")
 end
 
--- Triggered on the Server. Calculates context and fetches the text.
 function CosmicChroniclesRumormonger.getRumorFromServer()
     if not onServer() then return end
 
@@ -128,28 +131,30 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
     local station = Entity()
     local faction = Faction(station.factionIndex)
 
-    if not faction then return end
+    local rumor = nil
 
-    local sector = Sector()
-    local x, y = sector:getCoordinates()
-    local distance = math.sqrt(x * x + y * y)
+    if faction then
+        local sector = Sector()
+        local x, y = sector:getCoordinates()
+        local distance = math.sqrt(x * x + y * y)
 
-    local context = {
-        reputation = player:getRelations(faction.index),
-        factionTrait = faction:getTrait("aggressive") and "aggressive" or "peaceful",
-        factionWealth = faction:getTrait("wealthy") and "wealthy" or (faction:getTrait("poor") and "poor" or "average"),
-        distanceToCenter = distance,
-        warHeat = getFactionWarHeat(faction),
-        stationType = getCachedStationType(station)
-    }
+        local context = {
+            reputation = player:getRelations(faction.index),
+            factionTrait = faction:getTrait("aggressive") and "aggressive" or "peaceful",
+            factionWealth = faction:getTrait("wealthy") and "wealthy" or (faction:getTrait("poor") and "poor" or "average"),
+            distanceToCenter = distance,
+            warHeat = getFactionWarHeat(faction),
+            stationType = getCachedStationType(station)
+        }
 
-    local rumor = CosmicVaultDialogue.getValidLine("rumor", context)
-
-    if not rumor then
-        rumor = "I don't have any gossip right now, friend. The sector has been quiet."%_T
+        rumor = CosmicVaultDialogue.getValidLine("rumor", context)
     end
 
-    invokeClientFunction(player, "showRumorDialog", rumor)
+    if not rumor then
+        rumor = "I don't have any gossip right now, friend. The sector has been quiet."
+    end
+
+    invokeClientFunction(player, "showRumorDialog", tostring(rumor))
 end
 callable(CosmicChroniclesRumormonger, "getRumorFromServer")
 
@@ -157,7 +162,7 @@ callable(CosmicChroniclesRumormonger, "getRumorFromServer")
 function CosmicChroniclesRumormonger.showRumorDialog(rumor)
     if not onClient() then return end
 
-    local dialog = { text = rumor, answers = { {answer = "Interesting. Thanks."%_t} } }
+    local dialog = { text = rumor%_t, answers = { {answer = "Interesting. Thanks."%_t} } }
 
     -- Render the Avorion dialogue UI
     ScriptUI():showDialog(dialog)
