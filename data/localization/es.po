@@ -24,7 +24,6 @@ msgstr "Datos extraídos y créditos recuperados de la caja negra."
 msgid "Black Box Recording:\n\n\"${log}\"\n\n*Recording Ends*"
 msgstr "Grabación de la caja negra:\n\n\"${log}\"\n\n*Fin de la grabación*"
 
-
 # ========== /data/scripts/entity/cc_factionmonument.lua ==========
 #: /data/scripts/entity/cc_factionmonument.lua:
 msgid "Read Inscription"
@@ -57,7 +56,6 @@ msgstr "Fascinante."
 #: /data/scripts/entity/cc_factionmonument.lua:
 msgid "You paid your respects to the faction's history. Reputation improved."
 msgstr "Has presentado tus respetos a la historia de la facción. Reputación mejorada."
-
 
 # ========== /data/scripts/entity/cc_refugeedialogue.lua ==========
 #: /data/scripts/entity/cc_refugeedialogue.lua:
@@ -112,7 +110,6 @@ msgstr "Bienes de contrabando"
 msgid "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."
 msgstr "Tu capitán Contrabandista ha robado discretamente 100.000 créditos en objetos de valor del convoy de refugiados durante la transferencia."
 
-
 # ========== /data/scripts/entity/cosmicchronicles_rumormonger.lua ==========
 #: /data/scripts/entity/cosmicchronicles_rumormonger.lua:
 msgid "Any rumors?"
@@ -126,7 +123,6 @@ msgstr "No tengo cotilleos ahora mismo, amigo. El sector ha estado tranquilo."
 msgid "Interesting. Thanks."
 msgstr "Interesante. Gracias."
 
-
 # ========== /data/scripts/events/cc_spawnmonument.lua ==========
 #: /data/scripts/events/cc_spawnmonument.lua:
 msgid "Cultural Monument"
@@ -136,7 +132,6 @@ msgstr "Monumento cultural"
 msgid "Sensors are detecting a massive, ancient architectural structure in this sector."
 msgstr "Los sensores detectan una enorme y antigua estructura arquitectónica en este sector."
 
-
 # ========== /data/scripts/events/cw_derelictgraveyard.lua ==========
 #: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Flight Recorder (Black Box)"
@@ -145,7 +140,6 @@ msgstr "Registrador de vuelo (caja negra)"
 #: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Warning: Massive debris field detected. Sensor profiles match recent military casualties."
 msgstr "Advertencia: Campo de escombros masivo detectado. Los perfiles de los sensores coinciden con bajas militares recientes."
-
 
 # ========== /data/scripts/events/cw_refugeeconvoy.lua ==========
 #: /data/scripts/events/cw_refugeeconvoy.lua:
@@ -160,12 +154,10 @@ msgstr "Convoy de refugiados"
 msgid "Mayday! Our hyperdrives are offline and we are fleeing the frontline! Is anyone out there?"
 msgstr "¡Mayday! ¡Nuestros hipermotores están desconectados y huimos de la línea del frente! ¿Hay alguien ahí?"
 
-
 # ========== /data/scripts/player/background/simulation/command.lua ==========
 #: /data/scripts/player/background/simulation/command.lua:
 msgid "Captain's Log:"
 msgstr "Bitácora del capitán:"
-
 
 # ========== /data/scripts/server/cosmicchronicles.lua ==========
 #: /data/scripts/server/cosmicchronicles.lua:
@@ -637,18 +629,10 @@ msgid "Galactic News"
 msgstr "Noticias Galácticas"
 
 #: /data/scripts/player/ui/cc_newsboard.lua:
-msgid "Unknown"
-msgstr "Desconocido"
-
-#: /data/scripts/player/ui/cc_newsboard.lua:
 msgid "   Reported by: "
 msgstr "   Reportado por: "
 
 #: /data/scripts/player/ui/cc_newsboard.lua:
 msgid "   Category: "
 msgstr "   Categoría: "
-
-#: /data/scripts/player/ui/cc_newsboard.lua:
-msgid "News"
-msgstr "Noticias"
 

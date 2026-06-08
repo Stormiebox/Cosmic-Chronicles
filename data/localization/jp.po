@@ -24,7 +24,6 @@ msgstr "ブラックボックスからデータを抽出し、クレジットを
 msgid "Black Box Recording:\n\n\"${log}\"\n\n*Recording Ends*"
 msgstr "ブラックボックスの記録:\n\n\"${log}\"\n\n*記録終了*"
 
-
 # ========== /data/scripts/entity/cc_factionmonument.lua ==========
 #: /data/scripts/entity/cc_factionmonument.lua:
 msgid "Read Inscription"
@@ -57,7 +56,6 @@ msgstr "魅力的だ。"
 #: /data/scripts/entity/cc_factionmonument.lua:
 msgid "You paid your respects to the faction's history. Reputation improved."
 msgstr "派閥の歴史に敬意を表しました。評判が向上しました。"
-
 
 # ========== /data/scripts/entity/cc_refugeedialogue.lua ==========
 #: /data/scripts/entity/cc_refugeedialogue.lua:
@@ -112,7 +110,6 @@ msgstr "密輸品"
 msgid "Your Smuggler captain quietly skimmed 100,000 credits worth of valuables from the refugee convoy during the transfer."
 msgstr "あなたの密輸業者キャプテンは、移送中に難民の船団から100,000クレジット相当の貴重品を密かにかすめ取りました。"
 
-
 # ========== /data/scripts/entity/cosmicchronicles_rumormonger.lua ==========
 #: /data/scripts/entity/cosmicchronicles_rumormonger.lua:
 msgid "Any rumors?"
@@ -126,7 +123,6 @@ msgstr "今は何の噂もないよ、友よ。セクターは静かだ。"
 msgid "Interesting. Thanks."
 msgstr "興味深い。ありがとう。"
 
-
 # ========== /data/scripts/events/cc_spawnmonument.lua ==========
 #: /data/scripts/events/cc_spawnmonument.lua:
 msgid "Cultural Monument"
@@ -136,7 +132,6 @@ msgstr "文化記念碑"
 msgid "Sensors are detecting a massive, ancient architectural structure in this sector."
 msgstr "センサーが、このセクターで巨大な古代の建築構造物を検出しています。"
 
-
 # ========== /data/scripts/events/cw_derelictgraveyard.lua ==========
 #: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Flight Recorder (Black Box)"
@@ -145,7 +140,6 @@ msgstr "フライトレコーダー（ブラックボックス）"
 #: /data/scripts/events/cw_derelictgraveyard.lua:
 msgid "Warning: Massive debris field detected. Sensor profiles match recent military casualties."
 msgstr "警告：大規模なデブリフィールドが検出されました。センサープロファイルは最近の軍事的犠牲者と一致します。"
-
 
 # ========== /data/scripts/events/cw_refugeeconvoy.lua ==========
 #: /data/scripts/events/cw_refugeeconvoy.lua:
@@ -160,12 +154,10 @@ msgstr "難民船団"
 msgid "Mayday! Our hyperdrives are offline and we are fleeing the frontline! Is anyone out there?"
 msgstr "メーデー！ハイパードライブがオフラインで、最前線から逃げています！誰かいませんか？"
 
-
 # ========== /data/scripts/player/background/simulation/command.lua ==========
 #: /data/scripts/player/background/simulation/command.lua:
 msgid "Captain's Log:"
 msgstr "船長の日誌:"
-
 
 # ========== /data/scripts/server/cosmicchronicles.lua ==========
 #: /data/scripts/server/cosmicchronicles.lua:
@@ -637,18 +629,10 @@ msgid "Galactic News"
 msgstr "銀河ニュース"
 
 #: /data/scripts/player/ui/cc_newsboard.lua:
-msgid "Unknown"
-msgstr "不明"
-
-#: /data/scripts/player/ui/cc_newsboard.lua:
 msgid "   Reported by: "
 msgstr "   報告者: "
 
 #: /data/scripts/player/ui/cc_newsboard.lua:
 msgid "   Category: "
 msgstr "   カテゴリー: "
-
-#: /data/scripts/player/ui/cc_newsboard.lua:
-msgid "News"
-msgstr "ニュース"
 
