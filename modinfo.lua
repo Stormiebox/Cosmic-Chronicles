@@ -16,7 +16,7 @@ meta =
     type = "mod",
 
     -- Description of your mod that will be displayed to players
-    description = "The narrative and lore expansion module for the Cosmic series. Adds dynamic rumors, background chatter, captain's logs, and narrative events driven by the state of the galaxy.",
+    description = "A dynamic narrative and living galaxy expansion. Pushes live, dynamic articles to a dedicated Galactic News Network based on your galaxy's state!",
 
     -- Insert all authors into this list
     authors = {"Stormbox"},
