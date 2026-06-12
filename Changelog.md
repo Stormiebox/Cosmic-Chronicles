@@ -1,5 +1,24 @@
+# Changelog
+
+All notable changes to **Cosmic Chronicles** will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+--
+
+## v2.1.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
+
+- Fully integrated with the Cosmic Vault API framework.
+- Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
+
+
+### LEGACY LOGS BELOW - KEPT FOR HISTORICAL PURPOSES!
+
 # 2.0.1
-- **Hotfix:** Removed duplicate base-game translation strings from the mod's localization files to prevent 	inygettext collision warnings from spamming the client log.
+
+- **Hotfix:** Removed duplicate base-game translation strings from the mod's localization files to prevent  inygettext collision warnings from spamming the client log.
+
 # Cosmic Chronicles - Changelog
 
 All notable changes to this project will be documented in this file.
@@ -8,7 +27,9 @@ The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
 ## [v2.0.0] - 2026-06-07
+
 ### Fixed
+
 - **Engine Bootstrap Compliance:** Removed invalid `initialize()` wrappers inside `player/init.lua` and `entity/init.lua`. Wrapping the payload inside a function was causing the UI hooks and rumormonger logic to fail to inject on fresh saves.
 - **Galactic News Network Crash:** Refactored `cc_newsboard.lua` to stop calling `Server().invokeFunction` (which doesn't exist in the Avorion API). Communication with the Vault news server now securely passes through Avorion's native global event bus via `Server():sendCallback()`.
 - **UI Crash:** Removed an invalid `fontSize` assignment on a TextBox component in `cc_newsboard.lua` that was causing the client to instantly crash when attempting to render the Galactic News tab.
@@ -17,6 +38,7 @@ and this project adheres to Semantic Versioning.
 - **Vanilla Boss Variables:** Fixed a bug in `cc_newsgenerator.lua` that was querying incorrect internal variable names (e.g. `swoks_defeated`), preventing it from tracking boss kills dynamically during gameplay. It now queries the correct native Avorion variables.
 
 ### Added
+
 - **Galactic News Board:** A brand new dedicated "News" tab has been added to the Player Window!
   - Generates random, dynamic news articles every 15 real-time minutes based on the current state of the galaxy.
   - **Cosmic War Synergy:** Tracks local War Heat. If heat hits critical levels, it publishes High-Value Bounties (giving players a target to hunt). Otherwise, it reports on frontline sector shifts.
@@ -33,6 +55,7 @@ and this project adheres to Semantic Versioning.
 - **Translation Additions:** Added in new translation strings in all .po files for all available languages. Spanish, German, French, Japanese, Chinese, Russian and Portuguese.
 
 ### Changed
+
 - **Event Reward Re-balancing (Compliance Fix):** To strictly comply with the mod's core philosophy as a pure "Lore and Narrative" expansion, the heavy material payouts from dynamic events have been significantly balanced to prevent economy inflation:
   - **Black Box Extracts:** Reduced the massive credit payouts from 75k-150k down to a balanced 15k-35k. Upgrades dropped are now guaranteed Uncommon (with a 15% chance to be Rare) rather than guaranteed Rare/Exceptional. Scavenger/Explorer Captain synergies still apply to these new baselines.
   - **Refugee Convoys:** The instant reputation reward for donating supplies has been reduced from +10,000 to a more reasonable +2,500. Merchant and Smuggler hazard pay synergies have been lowered from 75k/100k to 25k/35k.
@@ -43,6 +66,7 @@ and this project adheres to Semantic Versioning.
 - **Event Stability & Standardization:** Bypassed the brittle `CosmicVaultNews` library wrapper entirely across all dynamic events and Vanilla Behemoth DLC hooks. The mod now natively pushes news straight to the engine via `Server():sendCallback("onCCNewsPublishArticle")`, guaranteeing perfectly stable article delivery regardless of load order.
 
 ### Removed
+
 - **Texture Folder:** All textures were removed and migrated into `Cosmic Vault`.
 
 ## [v1.1.0] - 2026-05-30 In Sync with Cosmic Overhaul v4.0.0 Development
@@ -113,5 +137,3 @@ and this project adheres to Semantic Versioning.
 - **cw_derelictgraveyard.lua**: Fixed an issue where derelict ships disappeared instantly by reverting to proper C++ physics engine destruction, leaving behind standard wreckage and explosion VFX.
 - **cc_spawnmonument.lua**: Fixed hyperspace collisions by adding a randomized offset to the spawn coordinates, and corrected the invulnerability hook to use the proper Avorion API (`station.invincible = true`).
 - **cc_blackbox.lua**: Resolved a silent Lua C++ Type crash by correctly passing `random():createSeed()` instead of a boolean to `UpgradeGenerator`.
-
-
