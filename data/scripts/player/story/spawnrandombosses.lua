@@ -170,7 +170,7 @@ function SpawnRandomBosses.disableSpawn(x, y, time)
 
     -- no interdiction found -> continue
     local i = 0
-    while true do
+    while i < 1000 do
         i = i + 1
 
         if not self.spawnInterdictions[i] then

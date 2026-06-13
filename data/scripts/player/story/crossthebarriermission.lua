@@ -9,7 +9,7 @@ include("randomext")
 
 local SectorSpecifics = include ("sectorspecifics")
 local MissionUT = include("missionutility")
-local Hermit = include("data/scripts/entity/story/hermit")
+local Hermit = include("story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
