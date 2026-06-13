@@ -1,0 +1,6 @@
+function infoCc_injectToCodex()
+    Player():invokeFunction('ui/cosmiccodex', 'addCategory', 'cc_cat', 'Cosmic Chronicles'%_t, 'data/textures/icons/trading.png')
+    Player():invokeFunction('ui/cosmiccodex', 'addArticle', 'cc_cat', 'cc_news', 'Galactic News'%_t, 'The Galactic News Network broadcasts events happening across the galaxy in real-time. Whether it is an economic boom, a pirate invasion, or a diplomatic breakdown, staying tuned to the news will give you an edge in both trading and combat.'%_t, '')
+    Player():invokeFunction('ui/cosmiccodex', 'addArticle', 'cc_cat', 'cc_stock_market', 'Stock Market'%_t, 'The Stock Market allows you to invest in various galactic commodities and faction indices. Prices fluctuate dynamically based on galaxy events—wars will drive up weapon prices, while economic booms will inflate consumer goods. Buy low, sell high.'%_t, '')
+    Player():invokeFunction('ui/cosmiccodex', 'addArticle', 'cc_cat', 'cc_events', 'Dynamic Events'%_t, 'Sectors may occasionally experience localized events, such as \'Gold Rushes\' spawning rich asteroid fields, or \'Trade Blockades\' shutting down local supply lines. Adapting to these events is key to maximizing profit and survival.'%_t, '')
+end
