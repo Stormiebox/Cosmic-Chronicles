@@ -1,4 +1,4 @@
-# Cosmic Chronicles - Detailed Features
+# ⚙️ Cosmic Chronicles - Detailed Features
 
 Welcome to the **Cosmic Chronicles** official wiki! This page contains the full, detailed documentation for the narrative and lore expansion module in the **Cosmic** mod series.
 
@@ -10,7 +10,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 ---
 
-## Table of Contents
+## 📑 Table of Contents
 
 - [Mod Identity & Design Goals](#mod-identity--design-goals)
 - [Architecture Summary](#architecture-summary)
@@ -19,7 +19,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 ---
 
-## Mod Identity & Design Goals
+## 🧬 Mod Identity & Design Goals
 
 <details>
 <summary><b>View Mod Identity & Core Goals</b></summary>
@@ -37,7 +37,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 ---
 
-## Architecture Summary
+## 🏗️ Architecture Summary
 
 <details>
 <summary><b>View Architecture Details</b></summary>
@@ -50,25 +50,7 @@ When an event or interaction occurs, the mod builds a **Context Table** containi
 
 ---
 
-## Full Feature Breakdown
-
-<details>
-<summary><h3>The Galactic News Board</h3></summary>
-
-The beating heart of the Cosmic Chronicles information network. The Galactic News Board acts as an in-game digital newspaper that keeps players constantly updated on the shifting background math of the entire Cosmic ecosystem without ever breaking immersion.
-
-**Key Mechanics:**
-- **Player UI Tab:** Fully integrated into the standard Player Window menu as a dedicated tab with a split-pane interface (Headlines on the left, Articles on the right).
-- **Dynamic News Generator:** A dedicated background server script runs a simulation cycle every 15 real-time minutes, rolling for major galactic events.
-- **Cosmic War Synergy:** Generates real-time "Conflict" articles reporting on border skirmishes, invasions, and war heat spikes happening between NPC factions across the galaxy.
-- **Economy Synergy:** Generates "Economic" articles detailing market booms or crashes based on the wealth level and traits of random NPC factions.
-- **Vanilla Progression Synergy:** Tracks major vanilla milestones (Boss kills like Swoks or the AI, Pirate Hideout destruction) and publishes massive server-wide breaking news.
-- **Vanilla Event & DLC Hooks:** Safely intercepts and reports on Xsotan Incursions, Traveling Merchants, Smuggler Raids, Bounty Hunters, and Behemoth DLC sector destructions via non-destructive proxy scripts.
-- **Historical Backfilling (Self-Healing):** Safely retrofits into existing saves by automatically scanning server and player variables to backfill past boss defeats into the news buffer.
-- **Server Sync Buffer:** The system safely buffers the latest 30 articles globally, instantly broadcasting the array to any player who logs in or checks their news board.
-- **Real-Time UI Updates:** The News Board natively integrates with the Vault's client-side callbacks, instantly refreshing your display the moment a breaking news article is published without needing to close and reopen the tab.
-
-</details>
+## ⚙️ Full Feature Breakdown
 
 <details>
 <summary><h3>The Rumormonger System</h3></summary>
@@ -77,9 +59,7 @@ Adds dynamic background chatter and interactive rumor-gathering to all NPC stati
 
 **Key Mechanics:**
 
-- **Vanilla Rumormonger Integration:** Hooked seamlessly into Avorion's native `storyhints.lua`. When you ask a station NPC "Anything interesting around here?", there is a 60% chance they will dispense a Cosmic Chronicles context-aware rumor instead of a generic vanilla tip.
-- **Vanilla Ambient Chatter Integration:** Hooked seamlessly into Avorion's native `radiochatter.lua`. Custom ambient lines are perfectly injected into the background chatter pools of all vanilla civilian, military, and event ships across the galaxy.
-- **Ambient Chatter (Stations):** Stations run a highly optimized 35-second background chatter loop, periodically broadcasting floating overhead text based on their specific type and current situation. (Global sector cooldown is 30 seconds with a 50% speech probability).
+- **Ambient Chatter:** Stations run a highly optimized 35-second background chatter loop, periodically broadcasting floating overhead text based on their specific type and current situation. (Global sector cooldown is 30 seconds with a 50% speech probability).
 - **Interaction:** Players can dock and access a direct dialogue menu to ask "Any rumors?" and receive a dynamic tip.
 - **Tutorialization:** The Rumormonger now acts as an immersive guide, occasionally broadcasting tips to teach players about complex mechanics (e.g., Merchant synergies, Trash Man filters) naturally through gameplay.
 - **Contextual Awareness:** The Rumormonger actively parses and adapts to:
@@ -144,17 +124,22 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 
 </details>
 
-## v3.0.0 Update Additions
 
-### Deep Space Events
-Cosmic Chronicles now injects a variety of random anomalies into deep space (empty sectors):
-*   **The Ghost Ship**: Encounter drifting derelicts with corrupted text logs. Salvage them or use an Explorer captain to decrypt their coordinates.
-*   **Diplomatic Escort**: Stumble across stranded VIPs. A Smuggler captain can easily sneak them past border patrols.
-*   **Rogue AI Probes**: Fast, evasive, heavily-shielded drones that hack stations. Destroy them quickly before they warp out to claim top-tier loot.
-*   **Ancient Data Caches**: Only found near the galactic core, these massive vaults yield Xsotan lore and permanent buffs.
+---
 
-### Eclipse Lore Integration
-Scattered across the galaxy are ancient beacons, shipwrecks, and stashes left behind by **The Eclipse**. Discovering these structures yields massive narrative context about the universe, as well as physical loot that scales based on your proximity to the galactic core.
+## 🔗 Cosmic Series Integration & Audit 3.0 Updates
+<details>
+<summary><b>Click to expand</b></summary>
 
-### The Galactic Stock Market
-The Galactic News Board now tracks the background simulation of AI economies. When severe supply shortages or industrial surpluses occur, the News Board will broadcast a "Boom" or "Crash" report, giving savvy traders the exact coordinates to buy low and sell astronomically high.
+During the Cosmic Series Final QA Audit (v3.0+), several massive backend systems were standardized across all mods:
+
+### 📖 Cosmic Codex Integration
+All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
+
+### 🔒 Network Safety & Anti-Cheat
+- **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
+- **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
+
+### 🛠️ Vanilla Bug Fixes
+- **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
+</details>

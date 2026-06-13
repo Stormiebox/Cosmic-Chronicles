@@ -42,24 +42,7 @@ Because of this context-awareness, the galaxy actually reacts to you and the wor
 * **If you have Bad Reputation:** Smugglers will give you tips on unbranding stolen goods, while security forces will tell you to keep your transponders clean.
 * **If the Faction is Poor:** Repair docks will complain about holding ships together with duct tape because they can't afford cohesive field generators.
 
-And the best part? It works *alongside* the vanilla game. You'll still see the classic Avorion chatter, but it is beautifully interwoven with deep, reactive world-building. We even securely hooked into the core vanilla systems! If you use the standard "Anything interesting around here?" dialogue option, the NPC has a high chance to whisper Cosmic Chronicles lore. Furthermore, all standard vanilla civilian and military ships will seamlessly mix Cosmic lore into their background radio broadcasts!
-
----
-
-## The Galactic News Board
-
-If listening to ambient chatter isn't enough, you can also keep your finger on the pulse of the galaxy using the brand new **Galactic News** tab.
-
-Located right inside your standard Player Window (alongside your Fleet and Alliance tabs), the Galactic News Board acts as a constantly updating digital newspaper. Every 15 minutes, the mod's background simulator checks the pulse of the entire galaxy and generates an article. If you have the tab open, it will automatically sync and update in real-time!
-
-* Did a faction's economy suddenly boom, lowering industrial prices? **It will be on the News Board.**
-* Did heavy border skirmishes break out between two AI factions on the other side of the map? **It will be on the News Board.**
-* Are independent scouts reporting massive spikes in Xsotan sightings near the core? **It will be on the News Board.**
-* Did an ancient Behemoth suddenly obliterate an entire sector? **It will be on the News Board.**
-
-**Self-Healing History:** Did you install Cosmic Chronicles in the middle of a playthrough? No problem! The News Board will automatically scan your galaxy's history and backfill major past events (like the defeat of Swoks or the Rogue AI) so you don't miss out on the lore!
-
-You can use the News Board to actively hunt for profitable war-zones, find cheap markets, or simply immerse yourself in the living ecosystem.
+And the best part? It works *alongside* the vanilla game. You'll still hear the classic Avorion chatter, but it is beautifully interwoven with deep, reactive world-building.
 
 ---
 
@@ -67,7 +50,7 @@ You can use the News Board to actively hunt for profitable war-zones, find cheap
 
 The Rumormonger system doesn't just stop at stations. Cosmic Chronicles extends this dynamic awareness into the dark reaches of space:
 
-### Dynamic Deep Space Events
+### 📅 Dynamic Deep Space Events
 
 When you jump into an empty sector, the mod checks the local political climate. If "War Heat" is boiling over, you might stumble into a **Derelict Graveyard**—the immediate, smoking aftermath of a massive fleet battle where you can recover doomed Black Box recordings and system upgrades that actively scale in value the closer you get to the galactic core. If tensions are rising, you might intercept a **Refugee Convoy** begging for food and medical supplies to repair their hyperdrives before a hunter fleet arrives.
 
@@ -75,7 +58,7 @@ If you venture deep into the heart of an ancient faction's territory, your ship'
 
 These aren't just random events; they only happen *because* of the state of the galaxy.
 
-### Your Crew Matters (Captain Synergies)
+### 🎖️ Your Crew Matters (Captain Synergies)
 
 Cosmic Chronicles also knows *who* is sitting in the captain's chair, and it actively changes how events unfold based on their class:
 
@@ -83,7 +66,7 @@ Cosmic Chronicles also knows *who* is sitting in the captain's chair, and it act
 * When rescuing a refugee convoy, a **Merchant** captain can aggressively negotiate a hefty "Hazard Pay" reward for the supplies, while a **Smuggler** might quietly skim valuable smuggled goods from their cargo holds (yielding up to 100,000 credits) during the transfer.
 * When extracting a Black Box from a graveyard, **Scavenger** and **Explorer** captains are far more skilled at decrypting the data, recovering up to 50% more credits and earning a higher chance to pull *Exceptional* rarity system upgrades.
 
-### Captain's Logs
+### 🎖️ Captain's Logs
 
 If you use the *Cosmic Overhaul* mod, you can send your captains on background missions (like Mining or Trading). When they finish, they send you an email report.
 
@@ -95,17 +78,22 @@ Cosmic Chronicles intercepts these emails and dynamically writes a **Captain's L
 
 **Cosmic Chronicles** doesn't just add words to the screen. It creates a narrative ecosystem that listens to the invisible math dictating the wars and economies around you, and translates that math into living, breathing stories.
 
-## v3.0.0 Update Additions
 
-### Deep Space Events
-Cosmic Chronicles now injects a variety of random anomalies into deep space (empty sectors):
-*   **The Ghost Ship**: Encounter drifting derelicts with corrupted text logs. Salvage them or use an Explorer captain to decrypt their coordinates.
-*   **Diplomatic Escort**: Stumble across stranded VIPs. A Smuggler captain can easily sneak them past border patrols.
-*   **Rogue AI Probes**: Fast, evasive, heavily-shielded drones that hack stations. Destroy them quickly before they warp out to claim top-tier loot.
-*   **Ancient Data Caches**: Only found near the galactic core, these massive vaults yield Xsotan lore and permanent buffs.
+---
 
-### Eclipse Lore Integration
-Scattered across the galaxy are ancient beacons, shipwrecks, and stashes left behind by **The Eclipse**. Discovering these structures yields massive narrative context about the universe, as well as physical loot that scales based on your proximity to the galactic core.
+## 🔗 Cosmic Series Integration & Audit 3.0 Updates
+<details>
+<summary><b>Click to expand</b></summary>
 
-### The Galactic Stock Market
-The Galactic News Board now tracks the background simulation of AI economies. When severe supply shortages or industrial surpluses occur, the News Board will broadcast a "Boom" or "Crash" report, giving savvy traders the exact coordinates to buy low and sell astronomically high.
+During the Cosmic Series Final QA Audit (v3.0+), several massive backend systems were standardized across all mods:
+
+### 📖 Cosmic Codex Integration
+All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
+
+### 🔒 Network Safety & Anti-Cheat
+- **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
+- **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
+
+### 🛠️ Vanilla Bug Fixes
+- **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
+</details>

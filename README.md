@@ -1,43 +1,30 @@
-# Cosmic Chronicles
+# 🌌 Cosmic Chronicles
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+*A dynamic economy and galactic news simulation.*
 
-**Cosmic Chronicles** is the narrative, world-building, and lore module of the Cosmic mod series for Avorion.
+## 📖 Overview
+Cosmic Chronicles adds a living economy and news network to the galaxy. The Galactic News Network broadcasts real-time events like economic booms, pirate invasions, and trade blockades. The Stock Market allows you to invest in various galactic commodities and faction indices that fluctuate based on these events.
 
-This mod acts as a dynamic "Living Galaxy" text system, feeding atmospheric dialogue, ambient chatter, and dynamic rumors to players based on their reputation, current sector, and local faction states. It translates the abstract background math of the Cosmic ecosystem into human stories.
+## ✨ Features
+<details>
+<summary><b>Click to expand features</b></summary>
 
----
+- **Galactic News Network:** Real-time broadcasts of sector events.
+- **Stock Market:** Invest in commodities and watch their prices fluctuate dynamically.
+- **Dynamic Local Events:** Gold rushes, trade blockades, and shortages that physically alter sectors and trading profits.
+- **Deep Integration:** Ties directly into Cosmic War and Overhaul to reflect their events in the news and economy.
+</details>
 
-## 🚀 Core Features (v2.0.0)
+## ⚙️ Requirements
+- Avorion v2.0+
+- Dependencies: **Cosmic Vault**
 
-- **The Galactic News Board:** A fully interactive, real-time UI tab in the Player Window that broadcasts massive ecosystem shifts (Trade Crises, Fleet Clashes, Boss Defeats, Vanilla Events, and Behemoth DLC Incursions) directly to you.
-- **The Rumormonger System:** Hooks directly into the vanilla `storyhints.lua` and `radiochatter.lua` scripts to inject dynamic dialogue and ambient chatter into stations and civilian/military ships that reacts live to Faction Wealth, Geography, and War Heat.
-- **Captain's Logs:** Narrative event logs appended to operation report mails, reacting to the dangers and anomalies your captains encounter during background commands.
-- **Dynamic Events:** Experience deep-space flashpoints like *Refugee Convoys* and *Derelict Graveyards* complete with Black Box extractions.
-- **Vault Powered:** Built seamlessly on top of the shared `Cosmic Vault` dialogue API framework, making it highly modular and extensible for other modders.
-
----
-
-## 🛠️ Installation & Dependencies
-
-Cosmic Chronicles requires the core Cosmic simulation mods to function properly, as it reads their background data to generate its narrative context.
-
-1. Place the mod folder into:
+## 🚀 Installation
+1. Place the folder in:
    - **Windows:** `%AppData%\Avorion\mods\`
    - **Linux:** `~/.avorion/mods/`
-2. Ensure the following **required dependencies** are installed:
-   - **[Cosmic Vault]** (Core API)
-   - **[Cosmic Overhaul]** (Required for Captain's Logs)
-   - **[Cosmic War]** (Required for War Heat synergy & events)
-3. Enable **Cosmic Chronicles** (alongside its dependencies) in **Settings -> Mods**.
-4. Restart the game/server when prompted.
+2. Enable **Cosmic Chronicles** in **Settings -> Mods**.
+3. Restart Avorion when prompted.
 
----
-
-## ⚙️ Compatibility Snapshot
-
-- `serverSideOnly = false`
-- Heavily relies on **Cosmic Vault** for its core API injections. Failsafes (`pcall`) are built into hard-hooks to prevent crashes if a dependency drops, but the narrative experience will be heavily degraded.
-- Seamlessly supports custom stations and modded factions by falling back to generic lore categories when unique traits cannot be identified.
-- Fully localized in 7 languages (Chinese, German, Russian, Portuguese, French, Japanese, and Spanish).
-- For full dependency specifics, see `modinfo.lua`.
+## 📚 Documentation
+For detailed mechanics, guides, and lore, please refer to the in-game **Cosmic Codex**, or check the included `WIKI.md` and `PLAYER_GUIDE.md` files.
