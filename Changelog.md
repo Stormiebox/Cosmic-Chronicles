@@ -9,6 +9,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v2.1.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
 
+### Added
+- **Vanilla Story Quest Migration**: Massively ported and modernized all 21 core Avorion story quests directly into the unified Cosmic Codex API.
+
 - Fully integrated with the Cosmic Vault API framework.
 - Swept codebase for legacy callbacks and implemented safe pcall fallbacks.
 
