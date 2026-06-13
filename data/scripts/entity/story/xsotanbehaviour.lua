@@ -39,7 +39,7 @@ function XsotanBehaviour.despawnSoon()
     if Galaxy():sectorInRift(x, y) then return end
 
     provoked = false
-    deferredCallback(60 + math.random() * 4, "tryDespawn")
+    deferredCallback(60 + random():getInt() * 4, "tryDespawn")
 end
 
 function XsotanBehaviour.tryDespawn()

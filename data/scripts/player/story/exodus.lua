@@ -199,7 +199,7 @@ end
 
 function placeWayWreckages()
 
-    if math.random() < 0.5 then return end
+    if random():getInt() < 0.5 then return end
 
     local wreckages = {Sector():getEntitiesByType(EntityType.Wreckage)}
     if #wreckages > 0 then return end
@@ -207,7 +207,7 @@ function placeWayWreckages()
     local faction = OperationExodus.getFaction()
     local generator = SectorGenerator(faction:getHomeSectorCoordinates())
 
-    for i = 1, math.random(1, 3) do
+    for i = 1, random():getInt(1, 1, 3) do
         generator:createWreckage(faction)
     end
 

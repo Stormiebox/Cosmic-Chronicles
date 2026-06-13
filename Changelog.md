@@ -9,6 +9,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v3.0.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
 
+### Bug Fixes & Compliance
+- **Multiplayer Synchronization:** Replaced all instances of `math.random` with Avorion's deterministic `random()` engine to prevent massive multiplayer client/server desyncs when generating loot, stats, and enemies.
+
 ### Added
 - **Deep Space Event: The Ghost Ship**: Discover intact derelicts with corrupted logs and hidden compartments. Captain Synergy: Scavengers find extra loot, Explorers decrypt coordinates.
 - **Deep Space Event: Rogue AI Probe**: A fast, evasive anomaly scaling in difficulty near the core. Destroy it before it warps away for rare technology.

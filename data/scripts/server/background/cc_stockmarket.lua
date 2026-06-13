@@ -14,11 +14,11 @@ function CosmicChroniclesStockMarket.simulateStockMarket()
     local factions = {Galaxy():getFactions()}
     if #factions == 0 then return end
     
-    local targetFaction = factions[math.random(1, #factions)]
+    local targetFaction = factions[random():getInt(1, #factions)]
     if targetFaction.isPlayer or targetFaction.isAlliance then return end
     if targetFaction.isAIFaction == false then return end
     
-    local isBoom = math.random() > 0.5
+    local isBoom = random():getInt() > 0.5
     local article = {}
     
     if isBoom then

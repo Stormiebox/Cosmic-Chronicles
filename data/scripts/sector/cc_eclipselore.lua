@@ -17,12 +17,12 @@ function EclipseLoreGenerator.initialize()
     if sector.numEntities > 100 then return end
     
     -- 5% chance to spawn an Eclipse Lore Object
-    if math.random() > 0.05 then return end
+    if random():getInt() > 0.05 then return end
     
     local generator = SectorGenerator(x, y)
     local eclipseFaction = Galaxy():getPirateFaction(0)
     
-    local loreType = math.random(1, 3)
+    local loreType = random():getInt(1, 3)
     local entity = nil
     
     if loreType == 1 then
