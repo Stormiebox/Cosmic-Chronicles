@@ -94,3 +94,18 @@ Cosmic Chronicles intercepts these emails and dynamically writes a **Captain's L
 ### Summary
 
 **Cosmic Chronicles** doesn't just add words to the screen. It creates a narrative ecosystem that listens to the invisible math dictating the wars and economies around you, and translates that math into living, breathing stories.
+
+## v3.0.0 Update Additions
+
+### Deep Space Events
+Cosmic Chronicles now injects a variety of random anomalies into deep space (empty sectors):
+*   **The Ghost Ship**: Encounter drifting derelicts with corrupted text logs. Salvage them or use an Explorer captain to decrypt their coordinates.
+*   **Diplomatic Escort**: Stumble across stranded VIPs. A Smuggler captain can easily sneak them past border patrols.
+*   **Rogue AI Probes**: Fast, evasive, heavily-shielded drones that hack stations. Destroy them quickly before they warp out to claim top-tier loot.
+*   **Ancient Data Caches**: Only found near the galactic core, these massive vaults yield Xsotan lore and permanent buffs.
+
+### Eclipse Lore Integration
+Scattered across the galaxy are ancient beacons, shipwrecks, and stashes left behind by **The Eclipse**. Discovering these structures yields massive narrative context about the universe, as well as physical loot that scales based on your proximity to the galactic core.
+
+### The Galactic Stock Market
+The Galactic News Board now tracks the background simulation of AI economies. When severe supply shortages or industrial surpluses occur, the News Board will broadcast a "Boom" or "Crash" report, giving savvy traders the exact coordinates to buy low and sell astronomically high.

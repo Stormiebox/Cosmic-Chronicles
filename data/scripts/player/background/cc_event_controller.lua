@@ -63,8 +63,27 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
                 if dist <= 15 and random():getInt(1, 100) <= 15 then
                     sector:setValue("cc_event_spawned", true)
                     sector:addScriptOnce("events/cc_spawnmonument.lua")
+                    return
                 end
             end
+        end
+        
+        -- v3.0.0: New Deep Space Events
+        local coreDist = math.sqrt(x*x + y*y)
+        local roll = random():getInt(1, 100)
+        
+        if coreDist <= 150 and roll <= 25 then
+            sector:setValue("cc_event_spawned", true)
+            sector:addScriptOnce("events/cc_ancientdatacache.lua")
+        elseif roll <= 10 then
+            sector:setValue("cc_event_spawned", true)
+            sector:addScriptOnce("events/cc_rogueaiprobe.lua")
+        elseif roll > 10 and roll <= 25 then
+            sector:setValue("cc_event_spawned", true)
+            sector:addScriptOnce("events/cc_ghostship.lua")
+        elseif roll > 25 and roll <= 40 then
+            sector:setValue("cc_event_spawned", true)
+            sector:addScriptOnce("events/cc_diplomatescort.lua")
         end
     end
 end

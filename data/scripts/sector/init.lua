@@ -5,5 +5,6 @@ if onServer() then
 
     if sector then
         sector:addScriptOnce("data/scripts/sector/cc_destructiontracker.lua")
+        sector:addScriptOnce("data/scripts/sector/cc_eclipselore.lua")
     end
 end
