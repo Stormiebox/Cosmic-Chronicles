@@ -4,6 +4,11 @@ include("stringutility")
 include("structuredmission")
 include("callable")
 
+function getUpdateInterval()
+    return 1.0
+end
+
+
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
 local cvm_success, CosmicVaultMission = pcall(require, "cosmicvaultmission")
