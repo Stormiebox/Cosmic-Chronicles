@@ -2,6 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
 local SectorGenerator = include("SectorGenerator")
+local PlanGenerator = include("plangenerator")
 
 local AncientCache = {}
 
@@ -12,7 +13,11 @@ end
 function AncientCache.spawn()
     local x, y = Sector():getCoordinates()
     
-    local cache = Sector():createWreckage(PlanGenerator.makeStationPlan(Galaxy():getPirateFaction(0)), SectorGenerator(x,y):getPositionInSector())
+    local planPath = "data/plans/chronicles/ancient_data_cache.xml"
+    local plan = LoadPlanFromFile(planPath)
+    if not plan then plan = PlanGenerator.makeStationPlan(Galaxy():getPirateFaction(0)) end
+    
+    local cache = Sector():createWreckage(plan, SectorGenerator(x,y):getPositionInSector())
     cache.title = "Ancient Data Cache"
     cache:addScript("data/scripts/entity/story/ancientcachedialog.lua")
     

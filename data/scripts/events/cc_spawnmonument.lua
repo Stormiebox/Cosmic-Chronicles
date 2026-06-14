@@ -12,7 +12,9 @@ function initialize()
     if not faction then terminate() return end
 
     -- Generate a massive procedural station based on the faction's architectural style
-    local plan = PlanGenerator.makeStationPlan(faction)
+    local planPath = "data/plans/chronicles/cosmic_monument.xml"
+    local plan = LoadPlanFromFile(planPath)
+    if not plan then plan = PlanGenerator.makeStationPlan(faction) end
     plan:scale(vec3(1.5, 1.5, 1.5)) -- Scaled down from 2.5 to prevent C++ physics thread hangs, still looks massive!
     -- TODO: Continue keeping an eye on this monument if it needs to be scaled down further.
     local desc = StationDescriptor()

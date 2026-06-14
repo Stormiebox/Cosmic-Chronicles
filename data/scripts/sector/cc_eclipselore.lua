@@ -17,7 +17,7 @@ function EclipseLoreGenerator.initialize()
     if sector.numEntities > 100 then return end
     
     -- 5% chance to spawn an Eclipse Lore Object
-    if random():getInt() > 0.05 then return end
+    if random():getFloat() > 0.05 then return end
     
     local generator = SectorGenerator(x, y)
     local eclipseFaction = Galaxy():getPirateFaction(0)
@@ -25,14 +25,20 @@ function EclipseLoreGenerator.initialize()
     local loreType = random():getInt(1, 3)
     local entity = nil
     
+    local planPath = "data/plans/chronicles/eclipse_beacon.xml"
+    local eclipsePlan = LoadPlanFromFile(planPath)
+    
     if loreType == 1 then
-        entity = sector:createWreckage(PlanGenerator.makeStationPlan(eclipseFaction), generator:getPositionInSector())
+        local plan = eclipsePlan or PlanGenerator.makeStationPlan(eclipseFaction)
+        entity = sector:createWreckage(plan, generator:getPositionInSector())
         entity.title = "Eclipse Beacon"
     elseif loreType == 2 then
-        entity = sector:createWreckage(PlanGenerator.makeShipPlan(eclipseFaction), generator:getPositionInSector())
+        local plan = eclipsePlan or PlanGenerator.makeShipPlan(eclipseFaction)
+        entity = sector:createWreckage(plan, generator:getPositionInSector())
         entity.title = "Eclipse Shipwreck"
     else
-        entity = sector:createWreckage(PlanGenerator.makeFreighterPlan(eclipseFaction), generator:getPositionInSector())
+        local plan = eclipsePlan or PlanGenerator.makeFreighterPlan(eclipseFaction)
+        entity = sector:createWreckage(plan, generator:getPositionInSector())
         entity.title = "Eclipse Stash"
     end
     
