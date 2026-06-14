@@ -18,7 +18,7 @@ function CosmicChroniclesStockMarket.simulateStockMarket()
     if targetFaction.isPlayer or targetFaction.isAlliance then return end
     if targetFaction.isAIFaction == false then return end
     
-    local isBoom = random():getInt() > 0.5
+    local isBoom = random():getFloat() > 0.5
     local article = {}
     
     if isBoom then

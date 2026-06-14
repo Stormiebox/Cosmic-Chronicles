@@ -199,7 +199,7 @@ end
 
 function placeWayWreckages()
 
-    if random():getInt() < 0.5 then return end
+    if random():getFloat() < 0.5 then return end
 
     local wreckages = {Sector():getEntitiesByType(EntityType.Wreckage)}
     if #wreckages > 0 then return end
