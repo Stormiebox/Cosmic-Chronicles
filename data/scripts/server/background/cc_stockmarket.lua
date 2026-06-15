@@ -5,8 +5,8 @@ local CosmicChroniclesStockMarket = {}
 
 function CosmicChroniclesStockMarket.initialize()
     if onServer() then
-        -- Run the stock market check every 30 minutes
-        Timer():create("simulateStockMarket", 1800)
+        -- Run the stock market check every 20 minutes (Galactic Turn)
+        Timer():create("simulateStockMarket", 1200)
     end
 end
 
