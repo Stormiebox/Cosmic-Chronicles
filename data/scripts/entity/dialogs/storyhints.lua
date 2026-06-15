@@ -1,5 +1,5 @@
 -- namespace StoryHints
-local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
+local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
 
 -- Cache the original vanilla function so we don't break it
 local cc_vanilla_onAnythingInteresting = StoryHints.onAnythingInteresting

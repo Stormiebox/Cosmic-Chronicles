@@ -143,3 +143,6 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 ### 🛠️ Vanilla Bug Fixes
 - **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
 </details>
+
+## Architecture Note
+Cosmic Chronicles is now a hard-coded dependency of the Core 5 ecosystem.

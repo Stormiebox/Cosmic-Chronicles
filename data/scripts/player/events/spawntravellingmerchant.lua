@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
-local cv_success = pcall(include, "cosmicvaultnews")
+local cv_success = true; include("cosmicvaultnews")
 
 local CC_Original_initialize = initialize
 function initialize(...)

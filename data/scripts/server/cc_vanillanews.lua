@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
-local cv_success, cv_news = pcall(require, "cosmicvaultnews")
+local cv_success, cv_news = true, require("cosmicvaultnews")
 
 -- namespace CCVanillaNews
 CCVanillaNews = {}

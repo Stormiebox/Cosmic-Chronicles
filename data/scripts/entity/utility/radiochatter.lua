@@ -1,5 +1,5 @@
 -- namespace EntityRadioChatter
-local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
+local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
 
 -- Cache the original vanilla function
 local cc_vanilla_initialize = EntityRadioChatter.initialize

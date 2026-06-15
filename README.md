@@ -18,7 +18,7 @@ Cosmic Chronicles adds a living economy and news network to the galaxy. The Gala
 
 ## ⚙️ Requirements
 - Avorion v2.0+
-- Dependencies: **Cosmic Vault**
+- Dependencies: **Cosmic Vault, Cosmic Overhaul, Cosmic War and Cosmic Ascendancy**
 
 ## 🚀 Installation
 1. Place the folder in:
@@ -29,3 +29,4 @@ Cosmic Chronicles adds a living economy and news network to the galaxy. The Gala
 
 ## 📚 Documentation
 For detailed mechanics, guides, and lore, please refer to the in-game **Cosmic Codex**, or check the included `WIKI.md` and `PLAYER_GUIDE.md` files.
+ Fully integrated into the Core 5 hard-dependency architecture.

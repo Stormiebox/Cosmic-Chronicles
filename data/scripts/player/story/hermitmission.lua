@@ -16,8 +16,8 @@ local AdventurerGuide = include("story/adventurerguide")
 local Hermit = include("story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = pcall(require, "cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
 
 
 --mission.tracing = true

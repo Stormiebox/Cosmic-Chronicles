@@ -2,8 +2,8 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("randomext")
 
 -- Load APIs
-local cv_success, CosmicVaultNews = pcall(require, "cosmicvaultnews")
-local cw_success = pcall(include, "cosmicwarbridge")
+local cv_success, CosmicVaultNews = true, require("cosmicvaultnews")
+local cw_success = true; include("cosmicwarbridge")
 
 -- namespace CosmicChroniclesNewsGenerator
 CosmicChroniclesNewsGenerator = {}

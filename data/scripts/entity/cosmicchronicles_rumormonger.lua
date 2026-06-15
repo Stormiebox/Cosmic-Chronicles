@@ -5,7 +5,7 @@ include("cosmicvaultdialogue")
 -- namespace CosmicChroniclesRumormonger
 CosmicChroniclesRumormonger = {}
 
-local cw_success = pcall(include, "cosmicwarbridge")
+local cw_success = true; include("cosmicwarbridge")
 
 -- Helper function to fetch War Heat safely
 local function getFactionWarHeat(faction)

@@ -7,8 +7,8 @@ local RiftMissionUT = include("dlc/rift/lib/riftmissionutility")
 local CaptainClass = include("captainclass")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = pcall(require, "cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.

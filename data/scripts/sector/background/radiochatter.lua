@@ -5,8 +5,8 @@ include ("callable")
 include ("galaxy")
 include ("faction")
 
-local cw_success = pcall(include, "cosmicwarbridge")
-local cv_success = pcall(include, "cosmicvaultdialogue")
+local cw_success = true; include("cosmicwarbridge")
+local cv_success = true; include("cosmicvaultdialogue")
 
 local function cc_getFactionWarHeat(faction)
     local realWarHeat = 0

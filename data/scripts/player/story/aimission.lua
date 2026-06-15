@@ -10,8 +10,8 @@ local AI = include("story/ai")
 local MissionUT = include("missionutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = pcall(require, "cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
 
 
 --mission.tracing = true

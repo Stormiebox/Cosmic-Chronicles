@@ -1,7 +1,7 @@
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
 include("stringutility")
 
-local cw_success = pcall(include, "cosmicwarbridge")
+local cw_success = true; include("cosmicwarbridge")
 
 if not Command then Command = {} end
 local cc_old_sendMail = Command.sendMail

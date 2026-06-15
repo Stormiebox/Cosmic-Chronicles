@@ -11,8 +11,8 @@ include("stringutility")
 include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = pcall(require, "cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = pcall(require, "cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
 
 
 -- the data variable is created by the singleinteraction.lua api
