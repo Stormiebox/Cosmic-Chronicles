@@ -9,6 +9,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v3.0.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
 
+### 🛠️ Improved & Upgraded
+- **Vault Integration:** Assured full compatibility with the new CCM 3-Column layout and Keybind systems.
+
+
 ### 🚀 Major Overhaul Features
 - **Vanilla Story Quest Migration:** Massively ported and modernized all 21 core Avorion story quests directly into the unified Cosmic Codex API.
 - **Cosmic Codex Integration:** The mod now fully supports the Cosmic Codex! Comprehensive lore and mechanical documentation (such as features, UI tools, and dynamic events) are now readable directly in-game from the new Cosmic Codex tab.
