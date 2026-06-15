@@ -23,7 +23,7 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
         if inflictor and inflictor.factionIndex then
             local faction = Faction(inflictor.factionIndex)
             if faction then
-                if faction.isPlayer then
+                if faction.isPlayer or faction.isAlliance then
                     inflictorName = "a hostile Independent Pilot"
                 elseif faction.isAIFaction and faction.name == "Pirates"%_t then
                     inflictorName = "Pirate Raiders"
