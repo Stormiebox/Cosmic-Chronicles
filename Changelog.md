@@ -7,7 +7,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
-## v3.0.0 (CURRENT PROJECT VERSION - NO RELEASE DATE YET!)
+## v3.0.0 UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
 
 ### 🛠️ Improved & Upgraded
 - **Vault Integration:** Assured full compatibility with the new CCM 3-Column layout and Keybind systems.
