@@ -86,4 +86,3 @@ function Hermit.getLocation(x, y)
     end
 end
 
-return Hermit
