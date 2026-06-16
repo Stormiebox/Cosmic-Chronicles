@@ -9,25 +9,25 @@ local EclipseLoreGenerator = {}
 
 function EclipseLoreGenerator.initialize()
     if onClient() then return end
-    
+
     local sector = Sector()
     local x, y = sector:getCoordinates()
-    
+
     -- Only spawn in empty sectors or unpopulated sectors
     if sector.numEntities > 100 then return end
-    
+
     -- 5% chance to spawn an Eclipse Lore Object
     if random():getFloat() > 0.05 then return end
-    
+
     local generator = SectorGenerator(x, y)
     local eclipseFaction = Galaxy():getPirateFaction(0)
-    
+
     local loreType = random():getInt(1, 3)
     local entity = nil
-    
+
     local planPath = "data/plans/chronicles/eclipse_beacon.xml"
     local eclipsePlan = LoadPlanFromFile(planPath)
-    
+
     if loreType == 1 then
         local plan = eclipsePlan or PlanGenerator.makeStationPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
@@ -41,16 +41,21 @@ function EclipseLoreGenerator.initialize()
         entity = sector:createWreckage(plan, generator:getPositionInSector())
         entity.title = "Eclipse Stash"
     end
-    
+
     -- Add dialog script
     entity:addScript("data/scripts/entity/story/eclipseloredialog.lua")
-    
+
     -- Add scaling loot script based on distance to core
     local d = math.sqrt(x*x + y*y)
     local scalingFactor = math.max(1, (500 - d) / 100)
-    
+
     entity:setValue("cc_eclipse_loot_scale", scalingFactor)
     entity:addScript("data/scripts/entity/story/eclipseloot.lua")
 end
+
+function initialize(...)
+    if EclipseLoreGenerator.initialize then return EclipseLoreGenerator.initialize(...) end
+end
+
 
 return EclipseLoreGenerator

@@ -16,8 +16,8 @@ local AdventurerGuide = include("story/adventurerguide")
 local Hermit = include("story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -56,7 +56,7 @@ mission.phases[1].onBeginServer = function()
 
     -- send player mail
     local mail = Mail()
-    mail.text = Format("Hello!\n\nYou’ve found an interesting artifact. You should hang on to it! Meet me in sector (%1%:%2%). I‘ve found out a lot about the Xsotan! There is only one small hitch... Let's talk about that in person.\n\nGreetings,\n%3%"%_T, x, y, MissionUT.getAdventurerName())
+    mail.text = Format("Hello!\n\nYou've found an interesting artifact. You should hang on to it! Meet me in sector (%1%:%2%). Iâ€˜ve found out a lot about the Xsotan! There is only one small hitch... Let's talk about that in person.\n\nGreetings,\n%3%"%_T, x, y, MissionUT.getAdventurerName())
     mail.header = "Need to talk /* Mail Subject */"%_T
     mail.sender = Format("%1%, the Adventurer"%_T, MissionUT.getAdventurerName())
     mail.id = "Story_Hermit_Mission_1"
@@ -282,33 +282,33 @@ function createAdventurerDialog()
 
     d0_HiThere.text = "Hello! Thank you for coming!"%_t
     d0_HiThere.answers = {
-        {answer = "What’s up?"%_t, followUp = d1_IveManaged},
+        {answer = "What's up?"%_t, followUp = d1_IveManaged},
         {answer = "Sure!"%_t, followUp = d1_IveManaged}
     }
     d0_HiThere.onEnd = onAdventurerDialogEnd
 
-    d1_IveManaged.text = "I’ve managed to find out something interesting! There is good news and bad news."%_t
+    d1_IveManaged.text = "I've managed to find out something interesting! There is good news and bad news."%_t
     d1_IveManaged.answers = {{answer = "Tell me, please!"%_t, followUp = d2_TheGoodNews}}
 
     d2_TheGoodNews.text = "The good news is that I know where the Xsotan might have their bases."%_t
-    d2_TheGoodNews.answers = {{answer = "That’s great!"%_t, followUp = d3_TheBadNews}}
+    d2_TheGoodNews.answers = {{answer = "That's great!"%_t, followUp = d3_TheBadNews}}
 
     d3_TheBadNews.text = "The bad news is that they are coming from the other side of the Barrier."%_t
     d3_TheBadNews.answers = {{answer = "That sounds bad."%_t, followUp = d4_DoYouKnow}}
 
     d4_DoYouKnow.text = "Do you know what the Barrier is?"%_t
     d4_DoYouKnow.answers = {
-        {answer = "I’m not sure..."%_t, followUp = d5_WeCant},
+        {answer = "I'm not sure..."%_t, followUp = d5_WeCant},
         {answer = "I've heard of it."%_t, followUp = d6_IHaveHeard}
     }
 
-    d5_WeCant.text = "We can’t jump to the center of the galaxy anymore. The sectors there are not normal sectors, they are more like rifts that you can’t jump into or across. \n\nThe ring around the center is called the Barrier. I don’t really know much about this. But there is more good news!"%_t
+    d5_WeCant.text = "We can't jump to the center of the galaxy anymore. The sectors there are not normal sectors, they are more like rifts that you can't jump into or across. \n\nThe ring around the center is called the Barrier. I don't really know much about this. But there is more good news!"%_t
     d5_WeCant.answers = {{answer = "Tell me."%_t, followUp = d6_IHaveHeard}}
 
     d6_IHaveHeard.text = "I have heard of somebody who knows a lot about the Barrier."%_t
     d6_IHaveHeard.answers = {{answer ="Will he help us?"%_t, followUp = d7_Yes}}
 
-    d7_Yes.text = "I hope so. We should definitely go talk to him. I need to find out where exactly we can find him. \n\nOnce I've done this I’ll send you an email with the coordinates of his location."%_t
+    d7_Yes.text = "I hope so. We should definitely go talk to him. I need to find out where exactly we can find him. \n\nOnce I've done this I'll send you an email with the coordinates of his location."%_t
     d7_Yes.answers = {{answer = "See you soon."%_t}}
 
     return d0_HiThere
@@ -328,7 +328,7 @@ function createHermitDialog()
 
     d0_WhyAreYou.text = "Why are you disturbing my solitude?"%_t
     d0_WhyAreYou.answers = {
-        {answer = "I’m sorry. Should I leave?"%_t, followUp = d1_NowThat},
+        {answer = "I'm sorry. Should I leave?"%_t, followUp = d1_NowThat},
         {answer = "I heard you know a lot of things."%_t, followUp = d1_NowThat}
     }
 
@@ -344,22 +344,22 @@ function createHermitDialog()
     d4_AsFarAs.text = "As far as we know, they are still there. A couple of decades ago, one of their ships crossed the Barrier. \n\nThe crew told us they thought they were on a suicide mission. \n\nThe factions on the inside believe that the Event destroyed everything outside of the Barrier and that the entire galaxy has shrunk to the size of the center."%_t
     d4_AsFarAs.answers = {{answer = "They can cross it?"%_t, followUp = d5_Yes}}
 
-    d5_Yes.text = "Yes, they have a material they are calling ‘Avorion’, which apparently was created during the Event, and which allows them to cross the Barrier."%_t
+    d5_Yes.text = "Yes, they have a material they are calling ‘Avorion', which apparently was created during the Event, and which allows them to cross the Barrier."%_t
     d5_Yes.answers = {{answer = "They brought it out here?"%_t, followUp = d6_Sadly}}
 
-    d6_Sadly.text = "Sadly, the Avorion they brought was destroyed when scientists began fighting over it because they wanted to experiment on it. \n\nThis is exactly why I’m a Hermit. I’ll stay away from all this stupidity."%_t
+    d6_Sadly.text = "Sadly, the Avorion they brought was destroyed when scientists began fighting over it because they wanted to experiment on it. \n\nThis is exactly why I'm a Hermit. I'll stay away from all this stupidity."%_t
     d6_Sadly.answers = {
         {answer = "Experiments are important!"%_t, followUp = d7_SinceThe},
         {answer = "I understand your aversion."%_t, followUp = d7_SinceThe}
     }
 
-    d7_SinceThe.text = "Since the factions inside the Barrier won’t bring any Avorion out to us, the only way to get in might be Xsotan technology."%_t
+    d7_SinceThe.text = "Since the factions inside the Barrier won't bring any Avorion out to us, the only way to get in might be Xsotan technology."%_t
     d7_SinceThe.answers = {{answer ="You mean Xsotan artifacts?"%_t, followUp = d8_YesALot}}
 
     d8_YesALot.text = "Yes. There are some that are looking for ways to get to the core, and apparently there are Xsotan artifacts that will allow you to do just that. \n\nI know of one such artifact that is for sale. I can send you an email with the details if you like?"%_t
     d8_YesALot.answers = {{answer = "Thank you so much!"%_t, followUp = d9_IMSure}}
 
-    d9_IMSure.text = "I’m sure the factions that live on the inside of the Barrier would be eternally grateful to you if you could show them that the galaxy outside of the Barrier still exists."%_t
+    d9_IMSure.text = "I'm sure the factions that live on the inside of the Barrier would be eternally grateful to you if you could show them that the galaxy outside of the Barrier still exists."%_t
     d9_IMSure.onEnd = onHermitDialogEnd
 
     return d0_WhyAreYou

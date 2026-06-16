@@ -5,8 +5,8 @@ include ("callable")
 include ("utility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -151,4 +151,21 @@ end
 function MissionAdventurer.restore(data_in)
     data = data_in
     MissionAdventurer.sync()
+end
+
+
+function initialize(...)
+    if MissionAdventurer.initialize then return MissionAdventurer.initialize(...) end
+end
+function getUpdateInterval(...)
+    if MissionAdventurer.getUpdateInterval then return MissionAdventurer.getUpdateInterval(...) end
+end
+function updateClient(...)
+    if MissionAdventurer.updateClient then return MissionAdventurer.updateClient(...) end
+end
+function secure(...)
+    if MissionAdventurer.secure then return MissionAdventurer.secure(...) end
+end
+function restore(...)
+    if MissionAdventurer.restore then return MissionAdventurer.restore(...) end
 end

@@ -7,8 +7,8 @@ include ("utility")
 include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- namespace LaserBossBehavior
@@ -503,3 +503,11 @@ function LaserBossBehavior.syncLaserData(data_in)
     end
 end
 callable(LaserBossBehavior, "syncLaserData")
+
+
+function initialize(...)
+    if LaserBossBehavior.initialize then return LaserBossBehavior.initialize(...) end
+end
+function update(...)
+    if LaserBossBehavior.update then return LaserBossBehavior.update(...) end
+end

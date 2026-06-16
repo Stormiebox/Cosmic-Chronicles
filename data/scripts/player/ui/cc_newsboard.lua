@@ -18,21 +18,21 @@ function CosmicChroniclesNewsBoard.initialize()
     self.tab = menu:createTab("Galactic News"%_t, "data/textures/icons/cc_galacticnews_rss.png", "Galactic News"%_t)
     self.tab.onShowFunction = "onShowWindow"
     self.tab.onSelectedFunction = "onShowWindow"
-    
+
     local split = UIVerticalSplitter(Rect(self.tab.size), 10, 0, 0.35)
-    
+
     local leftSplit = UIHorizontalSplitter(split.left, 10, 0, 0.5)
     leftSplit.bottomSize = 40
-    
+
     self.headlineList = self.tab:createListBox(leftSplit.top)
     self.headlineList.onSelectFunction = "onNewsSelected"
-    
+
     self.refreshButton = self.tab:createButton(leftSplit.bottom, "Refresh"%_t, "onRefreshClicked")
-    
+
     self.contentTextBox = self.tab:createMultiLineTextBox(split.right)
-    
+
     self.headlineList:addEntry("Connecting to Galactic News Network..."%_t, 0)
-    
+
     invokeServerFunction("requestNewsSync")
 end
 
@@ -46,7 +46,7 @@ end
 
 function CosmicChroniclesNewsBoard.onNewsSelected(index)
     if not self.headlineList then return end
-    
+
     local selectedValue = self.headlineList.selectedValue
     if not selectedValue then return end
 
@@ -64,10 +64,10 @@ end
 
 function CosmicChroniclesNewsBoard.receiveNews(newsArray)
     self.currentNewsArray = newsArray or {}
-    
+
     if self.headlineList then
         self.headlineList:clear()
-        
+
         if #self.currentNewsArray == 0 then
             self.headlineList:addEntry("No broadcasts available at this time."%_t, 0)
         else
@@ -87,15 +87,15 @@ end -- end onClient()
 
 function CosmicChroniclesNewsBoard.requestNewsSync()
     if not onServer() then return end
-    
+
     Server():sendCallback("onCCNewsSyncRequest", callingPlayer)
-    
+
     local ok, vaultNews = Galaxy():invokeFunction("cosmicvaultnews_server.lua", "getNews")
     local newsData = {}
     if ok == 0 and type(vaultNews) == "table" then
         newsData = vaultNews
     end
-    
+
     local player = Player(callingPlayer)
     if player then
         invokeClientFunction(player, "receiveNews", newsData)
@@ -110,13 +110,13 @@ end
 
 function CosmicChroniclesNewsBoard.deferredNewsSync()
     if not onServer() then return end
-    
+
     local ok, vaultNews = Galaxy():invokeFunction("cosmicvaultnews_server.lua", "getNews")
     local newsData = {}
     if ok == 0 and type(vaultNews) == "table" then
         newsData = vaultNews
     end
-    
+
     local player = Player()
     if player then
         invokeClientFunction(player, "receiveNews", newsData)
@@ -124,3 +124,8 @@ function CosmicChroniclesNewsBoard.deferredNewsSync()
 end
 
 
+
+
+function initialize(...)
+    if CosmicChroniclesNewsBoard.initialize then return CosmicChroniclesNewsBoard.initialize(...) end
+end

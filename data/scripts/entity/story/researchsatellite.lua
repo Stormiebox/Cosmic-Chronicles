@@ -4,8 +4,8 @@ include("utility")
 include("stringutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 Scientist = include("story/scientist")
 
@@ -114,3 +114,8 @@ function ResearchSatellite.onDestroyed(...)
 end
 
 
+
+
+function initialize(...)
+    if ResearchSatellite.initialize then return ResearchSatellite.initialize(...) end
+end

@@ -5,8 +5,8 @@ include("structuredmission")
 include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -52,7 +52,7 @@ mission.phases[1] = {}
 mission.phases[1].onBeginServer = function()
     local player = Player()
     local mail = Mail()
-    mail.text = Format("Hello!\n\nMy friend, I have one more adventure for you.\nOn my last tour to sell some sweet Avorion I came across this Resistance Outpost. They told me that they know that the Xsotan are guarding something in the center of the galaxy. Whenever they try to come close there’s tons of Xsotan.\n\nThey tried a lot to destroy this guardian, but until now nobody managed. Not the best warriors and not even the upgraded AI that they built.\n\nDo you think you could do it? Wouldn’t that be the adventure of a lifetime?\nI’d say go for it!\n\nGreetings and good luck!\n%1%"%_T, MissionUT.getAdventurerName())
+    mail.text = Format("Hello!\n\nMy friend, I have one more adventure for you.\nOn my last tour to sell some sweet Avorion I came across this Resistance Outpost. They told me that they know that the Xsotan are guarding something in the center of the galaxy. Whenever they try to come close there's tons of Xsotan.\n\nThey tried a lot to destroy this guardian, but until now nobody managed. Not the best warriors and not even the upgraded AI that they built.\n\nDo you think you could do it? Wouldn't that be the adventure of a lifetime?\nI'd say go for it!\n\nGreetings and good luck!\n%1%"%_T, MissionUT.getAdventurerName())
     mail.header = "Destroy the Guardian /*Mail Subject */"%_T
     mail.sender = Format("%1%, the Adventurer"%_T, MissionUT.getAdventurerName())
     mail.id = "Story_Kill_Guardian_Mission"

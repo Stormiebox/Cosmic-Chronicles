@@ -7,8 +7,8 @@ include("randomext")
 local MissionUT = include("missionutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 local SectorSpecifics = include ("sectorspecifics")
 
@@ -77,7 +77,7 @@ mission.phases[2].onBeginServer = function()
 
     local player = Player()
     local mail = Mail()
-    mail.text = Format("Hello!\n\nHave you seen this mail that’s going round lately?\nWe have to help. I know, I know, it looks like total spam, but I think he’s onto something. Will you help, too?\n\nGreetings,\n%1%\n\nQuote:\n\"Hello fellow galaxy dwellers,\nI have extremely concerning news to share with you. I just can’t not say something. We have to save the people! I’m a former member of the M.A.D. Association and they’re trying to reach galaxy domination. We have to stop them immediately!\n\nI’ve seen them do terrible experiments on all life-forms. Trying to create a super-being capable of destroying every living thing in the galaxy. They’re actively using Xsotan technology in order to find a weapon for mass destruction!!\n\nIf you’re a good person, you have to act now! Help us protect the galaxy! Destroy all of the M.A.D. Association’s research satellites!\n\nA concerned citizen\"\n"%_T, MissionUT.getAdventurerName())
+    mail.text = Format("Hello!\n\nHave you seen this mail that's going round lately?\nWe have to help. I know, I know, it looks like total spam, but I think he's onto something. Will you help, too?\n\nGreetings,\n%1%\n\nQuote:\n\"Hello fellow galaxy dwellers,\nI have extremely concerning news to share with you. I just can't not say something. We have to save the people! I'm a former member of the M.A.D. Association and they're trying to reach galaxy domination. We have to stop them immediately!\n\nI've seen them do terrible experiments on all life-forms. Trying to create a super-being capable of destroying every living thing in the galaxy. They're actively using Xsotan technology in order to find a weapon for mass destruction!!\n\nIf you're a good person, you have to act now! Help us protect the galaxy! Destroy all of the M.A.D. Association's research satellites!\n\nA concerned citizen\"\n"%_T, MissionUT.getAdventurerName())
     mail.header = "Fwd: Re: Fwd: M.A.D. Science Association /* Mail Subject */"%_T
     mail.sender = Format("%1%, the Adventurer"%_T, MissionUT.getAdventurerName())
     mail.id = "Story_MAD_Mission"

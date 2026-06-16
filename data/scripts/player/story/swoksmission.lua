@@ -9,8 +9,8 @@ local MissionUT = include("missionutility")
 local Swoks = include("story/swoks")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -64,7 +64,7 @@ mission.phases[1] = {}
 mission.phases[1].onBeginServer = function()
     local player = Player()
     local mail = Mail()
-    mail.text = Format("Hello!\n\nTraders around here have been telling me about this pirate boss that’s terrorizing the area. Apparently, he has some secret technology on him. You should keep your ears open and listen to what everybody here has to say, maybe you can find him. While you do that, I’ll try to find out what this technology might be and what it does.\n\nGreetings,\n%1%"%_T, MissionUT.getAdventurerName())
+    mail.text = Format("Hello!\n\nTraders around here have been telling me about this pirate boss that's terrorizing the area. Apparently, he has some secret technology on him. You should keep your ears open and listen to what everybody here has to say, maybe you can find him. While you do that, I'll try to find out what this technology might be and what it does.\n\nGreetings,\n%1%"%_T, MissionUT.getAdventurerName())
     mail.header = "Pirates terrorizing Traders /* Mail Subject */"%_T
     mail.sender = Format("%1%, the Adventurer"%_T, MissionUT.getAdventurerName())
     mail.id = "Story_Swoks_Mission"

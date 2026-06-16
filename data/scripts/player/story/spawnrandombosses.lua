@@ -10,8 +10,8 @@ local AI = include("story/ai")
 local Swoks = include("story/swoks")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 
@@ -192,4 +192,18 @@ function SpawnRandomBosses.getSpawningDisabled(x, y)
 end
 
 
+end
+
+
+function getUpdateInterval(...)
+    if SpawnRandomBosses.getUpdateInterval then return SpawnRandomBosses.getUpdateInterval(...) end
+end
+function initialize(...)
+    if SpawnRandomBosses.initialize then return SpawnRandomBosses.initialize(...) end
+end
+function onSectorEntered(...)
+    if SpawnRandomBosses.onSectorEntered then return SpawnRandomBosses.onSectorEntered(...) end
+end
+function updateServer(...)
+    if SpawnRandomBosses.updateServer then return SpawnRandomBosses.updateServer(...) end
 end

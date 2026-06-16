@@ -7,8 +7,8 @@ include("callable")
 local MissionUT = include("missionutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 
@@ -69,7 +69,7 @@ mission.phases[1] = {}
 mission.phases[1].onBeginServer = function()
     local player = Player()
     local mail = Mail()
-    mail.text = Format("Hello!\n\nI’ve heard about another strange artifact. It seems that a smuggler has somehow got his hands on it. You should find a smuggler’s market and see if you can get the smugglers to trust you. Maybe they’ll lead you to the smuggler boss. He should have the artifact.\n\nGreetings,\n%1%"%_T, MissionUT.getAdventurerName())
+    mail.text = Format("Hello!\n\nI've heard about another strange artifact. It seems that a smuggler has somehow got his hands on it. You should find a smuggler's market and see if you can get the smugglers to trust you. Maybe they'll lead you to the smuggler boss. He should have the artifact.\n\nGreetings,\n%1%"%_T, MissionUT.getAdventurerName())
     mail.header = "Find the Smuggler /*Mail Subject */"%_T
     mail.sender = Format("%1%, the Adventurer"%_T, MissionUT.getAdventurerName())
     mail.id = "Story_Bottan_Mission"

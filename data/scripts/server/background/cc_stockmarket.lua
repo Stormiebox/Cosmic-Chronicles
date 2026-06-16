@@ -13,14 +13,14 @@ end
 function CosmicChroniclesStockMarket.simulateStockMarket()
     local factions = {Galaxy():getFactions()}
     if #factions == 0 then return end
-    
+
     local targetFaction = factions[random():getInt(1, #factions)]
     if targetFaction.isPlayer or targetFaction.isAlliance then return end
     if targetFaction.isAIFaction == false then return end
-    
+
     local isBoom = random():getFloat() > 0.5
     local article = {}
-    
+
     if isBoom then
         article.title = targetFaction.name .. " Economic Boom"
         article.content = "Massive industrial surpluses are crashing local commodity prices across " .. targetFaction.name .. " territory. Traders are flocking to take advantage of the dirt-cheap supply."
@@ -30,9 +30,14 @@ function CosmicChroniclesStockMarket.simulateStockMarket()
         article.content = "Critical supply chain failures have caused a massive shortage of high-tech and medical goods in " .. targetFaction.name .. " sectors. Demand prices are skyrocketing."
         article.category = "Economy"
     end
-    
+
     -- Send to news board
     Server():sendCallback("onCCNewsPublishArticle", article)
 end
+
+function initialize(...)
+    if CosmicChroniclesStockMarket.initialize then return CosmicChroniclesStockMarket.initialize(...) end
+end
+
 
 return CosmicChroniclesStockMarket

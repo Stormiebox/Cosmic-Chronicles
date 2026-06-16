@@ -11,8 +11,8 @@ include("stringutility")
 include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- the data variable is created by the singleinteraction.lua api
@@ -44,14 +44,14 @@ function Adventurer1.makeDialog()
     d1_ICould.text = "You seem like someone who just gets back up whenever they are beaten down.\n\nI was looking for someone like you, actually."%_t
     d1_ICould.answers = {{answer ="What for?"%_t, followUp = d2_ImOnA}}
 
-    d2_ImOnA.text = "I’m on a research mission. I want to find out where the Xsotan are coming from. What do you know about the Xsotan?"%_t
+    d2_ImOnA.text = "I'm on a research mission. I want to find out where the Xsotan are coming from. What do you know about the Xsotan?"%_t
     d2_ImOnA.answers = {{answer = "Not much."%_t, followUp = d3_Well}}
 
     d3_Well.text = "Well, you probably know that they are the scourge of the galaxy, an alien race that is attacking innocent ships and stations?"%_t
     d3_Well.answers = {{answer = "Okay."%_t, followUp = d4_ImTrying}}
     d3_Well.answers = {{answer = "Sure..."%_t, followUp = d4_ImTrying}}
 
-    d4_ImTrying.text = "I’m trying to find out where they come from and if there is any way to stop them.\n\nOnce you’ve built yourself a good ship, would you like to help me?"%_t
+    d4_ImTrying.text = "I'm trying to find out where they come from and if there is any way to stop them.\n\nOnce you've built yourself a good ship, would you like to help me?"%_t
     d4_ImTrying.answers = {
         {answer = "Yes!"%_t, followUp = d5_Great},
         {answer = "Uuh..."%_t, followUp = d5_Great},
@@ -61,7 +61,7 @@ function Adventurer1.makeDialog()
     d5_Great.followUp = d6_HaveThis
     d5_Great.onEnd = "givePlayerGoodie"
 
-    d6_HaveThis.text = "Have this! It's a subsystem for your ship.\n\nIt allows your scanners to scan for mass in distant sectors.\n\nIt basically finds hidden sectors for you! They'll show up as yellow blips on the Galaxy Map.\n\nMaybe you'll find something good! Just be careful, there are pirates everywhere in those off-grid sectors.\n\nWe’ll see each other once you made it further towards the center!"%_t
+    d6_HaveThis.text = "Have this! It's a subsystem for your ship.\n\nIt allows your scanners to scan for mass in distant sectors.\n\nIt basically finds hidden sectors for you! They'll show up as yellow blips on the Galaxy Map.\n\nMaybe you'll find something good! Just be careful, there are pirates everywhere in those off-grid sectors.\n\nWe'll see each other once you made it further towards the center!"%_t
     d6_HaveThis.answers = {{answer = "Thank you."%_t}}
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Adventurer ]] --

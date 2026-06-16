@@ -4,8 +4,8 @@ include("stringutility")
 local Xsotan = include("story/xsotan")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -51,4 +51,12 @@ function SpawnGuardian.onSectorEntered(player, x, y, changeType)
     Xsotan.createGuardian()
 end
 
+end
+
+
+function initialize(...)
+    if SpawnGuardian.initialize then return SpawnGuardian.initialize(...) end
+end
+function onSectorEntered(...)
+    if SpawnGuardian.onSectorEntered then return SpawnGuardian.onSectorEntered(...) end
 end

@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("randomext")
 
 -- Load APIs
-local cv_success, CosmicVaultNews = true, require("cosmicvaultnews")
+local cv_success, CosmicVaultNews = true, include("cosmicvaultnews")
 local cw_success = true; include("cosmicwarbridge")
 
 -- namespace CosmicChroniclesNewsGenerator
@@ -37,12 +37,12 @@ local reportedBosses = {}
 
 function CosmicChroniclesNewsGenerator.updateServer(timeStep)
     if not cv_success then return end -- Vault News API not available
-    
+
     local rand = random():getInt(1, 100)
-    
+
     -- Check for Boss Defeats (Highest priority, but only once per boss)
     if CosmicChroniclesNewsGenerator.checkBossDefeats() then return end
-    
+
     if rand <= 33 and cw_success then
         CosmicChroniclesNewsGenerator.generateWarNews()
     elseif rand <= 66 then
@@ -54,7 +54,7 @@ end
 
 function CosmicChroniclesNewsGenerator.checkBossDefeats()
     local server = Server()
-    
+
     local function publish(id, title, content)
         if not reportedBosses[id] then
             reportedBosses[id] = true
@@ -67,11 +67,11 @@ function CosmicChroniclesNewsGenerator.checkBossDefeats()
     if server:getValue("swoks_beaten") then
         if publish("swoks", "Pirate Warlord Swoks Eliminated", "Independent bounty hunters have confirmed the destruction of the infamous pirate lord Swoks. The outer rim breathes a sigh of relief as his blockades dissolve.") then return true end
     end
-    
+
     if server:getValue("big_ai_kill_counter") and server:getValue("big_ai_kill_counter") > 0 then
         if publish("big_ai", "Rogue AI Core Shattered", "A massive spatial anomaly has collapsed near the inner rim. Reports confirm that the rogue Artificial Intelligence construct threatening navigational arrays has been completely neutralized.") then return true end
     end
-    
+
     if server:getValue("last_killed_laser_boss") then
         if publish("laser_boss", "Project Beta Neutralized", "A massive experimental laser dreadnought known as 'Project Beta' has been destroyed. Authorities are investigating its origins.") then return true end
     end
@@ -81,11 +81,11 @@ function CosmicChroniclesNewsGenerator.checkBossDefeats()
         if player:getValue("last_killed_scientist") then
             if publish("scientist", "M.A.D. Science Lab Destroyed", "A secretive mobile laboratory conducting deeply unethical experiments has been eradicated. Authorities caution scavengers against approaching the irradiated wreckage.") then return true end
         end
-        
+
         if player:getValue("last_killed_bottan") then
             if publish("bottan", "Bottan's Smuggling Ring Busted!", "The infamous smuggler Bottan has finally been brought to justice. Faction security forces report a massive drop in black market shipments.") then return true end
         end
-        
+
         if player:getValue("last_killed_the4") then
             if publish("the4", "The Brotherhood Shattered", "The elusive cult known as 'The Brotherhood', or 'The 4', has been decimated. Their mysterious artifact has been recovered.") then return true end
         end
@@ -94,7 +94,7 @@ function CosmicChroniclesNewsGenerator.checkBossDefeats()
             if publish("guardian", "The Core is Open!", "A shockwave of unimaginable scale has echoed across the galaxy. The Xsotan Wormhole Guardian blockading the galactic core has fallen! A new era of exploration and danger has begun.") then return true end
         end
     end
-    
+
     return false
 end
 
@@ -102,12 +102,12 @@ function CosmicChroniclesNewsGenerator.generateWarNews()
     local factions = {Galaxy():getFactions()}
     if #factions == 0 then return end
     local faction = factions[random():getInt(1, #factions)]
-    
+
     local heat = 0
     if CosmicWarBridge and CosmicWarBridge.computeWarHeatForFaction then
         heat = CosmicWarBridge.computeWarHeatForFaction(faction)
     end
-    
+
     local hx, hy = faction:getHomeSectorCoordinates()
     local sectorStr = ""
     if hx and hy then
@@ -115,7 +115,7 @@ function CosmicChroniclesNewsGenerator.generateWarNews()
         local oy = hy + random():getInt(-15, 15)
         sectorStr = " near sector [" .. ox .. ":" .. oy .. "]"
     end
-    
+
     if heat > 0.5 then
         CosmicVaultNews.publishArticle({
             title = "MOST WANTED: " .. faction.name .. " Issues High-Value Bounty",
@@ -135,7 +135,7 @@ function CosmicChroniclesNewsGenerator.generateEconomyNews()
     local factions = {Galaxy():getFactions()}
     if #factions == 0 then return end
     local faction = factions[random():getInt(1, #factions)]
-    
+
     if random():test(0.5) then
         CosmicVaultNews.publishArticle({
             title = "Trade Crisis: " .. faction.name .. " Faces Severe Shortages",
@@ -155,7 +155,7 @@ function CosmicChroniclesNewsGenerator.generateCaptainNews()
     local players = {Server():getOnlinePlayers()}
     local playerName = "an Independent Captain"
     local capClass = "Commander"
-    
+
     if #players > 0 then
         local p = players[random():getInt(1, #players)]
         playerName = p.name
@@ -171,7 +171,7 @@ function CosmicChroniclesNewsGenerator.generateCaptainNews()
             end
         end
     end
-    
+
     CosmicVaultNews.publishArticle({
         title = "Galactic Spotlight: The Exploits of " .. playerName,
         content = "Famed " .. capClass .. " captain, " .. playerName .. ", has recently made headlines across the coreward sectors after successfully completing a massive and highly dangerous operation.\n\nLocal authorities have praised their efforts, and their reputation continues to grow among the stars.",
@@ -187,4 +187,21 @@ end
 
 function CosmicChroniclesNewsGenerator.restore(data)
     reportedBosses = data.reportedBosses or {}
+end
+
+
+function getUpdateInterval(...)
+    if CosmicChroniclesNewsGenerator.getUpdateInterval then return CosmicChroniclesNewsGenerator.getUpdateInterval(...) end
+end
+function initialize(...)
+    if CosmicChroniclesNewsGenerator.initialize then return CosmicChroniclesNewsGenerator.initialize(...) end
+end
+function updateServer(...)
+    if CosmicChroniclesNewsGenerator.updateServer then return CosmicChroniclesNewsGenerator.updateServer(...) end
+end
+function secure(...)
+    if CosmicChroniclesNewsGenerator.secure then return CosmicChroniclesNewsGenerator.secure(...) end
+end
+function restore(...)
+    if CosmicChroniclesNewsGenerator.restore then return CosmicChroniclesNewsGenerator.restore(...) end
 end

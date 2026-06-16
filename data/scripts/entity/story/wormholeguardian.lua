@@ -9,8 +9,8 @@ local Placer = include ("placer");
 local AsyncShipGenerator = include("asyncshipgenerator")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -507,3 +507,20 @@ function WormholeGuardian.updateClient(timeStep)
 end
 
 
+
+
+function initialize(...)
+    if WormholeGuardian.initialize then return WormholeGuardian.initialize(...) end
+end
+function getUpdateInterval(...)
+    if WormholeGuardian.getUpdateInterval then return WormholeGuardian.getUpdateInterval(...) end
+end
+function getUpdateInterval(...)
+    if WormholeGuardian.getUpdateInterval then return WormholeGuardian.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if WormholeGuardian.updateServer then return WormholeGuardian.updateServer(...) end
+end
+function updateClient(...)
+    if WormholeGuardian.updateClient then return WormholeGuardian.updateClient(...) end
+end

@@ -12,8 +12,8 @@ local MissionUT = include("missionutility")
 local Hermit = include("story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -175,14 +175,14 @@ function createHermitDialog()
     d1_dialog.text = "Always on the hunt, hu? Well, start talking!"%_t
     d1_dialog.answers = {{answer ="I have the eight artifacts. Now what?"%_t, followUp = d2_dialog}}
 
-    d2_dialog.text = "Ah, you’re looking for the gate. Very interesting thing that was. Hum, mh, hum, where do I start.. \n\nRemember the ship from the center that I told you about?\n\nTheir arrival started a race of the best scientists and the most ruthless corporations to find a way to the inside."%_t
+    d2_dialog.text = "Ah, you're looking for the gate. Very interesting thing that was. Hum, mh, hum, where do I start.. \n\nRemember the ship from the center that I told you about?\n\nTheir arrival started a race of the best scientists and the most ruthless corporations to find a way to the inside."%_t
     d2_dialog.answers = {{answer = "How did that go?"%_t, followUp = d3_dialog}}
 
-    d3_dialog.text = "About as well as you could expect. Supposedly they managed to build a teleporter system that would be able to open a gate across the barrier.\n\nBut they never managed to open it. There’s been tons of rumors that these artifacts you have could make it work, but nobody has ever tried."%_t
+    d3_dialog.text = "About as well as you could expect. Supposedly they managed to build a teleporter system that would be able to open a gate across the barrier.\n\nBut they never managed to open it. There's been tons of rumors that these artifacts you have could make it work, but nobody has ever tried."%_t
     d3_dialog.answers = {{answer = "That sounds promising. Where was that?"%_t, followUp = d4_dialog}}
 
     d4_dialog.text = string.format("I've never been there myself. But I've heard that lots of workers with machinery were seen entering sector (${x}:${y}). You should go there."%_t % {x = mission.data.custom.teleporterLocation.x, y = mission.data.custom.teleporterLocation.y})
-    d4_dialog.answers = {{answer = "Thank you, I’ll start there."%_t, followUp = d5_dialog}}
+    d4_dialog.answers = {{answer = "Thank you, I'll start there."%_t, followUp = d5_dialog}}
 
     d5_dialog.text = "Good luck!"%_t
     d5_dialog.answers = {{answer = "Thank you!"%_t}}

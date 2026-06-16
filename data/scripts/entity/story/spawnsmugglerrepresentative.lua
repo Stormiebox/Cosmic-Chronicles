@@ -2,8 +2,8 @@
 local Smuggler = include("story/smuggler")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -27,4 +27,9 @@ end
 
 
 
+end
+
+
+function initialize(...)
+    if SpawnSmugglerRepresentative.initialize then return SpawnSmugglerRepresentative.initialize(...) end
 end

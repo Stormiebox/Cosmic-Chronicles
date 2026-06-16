@@ -167,3 +167,11 @@ function CosmicChroniclesRumormonger.showRumorDialog(rumor)
     -- Render the Avorion dialogue UI
     ScriptUI():showDialog(dialog)
 end
+
+
+function getUpdateInterval(...)
+    if CosmicChroniclesRumormonger.getUpdateInterval then return CosmicChroniclesRumormonger.getUpdateInterval(...) end
+end
+function updateServer(...)
+    if CosmicChroniclesRumormonger.updateServer then return CosmicChroniclesRumormonger.updateServer(...) end
+end

@@ -6,8 +6,8 @@ include ("callable")
 local OperationExodus = include("story/operationexodus")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, require("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, require("cosmicvaultmission")
+local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -235,3 +235,17 @@ function ExodusWormholeBeacon.restore(data)
     lastCodeEntered = data.lastCodeEntered
 end
 
+
+
+function updateClient(...)
+    if ExodusWormholeBeacon.updateClient then return ExodusWormholeBeacon.updateClient(...) end
+end
+function getUpdateInterval(...)
+    if ExodusWormholeBeacon.getUpdateInterval then return ExodusWormholeBeacon.getUpdateInterval(...) end
+end
+function secure(...)
+    if ExodusWormholeBeacon.secure then return ExodusWormholeBeacon.secure(...) end
+end
+function restore(...)
+    if ExodusWormholeBeacon.restore then return ExodusWormholeBeacon.restore(...) end
+end
