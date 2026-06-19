@@ -11,8 +11,8 @@ include("stringutility")
 include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 -- the data variable is created by the singleinteraction.lua api
@@ -65,7 +65,7 @@ function Adventurer1.makeDialog()
     d6_HaveThis.answers = {{answer = "Thank you."%_t}}
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Adventurer ]] --
-    if cv_success and CosmicVaultDialogue then
+    if CosmicVaultDialogue then
         local overrideDialog = CosmicVaultDialogue.getValidLine("adventurer_encounter", nil, nil)
         if overrideDialog then
             -- Can completely replace the return node with the Vault dialogue if present!

@@ -6,8 +6,8 @@ include ("stringutility")
 include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 local interacted
@@ -148,7 +148,7 @@ function normalDialog()
     local sum = getPayAmount(Player())
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook ]] --
-    if cv_success and CosmicVaultDialogue then
+    if CosmicVaultDialogue then
         local overrideDialog = CosmicVaultDialogue.getValidLine("swoks_encounter", nil, nil)
         if overrideDialog then
             -- Note: We could deeply inject here, but for now just replacing the base greeting text
@@ -233,7 +233,7 @@ function normalDialog()
     local greetingText = "Well hello there. Now who might you be?"%_t
     
     -- [[ Cosmic Chronicles: Dynamic Boss Greeting ]] --
-    if cv_success and CosmicVaultDialogue then
+    if CosmicVaultDialogue then
         -- We try to fetch a class-based greeting or a war-heat greeting!
         local dynamicGreeting = CosmicVaultDialogue.getValidLine("swoks_greeting", nil, nil)
         if dynamicGreeting then

@@ -5,8 +5,8 @@ include ("stringutility")
 include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 local canFlee = true
@@ -99,7 +99,7 @@ function startInteraction()
     end
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Bottan ]] --
-    if cv_success and CosmicVaultDialogue then
+    if CosmicVaultDialogue then
         local overrideDialog = CosmicVaultDialogue.getValidLine("bottan_encounter", nil, nil)
         if overrideDialog then
             dialog.text = overrideDialog.text or dialog.text

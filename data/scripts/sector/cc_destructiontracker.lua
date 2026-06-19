@@ -49,3 +49,9 @@ end
 function initialize()
     CCDestructionTracker.initialize()
 end
+
+
+-- Global Event Callbacks
+function onEntityDestroyed(...)
+    if CCDestructionTracker.onEntityDestroyed then return CCDestructionTracker.onEntityDestroyed(...) end
+end

@@ -809,6 +809,3 @@ end
 function initialize(...)
     if CosmicChronicles.initialize then return CosmicChronicles.initialize(...) end
 end
-
-
-return CosmicChronicles

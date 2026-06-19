@@ -7,8 +7,8 @@ include ("utility")
 include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 -- namespace LaserBossBehavior
@@ -510,4 +510,13 @@ function initialize(...)
 end
 function update(...)
     if LaserBossBehavior.update then return LaserBossBehavior.update(...) end
+end
+
+
+-- Global Event Callbacks
+function onDestroyed(...)
+    if LaserBossBehavior.onDestroyed then return LaserBossBehavior.onDestroyed(...) end
+end
+function onPlayerArrivalConfirmed(...)
+    if LaserBossBehavior.onPlayerArrivalConfirmed then return LaserBossBehavior.onPlayerArrivalConfirmed(...) end
 end

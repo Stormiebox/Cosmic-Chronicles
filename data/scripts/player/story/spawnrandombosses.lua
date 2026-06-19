@@ -10,8 +10,8 @@ local AI = include("story/ai")
 local Swoks = include("story/swoks")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 

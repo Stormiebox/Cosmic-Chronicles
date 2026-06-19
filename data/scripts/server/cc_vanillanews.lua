@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
-local cv_success, cv_news = true, include("cosmicvaultnews")
+local cv_news = include("cosmicvaultnews")
 
 -- namespace CCVanillaNews
 CCVanillaNews = {}
@@ -16,7 +16,7 @@ function CCVanillaNews.onSeedNews()
     
     -- 1. Boss Defeats
     if server:getValue("swoks_beaten") then
-        if cv_success and cv_news.publishArticle then
+        if cv_news.publishArticle then
         cv_news.publishArticle({
             title = "Pirate Warlord Swoks Assassinated!",
             category = "Galactic Milestone",
@@ -26,7 +26,7 @@ function CCVanillaNews.onSeedNews()
     end
 
     if server:getValue("big_ai_kill_counter") and server:getValue("big_ai_kill_counter") > 0 then
-        if cv_success and cv_news.publishArticle then
+        if cv_news.publishArticle then
         cv_news.publishArticle({
             title = "Rogue A.I. Supercomputer Dismantled",
             category = "Galactic Milestone",
@@ -36,7 +36,7 @@ function CCVanillaNews.onSeedNews()
     end
 
     if server:getValue("last_killed_laser_boss") then
-        if cv_success and cv_news.publishArticle then
+        if cv_news.publishArticle then
         cv_news.publishArticle({
             title = "Project Beta Neutralized",
             category = "Galactic Milestone",
@@ -48,7 +48,7 @@ function CCVanillaNews.onSeedNews()
     -- 2. Player-tracked Boss Achievements & Player Actions
     for _, player in pairs({server:getOnlinePlayers()}) do
         if player:getValue("last_killed_bottan") then
-            if cv_success and cv_news.publishArticle then
+            if cv_news.publishArticle then
         cv_news.publishArticle({
                 title = "Bottan's Smuggling Ring Busted!",
                 category = "Galactic Milestone",
@@ -60,7 +60,7 @@ function CCVanillaNews.onSeedNews()
         end
 
         if player:getValue("last_killed_scientist") then
-            if cv_success and cv_news.publishArticle then
+            if cv_news.publishArticle then
         cv_news.publishArticle({
                 title = "M.A.D. Science Lab Destroyed!",
                 category = "Galactic Milestone",
@@ -71,7 +71,7 @@ function CCVanillaNews.onSeedNews()
         end
         
         if player:getValue("last_killed_the4") then
-            if cv_success and cv_news.publishArticle then
+            if cv_news.publishArticle then
         cv_news.publishArticle({
                 title = "The Brotherhood Shattered",
                 category = "Galactic Milestone",
@@ -82,7 +82,7 @@ function CCVanillaNews.onSeedNews()
         end
         
         if player:getValue("wormhole_guardian_destroyed") then
-            if cv_success and cv_news.publishArticle then
+            if cv_news.publishArticle then
         cv_news.publishArticle({
                 title = "Xsotan Wormhole Guardian Defeated!",
                 category = "Galactic Milestone",
@@ -96,7 +96,7 @@ function CCVanillaNews.onSeedNews()
 
         if player:getValue("pirate_hideout_destroyed") or player:getValue("tutorial_pirateraid_accomplished") then
             if not player:getValue("cc_news_pirate_hideout_published") then
-            if cv_success and cv_news.publishArticle then
+            if cv_news.publishArticle then
                 cv_news.publishArticle({
                     title = "Pirate Stronghold Eradicated",
                     category = "Military Action",
@@ -111,4 +111,10 @@ end
 
 function initialize()
     CCVanillaNews.initialize()
+end
+
+
+-- Global Event Callbacks
+function onSeedNews(...)
+    if CCVanillaNews.onSeedNews then return CCVanillaNews.onSeedNews(...) end
 end

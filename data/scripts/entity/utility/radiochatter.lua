@@ -1,5 +1,5 @@
 -- namespace EntityRadioChatter
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
 
 -- Cache the original vanilla function
 local cc_vanilla_initialize = EntityRadioChatter.initialize
@@ -11,7 +11,7 @@ function EntityRadioChatter.initialize(lines, minFrequency, maxFrequency, timeTo
     end
 
     -- Now, silently inject our own custom ambient lines into the entity's data pool!
-    if cv_success and onServer() then
+    if onServer() then
         local entity = Entity()
         local faction = Faction(entity.factionIndex)
         if faction then

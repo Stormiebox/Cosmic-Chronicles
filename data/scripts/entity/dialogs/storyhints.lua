@@ -1,5 +1,5 @@
 -- namespace StoryHints
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
 
 -- Cache the original vanilla function so we don't break it
 local cc_vanilla_onAnythingInteresting = StoryHints.onAnythingInteresting
@@ -10,7 +10,7 @@ function StoryHints.onAnythingInteresting()
     local station = Entity()
     local faction = Faction(station.factionIndex)
     
-    if cv_success and faction then
+    if faction then
         local sector = Sector()
         local x, y = sector:getCoordinates()
         local distance = math.sqrt(x * x + y * y)

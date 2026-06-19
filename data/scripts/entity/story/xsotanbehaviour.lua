@@ -7,8 +7,8 @@ local RiftMissionUT = include("dlc/rift/lib/riftmissionutility")
 local CaptainClass = include("captainclass")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
@@ -152,4 +152,19 @@ end
 
 function initialize(...)
     if XsotanBehaviour.initialize then return XsotanBehaviour.initialize(...) end
+end
+
+
+-- Global Event Callbacks
+function onSetToAggressive(...)
+    if XsotanBehaviour.onSetToAggressive then return XsotanBehaviour.onSetToAggressive(...) end
+end
+function onXsotanDestroyed(...)
+    if XsotanBehaviour.onXsotanDestroyed then return XsotanBehaviour.onXsotanDestroyed(...) end
+end
+function onSelfDestroyed(...)
+    if XsotanBehaviour.onSelfDestroyed then return XsotanBehaviour.onSelfDestroyed(...) end
+end
+function onCollision(...)
+    if XsotanBehaviour.onCollision then return XsotanBehaviour.onCollision(...) end
 end

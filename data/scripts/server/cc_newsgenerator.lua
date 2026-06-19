@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("randomext")
 
 -- Load APIs
-local cv_success, CosmicVaultNews = true, include("cosmicvaultnews")
+local CosmicVaultNews = include("cosmicvaultnews")
 local cw_success = true; include("cosmicwarbridge")
 
 -- namespace CosmicChroniclesNewsGenerator
@@ -204,4 +204,10 @@ function secure(...)
 end
 function restore(...)
     if CosmicChroniclesNewsGenerator.restore then return CosmicChroniclesNewsGenerator.restore(...) end
+end
+
+
+-- Global Event Callbacks
+function onBehemothAttackStart(...)
+    if CosmicChroniclesNewsGenerator.onBehemothAttackStart then return CosmicChroniclesNewsGenerator.onBehemothAttackStart(...) end
 end

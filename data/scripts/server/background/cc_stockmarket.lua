@@ -38,6 +38,3 @@ end
 function initialize(...)
     if CosmicChroniclesStockMarket.initialize then return CosmicChroniclesStockMarket.initialize(...) end
 end
-
-
-return CosmicChroniclesStockMarket

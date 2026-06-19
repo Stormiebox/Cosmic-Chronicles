@@ -56,6 +56,3 @@ end
 function initialize(...)
     if EclipseLoreGenerator.initialize then return EclipseLoreGenerator.initialize(...) end
 end
-
-
-return EclipseLoreGenerator

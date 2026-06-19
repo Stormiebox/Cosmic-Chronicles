@@ -27,6 +27,3 @@ end
 function initialize(...)
     if AncientCache.initialize then return AncientCache.initialize(...) end
 end
-
-
-return AncientCache

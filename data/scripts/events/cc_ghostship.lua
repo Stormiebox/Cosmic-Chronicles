@@ -29,6 +29,3 @@ end
 function initialize(...)
     if GhostShipEvent.initialize then return GhostShipEvent.initialize(...) end
 end
-
-
-return GhostShipEvent

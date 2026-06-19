@@ -35,6 +35,3 @@ end
 function initialize(...)
     if RogueAIProbe.initialize then return RogueAIProbe.initialize(...) end
 end
-
-
-return RogueAIProbe

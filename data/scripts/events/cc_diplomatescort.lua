@@ -24,6 +24,3 @@ end
 function initialize(...)
     if DiplomatEscort.initialize then return DiplomatEscort.initialize(...) end
 end
-
-
-return DiplomatEscort

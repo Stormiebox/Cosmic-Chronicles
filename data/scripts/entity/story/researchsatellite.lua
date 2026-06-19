@@ -4,8 +4,8 @@ include("utility")
 include("stringutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 Scientist = include("story/scientist")
 
@@ -118,4 +118,10 @@ end
 
 function initialize(...)
     if ResearchSatellite.initialize then return ResearchSatellite.initialize(...) end
+end
+
+
+-- Global Event Callbacks
+function onDestroyed(...)
+    if ResearchSatellite.onDestroyed then return ResearchSatellite.onDestroyed(...) end
 end

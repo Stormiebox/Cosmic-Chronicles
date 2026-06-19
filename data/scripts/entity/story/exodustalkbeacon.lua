@@ -6,8 +6,8 @@ include ("stringutility")
 include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local cv_success, CosmicVaultDialogue = true, include("cosmicvaultdialogue")
-local cvm_success, CosmicVaultMission = true, include("cosmicvaultmission")
+local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local CosmicVaultMission = include("cosmicvaultmission")
 
 
 function initialize()
@@ -232,7 +232,7 @@ function onEstablishConnection()
     }
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook ]] --
-    if cv_success and CosmicVaultDialogue then
+    if CosmicVaultDialogue then
         local overrideDialog = CosmicVaultDialogue.getValidLine("exodus_encounter", nil, nil)
         if overrideDialog then
             intro = overrideDialog
