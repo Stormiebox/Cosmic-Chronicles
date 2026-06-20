@@ -55,3 +55,5 @@ end
 function onEntityDestroyed(...)
     if CCDestructionTracker.onEntityDestroyed then return CCDestructionTracker.onEntityDestroyed(...) end
 end
+
+return CCDestructionTracker

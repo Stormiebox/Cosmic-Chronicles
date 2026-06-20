@@ -3,7 +3,6 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 local SectorGenerator = include("SectorGenerator")
 local PlanGenerator = include("plangenerator")
-local Balancing = include("galaxy")
 
 local EclipseLoreGenerator = {}
 

@@ -2,7 +2,6 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
 include("cosmicvaultdialogue")
 include("stringutility")
-include("galaxy")
 
 -- namespace CosmicChroniclesBlackBox
 CosmicChroniclesBlackBox = {}
@@ -80,3 +79,5 @@ function CosmicChroniclesBlackBox.showLogDialog(log)
     local dialog = {text = text, answers = {{answer = "Close"%_t}}}
     ScriptUI():showDialog(dialog)
 end
+
+return CosmicChroniclesBlackBox

@@ -51,3 +51,5 @@ function CosmicChroniclesMonument.showLoreDialog(fName, trait1, trait2)
     local dialog = {text = text, answers = {{answer = "Fascinating."%_t}}}
     ScriptUI():showDialog(dialog)
 end
+
+return CosmicChroniclesMonument

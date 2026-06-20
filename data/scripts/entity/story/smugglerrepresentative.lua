@@ -10,7 +10,6 @@ local CosmicVaultDialogue = include("cosmicvaultdialogue")
 local CosmicVaultMission = include("cosmicvaultmission")
 
 SectorSpecifics = include ("sectorspecifics")
-Balancing = include ("galaxy")
 
 local interacted
 

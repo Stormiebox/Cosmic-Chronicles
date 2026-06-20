@@ -243,3 +243,5 @@ end
 function restore(data)
     angry = data.angry
 end
+
+function onChildDestroyed() end
