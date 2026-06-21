@@ -2,7 +2,6 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
 include ("randomext")
-Balancing = include("galaxy")
 local RiftMissionUT = include("dlc/rift/lib/riftmissionutility")
 local CaptainClass = include("captainclass")
 

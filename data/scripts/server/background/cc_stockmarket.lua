@@ -4,10 +4,15 @@ package.path = package.path .. ";data/scripts/?.lua"
 local CosmicChroniclesStockMarket = {}
 
 function CosmicChroniclesStockMarket.initialize()
-    if onServer() then
-        -- Run the stock market check every 20 minutes (Galactic Turn)
-        Timer():create("simulateStockMarket", 1200)
-    end
+    -- Nothing needed here
+end
+
+function getUpdateInterval()
+    return 1200 -- Run the stock market check every 20 minutes (Galactic Turn)
+end
+
+function updateServer(timeStep)
+    CosmicChroniclesStockMarket.simulateStockMarket()
 end
 
 function CosmicChroniclesStockMarket.simulateStockMarket()

@@ -118,3 +118,5 @@ end
 function onSeedNews(...)
     if CCVanillaNews.onSeedNews then return CCVanillaNews.onSeedNews(...) end
 end
+
+return CCVanillaNews

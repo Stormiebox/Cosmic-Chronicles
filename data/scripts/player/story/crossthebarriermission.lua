@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 include("utility")
-include("galaxy")
+
 include("stringutility")
 include("structuredmission")
 include("callable")

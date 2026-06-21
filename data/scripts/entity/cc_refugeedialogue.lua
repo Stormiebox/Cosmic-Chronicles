@@ -104,3 +104,5 @@ function CosmicChroniclesRefugee.jumpAway()
     if not onServer() then return end
     Entity():addScriptOnce("entity/utility/delayedjump.lua", 2)
 end
+
+return CosmicChroniclesRefugee

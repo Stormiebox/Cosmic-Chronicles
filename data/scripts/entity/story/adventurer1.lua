@@ -107,4 +107,3 @@ function Adventurer1.givePlayerGoodie()
     player:getInventory():addOrDrop(SystemUpgradeTemplate("data/scripts/systems/radarbooster.lua", Rarity(1), Seed(124)))
 end
 callable(Adventurer1, "givePlayerGoodie")
-

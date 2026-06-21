@@ -211,3 +211,5 @@ end
 function onBehemothAttackStart(...)
     if CosmicChroniclesNewsGenerator.onBehemothAttackStart then return CosmicChroniclesNewsGenerator.onBehemothAttackStart(...) end
 end
+
+return CosmicChroniclesNewsGenerator

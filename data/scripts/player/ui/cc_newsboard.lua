@@ -129,3 +129,5 @@ end
 function initialize(...)
     if CosmicChroniclesNewsBoard.initialize then return CosmicChroniclesNewsBoard.initialize(...) end
 end
+
+return CosmicChroniclesNewsBoard

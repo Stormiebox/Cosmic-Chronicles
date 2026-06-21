@@ -64,3 +64,4 @@ function updateClient(timeStep)
     end
 end
 
+function onBreak() end

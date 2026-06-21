@@ -175,3 +175,5 @@ end
 function updateServer(...)
     if CosmicChroniclesRumormonger.updateServer then return CosmicChroniclesRumormonger.updateServer(...) end
 end
+
+return CosmicChroniclesRumormonger

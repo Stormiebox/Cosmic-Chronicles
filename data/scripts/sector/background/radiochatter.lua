@@ -2,8 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include ("stringutility")
 include ("randomext")
 include ("callable")
-include ("galaxy")
-include ("faction")
+
 
 local cw_success = true; include("cosmicwarbridge")
 local cv_success = true; include("cosmicvaultdialogue")
