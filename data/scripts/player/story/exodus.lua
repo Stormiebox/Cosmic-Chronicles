@@ -8,8 +8,8 @@ include("mission")
 include("stringutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 missionData.title = "Operation Exodus"%_t
@@ -100,6 +100,16 @@ function onItemAdded(index, amount, amountBefore)
 
     if item.itemType == InventoryItemType.SystemUpgrade then
         if item.script:find("data/scripts/systems/teleporterkey1.lua") then
+            -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+            if CosmicVaultMission then
+                local x, y = Sector():getCoordinates()
+                local dist = math.max(1, length(vec2(x, y)))
+                local multiplier = math.max(1, 1 + (500 - dist) / 500)
+                local credits = math.floor(100000 * multiplier)
+                local rep = math.floor(5000 * multiplier)
+                CosmicVaultMission.completeMission("operation_exodus", credits, rep)
+            end
+
            showMissionAccomplished()
            terminate()
         end

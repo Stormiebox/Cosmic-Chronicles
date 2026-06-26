@@ -12,6 +12,7 @@ function CosmicChronicles.initialize()
     -- Ensure this dialogue population only runs in the server VM
     if onServer() then
         CosmicChronicles.registerLore()
+        CosmicChronicles.registerStoryDialogues()
         Galaxy():addScriptOnce("server/cc_newsgenerator.lua")
         Galaxy():addScriptOnce("server/cc_vanillanews.lua")
         Galaxy():addScriptOnce("server/background/cc_stockmarket.lua")
@@ -803,6 +804,103 @@ function CosmicChronicles.registerLore()
         modId = "CosmicChronicles", category = "rumor",
         text = "The experimental stealth fighters went missing during a training exercise... maybe their cloaks actually work."%_T,
         conditions = { stationType = "fighterfactory" }
+    })
+end
+
+function CosmicChronicles.registerStoryDialogues()
+    -- Organized Allies
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "organized_allies_assist",
+        text = "This is a priority military broadcast. We are dispatching forces to assist."%_T
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "organized_allies_trait_check",
+        text = "Scanning protocols engaged. Our military databases suggest your vessel requires an escort."%_T
+    })
+    -- Adventurer
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "adventurer_encounter",
+        text = "Greetings! I am an explorer mapping these regions. Watch your back out here, there's always something lurking in the void."%_T
+    })
+    -- AI Boss
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ai_dialog_positive",
+        text = "I am the AI. Your species is inefficient but capable of learning. We shall observe you."%_T
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ai_dialog_negative",
+        text = "Warning. Unauthorized biological entity detected. Commencing purge protocols."%_T
+    })
+    -- Artifact Delivery Beacon
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "artifact_beacon_positive",
+        text = "Transmission received. The brotherhood acknowledges your offering."%_T
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "artifact_beacon_negative",
+        text = "Incomplete offering detected. The coordinates remain sealed."%_T
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "artifact_beacon_unspawnable",
+        text = "Warning: Dimensional interference prevents locking onto coordinates. Try again elsewhere."%_T
+    })
+    -- Brotherhood
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "brotherhood_hints",
+        text = "The barrier cannot be breached by conventional means. We of the Brotherhood know the truth."%_T
+    })
+    -- Exodus
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "exodus_encounter",
+        text = "We are the remnants of Operation Exodus. We thought we were the last ones left..."%_T
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "exodus_wreckage",
+        text = "Automated Distress Beacon: Hull integrity critical. Abandon ship. Repeat, abandon ship."%_T
+    })
+    -- History Book
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "history_book",
+        text = "Ancient text decrypted... 'When the Xsotan arrived, our shields failed. The barrier was meant to save us, but it became our prison.'"%_T
+    })
+    -- Laser Boss
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "laser_boss",
+        text = "Target locked. Prepare to be atomized."%_T
+    })
+    -- Progression Warning
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "progression_warning",
+        text = "Traveler, turn back! Your weapons and shields are completely inadequate for the horrors that lie closer to the core!"%_T
+    })
+    -- Scientist (Mad)
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "scientist_mad",
+        text = "Fools! You cannot comprehend the energy potential of this research! I will demonstrate it upon your hull!"%_T
+    })
+    -- Bottan (Smuggler)
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "bottan_encounter",
+        text = "You've got a lot of nerve dropping out of hyperspace here. Hand over the cargo or we scrap your ship."%_T
+    })
+    -- Smuggler NPCs
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "smuggler_engineer",
+        text = "We can bypass any security scan. For the right price, of course."%_T
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "smuggler_representative",
+        text = "The Syndicate sends its regards. Stay out of our territory if you want to keep breathing."%_T
+    })
+    -- Swoks
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "swoks_greeting",
+        text = "I am Swoks! The terror of the outer rim! Your scrap belongs to me now!"%_T
+    })
+    -- The Four
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "the_four",
+        text = "You are not worthy of the artifacts. We shall test your strength."%_T
     })
 end
 

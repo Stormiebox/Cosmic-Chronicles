@@ -5,8 +5,8 @@ include("structuredmission")
 include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -43,6 +43,20 @@ end
 mission.globalPhase.onAccomplish = function()
     if onServer() then
         local player = Player()
+
+        -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+        if CosmicVaultMission then
+            local x, y = Sector():getCoordinates()
+            local dist = math.max(1, length(vec2(x, y)))
+            local multiplier = math.max(1, 1 + (500 - dist) / 500)
+            local credits = math.floor(1000000 * multiplier)
+            local rep = math.floor(50000 * multiplier)
+            CosmicVaultMission.completeMission("kill_guardian_mission", credits, rep)
+        end
+
+        -- [[ Cosmic Chronicles: Boss Death Hint ]] --
+        Sector():broadcastChatMessage("Unknown Signal"%_t, 2, "Biological contamination purged. The Eclipse claims this galaxy."%_t)
+
         player:invokeFunction("storyquestutility.lua", "onKillGuardianAccomplished")
     end
 end

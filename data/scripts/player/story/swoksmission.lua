@@ -9,8 +9,8 @@ local MissionUT = include("missionutility")
 local Swoks = include("story/swoks")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -37,6 +37,20 @@ mission.data.description =
 -- on accomplish frame mission has to be moved on
 mission.globalPhase.onAccomplish = function()
     local player = Player()
+
+    -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+    if CosmicVaultMission then
+        local x, y = Sector():getCoordinates()
+        local dist = math.max(1, length(vec2(x, y)))
+        local multiplier = math.max(1, 1 + (500 - dist) / 500)
+        local credits = math.floor(150000 * multiplier)
+        local rep = math.floor(10000 * multiplier)
+        CosmicVaultMission.completeMission("swoks_mission", credits, rep)
+    end
+
+    -- [[ Cosmic Chronicles: Boss Death Hint ]] --
+    Sector():broadcastChatMessage("Swoks"%_t, 2, "You worry about my scrap? Fools... the dark ships... The Eclipse... they will consume us all..."%_t)
+
     player:invokeFunction("storyquestutility.lua", "onSwoksAccomplished")
 end
 mission.globalPhase.playerCallbacks =

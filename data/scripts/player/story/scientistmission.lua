@@ -7,8 +7,8 @@ include("randomext")
 local MissionUT = include("missionutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 local SectorSpecifics = include ("sectorspecifics")
 
@@ -35,6 +35,17 @@ mission.data.description =
 
 mission.globalPhase.onAccomplish = function()
     local player = Player()
+
+    -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+    if CosmicVaultMission then
+        local x, y = Sector():getCoordinates()
+        local dist = math.max(1, length(vec2(x, y)))
+        local multiplier = math.max(1, 1 + (500 - dist) / 500)
+        local credits = math.floor(400000 * multiplier)
+        local rep = math.floor(25000 * multiplier)
+        CosmicVaultMission.completeMission("scientist_mission", credits, rep)
+    end
+
     player:invokeFunction("storyquestutility.lua", "onFollowUpQuestAccomplished")
 end
 mission.globalPhase.playerCallbacks =

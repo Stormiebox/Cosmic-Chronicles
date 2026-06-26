@@ -3,11 +3,11 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 Dialog = include ("dialogutility")
 include ("stringutility")
 include ("callable")
+include ("faction")
+include ("randomext")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
-
 
 local canFlee = true
 

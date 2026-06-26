@@ -1,4 +1,3 @@
-
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
 Dialog = include ("dialogutility")
@@ -7,8 +6,6 @@ include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
-
 
 local interacted
 local flyAway
@@ -240,6 +237,7 @@ function normalDialog()
             greetingText = dynamicGreeting.text or greetingText
         end
     end
+    
 
     local dialog =
     {

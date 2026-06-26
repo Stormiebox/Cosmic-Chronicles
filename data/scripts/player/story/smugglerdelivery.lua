@@ -9,8 +9,8 @@ local SpawnUtility = include ("spawnutility")
 include("randomext")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 -- mission.tracing = true

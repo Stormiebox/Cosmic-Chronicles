@@ -7,8 +7,6 @@ include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
-
 
 function initialize()
     if onClient() then

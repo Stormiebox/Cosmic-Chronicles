@@ -16,8 +16,8 @@ local AdventurerGuide = include("story/adventurerguide")
 local Hermit = include("story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 --mission.tracing = true
@@ -41,6 +41,17 @@ mission.data.description = {
 
 mission.globalPhase.onAccomplish = function()
     local player = Player()
+
+    -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+    if CosmicVaultMission then
+        local x, y = Sector():getCoordinates()
+        local dist = math.max(1, length(vec2(x, y)))
+        local multiplier = math.max(1, 1 + (500 - dist) / 500)
+        local credits = math.floor(75000 * multiplier)
+        local rep = math.floor(5000 * multiplier)
+        CosmicVaultMission.completeMission("hermit_mission", credits, rep)
+    end
+
     player:invokeFunction("storyquestutility.lua", "onHermitAccomplished")
 end
 
@@ -56,7 +67,7 @@ mission.phases[1].onBeginServer = function()
 
     -- send player mail
     local mail = Mail()
-    mail.text = Format("Hello!\n\nYou've found an interesting artifact. You should hang on to it! Meet me in sector (%1%:%2%). Iâ€˜ve found out a lot about the Xsotan! There is only one small hitch... Let's talk about that in person.\n\nGreetings,\n%3%"%_T, x, y, MissionUT.getAdventurerName())
+    mail.text = Format("Hello!\n\nYou've found an interesting artifact. You should hang on to it! Meet me in sector (%1%:%2%). I've found out a lot about the Xsotan! There is only one small hitch... Let's talk about that in person.\n\nGreetings,\n%3%"%_T, x, y, MissionUT.getAdventurerName())
     mail.header = "Need to talk /* Mail Subject */"%_T
     mail.sender = Format("%1%, the Adventurer"%_T, MissionUT.getAdventurerName())
     mail.id = "Story_Hermit_Mission_1"

@@ -10,8 +10,8 @@ end
 
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 -- mission.tracing = true
@@ -36,6 +36,17 @@ mission.data.description =
 -- on accomplish frame mission has to be moved on
 mission.globalPhase.onAccomplish = function()
     local player = Player()
+
+    -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+    if CosmicVaultMission then
+        local x, y = Sector():getCoordinates()
+        local dist = math.max(1, length(vec2(x, y)))
+        local multiplier = math.max(1, 1 + (500 - dist) / 500)
+        local credits = math.floor(50000 * multiplier)
+        local rep = math.floor(5000 * multiplier)
+        CosmicVaultMission.completeMission("buy_mission", credits, rep)
+    end
+
     player:invokeFunction("storyquestutility.lua", "onFollowUpQuestAccomplished")
 end
 mission.globalPhase.playerCallbacks =

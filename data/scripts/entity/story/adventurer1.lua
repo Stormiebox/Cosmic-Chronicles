@@ -12,8 +12,6 @@ include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
-
 
 -- the data variable is created by the singleinteraction.lua api
 -- we can just add more variables and it will be saved in the database by the singleinteraction api.
@@ -68,7 +66,6 @@ function Adventurer1.makeDialog()
     if CosmicVaultDialogue then
         local overrideDialog = CosmicVaultDialogue.getValidLine("adventurer_encounter", nil, nil)
         if overrideDialog then
-            -- Can completely replace the return node with the Vault dialogue if present!
             return overrideDialog
         end
     end

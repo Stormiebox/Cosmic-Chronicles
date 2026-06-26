@@ -8,8 +8,8 @@ local Smuggler = include("story/smuggler")
 local MissionUT = include("missionutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 -- mission.tracing = true
@@ -374,6 +374,16 @@ end
 callable(nil, "resetToIngredientsStage")
 
 function onBottanDestroyed()
+    -- [[ Cosmic Chronicles: Dynamic Mission Reward Hook ]] --
+    if CosmicVaultMission then
+        local x, y = Sector():getCoordinates()
+        local dist = math.max(1, length(vec2(x, y)))
+        local multiplier = math.max(1, 1 + (500 - dist) / 500)
+        local credits = math.floor(200000 * multiplier)
+        local rep = math.floor(15000 * multiplier)
+        CosmicVaultMission.completeMission("smuggler_retaliation", credits, rep)
+    end
+
     -- we don't care at which point the player destroyed Bottan, the quest is finished anyway
     accomplish()
 end

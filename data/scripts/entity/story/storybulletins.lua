@@ -1,12 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
 local The4 = include("story/the4")
-
--- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
-
-
 -- Don't remove or alter the following comment, it tells the game the namespace this script lives in. If you remove it, the script will break.
 -- namespace StoryBulletins
 StoryBulletins = {}

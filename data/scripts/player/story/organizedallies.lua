@@ -7,8 +7,8 @@ include ("stringutility")
 include ("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-local CosmicVaultDialogue = include("cosmicvaultdialogue")
-local CosmicVaultMission = include("cosmicvaultmission")
+include("cosmicvaultdialogue")
+include("cosmicvaultmission")
 
 
 local Dialog = include ("dialogutility")
@@ -124,6 +124,14 @@ function onAssist(entityId)
             dialog = makeGoodDialog()
         else
             dialog = makeDialog()
+        end
+    end
+
+    -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Organized Allies ]] --
+    if CosmicVaultDialogue then
+        local overrideLine = CosmicVaultDialogue.getValidLine("organized_allies_assist")
+        if overrideLine then
+            dialog.text = overrideLine
         end
     end
 
@@ -254,6 +262,14 @@ function traitCheck(...)
     else
         dialog = {text = "This doesn't sound like a good idea.\n\nWe wish you best of luck in your struggles."%_t}
         invokeServerFunction("deny", faction.index)
+    end
+
+    -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Organized Allies ]] --
+    if CosmicVaultDialogue then
+        local overrideLine = CosmicVaultDialogue.getValidLine("organized_allies_trait_check")
+        if overrideLine then
+            dialog.text = overrideLine
+        end
     end
 
     ScriptUI(interactedEntityIndex):showDialog(dialog)
