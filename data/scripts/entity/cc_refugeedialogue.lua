@@ -57,6 +57,10 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
     if not onServer() then return end
     if helped then return end
 
+    -- SECURITY PATCH: Prevent ACE (Arbitrary Code Execution) vulnerability where clients can send negative amounts or invalid goods
+    if goodName ~= "Food" and goodName ~= "Medical Supplies" then return end
+    if type(amount) ~= "number" or amount <= 0 then return end
+
     local player = Player(callingPlayer)
     local ship = player.craft
     if not ship or not ship:hasComponent(ComponentType.CargoBay) then return end

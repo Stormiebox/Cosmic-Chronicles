@@ -27,12 +27,12 @@ function CosmicChroniclesStockMarket.simulateStockMarket()
     local article = {}
 
     if isBoom then
-        article.title = targetFaction.name .. " Economic Boom"
-        article.content = "Massive industrial surpluses are crashing local commodity prices across " .. targetFaction.name .. " territory. Traders are flocking to take advantage of the dirt-cheap supply."
+        article.title = tostring(targetFaction.name) .. " Economic Boom"
+        article.content = "Massive industrial surpluses are crashing local commodity prices across " .. tostring(targetFaction.name) .. " territory. Traders are flocking to take advantage of the dirt-cheap supply."
         article.category = "Economy"
     else
-        article.title = targetFaction.name .. " Supply Chain Collapse"
-        article.content = "Critical supply chain failures have caused a massive shortage of high-tech and medical goods in " .. targetFaction.name .. " sectors. Demand prices are skyrocketing."
+        article.title = tostring(targetFaction.name) .. " Supply Chain Collapse"
+        article.content = "Critical supply chain failures have caused a massive shortage of high-tech and medical goods in " .. tostring(targetFaction.name) .. " sectors. Demand prices are skyrocketing."
         article.category = "Economy"
     end
 

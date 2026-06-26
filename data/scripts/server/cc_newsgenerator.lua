@@ -28,7 +28,7 @@ function CosmicChroniclesNewsGenerator.onBehemothAttackStart(quadrant, x, y)
 
     CosmicVaultNews.publishArticle({
         title = "BEHEMOTH INCURSION DETECTED",
-        content = "Warning! A catastrophic spatial anomaly has been detected! The Behemoth of the " .. quadName .. " has dropped out of hyperspace and is currently assaulting sector [" .. x .. ":" .. y .. "]. All available captains are urged to defend the sector immediately!",
+        content = "Warning! A catastrophic spatial anomaly has been detected! The Behemoth of the " .. tostring(quadName) .. " has dropped out of hyperspace and is currently assaulting sector [" .. tostring(x) .. ":" .. tostring(y) .. "]. All available captains are urged to defend the sector immediately!",
         category = "Galactic Threat"
     })
 end
@@ -118,14 +118,14 @@ function CosmicChroniclesNewsGenerator.generateWarNews()
 
     if heat > 0.5 then
         CosmicVaultNews.publishArticle({
-            title = "MOST WANTED: " .. faction.name .. " Issues High-Value Bounty",
-            content = "Due to extreme hostiles operating in their territory, the " .. faction.name .. " military has designated a notorious pirate dreadnought as a Tier 1 Threat" .. sectorStr .. ".\n\nAll independent mercenaries are cleared to engage. A massive bounty has been authorized for its destruction.",
+            title = "MOST WANTED: " .. tostring(faction.name) .. " Issues High-Value Bounty",
+            content = "Due to extreme hostiles operating in their territory, the " .. tostring(faction.name) .. " military has designated a notorious pirate dreadnought as a Tier 1 Threat" .. sectorStr .. ".\n\nAll independent mercenaries are cleared to engage. A massive bounty has been authorized for its destruction.",
             category = "Bounty Board"
         })
     else
         CosmicVaultNews.publishArticle({
-            title = "Territorial Shift in " .. faction.name .. " Space",
-            content = "Military outposts report that " .. faction.name .. " has successfully pushed the frontline further into enemy space following a decisive victory" .. sectorStr .. ".\n\nScavenger vessels are already moving in to clean up the wreckage of the destroyed staging grounds.",
+            title = "Territorial Shift in " .. tostring(faction.name) .. " Space",
+            content = "Military outposts report that " .. tostring(faction.name) .. " has successfully pushed the frontline further into enemy space following a decisive victory" .. sectorStr .. ".\n\nScavenger vessels are already moving in to clean up the wreckage of the destroyed staging grounds.",
             category = "Conflict"
         })
     end
@@ -138,14 +138,14 @@ function CosmicChroniclesNewsGenerator.generateEconomyNews()
 
     if random():test(0.5) then
         CosmicVaultNews.publishArticle({
-            title = "Trade Crisis: " .. faction.name .. " Faces Severe Shortages",
-            content = "A recent string of pirate embargoes has plunged " .. faction.name .. " into a severe resource drought. Reports indicate critical shortages of Medical Supplies and Processors.\n\nPrices have skyrocketed. Independent merchants and smugglers are advised to exploit the markup while the crisis lasts.",
+            title = "Trade Crisis: " .. tostring(faction.name) .. " Faces Severe Shortages",
+            content = "A recent string of pirate embargoes has plunged " .. tostring(faction.name) .. " into a severe resource drought. Reports indicate critical shortages of Medical Supplies and Processors.\n\nPrices have skyrocketed. Independent merchants and smugglers are advised to exploit the markup while the crisis lasts.",
             category = "Economy"
         })
     else
         CosmicVaultNews.publishArticle({
-            title = "Market Boom: " .. faction.name .. " Tech Sector Surges",
-            content = "Stock exchanges across " .. faction.name .. " space have reported record highs today. A sudden surplus in industrial goods has driven manufacturing costs down, resulting in massive profits for local mega-corporations.",
+            title = "Market Boom: " .. tostring(faction.name) .. " Tech Sector Surges",
+            content = "Stock exchanges across " .. tostring(faction.name) .. " space have reported record highs today. A sudden surplus in industrial goods has driven manufacturing costs down, resulting in massive profits for local mega-corporations.",
             category = "Economy"
         })
     end
@@ -173,8 +173,8 @@ function CosmicChroniclesNewsGenerator.generateCaptainNews()
     end
 
     CosmicVaultNews.publishArticle({
-        title = "Galactic Spotlight: The Exploits of " .. playerName,
-        content = "Famed " .. capClass .. " captain, " .. playerName .. ", has recently made headlines across the coreward sectors after successfully completing a massive and highly dangerous operation.\n\nLocal authorities have praised their efforts, and their reputation continues to grow among the stars.",
+        title = "Galactic Spotlight: The Exploits of " .. tostring(playerName),
+        content = "Famed " .. capClass .. " captain, " .. tostring(playerName) .. ", has recently made headlines across the coreward sectors after successfully completing a massive and highly dangerous operation.\n\nLocal authorities have praised their efforts, and their reputation continues to grow among the stars.",
         category = "Captain Feats"
     })
 end

@@ -52,7 +52,7 @@ function CCVanillaNews.onSeedNews()
         cv_news.publishArticle({
                 title = "Bottan's Smuggling Ring Busted!",
                 category = "Galactic Milestone",
-                content = string.format("The infamous smuggler Bottan has finally been brought to justice by Commander %s. Faction security forces report a massive drop in black market shipments.", player.name)
+                content = string.format("The infamous smuggler Bottan has finally been brought to justice by Commander %s. Faction security forces report a massive drop in black market shipments.", tostring(player.name))
             })
         end
             -- Prevent duplicate news if multiple players killed him
@@ -64,7 +64,7 @@ function CCVanillaNews.onSeedNews()
         cv_news.publishArticle({
                 title = "M.A.D. Science Lab Destroyed!",
                 category = "Galactic Milestone",
-                content = string.format("A secretive mobile laboratory conducting deeply unethical experiments has been eradicated by Commander %s. Authorities refuse to comment on the technology recovered.", player.name)
+                content = string.format("A secretive mobile laboratory conducting deeply unethical experiments has been eradicated by Commander %s. Authorities refuse to comment on the technology recovered.", tostring(player.name))
             })
         end
             player:setValue("last_killed_scientist", nil)
@@ -75,7 +75,7 @@ function CCVanillaNews.onSeedNews()
         cv_news.publishArticle({
                 title = "The Brotherhood Shattered",
                 category = "Galactic Milestone",
-                content = string.format("The elusive cult known as 'The Brotherhood', or 'The 4', has been decimated by Commander %s. Their mysterious artifact has been recovered.", player.name)
+                content = string.format("The elusive cult known as 'The Brotherhood', or 'The 4', has been decimated by Commander %s. Their mysterious artifact has been recovered.", tostring(player.name))
             })
         end
             player:setValue("last_killed_the4", nil)
@@ -86,7 +86,7 @@ function CCVanillaNews.onSeedNews()
         cv_news.publishArticle({
                 title = "Xsotan Wormhole Guardian Defeated!",
                 category = "Galactic Milestone",
-                content = string.format("Incredible reports are flooding in! Commander %s has successfully destroyed the massive Xsotan Guardian protecting the galactic core. The barrier to the center of the galaxy is opening!", player.name)
+                content = string.format("Incredible reports are flooding in! Commander %s has successfully destroyed the massive Xsotan Guardian protecting the galactic core. The barrier to the center of the galaxy is opening!", tostring(player.name))
             })
         end
             if not server:getValue("cc_news_whg_published") then
@@ -100,7 +100,7 @@ function CCVanillaNews.onSeedNews()
                 cv_news.publishArticle({
                     title = "Pirate Stronghold Eradicated",
                     category = "Military Action",
-                    content = string.format("A heavily fortified pirate sector was completely wiped out by Commander %s. Local trade routes are seeing a massive resurgence in traffic.", player.name)
+                    content = string.format("A heavily fortified pirate sector was completely wiped out by Commander %s. Local trade routes are seeing a massive resurgence in traffic.", tostring(player.name))
                 })
             end
                 player:setValue("cc_news_pirate_hideout_published", true)

@@ -32,7 +32,7 @@ end
 
 
 function getUpdateInterval()
-    time = time or random():getInt() * 0.5 + 0.5
+    time = time or random():getFloat() * 0.5 + 0.5
     return time
 end
 
@@ -105,7 +105,7 @@ function onBreak(entityId, ...)
             local numTurrets = (newPlan.numBlocks / 25) + 1
             BigAI.addTurrets(child, numTurrets)
 
-            child.shieldDurability = child.shieldMaxDurability * random():getInt()
+            child.shieldDurability = child.shieldMaxDurability * random():getFloat()
 
             WreckageCreator(child.index).active = false
             child:invokeFunction("story/bigaibehaviour.lua", "setAngry")

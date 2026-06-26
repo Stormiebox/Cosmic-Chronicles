@@ -32,7 +32,7 @@ end
 
 
 function getUpdateInterval()
-    time = time or random():getInt() * 0.5 + 0.5
+    time = time or random():getFloat() * 0.5 + 0.5
     return time
 end
 
