@@ -1,4 +1,4 @@
-# Cosmic Chronicles: A Player's Guide to a Living Galaxy
+# 🪐 Cosmic Chronicles - Detailed Features
 
 Have you ever docked at a station and wondered what the locals are actually thinking? In the vast, procedurally generated universe of Avorion, space can sometimes feel a little quiet. **Cosmic Chronicles** was built to change that by transforming the cold math of background simulations into human stories.
 
@@ -56,6 +56,8 @@ When you jump into an empty sector, the mod checks the local political climate. 
 
 If you venture deep into the heart of an ancient faction's territory, your ship's computer might warn you about a colossal, cinematic **Cultural Monument**. Taking the time to approach it and read its inscriptions will earn you a massive, permanent (+1500) reputation boost with that faction.
 
+Other deep-space events include intercepting silent **Drifting Ghost Ships**, racing to destroy deeply-embedded **Rogue AI Probes** before they warp out with your sector data, or desperately attempting to extract a **Stranded Diplomat** whose military escort was annihilated.
+
 These aren't just random events; they only happen *because* of the state of the galaxy.
 
 ### 🎖️ Your Crew Matters (Captain Synergies)
@@ -87,10 +89,10 @@ Cosmic Chronicles intercepts these emails and dynamically writes a **Captain's L
 
 During the Cosmic Series Final QA Audit (v3.0+), several massive backend systems were standardized across all mods:
 
-### 📖 Cosmic Codex Integration
+### 🛠️ Cosmic Codex Integration
 All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
 
-### 🔒 Network Safety & Anti-Cheat
+### 🛠️ Network Safety & Anti-Cheat
 - **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
 - **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
 

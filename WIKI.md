@@ -1,4 +1,4 @@
-# ⚙️ Cosmic Chronicles - Detailed Features
+# 🪐 Cosmic Chronicles - Detailed Features
 
 Welcome to the **Cosmic Chronicles** official wiki! This page contains the full, detailed documentation for the narrative and lore expansion module in the **Cosmic** mod series.
 
@@ -10,7 +10,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 ---
 
-## 📑 Table of Contents
+## 📜 Table of Contents
 
 - [Mod Identity & Design Goals](#mod-identity--design-goals)
 - [Architecture Summary](#architecture-summary)
@@ -19,7 +19,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 ---
 
-## 🧬 Mod Identity & Design Goals
+## 🔗 Mod Identity & Design Goals
 
 <details>
 <summary><b>View Mod Identity & Core Goals</b></summary>
@@ -37,7 +37,7 @@ Welcome to the **Cosmic Chronicles** official wiki! This page contains the full,
 
 ---
 
-## 🏗️ Architecture Summary
+## 🔗 Architecture Summary
 
 <details>
 <summary><b>View Architecture Details</b></summary>
@@ -97,12 +97,15 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 3. **Black Box Extraction:** Spawns via a custom stash script inside Derelict Graveyards. Players can interact with the Stash to extract the doomed captain's final audio log, alongside high-tier System Upgrades and credits that dynamically scale based on distance to the core.
    - **Captain Synergy:** Scavenger and Explorer captains extract 25-50% more value and have a higher chance to pull *Exceptional* system upgrades.
 4. **Cinematic Monuments:** *(Triggers deep inside AI territory)*. Spawns colossal, 2.5x scaled procedural monuments. A Ship Computer broadcast warns players upon entry. Paying your respects by reading the inscription grants a permanent **+1500 reputation boost** with the local faction.
+5. **Drifting Ghost Ship:** Players may intercept a faint, repeating distress signal from a derelict freighter drifting silently in space. Boarding/interacting with the ship triggers a narrative dialog script.
+6. **Rogue AI Probe:** Spawns a fast, evasive military probe that scales its shields and damage up to 500% based on proximity to the Galactic Core. If players cannot destroy it within 3 minutes, it activates its hyperdrive and escapes with scanned sector data.
+7. **Stranded Diplomat:** Emergency civilian broadcast detected. A faction's diplomat is stranded in hostile space after their escort was destroyed. Players must extract them before they are captured.
 
 </details>
 
 ---
 
-## Dependencies & Compatibility
+## 🔗 Dependencies & Compatibility
 
 <details>
 <summary><h3>Required Mods</h3></summary>
@@ -133,10 +136,10 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 
 During the Cosmic Series Final QA Audit (v3.0+), several massive backend systems were standardized across all mods:
 
-### 📖 Cosmic Codex Integration
+### 🛠️ Cosmic Codex Integration
 All deep lore, stat blocks, and dynamic recipes have been fully integrated into the in-game **Cosmic Codex**. You no longer need to tab out of the game to read these features; they will natively update and unlock inside your Codex UI as you progress!
 
-### 🔒 Network Safety & Anti-Cheat
+### 🛠️ Network Safety & Anti-Cheat
 - **Math.Random Fix:** We systematically replaced all unstable Lua `math.random` calls with Avorion's deterministic `random():getInt()` generation sequence. This guarantees 100% synchronization on Multiplayer Dedicated Servers and prevents cascading desyncs during massive fleet spawns.
 - **Callable Validation:** UI and background scripts have been fully hardened. Malicious clients can no longer spoof "free" remote calls; the server actively verifies execution contexts before processing any requests, sealing multiple Arbitrary Code Execution (ACE) vulnerabilities.
 
@@ -144,5 +147,5 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 - **Scout Mission Fix:** We patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
 </details>
 
-## Architecture Note
+## 🔗 Architecture Note
 Cosmic Chronicles is now a hard-coded dependency of the Core 5 ecosystem.

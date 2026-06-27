@@ -1,4 +1,4 @@
-# 🌌 Cosmic Chronicles
+# 🪐 Cosmic Chronicles - Detailed Features
 
 *A dynamic economy and galactic news simulation.*
 
