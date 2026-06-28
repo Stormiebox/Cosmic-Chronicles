@@ -1,4 +1,4 @@
-﻿package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
 local CaptainClass = include("captainclass")
@@ -82,6 +82,6 @@ function triggerServerPayout(tier)
     end
     
     -- Visual warp out
-    sector:createHyperspaceAnimation(entity, entity.translationf, ColorRGB(0.2, 0.8, 0.2), 1.0)
+    sector:createHyperspaceJumpAnimation(entity, entity.look, ColorRGB(0.2, 0.8, 0.2), 1.0)
     sector:deleteEntity(entity)
 end

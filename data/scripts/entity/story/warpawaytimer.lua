@@ -25,7 +25,7 @@ function updateServer(timeStep)
         sector:broadcastChatMessage(entity.title or "Rogue AI", 0, "Data extraction complete. Initiating hyperspace warp. Goodbye, organics.")
         
         -- Create a hyperspace animation visual effect
-        sector:createHyperspaceAnimation(entity, entity.translationf, ColorRGB(0.1, 0.5, 1.0), 1.5)
+        sector:createHyperspaceJumpAnimation(entity, entity.look, ColorRGB(0.1, 0.5, 1.0), 1.5)
         
         -- Delete the entity
         sector:deleteEntity(entity)
