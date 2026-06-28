@@ -102,3 +102,8 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 
 ### Core Integration
 The Chronicles news network is deeply integrated into the Core 5 mods, reporting on everything from Famines to Ascendancy Sieges.
+
+## 🌌 Cosmic Vault Synergy
+- **Deep Economy Warfare:** Ambient Galactic News events (Trade Crisis & Market Boom) are no longer just cosmetic text. They natively tie into the Cosmic Vault Economy API, spiking or dropping a faction's active Famine Score.
+- **Dead Empire Filter:** Galactic News Generation natively utilizes the vault to strictly filter out destroyed empires, preventing ghost factions from broadcasting messages.
+- **Post-Boss Anomalies:** Upon destroying the infamous Bottan Dreadnought, the game natively spawns a persistent Spatial Rift anomaly for advanced exploration.

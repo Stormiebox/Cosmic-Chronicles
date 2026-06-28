@@ -8,6 +8,7 @@ include ("randomext")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
+local cv_anomalies = include("cosmicvaultanomalies")
 
 local canFlee = true
 
@@ -282,6 +283,12 @@ function onDestroyed()
         -- reset mission cooldown
         local runtime = Server().unpausedRuntime
         player:setValue("last_killed_bottan", runtime)
+    end
+
+    -- Synergy: Post-Boss Anomaly Generation
+    if cv_anomalies and cv_anomalies.spawnAnomaly then
+        local x, y = Sector():getCoordinates()
+        cv_anomalies.spawnAnomaly(x, y, "SpatialRift", Entity().translationf)
     end
 end
 

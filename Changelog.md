@@ -9,6 +9,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## v3.0.0 UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
 
+### 🌌 Cosmic Vault Synergy (Cross-Mod Engine)
+- **Deep Economy Integration:** Ambient Galactic News events (Trade Crisis & Market Boom) are no longer just cosmetic text. They seamlessly tie into the `CosmicVaultEconomy` API, natively spiking or dropping a faction's active Famine Score.
+- **Dead Empire Filter:** Galactic News Generation natively utilizes `FactionEradicationUtility` to strictly filter out destroyed empires, preventing ghost factions from broadcasting messages.
+- **Post-Boss Anomalies:** Upon destroying the infamous Bottan Dreadnought, the game natively invokes `CosmicVaultAnomalies` to spawn a persistent `SpatialRift` anomaly for advanced exploration.
+- **Unified News API:** Refactored multiple legacy news broadcasting systems to securely pass through the new `CosmicVaultNews.publishArticle` architecture for global validation.
+
 ### 🚀 Improved & Upgraded
 - **Updated:** Global Compliance and API updates across various scripts.
 - **Vault Integration:** Assured full compatibility with the new CCM 3-Column layout and Keybind systems.
