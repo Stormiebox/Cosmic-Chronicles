@@ -10,6 +10,13 @@ local helped = false
 
 function CosmicChroniclesRefugee.interactionPossible(playerIndex, option)
     if helped then return false end
+    
+    local player = Player(playerIndex)
+    if not player then return false end
+    local craft = player.craft
+    if not craft then return false end
+    if craft:getDistance(Entity()) > 50 then return false end
+    
     return true
 end
 
@@ -106,7 +113,7 @@ end
 
 function CosmicChroniclesRefugee.jumpAway()
     if not onServer() then return end
-    Entity():addScriptOnce("entity/utility/delayedjump.lua", 2)
+    Entity():addScriptOnce("deletejumped.lua")
 end
 
 return CosmicChroniclesRefugee

@@ -5,6 +5,14 @@ local CaptainClass = include("captainclass")
 include("callable")
 
 function interactionPossible(playerIndex, option)
+    local player = Player(playerIndex)
+    if not player then return false end
+    local craft = player.craft
+    if not craft then return false end
+    
+    -- Must be within 50 units (500m) to dock/board
+    if craft:getDistance(Entity()) > 50 then return false end
+    
     return true
 end
 
@@ -75,14 +83,14 @@ function triggerServerPayout(tier)
         -- Smuggler bonus: Illegal Goods (e.g. 50x Unbranded Weapons or similar)
         -- Since adding specific cargo safely requires more logic, we can just drop a high rarity system upgrade as a "bribe"
         local UpgradeGenerator = include("upgradegenerator")
-        local upgrade = UpgradeGenerator():generateSectorSystem(sector:getCoordinates(), 0, Rarity(RarityType.Exotic))
+        local x, y = sector:getCoordinates()
+        local upgrade = UpgradeGenerator():generateSectorSystem(x, y, 0, Rarity(RarityType.Exotic))
         sector:dropUpgrade(entity.translationf, nil, nil, upgrade)
         player:sendChatMessage("Smuggler", 0, "They threw in some highly illegal tech as a bribe to keep our mouths shut.")
     end
     
     -- Visual warp out
-    sector:createHyperspaceJumpAnimation(entity, entity.look, ColorRGB(0.2, 0.8, 0.2), 1.0)
-    sector:deleteEntity(entity)
+    entity:addScriptOnce("deletejumped.lua")
 end
 
 callable(nil, "triggerServerPayout")

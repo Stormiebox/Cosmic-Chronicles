@@ -10,6 +10,11 @@ function initialize()
 end
 
 function interactionPossible(playerIndex, option)
+    local player = Player(playerIndex)
+    if not player then return false end
+    local craft = player.craft
+    if not craft then return false end
+    if craft:getDistance(Entity()) > 50 then return false end
     return true
 end
 
@@ -51,6 +56,7 @@ function triggerLootServer()
     player:sendChatMessage("Ship Computer", 0, "Downloaded encrypted schematics and valuables from the cache.")
 
     -- Destroy the stash entity
+    Sector():createExplosion(entity.translationf, 1, false)
     Sector():deleteEntity(entity)
 end
 

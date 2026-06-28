@@ -8,7 +8,15 @@ CosmicChroniclesBlackBox = {}
 local extracted = false
 
 function CosmicChroniclesBlackBox.interactionPossible(playerIndex, option)
-    return not extracted
+    if extracted then return false end
+    
+    local player = Player(playerIndex)
+    if not player then return false end
+    local craft = player.craft
+    if not craft then return false end
+    if craft:getDistance(Entity()) > 50 then return false end
+    
+    return true
 end
 
 function CosmicChroniclesBlackBox.initUI()
@@ -69,6 +77,7 @@ function CosmicChroniclesBlackBox.extract()
     end
 
     player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted data and recovered credits from the black box."%_T)
+    Sector():createExplosion(Entity().translationf, 1, false)
     Sector():deleteEntity(Entity())
 end
 callable(CosmicChroniclesBlackBox, "extract")

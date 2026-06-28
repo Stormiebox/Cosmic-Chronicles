@@ -24,11 +24,9 @@ function updateServer(timeStep)
         
         sector:broadcastChatMessage(entity.title or "Rogue AI", 0, "Data extraction complete. Initiating hyperspace warp. Goodbye, organics.")
         
-        -- Create a hyperspace animation visual effect
-        sector:createHyperspaceJumpAnimation(entity, entity.look, ColorRGB(0.1, 0.5, 1.0), 1.5)
-        
-        -- Delete the entity
-        sector:deleteEntity(entity)
+        -- Jump out cleanly using native jump script
+        entity:addScriptOnce("deletejumped.lua")
+        terminate()
     elseif timeRemaining <= 60 and not warned then
         warned = true
         Sector():broadcastChatMessage(Entity().title or "Rogue AI", 0, "Warning: Local data assimilation at 75%. Preparing for warp jump in 60 seconds.")

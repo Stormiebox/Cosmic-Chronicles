@@ -12,6 +12,11 @@ function initialize()
 end
 
 function interactionPossible(playerIndex, option)
+    local player = Player(playerIndex)
+    if not player then return false end
+    local craft = player.craft
+    if not craft then return false end
+    if craft:getDistance(Entity()) > 50 then return false end
     return true
 end
 
