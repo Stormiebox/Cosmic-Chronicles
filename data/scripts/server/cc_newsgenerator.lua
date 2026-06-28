@@ -101,7 +101,14 @@ function CosmicChroniclesNewsGenerator.checkBossDefeats()
 end
 
 function CosmicChroniclesNewsGenerator.generateWarNews()
-    local factions = {Galaxy():getFactions()}
+    local factions = {}
+    local factionStr = Server():getValue("factions")
+    if type(factionStr) == "string" and factionStr ~= "" then
+        for id in string.gmatch(factionStr, "([^,]+)") do
+            local f = Faction(tonumber(id))
+            if f then table.insert(factions, f) end
+        end
+    end
     local validFactions = {}
     for _, f in pairs(factions) do
         if f and not f.isPlayer and not f.isAlliance then
@@ -146,7 +153,14 @@ function CosmicChroniclesNewsGenerator.generateWarNews()
 end
 
 function CosmicChroniclesNewsGenerator.generateEconomyNews()
-    local factions = {Galaxy():getFactions()}
+    local factions = {}
+    local factionStr = Server():getValue("factions")
+    if type(factionStr) == "string" and factionStr ~= "" then
+        for id in string.gmatch(factionStr, "([^,]+)") do
+            local f = Faction(tonumber(id))
+            if f then table.insert(factions, f) end
+        end
+    end
     local validFactions = {}
     for _, f in pairs(factions) do
         if f and not f.isPlayer and not f.isAlliance then

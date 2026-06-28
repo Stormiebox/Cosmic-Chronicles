@@ -1,4 +1,4 @@
-﻿package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
 local CaptainClass = include("captainclass")
@@ -78,7 +78,7 @@ function triggerLootServer()
     for i = 1, numUpgrades do
         local rType = RarityType.Rare
         if scale >= 3.0 then rType = RarityType.Exceptional end
-        if (isScavenger or isExplorer) and math.random() > 0.5 then
+        if (isScavenger or isExplorer) and random():test(0.5) then
             rType = RarityType.Exotic
         end
         

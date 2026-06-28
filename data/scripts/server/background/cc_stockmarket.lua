@@ -20,7 +20,14 @@ function CosmicChroniclesStockMarket.simulateStockMarket()
     local cv_economy = include("cosmicvaulteconomy")
     local cv_news = include("cosmicvaultnews")
 
-    local factions = {Galaxy():getFactions()}
+    local factions = {}
+    local factionStr = Server():getValue("factions")
+    if type(factionStr) == "string" and factionStr ~= "" then
+        for id in string.gmatch(factionStr, "([^,]+)") do
+            local f = Faction(tonumber(id))
+            if f then table.insert(factions, f) end
+        end
+    end
     if #factions == 0 then return end
 
     local targetFaction
