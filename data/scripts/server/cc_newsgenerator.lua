@@ -4,6 +4,8 @@ include("randomext")
 -- Load APIs
 local CosmicVaultNews = include("cosmicvaultnews")
 local cw_success = true; include("cosmicwarbridge")
+local FactionEradicationUtility = include("factioneradicationutility")
+local cv_economy = include("cosmicvaulteconomy")
 
 -- namespace CosmicChroniclesNewsGenerator
 CosmicChroniclesNewsGenerator = {}
@@ -100,8 +102,20 @@ end
 
 function CosmicChroniclesNewsGenerator.generateWarNews()
     local factions = {Galaxy():getFactions()}
-    if #factions == 0 then return end
-    local faction = factions[random():getInt(1, #factions)]
+    local validFactions = {}
+    for _, f in pairs(factions) do
+        if f and not f.isPlayer and not f.isAlliance then
+            local isEradicated = false
+            if FactionEradicationUtility and FactionEradicationUtility.isFactionEradicated then
+                isEradicated = FactionEradicationUtility.isFactionEradicated(f.index)
+            end
+            if not isEradicated then
+                table.insert(validFactions, f)
+            end
+        end
+    end
+    if #validFactions == 0 then return end
+    local faction = validFactions[random():getInt(1, #validFactions)]
 
     local heat = 0
     if CosmicWarBridge and CosmicWarBridge.computeWarHeatForFaction then
@@ -133,8 +147,20 @@ end
 
 function CosmicChroniclesNewsGenerator.generateEconomyNews()
     local factions = {Galaxy():getFactions()}
-    if #factions == 0 then return end
-    local faction = factions[random():getInt(1, #factions)]
+    local validFactions = {}
+    for _, f in pairs(factions) do
+        if f and not f.isPlayer and not f.isAlliance then
+            local isEradicated = false
+            if FactionEradicationUtility and FactionEradicationUtility.isFactionEradicated then
+                isEradicated = FactionEradicationUtility.isFactionEradicated(f.index)
+            end
+            if not isEradicated then
+                table.insert(validFactions, f)
+            end
+        end
+    end
+    if #validFactions == 0 then return end
+    local faction = validFactions[random():getInt(1, #validFactions)]
 
     if random():test(0.5) then
         CosmicVaultNews.publishArticle({
@@ -142,12 +168,18 @@ function CosmicChroniclesNewsGenerator.generateEconomyNews()
             content = "A recent string of pirate embargoes has plunged " .. tostring(faction.name) .. " into a severe resource drought. Reports indicate critical shortages of Medical Supplies and Processors.\n\nPrices have skyrocketed. Independent merchants and smugglers are advised to exploit the markup while the crisis lasts.",
             category = "Economy"
         })
+        if cv_economy and cv_economy.addFamineScore then
+            cv_economy.addFamineScore(faction.index, 25)
+        end
     else
         CosmicVaultNews.publishArticle({
             title = "Market Boom: " .. tostring(faction.name) .. " Tech Sector Surges",
             content = "Stock exchanges across " .. tostring(faction.name) .. " space have reported record highs today. A sudden surplus in industrial goods has driven manufacturing costs down, resulting in massive profits for local mega-corporations.",
             category = "Economy"
         })
+        if cv_economy and cv_economy.addFamineScore then
+            cv_economy.addFamineScore(faction.index, -20)
+        end
     end
 end
 
