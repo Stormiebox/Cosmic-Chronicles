@@ -57,7 +57,6 @@ function triggerSmugglerPayout()
     if onClient() then invokeServerFunction("triggerServerPayout", 3); return end
 end
 
-callable(nil, "triggerServerPayout")
 function triggerServerPayout(tier)
     local entity = Entity()
     local player = Player(callingPlayer)
@@ -85,3 +84,5 @@ function triggerServerPayout(tier)
     sector:createHyperspaceJumpAnimation(entity, entity.look, ColorRGB(0.2, 0.8, 0.2), 1.0)
     sector:deleteEntity(entity)
 end
+
+callable(nil, "triggerServerPayout")

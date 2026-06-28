@@ -1,8 +1,10 @@
-﻿package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
 local CaptainClass = include("captainclass")
 include("callable")
+include("utility")
+
 
 function interactionPossible(playerIndex, option)
     return true
@@ -57,7 +59,6 @@ function triggerExplorerLoot()
     if onClient() then invokeServerFunction("triggerServerLoot", 3); return end
 end
 
-callable(nil, "triggerServerLoot")
 function triggerServerLoot(lootTier)
     local entity = Entity()
     local player = Player(callingPlayer)
@@ -78,3 +79,6 @@ function triggerServerLoot(lootTier)
     sector:createExplosion(entity.translationf, 1, false)
     sector:deleteEntity(entity)
 end
+
+callable(nil, "triggerServerLoot")
+

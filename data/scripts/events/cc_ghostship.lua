@@ -22,6 +22,13 @@ function GhostShipEvent.spawn()
 
     -- Strip AI to make it dead
     ghost:removeScript("data/scripts/entity/ai/patrol.lua")
+    
+    local ai = ShipAI(ghost.index)
+    if ai then
+        ai:setPassive()
+        ai:setIdle()
+    end
+    ghost.crew = Crew()
 
     Sector():broadcastChatMessage("Scanner", 0, "Anomaly detected. Faint, repeating distress signal from a drifting vessel.")
 end

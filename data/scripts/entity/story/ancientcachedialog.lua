@@ -36,7 +36,6 @@ function triggerLoot()
         return
     end
 end
-callable(nil, "triggerLootServer")
 
 function triggerLootServer()
     local entity = Entity()
@@ -86,6 +85,8 @@ function triggerLootServer()
         sector:dropUpgrade(entity.translationf, nil, nil, upgrade)
     end
     
-    sector:createExplosion(entity.translationf, 1, false)
+    sector:createExplosion(entity.translationf, 1.5, false)
     sector:deleteEntity(entity)
 end
+
+callable(nil, "triggerLootServer")

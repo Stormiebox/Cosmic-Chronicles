@@ -36,12 +36,12 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
 
     local heat = getSectorWarHeat()
 
-    -- 25% chance to spawn Graveyard if Heat > 80
-    if heat > 80 and random():getInt(1, 100) <= 25 then
+    -- 10% chance to spawn Graveyard if Heat > 40
+    if heat > 40 and random():getInt(1, 100) <= 10 then
         sector:setValue("cc_event_spawned", true)
         sector:addScriptOnce("events/cc_derelictgraveyard.lua")
-    -- 25% chance to spawn Refugees if Heat > 40
-    elseif heat > 40 and random():getInt(1, 100) <= 25 then
+    -- 10% chance to spawn Refugees if Heat > 40
+    elseif heat > 40 and random():getInt(1, 100) <= 10 then
         sector:setValue("cc_event_spawned", true)
         sector:addScriptOnce("events/cc_refugeeconvoy.lua")
     else
@@ -59,29 +59,29 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
             local hx, hy = controllingFaction:getHomeSectorCoordinates()
             if hx and hy then
                 local dist = math.sqrt((x - hx)^2 + (y - hy)^2)
-                -- If we are in the "Inner Area" (<= 15 distance from home), 15% chance to find a Monument
-                if dist <= 15 and random():getInt(1, 100) <= 15 then
+                -- If we are in the "Inner Area" (<= 15 distance from home), 10% chance to find a Monument
+                if dist <= 15 and random():getInt(1, 100) <= 10 then
                     sector:setValue("cc_event_spawned", true)
                     sector:addScriptOnce("events/cc_spawnmonument.lua")
                     return
                 end
             end
         end
-        
+
         -- v3.0.0: New Deep Space Events
         local coreDist = math.sqrt(x*x + y*y)
         local roll = random():getInt(1, 100)
-        
-        if coreDist <= 150 and roll <= 25 then
+
+        if coreDist <= 150 and roll <= 10 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_ancientdatacache.lua")
-        elseif roll <= 10 then
+        elseif roll > 10 and roll <= 18 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_rogueaiprobe.lua")
-        elseif roll > 10 and roll <= 25 then
+        elseif roll > 18 and roll <= 26 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_ghostship.lua")
-        elseif roll > 25 and roll <= 40 then
+        elseif roll > 26 and roll <= 34 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_diplomatescort.lua")
         end

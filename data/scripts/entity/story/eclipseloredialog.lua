@@ -39,7 +39,6 @@ function triggerLoot()
         return
     end
 end
-callable(nil, "triggerLootServer")
 
 function triggerLootServer()
     local entity = Entity()
@@ -54,3 +53,6 @@ function triggerLootServer()
     -- Destroy the stash entity
     Sector():deleteEntity(entity)
 end
+
+callable(nil, "triggerLootServer")
+
