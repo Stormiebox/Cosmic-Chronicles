@@ -16,6 +16,16 @@ Cosmic Chronicles adds a living economy and news network to the galaxy. The Gala
 - **Deep Integration:** Ties directly into Cosmic War and Overhaul to reflect their events in the news and economy.
 </details>
 
+## 🌌 Cosmic Vault Synergy
+<details>
+<summary><b>Click to expand featuers</b></summary>
+Cosmic Chronicles is deeply integrated into the central **Cosmic Vault** APIs:
+
+- **Global Economy Impact:** Ambient Galactic News events (Trade Crises, Market Booms) directly ping `cv_economy` to raise or lower a faction's active Famine levels.
+- **Dead Empire Filter:** Galactic broadcasts run through `FactionEradicationUtility` to ensure destroyed empires cannot transmit messages.
+- **Post-Boss Anomalies:** Defeating the Bottan Dreadnought triggers `cv_anomalies` to spawn a persistent Spatial Rift.
+</details>
+
 ## ⚙️ Requirements
 - Avorion v2.0+
 - Dependencies: **Cosmic Vault, Cosmic Overhaul, Cosmic War and Cosmic Ascendancy**
@@ -29,4 +39,3 @@ Cosmic Chronicles adds a living economy and news network to the galaxy. The Gala
 
 ## 📚 Documentation
 For detailed mechanics, guides, and lore, please refer to the in-game **Cosmic Codex**, or check the included `WIKI.md` and `PLAYER_GUIDE.md` files.
- Fully integrated into the Core 5 hard-dependency architecture.

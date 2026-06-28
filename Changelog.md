@@ -16,6 +16,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Unified News API:** Refactored multiple legacy news broadcasting systems to securely pass through the new `CosmicVaultNews.publishArticle` architecture for global validation.
 
 ### 🚀 Improved & Upgraded
+- **Standardized Jump Logic:** Swept the entire event codebase to remove hardcoded deletion logic. All AI ships now natively use the engine's `deletejumped.lua` script for flawless hyper-jump escapes.
+- **Narrative Spawn Balancing:** Adjusted the global `events.lua` controller to strictly bound `Cosmic Chronicles` narrative event spawn rates to between 6% and 12% per sector visit, preventing overwhelming event chains.
+- **Interaction Distance Enforcement:** Hardcoded a strict 500m distance constraint onto all callable interaction scripts (Diplomats, Distress Beacons) to prevent long-distance exploit interaction.
+- **Inanimate Object Polish:** Swept all debris events (Ghost Ships, Blackboxes) to ensure they play `Sector():createExplosion()` before despawning, rather than just blinking out of existence.
+- **Lore-Accurate Debris:** Ghost ships and derelicts have had their AI controllers stripped. They now function as actual dead ships rather than active pirates.
 - **Updated:** Global Compliance and API updates across various scripts.
 - **Vault Integration:** Assured full compatibility with the new CCM 3-Column layout and Keybind systems.
 
