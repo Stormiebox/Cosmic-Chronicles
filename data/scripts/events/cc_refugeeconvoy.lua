@@ -26,7 +26,12 @@ function initialize()
         content = "A massive convoy of civilian refugees has broadcasted a distress signal from sector [" .. x .. ":" .. y .. "]. The convoy claims to be fleeing severe hostilities in their home sectors. Relief ships are en route.",
         category = "Humanitarian"
     }
-    Server():sendCallback("onCCNewsPublishArticle", article)
+    local cv_news = include("cosmicvaultnews")
+    if cv_news and cv_news.publishArticle then
+        cv_news.publishArticle(article)
+    else
+        Server():sendCallback("onCCNewsPublishArticle", article)
+    end
 
     terminate()
 end

@@ -13,6 +13,11 @@ function FactionAttacksSmugglers.spawnDefenders()
             content = "Breaking news! Local military forces have cracked down on a major Black Market operation in sector [" .. x .. ":" .. y .. "]. A massive shootout has ensued as smugglers refuse to surrender to the authorities.",
             category = "Conflict"
         }
-        Server():sendCallback("onCCNewsPublishArticle", article)
+        local cv_news = include("cosmicvaultnews")
+        if cv_news and cv_news.publishArticle then
+            cv_news.publishArticle(article)
+        else
+            Server():sendCallback("onCCNewsPublishArticle", article)
+        end
     end
 end

@@ -40,7 +40,12 @@ function initialize()
         content = "Sensors have picked up massive architectural signatures emitting strange energy patterns from sector [" .. x .. ":" .. y .. "]. Historians and explorers are rushing to the sector to analyze the ancient " .. faction.name .. " structure.",
         category = "Exploration"
     }
-    Server():sendCallback("onCCNewsPublishArticle", article)
+    local cv_news = include("cosmicvaultnews")
+    if cv_news and cv_news.publishArticle then
+        cv_news.publishArticle(article)
+    else
+        Server():sendCallback("onCCNewsPublishArticle", article)
+    end
 
     terminate()
 end

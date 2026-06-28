@@ -42,7 +42,12 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
             content = string.format("A catastrophic event has occurred in sector %i:%i. The %s was completely obliterated by %s. Rescue operations are underway, but casualties are expected to be massive.", x, y, entity.translatedTitle or "Station", inflictorName)
         }
 
+        local cv_news = include("cosmicvaultnews")
+    if cv_news and cv_news.publishArticle then
+        cv_news.publishArticle(article)
+    else
         Server():sendCallback("onCCNewsPublishArticle", article)
+    end
     end
 end
 
@@ -57,3 +62,4 @@ function onEntityDestroyed(...)
 end
 
 return CCDestructionTracker
+

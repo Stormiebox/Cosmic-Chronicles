@@ -36,7 +36,12 @@ function initialize()
         content = "A massive graveyard of derelict ships has been located by an independent captain in sector [" .. x .. ":" .. y .. "]. Scavengers are warned that the area may still contain live munitions or hostile drones.",
         category = "Exploration"
     }
-    Server():sendCallback("onCCNewsPublishArticle", article)
+    local cv_news = include("cosmicvaultnews")
+    if cv_news and cv_news.publishArticle then
+        cv_news.publishArticle(article)
+    else
+        Server():sendCallback("onCCNewsPublishArticle", article)
+    end
 
     terminate()
 end
