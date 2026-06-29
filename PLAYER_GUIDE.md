@@ -107,3 +107,10 @@ The Chronicles news network is deeply integrated into the Core 5 mods, reporting
 - **Deep Economy Warfare:** Ambient Galactic News events (Trade Crisis & Market Boom) are no longer just cosmetic text. They natively tie into the Cosmic Vault Economy API, spiking or dropping a faction's active Famine Score.
 - **Dead Empire Filter:** Galactic News Generation natively utilizes the vault to strictly filter out destroyed empires, preventing ghost factions from broadcasting messages.
 - **Post-Boss Anomalies:** Upon destroying the infamous Bottan Dreadnought, the game natively spawns a persistent Spatial Rift anomaly for advanced exploration.
+
+## Synergy Update
+- **Corrupted Lore Nodes**: Data caches in Eclipse territory offer 2x rewards but instantly spawn a massive Ascendancy ambush.
+- **Explorer Resonance**: Ships commanded by an Explorer captain gain a +400% (range 250) interaction range on Black Boxes.
+- **Galactic Lore Broadcasts**: Finding a Legendary subsystem or massive credits in a data cache broadcasts your discovery globally via Cosmic Vault News.
+- **Famine Relief Anomalies**: Interact with emergency relief caches during severe faction famines to either steal the loot or donate it for massive reputation (+25,000) and instant famine reduction.
+

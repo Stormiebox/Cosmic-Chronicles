@@ -155,3 +155,10 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 
 ## 🔗 Architecture Note
 Cosmic Chronicles is now a hard-coded dependency of the Core 5 ecosystem.
+
+## Synergy Update
+- **Corrupted Lore Nodes**: Data caches in Eclipse territory offer 2x rewards but instantly spawn a massive Ascendancy ambush.
+- **Explorer Resonance**: Ships commanded by an Explorer captain gain a +400% (range 250) interaction range on Black Boxes.
+- **Galactic Lore Broadcasts**: Finding a Legendary subsystem or massive credits in a data cache broadcasts your discovery globally via Cosmic Vault News.
+- **Famine Relief Anomalies**: Interact with emergency relief caches during severe faction famines to either steal the loot or donate it for massive reputation (+25,000) and instant famine reduction.
+

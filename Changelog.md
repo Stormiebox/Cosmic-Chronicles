@@ -53,3 +53,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Multiplayer Networking:** Added `onClient()` wrappers to the Exodus Wormhole Beacon UI to prevent the local singleplayer thread from self-invoking networking callbacks.
 - **Performance & TPS Optimization:** Drastically reduced server load during late-game scenarios. Injected a hardcoded `getUpdateInterval` throttle (1.0s) into `buymission.lua` and `hermitmission.lua` to prevent the engine from polling the sector 60 times a second for these story encounters.
 - **Desyncs:** Replaced `math.random` with `random():getInt()` inside `cc_rogueaiprobe.lua` and other event generators. This prevents physics desyncs and invisible collisions in multiplayer.
+
+## [Latest Synergy Patch]
+- [Feature] Added Corrupted Lore Nodes (High risk, high reward data caches in Eclipse territory).
+- [Feature] Added Explorer Resonance (Explorer captains detect black boxes from much further away).
+- [Feature] Added Galactic Lore Broadcasts (Major discoveries publish global Cosmic Vault News).
+- [Feature] Added Famine Relief Anomalies (Interactive Famine Relief Caches during severe faction famines).
+

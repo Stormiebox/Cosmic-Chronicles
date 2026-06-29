@@ -9,23 +9,80 @@ local extracted = false
 
 function CosmicChroniclesBlackBox.interactionPossible(playerIndex, option)
     if extracted then return false end
-    
+
     local player = Player(playerIndex)
     if not player then return false end
     local craft = player.craft
     if not craft then return false end
-    if craft:getDistance(Entity()) > 50 then return false end
-    
+
+    -- Cosmic Overhaul/Chronicles: Explorer Resonance
+    local maxDistance = 50
+    local captain = craft:getCaptain()
+    if captain then
+        local CaptainClass = include("captainclass")
+        if captain:hasClass(CaptainClass.Explorer) then
+            maxDistance = 250
+        end
+    end
+
+    if craft:getDistance(Entity()) > maxDistance then return false end
+
     return true
 end
 
 function CosmicChroniclesBlackBox.initUI()
-    ScriptUI():registerInteraction("Extract Data"%_t, "onInteract")
+    if Entity():getValue("is_famine_relief") then
+        ScriptUI():registerInteraction("Inspect Relief Cache"%_t, "onInteract")
+    else
+        ScriptUI():registerInteraction("Extract Data"%_t, "onInteract")
+    end
 end
 
 function CosmicChroniclesBlackBox.onInteract()
+    if Entity():getValue("is_famine_relief") then
+        local dialog = {
+            text = "This is a Famine Relief Cache. It contains massive amounts of food and medicine intended for the starving populace of this sector.\n\nYou can either steal the contents for personal gain, or donate the supplies to the local planetary governors to relieve the famine."%_t,
+            answers = {
+                {answer = "Steal Supplies (Gain Loot)"%_t, onSelect = "invokeSteal"},
+                {answer = "Donate Supplies (Relieve Famine & Gain Rep)"%_t, onSelect = "invokeDonate"}
+            }
+        }
+        ScriptUI():showDialog(dialog)
+    else
+        invokeServerFunction("extract")
+    end
+end
+
+function CosmicChroniclesBlackBox.invokeSteal()
     invokeServerFunction("extract")
 end
+
+function CosmicChroniclesBlackBox.invokeDonate()
+    invokeServerFunction("donate")
+end
+
+function CosmicChroniclesBlackBox.donate()
+    if not onServer() then return end
+    if extracted then return end
+    extracted = true
+
+    local player = Player(callingPlayer)
+    local factionIndex = Entity():getValue("is_famine_relief")
+    if factionIndex then
+        local cve = include("cosmicvaulteconomy")
+        if cve and cve.addFamineScore then
+            cve.addFamineScore(factionIndex, -50) -- Instantly relieve 50 famine
+        end
+        local faction = Faction(factionIndex)
+        if faction then
+            Galaxy():changeFactionRelations(faction, player, 25000)
+            player:sendChatMessage(faction.name, ChatMessageType.Information, "We are eternally grateful for these supplies! You have saved countless lives!"%_T)
+        end
+    end
+    Sector():createExplosion(Entity().translationf, 1, false)
+    Sector():deleteEntity(Entity())
+end
+callable(CosmicChroniclesBlackBox, "donate")
 
 function CosmicChroniclesBlackBox.extract()
     if not onServer() then return end
@@ -38,7 +95,6 @@ function CosmicChroniclesBlackBox.extract()
     local context = { warHeat = 100 }
     local log = CosmicVaultDialogue.getValidLine("captain_log", context) or "Mayday! Shields are failing! They're coming from everywhere!"%_T
 
-    invokeClientFunction(player, "showLogDialog", log)
     -- Give valuable but balanced rewards
     local x, y = Sector():getCoordinates()
     local rewardFactor = Balancing_GetSectorRewardFactor(x, y)
@@ -58,14 +114,42 @@ function CosmicChroniclesBlackBox.extract()
         end
     end
 
+    -- Cosmic Ascendancy: Corrupted Lore Nodes
+    local isEclipseOwned = false
+    local controllingFactionIndex = Galaxy():getControllingFaction(x, y)
+    if controllingFactionIndex then
+        local faction = Faction(controllingFactionIndex)
+        if faction and faction.name == "The Eclipse" then
+            isEclipseOwned = true
+        end
+    end
+
+    if isEclipseOwned then
+        log = "[CORRUPTED DATA] // TH3Y 4R3 H3R3 // " .. log
+        bonusMultiplier = bonusMultiplier * 2.0
+    end
+
+    invokeClientFunction(player, "showLogDialog", log)
+
     -- Balanced from 75k-150k down to 15k-35k base
     local amount = math.floor(random():getInt(15000, 35000) * rewardFactor * bonusMultiplier)
     player:receive("Recovered Credits"%_t, amount)
+
+    if isEclipseOwned then
+        -- Spawn Ascendancy Ambush
+        local cv_encounter = include("cosmicvaultencounter")
+        if cv_encounter and cv_encounter.spawnAmbush then
+            cv_encounter.spawnAmbush(controllingFactionIndex, 5000, 3, nil, true)
+            player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Warning, "WARNING: Data extraction triggered a quantum distress beacon! Hostile contacts inbound!"%_T)
+        end
+    end
 
     local generator = include("upgradegenerator")()
     -- Balanced from guaranteed Rare/Exceptional to guaranteed Uncommon with a chance for Rare
     local rarityValue = RarityType.Uncommon
     if random():test(0.15 * rewardFactor * bonusMultiplier) then rarityValue = RarityType.Rare end
+    -- Cosmic Chronicles/Vault: Galactic Lore Broadcasts
+    if random():test(0.02 * rewardFactor * bonusMultiplier) then rarityValue = RarityType.Legendary end
 
     local ok, upgrade = pcall(function() return generator:generateSectorSystem(x, y, nil, {[rarityValue] = 1}) end)
     if ok and upgrade then
@@ -74,6 +158,20 @@ function CosmicChroniclesBlackBox.extract()
             upgrade = SystemUpgradeTemplate(upgrade.script, upgrade.rarity, seed)
         end
         player:getInventory():add(upgrade)
+    end
+
+    if amount >= 50000 or rarityValue == RarityType.Legendary then
+        local article = {
+            title = "Major Discovery",
+            content = "The independent commander " .. player.name .. " has successfully decrypted a highly-classified data cache in sector [" .. x .. ":" .. y .. "], unearthing immense wealth and forgotten technologies.",
+            category = "Discovery"
+        }
+        local cv_news = include("cosmicvaultnews")
+        if cv_news and cv_news.publishArticle then
+            cv_news.publishArticle(article)
+        else
+            Server():sendCallback("onCCNewsPublishArticle", article)
+        end
     end
 
     player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted data and recovered credits from the black box."%_T)
