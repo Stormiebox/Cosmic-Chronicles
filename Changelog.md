@@ -60,3 +60,6 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Feature] Added Galactic Lore Broadcasts (Major discoveries publish global Cosmic Vault News).
 - [Feature] Added Famine Relief Anomalies (Interactive Famine Relief Caches during severe faction famines).
 
+
+## [New] Rift DLC Interoperability
+- **Classified Rift Tech:** Recovered Black Boxes now have a chance to drop highly-classified `Rift Research Data` and `Subclass Subsystems`. These contraband goods are extremely valuable on the black market.

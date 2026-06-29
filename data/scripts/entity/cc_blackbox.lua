@@ -2,6 +2,10 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
 include("cosmicvaultdialogue")
 include("stringutility")
+include("goods")
+
+-- Load the goods index to ensure goods array is populated
+include("goodsindex")
 
 -- namespace CosmicChroniclesBlackBox
 CosmicChroniclesBlackBox = {}
@@ -160,6 +164,40 @@ function CosmicChroniclesBlackBox.extract()
         player:getInventory():add(upgrade)
     end
 
+    -- Cosmic Chronicles - Black Market Rift Trade
+    -- Drop Rift Research Data
+    if random():test(0.25 * bonusMultiplier) then
+        local numData = random():getInt(2, 5)
+        player:getInventory():add(goods["Rift Research Data"]:good(), numData)
+        player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Rift Research Data from the black box."%_T, numData)
+    end
+
+    -- Drop Subclass Subsystems as high-value contraband trade goods
+    if random():test(0.15 * bonusMultiplier) then
+        local subclassGoodData = {
+            name = "Subclass Subsystem",
+            plural = "Subclass Subsystems",
+            description = "A heavily encrypted, prototype subsystem core. Smugglers will pay a premium for this technology.",
+            icon = "data/textures/icons/circuit-board.png",
+            price = 125000,
+            size = 2.0,
+            illegal = true,
+            dangerous = true,
+            stolen = true
+        }
+
+        local cvGoods = include("cosmicvaultgoods")
+        cvGoods.registerGood(subclassGoodData)
+        local good = goods["Subclass Subsystem"]
+        if good then subclassGood = good:good() end
+
+        if subclassGood then
+            local numSub = random():getInt(1, 2)
+            player:getInventory():add(subclassGood, numSub)
+            player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Subclass Subsystems from the black box."%_T, numSub)
+        end
+    end
+
     if amount >= 50000 or rarityValue == RarityType.Legendary then
         local article = {
             title = "Major Discovery",
@@ -167,11 +205,7 @@ function CosmicChroniclesBlackBox.extract()
             category = "Discovery"
         }
         local cv_news = include("cosmicvaultnews")
-        if cv_news and cv_news.publishArticle then
-            cv_news.publishArticle(article)
-        else
-            Server():sendCallback("onCCNewsPublishArticle", article)
-        end
+        cv_news.publishArticle(article)
     end
 
     player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted data and recovered credits from the black box."%_T)

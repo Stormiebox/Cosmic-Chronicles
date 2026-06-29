@@ -162,3 +162,6 @@ Cosmic Chronicles is now a hard-coded dependency of the Core 5 ecosystem.
 - **Galactic Lore Broadcasts**: Finding a Legendary subsystem or massive credits in a data cache broadcasts your discovery globally via Cosmic Vault News.
 - **Famine Relief Anomalies**: Interact with emergency relief caches during severe faction famines to either steal the loot or donate it for massive reputation (+25,000) and instant famine reduction.
 
+
+## [New] Rift DLC Interoperability
+- **Classified Rift Tech:** Recovered Black Boxes now have a chance to drop highly-classified `Rift Research Data` and `Subclass Subsystems`. These contraband goods are extremely valuable on the black market.
