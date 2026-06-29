@@ -11,7 +11,7 @@ function interactionPossible(playerIndex, option)
     if not craft then return false end
     
     -- Must be within 50 units (500m) to dock/board
-    if craft:getDistance(Entity()) > 50 then return false end
+    if craft:getNearestDistance(Entity()) > 50 then return false end
     
     return true
 end

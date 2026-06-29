@@ -25,7 +25,7 @@ function CosmicChroniclesBlackBox.interactionPossible(playerIndex, option)
         end
     end
 
-    if craft:getDistance(Entity()) > maxDistance then return false end
+    if craft:getNearestDistance(Entity()) > maxDistance then return false end
 
     return true
 end

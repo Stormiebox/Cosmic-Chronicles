@@ -16,7 +16,7 @@ function interactionPossible(playerIndex, option)
     if not player then return false end
     local craft = player.craft
     if not craft then return false end
-    if craft:getDistance(Entity()) > 50 then return false end
+    if craft:getNearestDistance(Entity()) > 50 then return false end
     return true
 end
 
