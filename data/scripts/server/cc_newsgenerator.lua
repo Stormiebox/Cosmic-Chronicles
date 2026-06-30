@@ -21,7 +21,7 @@ function CosmicChroniclesNewsGenerator.initialize()
 end
 
 function CosmicChroniclesNewsGenerator.onBehemothAttackStart(quadrant, x, y)
-    if not cv_success then return end
+    if not CosmicVaultNews then return end
     local quadName = "Unknown"
     if quadrant == 1 then quadName = "North"
     elseif quadrant == 2 then quadName = "East"
@@ -38,7 +38,7 @@ end
 local reportedBosses = {}
 
 function CosmicChroniclesNewsGenerator.updateServer(timeStep)
-    if not cv_success then return end -- Vault News API not available
+    if not CosmicVaultNews then return end -- Vault News API not available
 
     local rand = random():getInt(1, 100)
 
