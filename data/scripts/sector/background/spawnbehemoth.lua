@@ -1,6 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
--- local cv_success = true; include("cosmicvaultnews")
+local cvn = include("cosmicvaultnews")
 
 local CC_SpawnBehemoth_finish = SpawnBehemoth.finish
 function SpawnBehemoth.finish()
@@ -30,14 +30,14 @@ function SpawnBehemoth.finish()
                 content = "Incredible news! Independent captains have successfully driven the Behemoth of the " .. quadName .. " out of sector [" .. x .. ":" .. y .. "]. The sector has been saved from total annihilation.",
                 category = "Galactic Threat"
             }
-            Server():sendCallback("onCCNewsPublishArticle", article)
+            if cvn then cvn.publishArticle(article) end
         else
             local article = {
                 title = "Sector Obliterated by Behemoth",
                 content = "Tragedy strikes. The Behemoth of the " .. quadName .. " has completely wiped out all life and infrastructure in sector [" .. x .. ":" .. y .. "]. The beast has moved on, leaving nothing but ruin in its wake.",
                 category = "Galactic Threat"
             }
-            Server():sendCallback("onCCNewsPublishArticle", article)
+            if cvn then cvn.publishArticle(article) end
         end
     end
 
