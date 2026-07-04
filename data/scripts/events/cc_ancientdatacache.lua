@@ -19,7 +19,7 @@ function AncientCache.spawn()
 
     local cache = Sector():createWreckage(plan, SectorGenerator(x,y):getPositionInSector())
     cache.title = "Ancient Data Cache"
-    cache:addScript("data/scripts/entity/story/ancientcachedialog.lua")
+    cache:addScriptOnce("data/scripts/entity/story/ancientcachedialog.lua")
 
     Sector():broadcastChatMessage("Scanner", 0, "Extremely old quantum signatures detected nearby. Could it be Xsotan origins?")
 end

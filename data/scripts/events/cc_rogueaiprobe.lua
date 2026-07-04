@@ -16,7 +16,7 @@ function RogueAIProbe.spawn()
 
     local probe = ShipGenerator.createMilitaryShip(faction, SectorGenerator(x,y):getPositionInSector())
     probe.title = "Rogue AI Probe"
-    probe:addScript("data/scripts/entity/ai/patrol.lua")
+    probe:addScriptOnce("data/scripts/entity/ai/patrol.lua")
 
     -- Fast and evasive, scaling on distance to core
     local d = math.sqrt(x*x + y*y)
@@ -25,7 +25,7 @@ function RogueAIProbe.spawn()
     probe.damageMultiplier = scale * 5.0
 
     -- If it isn't killed in 3 minutes, it warps away
-    probe:addScript("data/scripts/entity/story/warpawaytimer.lua", 180)
+    probe:addScriptOnce("data/scripts/entity/story/warpawaytimer.lua", 180)
 
     Sector():broadcastChatMessage("Scanner", 2, "WARNING: Highly evasive, unidentified Rogue AI signature detected.")
 end

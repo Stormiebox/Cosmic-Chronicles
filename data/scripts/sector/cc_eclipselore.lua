@@ -42,14 +42,14 @@ function EclipseLoreGenerator.initialize()
     end
 
     -- Add dialog script
-    entity:addScript("data/scripts/entity/story/eclipseloredialog.lua")
+    entity:addScriptOnce("data/scripts/entity/story/eclipseloredialog.lua")
 
     -- Add scaling loot script based on distance to core
     local d = math.sqrt(x*x + y*y)
     local scalingFactor = math.max(1, (500 - d) / 100)
 
     entity:setValue("cc_eclipse_loot_scale", scalingFactor)
-    entity:addScript("data/scripts/entity/story/eclipseloot.lua")
+    entity:addScriptOnce("data/scripts/entity/story/eclipseloot.lua")
 end
 
 function initialize(...)

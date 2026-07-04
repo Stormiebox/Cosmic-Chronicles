@@ -18,7 +18,7 @@ function GhostShipEvent.spawn()
 
     local ghost = ShipGenerator.createFreighterShip(faction, SectorGenerator(x,y):getPositionInSector())
     ghost.title = "Drifting Ghost Ship"
-    ghost:addScript("data/scripts/entity/story/ghostshipdialog.lua")
+    ghost:addScriptOnce("data/scripts/entity/story/ghostshipdialog.lua")
 
     -- Strip AI to make it dead
     ghost:removeScript("data/scripts/entity/ai/patrol.lua")

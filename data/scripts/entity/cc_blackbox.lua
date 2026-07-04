@@ -155,8 +155,8 @@ function CosmicChroniclesBlackBox.extract()
     -- Cosmic Chronicles/Vault: Galactic Lore Broadcasts
     if random():test(0.02 * rewardFactor * bonusMultiplier) then rarityValue = RarityType.Legendary end
 
-    local ok, upgrade = pcall(function() return generator:generateSectorSystem(x, y, nil, {[rarityValue] = 1}) end)
-    if ok and upgrade then
+    local upgrade = generator:generateSectorSystem(x, y, nil, {[rarityValue] = 1})
+    if upgrade then
         if type(upgrade) == "table" and upgrade.script then
             local seed = generator:getUpgradeSeed(x, y, upgrade.script, upgrade.rarity)
             upgrade = SystemUpgradeTemplate(upgrade.script, upgrade.rarity, seed)
