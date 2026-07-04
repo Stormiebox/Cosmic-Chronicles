@@ -217,7 +217,7 @@ function placeWayWreckages()
     local faction = OperationExodus.getFaction()
     local generator = SectorGenerator(faction:getHomeSectorCoordinates())
 
-    for i = 1, random():getInt(1, 1, 3) do
+    for i = 1, random():getInt(1, 3) do
         generator:createWreckage(faction)
     end
 
