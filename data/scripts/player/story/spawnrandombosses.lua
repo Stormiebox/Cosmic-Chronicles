@@ -128,7 +128,7 @@ function SpawnRandomBosses.onSwoksDestroyed()
 
     Server():setValue("swoks_beaten", beaten)
 
-    print ("Swoks was beaten for the %s. time!", beaten)
+    include("cosmicvaultdebug").info("Cosmic Chronicles", "Swoks was beaten for the %s. time!", beaten)
 
     noSpawnTimer = 30 * 60
 end
@@ -144,7 +144,7 @@ function SpawnRandomBosses.updateServer(timeStep)
     if dropped then
         noSpawnTimer = 30 * 60
 
-        print ("The AI was beaten!")
+        include("cosmicvaultdebug").info("Cosmic Chronicles", "The AI was beaten!")
     end
 
     -- update spawn interdictions of sectors where no bosses may be spawned

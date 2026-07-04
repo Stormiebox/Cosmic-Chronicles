@@ -59,7 +59,7 @@ function onSectorEntered(player, x, y)
 
     if missionData.location then
         if missionData.location.x == x and missionData.location.y == y then
---            print ("entered point: " .. x .. " " .. y)
+--            include("cosmicvaultdebug").info("Cosmic Chronicles", "entered point: " .. x .. " " .. y)
             findNextPoint(x, y)
             placeWayWreckages()
             placeWormholeBeacon(missionData.nextBeaconLocation.x, missionData.nextBeaconLocation.y)
@@ -72,7 +72,7 @@ function onSectorEntered(player, x, y)
     local points = OperationExodus.getRendezVousPoints()
     for _, p in pairs(points) do
         if p.x == x and p.y == y then
---            print("entered rendez-vous point")
+--            include("cosmicvaultdebug").info("Cosmic Chronicles", "entered rendez-vous point")
             findNextPoint(x, y)
             placeWormholeBeacon(missionData.nextBeaconLocation.x, missionData.nextBeaconLocation.y)
             showMissionUpdated()
@@ -82,12 +82,12 @@ function onSectorEntered(player, x, y)
     end
 
 --    if missionData.location then
---        print ("next point: " .. missionData.location.x .. " " .. missionData.location.y)
+--        include("cosmicvaultdebug").info("Cosmic Chronicles", "next point: " .. missionData.location.x .. " " .. missionData.location.y)
 --        for _, corner in pairs(corners) do
---            print ("corner: " .. corner.x .. " " .. corner.y)
+--            include("cosmicvaultdebug").info("Cosmic Chronicles", "corner: " .. corner.x .. " " .. corner.y)
 --        end
 --    else
---        print ("next point: nil")
+--        include("cosmicvaultdebug").info("Cosmic Chronicles", "next point: nil")
 --    end
 
 end

@@ -162,7 +162,7 @@ function getTeleporterSector(sx, sy)
         end
     end
 
-    print("Cross barrier mission: Error: couldn't find a teleporter sector")
+    include("cosmicvaultdebug").info("Cosmic Chronicles", "Cross barrier mission: Error: couldn't find a teleporter sector")
 end
 
 local locationAskedOnEnd = makeDialogServerCallback("locationAskedOnEnd", 3, function()
