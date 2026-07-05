@@ -67,17 +67,34 @@ end
 function triggerServerLoot(lootTier)
     local entity = Entity()
     local player = Player(callingPlayer)
+    if not player then return end
+    
+    local craft = player.craft
+    if not craft then return end
+    
+    -- Multiplayer Exploit Fix: Verify distance on the server
+    if craft:getNearestDistance(entity) > 50 then 
+        return 
+    end
+    
+    -- Exploit Fix: Verify captain class on the server for special tiers
+    local captain = craft:getCaptain()
+    if lootTier == 2 and (not captain or not captain:hasClass(CaptainClass.Scavenger)) then return end
+    if lootTier == 3 and (not captain or not captain:hasClass(CaptainClass.Explorer)) then return end
+    
     local sector = Sector()
+    local faction = Faction(craft.factionIndex)
+    if not faction then return end
     
     if lootTier == 1 then
         player:sendChatMessage("Crew", 0, "We recovered some credits and loose cargo, but this place gives me the creeps.")
-        player:receive("Salvaged %1% Credits from Ghost Ship.", 25000)
+        faction:receive("Salvaged %1% Credits from Ghost Ship.", 25000)
     elseif lootTier == 2 then
         player:sendChatMessage("Scavenger", 0, "Jackpot! They had a shielded under-deck completely untouched by whatever hit them.")
-        player:receive("Salvaged %1% Credits from Ghost Ship.", 125000)
+        faction:receive("Salvaged %1% Credits from Ghost Ship.", 125000)
     elseif lootTier == 3 then
         player:sendChatMessage("Explorer", 0, "I've successfully pulled their last known jump coordinates. We found the anomaly's exact location, transferring data bounty! " )
-        player:receive("Salvaged %1% Credits from Ghost Ship.", 100000)
+        faction:receive("Salvaged %1% Credits from Ghost Ship.", 100000)
         -- Can add a rare map or upgrade here if desired
     end
     

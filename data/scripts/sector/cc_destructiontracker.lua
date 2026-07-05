@@ -13,14 +13,14 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
     if not onServer() then return end
     
     local entity = Entity(entityIndex)
-    if not entity then return end
+    if not valid(entity) then return end
 
     -- We only care about Stations getting destroyed
     if entity.isStation then
         local inflictor = Entity(lastDamageInflictor)
         local inflictorName = "Unknown Forces"
         
-        if inflictor and inflictor.factionIndex then
+        if valid(inflictor) and inflictor.factionIndex then
             local faction = Faction(inflictor.factionIndex)
             if faction then
                 if faction.isPlayer or faction.isAlliance then

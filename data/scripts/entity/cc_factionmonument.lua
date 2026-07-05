@@ -7,6 +7,11 @@ include("relations")
 CosmicChroniclesMonument = {}
 
 function CosmicChroniclesMonument.interactionPossible(playerIndex, option)
+    local player = Player(playerIndex)
+    if not player then return false end
+    local craft = player.craft
+    if not craft then return false end
+    if craft:getNearestDistance(Entity()) > 50 then return false end
     return true
 end
 
@@ -22,7 +27,11 @@ function CosmicChroniclesMonument.readLore()
     if not onServer() then return end
 
     local player = Player(callingPlayer)
-    local faction = Faction(Entity().factionIndex)
+    local entity = Entity()
+    local ship = player.craft
+    if not ship or ship:getNearestDistance(entity) > 50 then return end
+    
+    local faction = Faction(entity.factionIndex)
     if not faction then return end
 
     local fName = faction.name
@@ -35,7 +44,9 @@ function CosmicChroniclesMonument.readLore()
     local readKey = "cc_monument_read_" .. player.index
     if not Entity():getValue(readKey) then
         Entity():setValue(readKey, true)
-        changeRelations(player, faction, 1500, RelationChangeType.General)
+        local repTarget = player
+        if ship then repTarget = Faction(ship.factionIndex) or player end
+        changeRelations(repTarget, faction, 1500, RelationChangeType.General)
         player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "You paid your respects to the faction's history. Reputation improved."%_T)
     end
 

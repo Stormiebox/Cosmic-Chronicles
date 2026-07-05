@@ -387,7 +387,6 @@ function onBottanDestroyed()
     -- we don't care at which point the player destroyed Bottan, the quest is finished anyway
     accomplish()
 end
-callable(nil, "onBottanDestroyed")
 
 function playerHasOverloader()
     local player = Player()

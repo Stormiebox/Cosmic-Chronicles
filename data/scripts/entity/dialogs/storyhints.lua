@@ -1,4 +1,5 @@
 -- namespace StoryHints
+
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
 
 -- Cache the original vanilla function so we don't break it

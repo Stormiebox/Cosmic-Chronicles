@@ -68,24 +68,41 @@ end
 function triggerServerPayout(tier)
     local entity = Entity()
     local player = Player(callingPlayer)
+    if not player then return end
+    
+    local craft = player.craft
+    if not craft then return end
+    
+    -- Multiplayer Exploit Fix: Verify distance on the server
+    if craft:getNearestDistance(entity) > 50 then 
+        return 
+    end
+    
+    -- Exploit Fix: Verify captain class on the server for special tiers
+    local captain = craft:getCaptain()
+    if tier == 2 and (not captain or not captain:hasClass(CaptainClass.Merchant)) then return end
+    if tier == 3 and (not captain or not captain:hasClass(CaptainClass.Smuggler)) then return end
+    
     local sector = Sector()
+    local faction = Faction(craft.factionIndex)
+    if not faction then return end
     
     if tier == 1 then
         player:sendChatMessage("Diplomat", 0, "I've transferred standard extraction fees to your account. Let's move!")
-        player:receive("Received %1% Credits for VIP Extraction.", 150000)
+        faction:receive("Received %1% Credits for VIP Extraction.", 150000)
     elseif tier == 2 then
         player:sendChatMessage("Diplomat", 0, "You're bleeding me dry, but I don't have a choice! Hazard pay transferred.")
-        player:receive("Received %1% Credits for VIP Extraction.", 450000)
+        faction:receive("Received %1% Credits for VIP Extraction.", 450000)
     elseif tier == 3 then
         player:sendChatMessage("Diplomat", 0, "I'll turn a blind eye to your... less than legal operations in exchange for this escape route.")
-        player:receive("Received %1% Credits for VIP Extraction.", 100000)
+        faction:receive("Received %1% Credits for VIP Extraction.", 100000)
         
         -- Smuggler bonus: Illegal Goods (e.g. 50x Unbranded Weapons or similar)
         -- Since adding specific cargo safely requires more logic, we can just drop a high rarity system upgrade as a "bribe"
         local UpgradeGenerator = include("upgradegenerator")
         local x, y = sector:getCoordinates()
         local upgrade = UpgradeGenerator():generateSectorSystem(x, y, 0, Rarity(RarityType.Exotic))
-        sector:dropUpgrade(entity.translationf, nil, nil, upgrade)
+        sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
         player:sendChatMessage("Smuggler", 0, "They threw in some highly illegal tech as a bribe to keep our mouths shut.")
     end
     

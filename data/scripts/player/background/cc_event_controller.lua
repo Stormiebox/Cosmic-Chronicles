@@ -4,12 +4,18 @@ include("randomext")
 local cw_success = true; include("cosmicwarbridge")
 
 -- Helper to fetch the highest local War Heat from the sector's factions
-local function getSectorWarHeat()
+local function getSectorWarHeat(x, y)
     local sector = Sector()
-    local factions = {sector:getPresentFactions()}
+    local factionIndices = {sector:getPresentFactions()}
+    
+    local nearestFaction = Galaxy():getNearestFaction(x, y)
+    if nearestFaction then
+        table.insert(factionIndices, nearestFaction.index)
+    end
+    
     local heat = 0
 
-    for _, f in pairs(factions) do
+    for _, f in pairs(factionIndices) do
         local faction = Faction(f)
         if faction and faction.isAIFaction then
             if cw_success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
@@ -26,15 +32,17 @@ end
 
 function onSectorEntered(playerIndex, x, y, sectorChangeType)
     if not onServer() then return end
+    
+    if sectorChangeType ~= SectorChangeType.Jump then return end
 
     local sector = Sector()
     -- Only trigger these specific narrative events in empty or deep space sectors
-    if #{sector:getEntitiesByType(EntityType.Station)} > 0 then return end
+    if #sector:getEntitiesByType(EntityType.Station) > 0 then return end
 
     -- Prevent infinite farming: ensure narrative events only spawn once per sector
     if sector:getValue("cc_event_spawned") then return end
 
-    local heat = getSectorWarHeat()
+    local heat = getSectorWarHeat(x, y)
 
     -- 10% chance to spawn Graveyard if Heat > 40
     if heat > 40 and random():getInt(1, 100) <= 10 then
@@ -46,16 +54,10 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
         sector:addScriptOnce("events/cc_refugeeconvoy.lua")
     else
         -- Determine if we are deep inside AI territory
-        local controllingFaction = nil
-        for _, f in pairs({sector:getPresentFactions()}) do
-            local faction = Faction(f)
-            if faction and faction.isAIFaction then
-                controllingFaction = faction
-                break
-            end
-        end
+        -- Determine if we are deep inside AI territory
+        local controllingFaction = Galaxy():getNearestFaction(x, y)
 
-        if controllingFaction then
+        if controllingFaction and controllingFaction.isAIFaction then
             local hx, hy = controllingFaction:getHomeSectorCoordinates()
             if hx and hy then
                 local dist = math.sqrt((x - hx)^2 + (y - hy)^2)

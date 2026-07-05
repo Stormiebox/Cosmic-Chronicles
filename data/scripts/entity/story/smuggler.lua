@@ -100,11 +100,9 @@ function startInteraction()
     end
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Bottan ]] --
-    if CosmicVaultDialogue then
-        local overrideDialog = CosmicVaultDialogue.getValidLine("bottan_encounter", nil, nil)
-        if overrideDialog then
-            dialog.text = overrideDialog.text or dialog.text
-        end
+    local overrideText = CosmicVaultDialogue.getValidLine("bottan_encounter", nil, nil)
+    if overrideText then
+        dialog.text = overrideText
     end
 
     ScriptUI():showDialog(dialog, false)
@@ -135,9 +133,15 @@ function handOverGoods()
         end
     else
         local player = Player(callingPlayer)
+        local ship = Entity(player.craftIndex)
+        local entity = Entity()
+        
+        -- Multiplayer Exploit Fix: Verify distance on the server
+        if not ship or ship:getNearestDistance(entity) > 50 then 
+            return 
+        end
 
         if hasGoods() then
-            local ship = Entity(player.craftIndex)
 
             for good, amount in pairs(ship:findCargos("Goods")) do
                 if good.suspicious and amount > 0 then

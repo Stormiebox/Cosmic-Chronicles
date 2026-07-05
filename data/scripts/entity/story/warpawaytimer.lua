@@ -32,3 +32,15 @@ function updateServer(timeStep)
         Sector():broadcastChatMessage(Entity().title or "Rogue AI", 0, "Warning: Local data assimilation at 75%. Preparing for warp jump in 60 seconds.")
     end
 end
+
+function secure()
+    return {
+        timeRemaining = timeRemaining,
+        warned = warned
+    }
+end
+
+function restore(data)
+    timeRemaining = data.timeRemaining or 180
+    warned = data.warned or false
+end

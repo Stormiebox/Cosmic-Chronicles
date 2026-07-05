@@ -48,6 +48,15 @@ end
 function triggerLootServer()
     local entity = Entity()
     local player = Player(callingPlayer)
+    if not player then return end
+    
+    local craft = player.craft
+    if not craft then return end
+    
+    -- Multiplayer Exploit Fix: Verify distance on the server
+    if craft:getNearestDistance(entity) > 50 then 
+        return 
+    end
 
     -- Invoke the loot drop function on the sibling script
     entity:invokeFunction("data/scripts/entity/story/eclipseloot.lua", "dropLoot", callingPlayer)

@@ -230,12 +230,9 @@ function onEstablishConnection()
     }
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook ]] --
-    if CosmicVaultDialogue then
-        local overrideDialog = CosmicVaultDialogue.getValidLine("exodus_encounter", nil, nil)
-        if overrideDialog then
-            intro = overrideDialog
-            intro.followUp = dialog
-        end
+    local overrideText = CosmicVaultDialogue.getValidLine("exodus_encounter", nil, nil)
+    if overrideText then
+        intro = { text = overrideText, followUp = dialog }
     end
 
     ScriptUI():showDialog(intro)

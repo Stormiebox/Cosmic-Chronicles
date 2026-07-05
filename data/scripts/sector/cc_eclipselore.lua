@@ -12,6 +12,9 @@ function EclipseLoreGenerator.initialize()
     local sector = Sector()
     local x, y = sector:getCoordinates()
 
+    if sector:getValue("cc_eclipselore_evaluated") then return end
+    sector:setValue("cc_eclipselore_evaluated", true)
+
     -- Only spawn in empty sectors or unpopulated sectors
     if sector.numEntities > 100 then return end
 

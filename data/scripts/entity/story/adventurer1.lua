@@ -64,9 +64,9 @@ function Adventurer1.makeDialog()
 
     -- [[ Cosmic Chronicles: Dynamic Dialogue Hook for Adventurer ]] --
     if CosmicVaultDialogue then
-        local overrideDialog = CosmicVaultDialogue.getValidLine("adventurer_encounter", nil, nil)
-        if overrideDialog then
-            return overrideDialog
+        local overrideText = CosmicVaultDialogue.getValidLine("adventurer_encounter", nil, nil)
+        if overrideText then
+            d0_HeyYou.text = overrideText
         end
     end
 

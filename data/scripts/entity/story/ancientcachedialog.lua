@@ -45,17 +45,23 @@ end
 function triggerLootServer()
     local entity = Entity()
     local player = Player(callingPlayer)
+    if not player then return end
+    
     local craft = player.craft
+    if not craft then return end
+    
+    -- Multiplayer Exploit Fix: Verify distance on the server before dropping loot!
+    if craft:getNearestDistance(entity) > 50 then 
+        return 
+    end
     
     local isScavenger = false
     local isExplorer = false
     
-    if craft then
-        local captain = craft:getCaptain()
-        if captain then
-            if captain:hasClass(CaptainClass.Scavenger) then isScavenger = true end
-            if captain:hasClass(CaptainClass.Explorer) then isExplorer = true end
-        end
+    local captain = craft:getCaptain()
+    if captain then
+        if captain:hasClass(CaptainClass.Scavenger) then isScavenger = true end
+        if captain:hasClass(CaptainClass.Explorer) then isExplorer = true end
     end
     
     local sector = Sector()
@@ -69,8 +75,8 @@ function triggerLootServer()
         player:sendChatMessage("Captain", 0, "I managed to decrypt an isolated sub-routine in this cache! We found extra salvage!")
     end
     
-    -- Drop Credits
-    local faction = Faction(callingPlayer)
+    -- Alliance Fix: Give credits to the faction of the craft, not just the calling player!
+    local faction = Faction(craft.factionIndex)
     if faction then
         faction:receive("Extracted %1% Credits from Black Box.", math.floor(75000 * scale * bonusMultiplier))
     end
@@ -87,7 +93,7 @@ function triggerLootServer()
         end
         
         local upgrade = generator:generateSectorSystem(x, y, 0, Rarity(rType))
-        sector:dropUpgrade(entity.translationf, nil, nil, upgrade)
+        sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
     end
     
     sector:createExplosion(entity.translationf, 1.5, false)

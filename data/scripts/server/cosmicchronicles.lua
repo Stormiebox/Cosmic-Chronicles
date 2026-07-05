@@ -14,7 +14,6 @@ function CosmicChronicles.initialize()
         CosmicChronicles.registerLore()
         CosmicChronicles.registerStoryDialogues()
         Galaxy():addScriptOnce("server/cc_newsgenerator.lua")
-        Galaxy():addScriptOnce("server/cc_vanillanews.lua")
         Galaxy():addScriptOnce("server/background/cc_stockmarket.lua")
     end
 end

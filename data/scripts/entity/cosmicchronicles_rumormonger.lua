@@ -87,6 +87,7 @@ function CosmicChroniclesRumormonger.interactionPossible(playerIndex, option)
     local craft = player.craft
     -- Don't show the dialogue if the player is somehow trying to talk to their own ship
     if craft and craft.index == Entity().index then return false end
+    if craft and craft:getNearestDistance(Entity()) > 250 then return false end
 
     -- Base Threshold: Prevent casually asking for rumors from fiercely hostile stations (-30k rep)
     local threshold = -30000
@@ -134,6 +135,20 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
     local rumor = nil
 
     if faction then
+        local craft = player.craft
+        if not craft or craft:getNearestDistance(station) > 250 then return end
+
+        local threshold = -30000
+        local captain = craft:getCaptain()
+        if captain then
+            local CaptainClass = include("captainclass")
+            if captain:hasClass(CaptainClass.Smuggler) or captain:hasClass(CaptainClass.Explorer) then
+                threshold = -60000
+            end
+        end
+
+        if player:getRelations(faction.index) <= threshold then return end
+
         local sector = Sector()
         local x, y = sector:getCoordinates()
         local distance = math.sqrt(x * x + y * y)

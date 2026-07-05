@@ -71,6 +71,10 @@ function startFight()
     end
 
     local player = Player(callingPlayer)
+    local entity = Entity()
+    local ship = player.craft
+    if not ship or ship:getNearestDistance(entity) > 50 then return end
+    
     local allianceIndex = player.allianceIndex
     for _, pirate in pairs(getPirates()) do
         local ai = ShipAI(pirate.index)
@@ -89,12 +93,18 @@ function payUp()
     end
 
     local player = Player(callingPlayer)
-    local sum = getPayAmount(player)
+    local entity = Entity()
+    local ship = player.craft
+    
+    if not ship or ship:getNearestDistance(entity) > 50 then return end
+    
+    local faction = Faction(ship.factionIndex)
+    local sum = getPayAmount(faction)
 
-    local canPay, msg, args = player:canPayMoney(sum)
+    local canPay, msg, args = faction:canPayMoney(sum)
 
     if canPay then
-        player:pay("Paid Swoks %1% Credits."%_T, sum)
+        faction:pay("Paid Swoks %1% Credits."%_T, sum)
         invokeClientFunction(player, "paySuccessful")
     else
         invokeClientFunction(player, "payFailed")
@@ -142,17 +152,10 @@ end
 
 function normalDialog()
     local entity = Entity()
-    local sum = getPayAmount(Player())
-
-    -- [[ Cosmic Chronicles: Dynamic Dialogue Hook ]] --
-    if CosmicVaultDialogue then
-        local overrideDialog = CosmicVaultDialogue.getValidLine("swoks_encounter", nil, nil)
-        if overrideDialog then
-            -- Note: We could deeply inject here, but for now just replacing the base greeting text
-            -- The rest of the tree will remain standard unless we define full trees in the Vault.
-            -- This is just an example of how the Vault can be injected.
-        end
-    end
+    local player = Player()
+    local faction = player
+    if player.craft then faction = Faction(player.craft.factionIndex) end
+    local sum = getPayAmount(faction)
 
     local choose = {
         text = "Now, what will it be?"%_t,
@@ -230,12 +233,9 @@ function normalDialog()
     local greetingText = "Well hello there. Now who might you be?"%_t
     
     -- [[ Cosmic Chronicles: Dynamic Boss Greeting ]] --
-    if CosmicVaultDialogue then
-        -- We try to fetch a class-based greeting or a war-heat greeting!
-        local dynamicGreeting = CosmicVaultDialogue.getValidLine("swoks_greeting", nil, nil)
-        if dynamicGreeting then
-            greetingText = dynamicGreeting.text or greetingText
-        end
+    local dynamicGreeting = CosmicVaultDialogue.getValidLine("swoks_greeting", nil, nil)
+    if dynamicGreeting then
+        greetingText = dynamicGreeting
     end
     
 

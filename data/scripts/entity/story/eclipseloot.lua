@@ -1,4 +1,4 @@
-﻿package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/lib/?.lua"
 local UpgradeGenerator = include("upgradegenerator")
 
 local EclipseLoot = {}
@@ -13,8 +13,14 @@ function dropLoot(playerIndex)
     -- Base drop multiplier
     local scale = entity:getValue("cc_eclipse_loot_scale") or 1.0
 
-    -- Drop Credits
+    -- Alliance Fix: Check if the player is in an Alliance craft
     local faction = Faction(playerIndex)
+    local player = Player(playerIndex)
+    if player and player.craft then
+        faction = Faction(player.craft.factionIndex)
+    end
+
+    -- Drop Credits
     if faction then
         faction:receive("Looted %1% Credits from Eclipse cache.", math.floor(150000 * scale))
     end
@@ -30,7 +36,7 @@ function dropLoot(playerIndex)
         if scale >= 4.5 then rType = RarityType.Exotic end
         
         local upgrade = generator:generateSectorSystem(x, y, 0, Rarity(rType))
-        sector:dropUpgrade(entity.translationf, nil, nil, upgrade)
+        sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
     end
     
     -- Optional visual effect

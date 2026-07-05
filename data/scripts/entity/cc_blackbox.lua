@@ -68,9 +68,13 @@ end
 function CosmicChroniclesBlackBox.donate()
     if not onServer() then return end
     if extracted then return end
+    local player = Player(callingPlayer)
+    local entity = Entity()
+    local ship = player.craft
+    if not ship or ship:getNearestDistance(entity) > 250 then return end
+    
     extracted = true
 
-    local player = Player(callingPlayer)
     local factionIndex = Entity():getValue("is_famine_relief")
     if factionIndex then
         local cve = include("cosmicvaulteconomy")
@@ -79,7 +83,8 @@ function CosmicChroniclesBlackBox.donate()
         end
         local faction = Faction(factionIndex)
         if faction then
-            Galaxy():changeFactionRelations(faction, player, 25000)
+            local repTarget = Faction(ship.factionIndex) or player
+            Galaxy():changeFactionRelations(faction, repTarget, 25000)
             player:sendChatMessage(faction.name, ChatMessageType.Information, "We are eternally grateful for these supplies! You have saved countless lives!"%_T)
         end
     end
@@ -91,9 +96,12 @@ callable(CosmicChroniclesBlackBox, "donate")
 function CosmicChroniclesBlackBox.extract()
     if not onServer() then return end
     if extracted then return end
-    extracted = true
-
     local player = Player(callingPlayer)
+    local entity = Entity()
+    local ship = player.craft
+    if not ship or ship:getNearestDistance(entity) > 250 then return end
+    
+    extracted = true
 
     -- Generate narrative log text
     local context = { warHeat = 100 }
@@ -137,7 +145,8 @@ function CosmicChroniclesBlackBox.extract()
 
     -- Balanced from 75k-150k down to 15k-35k base
     local amount = math.floor(random():getInt(15000, 35000) * rewardFactor * bonusMultiplier)
-    player:receive("Recovered Credits"%_t, amount)
+    local receiver = Faction(ship.factionIndex) or player
+    receiver:receive("Recovered Credits"%_t, amount)
 
     if isEclipseOwned then
         -- Spawn Ascendancy Ambush
@@ -161,14 +170,14 @@ function CosmicChroniclesBlackBox.extract()
             local seed = generator:getUpgradeSeed(x, y, upgrade.script, upgrade.rarity)
             upgrade = SystemUpgradeTemplate(upgrade.script, upgrade.rarity, seed)
         end
-        player:getInventory():add(upgrade)
+        receiver:getInventory():add(upgrade)
     end
 
     -- Cosmic Chronicles - Black Market Rift Trade
     -- Drop Rift Research Data
     if random():test(0.25 * bonusMultiplier) then
         local numData = random():getInt(2, 5)
-        player:getInventory():add(goods["Rift Research Data"]:good(), numData)
+        receiver:getInventory():add(goods["Rift Research Data"]:good(), numData)
         player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Rift Research Data from the black box."%_T, numData)
     end
 
@@ -193,7 +202,7 @@ function CosmicChroniclesBlackBox.extract()
 
         if subclassGood then
             local numSub = random():getInt(1, 2)
-            player:getInventory():add(subclassGood, numSub)
+            receiver:getInventory():add(subclassGood, numSub)
             player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Subclass Subsystems from the black box."%_T, numSub)
         end
     end

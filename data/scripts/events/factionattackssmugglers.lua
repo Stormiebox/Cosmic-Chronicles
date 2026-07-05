@@ -1,5 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
+-- namespace FactionAttacksSmugglers
 -- local cv_success = true; include("cosmicvaultnews")
 
 local CC_Original_spawnDefenders = FactionAttacksSmugglers.spawnDefenders

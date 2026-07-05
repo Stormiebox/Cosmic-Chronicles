@@ -1,11 +1,12 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
+-- namespace HeadHunter
 local cv_success = true; include("cosmicvaultnews")
 
 local CC_Original_createEnemies = HeadHunter.createEnemies
 function HeadHunter.createEnemies(faction, useHeadhunters)
     if CC_Original_createEnemies then CC_Original_createEnemies(faction, useHeadhunters) end
-    
+
     if onServer() and cv_success and CosmicVaultNews then
         local x, y = Sector():getCoordinates()
         CosmicVaultNews.publishArticle({
