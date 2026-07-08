@@ -90,7 +90,7 @@ function CosmicChroniclesNewsBoard.requestNewsSync()
 
     Server():sendCallback("onCCNewsSyncRequest", callingPlayer)
 
-    local ok, vaultNews = Server():invokeFunction("cosmicvaultnews_server.lua", "getNews")
+    local ok, vaultNews = Galaxy():invokeFunction("cosmicvaultnews_server.lua", "getNews")
     local newsData = {}
     if ok == 0 and type(vaultNews) == "table" then
         newsData = vaultNews
@@ -111,7 +111,7 @@ end
 function CosmicChroniclesNewsBoard.deferredNewsSync()
     if not onServer() then return end
 
-    local ok, vaultNews = Server():invokeFunction("cosmicvaultnews_server.lua", "getNews")
+    local ok, vaultNews = Galaxy():invokeFunction("cosmicvaultnews_server.lua", "getNews")
     local newsData = {}
     if ok == 0 and type(vaultNews) == "table" then
         newsData = vaultNews
