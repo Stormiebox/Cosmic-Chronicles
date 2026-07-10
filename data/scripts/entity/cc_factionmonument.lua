@@ -37,8 +37,15 @@ function CosmicChroniclesMonument.readLore()
     local fName = faction.name
 
     -- Procedurally generate the monument's text based on the AI's internal traits
-    local trait1 = faction:getTrait("aggressive") and "unyielding strength and conquest"%_T or "diplomacy and unity"%_T
-    local trait2 = faction:getTrait("wealthy") and "endless prosperity"%_T or "scavenging the ashes of the old world"%_T
+    local trait1 = "diplomacy and unity"%_T
+    if faction:getTrait("aggressive") > 0.5 then
+        trait1 = "unyielding strength and conquest"%_T
+    end
+    
+    local trait2 = "scavenging the ashes of the old world"%_T
+    if faction:getTrait("wealthy") > 0.5 then
+        trait2 = "endless prosperity"%_T
+    end
 
     -- Award a small reputation boost for paying respects (once per player)
     local readKey = "cc_monument_read_" .. player.index

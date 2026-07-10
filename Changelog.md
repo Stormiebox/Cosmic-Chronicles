@@ -30,6 +30,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Cosmic Codex Integration:** The mod now fully supports the Cosmic Codex! Comprehensive lore and mechanical documentation (such as features, UI tools, and dynamic events) are now readable directly in-game from the new Cosmic Codex tab.
 
 ### ➕ Added
+- **Unified Radio Chatter:** Centralized all ambient radio storytelling into Cosmic Chronicles (migrating legacy chatter out of Cosmic War). Expanded radio traffic with over 400+ new lines featuring deep lore drops on The Eclipse, Ascendants, The Commune, and developer easter eggs.
+- **Dynamic Passing Ships:** Completely overhauled passing ship chatter via an override script. Ships like Cruise Liners, Prison Transports, and Party Ships now pull from a unique pool of ~270 customized lore lines.
+- **Expanded Pirate Threats:** Injected a `pirateattack.lua` override that expands pirate ambush speech bubbles from a vanilla pool of 9 lines to a massive pool of 59 unique taunts mentioning the Syndicate, upgraded hyperdrives, and The Eclipse.
+- **Rumormonger Intrigues:** Injected over 30 new intricate rumors into the `CosmicVaultDialogue` system, giving players much more depth when asking stations for the latest galaxy gossip.
 - **Deep Wiki Integration:** Hooked the Rumormonger and Captain's Log systems directly into the Cosmic Codex to explain their dynamic narrative mechanics natively in-game.
 - **Deep Space Event: The Ghost Ship:** Discover intact derelicts with corrupted logs and hidden compartments. Captain Synergy: Scavengers find extra loot, Explorers decrypt coordinates.
 - **Deep Space Event: Rogue AI Probe:** A fast, evasive anomaly scaling in difficulty near the core. Destroy it before it warps away for rare technology.
@@ -43,6 +47,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - **Galactic Turn Synchronization:** The Stock Market background simulation interval has been synced to the global 20-minute (1200s) server turn to improve dedicated server performance.
 
 ### 🐛 Bug Fixes & Optimization
+- **Truthiness Logic Stabilized:** Applied strict explicit float comparisons (`> 0.5`) inside `cc_factionmonument.lua`, `radiochatter.lua` and other scripts, resolving cases where Avorion Lua engine would implicitly evaluate 0 values as truthy.
 - Removed `pcall` soft-dependencies. Core 5 mods are now hard requirements.
 - **Cross-Mod API Integration:** Fixed a critical namespace error in `cc_newsboard.lua` where it incorrectly attempted to invoke the `cosmicvaultnews_server.lua` API via the `Server()` object instead of the `Galaxy()` object, completely restoring cross-mod news fetching functionality and resolving engine stack trace crashes.
 - **Cosmic Codex Loading Crash:** Fixed missing global definitions (e.g. `entities`, `rangeType`) in the codex files that prevented the encyclopedia from loading correctly and crashed the UI.

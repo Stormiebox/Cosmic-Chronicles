@@ -263,6 +263,198 @@ function CosmicChronicles.registerLore()
     })
 
     -- ==========================================
+    -- NEW EXPANDED COSMIC LORE & EASTER EGGS
+    -- ==========================================
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "I heard Stormbox actually recoded the laws of physics to make ships fly faster. Unbelievable."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Did you catch the latest broadcast on the Galactic News network? War tensions are rising in the neighboring sectors."%_T,
+        conditions = { minWarHeat = 15 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "I swear, these recent overhauls to the hyperdrive systems have made my ship run smoother than ever!"%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "The chroniclers are saying that this era of galactic politics will be remembered for centuries."%_T,
+        conditions = { minWarHeat = 10 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "If you ever meet a rogue engineer named Stormbox, buy him a drink. I heard he basically rewired the entire galaxy's framework!"%_T,
+        conditions = { minReputation = 10000 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Ever since the stars started falling, I've had this terrible feeling that we're being watched by something ancient."%_T,
+        conditions = { minDistanceToCenter = 200 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "We are currently experiencing a shortage of military-grade targeting systems due to the ongoing border skirmishes."%_T,
+        conditions = { minWarHeat = 20 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Remember, war profiteering is entirely legal as long as the local bureaucrats get their cut!"%_T,
+        conditions = { minWarHeat = 30, factionWealth = "wealthy" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Attention docking crews: All shipments of volatile reactive material must be scanned twice before loading."%_T,
+        conditions = { stationType = "resourcedepot" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "I just paid a ridiculous fee to get my ship's hull certified by the Overhaul standards committee."%_T,
+        conditions = { factionWealth = "wealthy" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "Are we safe here? The Galactic News says the war heat is rising to dangerous levels."%_T,
+        conditions = { minWarHeat = 45, factionTrait = "peaceful" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Don't buy any cheap coaxial weapons from the black market, they've been known to misfire and vaporize the ship."%_T,
+        conditions = { minReputation = 5000 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "Does anyone know why half the systems in the outer rim just went dark simultaneously?"%_T,
+        conditions = { minDistanceToCenter = 300 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "Station security is conducting randomized scans for restricted Xsotan artifacts. Cooperate or be detained."%_T,
+        conditions = { factionTrait = "aggressive" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "I need a drink. It's been a long week navigating through the warzone blockades."%_T,
+        conditions = { minWarHeat = 35 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "My crew refuses to fly anywhere near the core. They say the ancient statues are waking up."%_T,
+        conditions = { maxDistanceToCenter = 200 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Keep your eyes peeled, I saw a ship with no registry drift into the dock an hour ago."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "This station is completely out of coaxials. Some rich merchant bought the entire supply."%_T,
+        conditions = { stationType = "equipmentdock" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "The economy is booming, provided you don't mind trading in military-grade contraband."%_T,
+        conditions = { minWarHeat = 25, factionWealth = "wealthy" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "Who designed these docking lanes? Probably the same guy who overhauled the whole galaxy..."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "I just lost three crew members to a mercenary press gang while on shore leave."%_T,
+        conditions = { factionTrait = "aggressive" }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "Did you hear the latest rumor from the Chronicles? The Eclipse is a myth to scare away scavengers."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "I can't believe the bounties on pirates these days. It's almost worth retrofitting my freighter for combat."%_T,
+        conditions = { minReputation = 5000 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "rumor",
+        text = "I saw it with my own eyes! A massive black monolith completely drained the energy from a passing dreadnought."%_T,
+        conditions = { maxDistanceToCenter = 250 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "I don't trust anyone offering to overhaul my engines. Last guy who did it vanished into another dimension."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "Can we get maintenance to look at docking ring 3? It's been making a sound like a dying hyperspace core."%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles",
+        category = "ambient",
+        text = "If you see Stormbox, tell him his last patch notes were too vague!"%_T,
+        conditions = { minReputation = 0 }
+    })
+
+    -- ==========================================
     -- COSMIC WAR SYNERGY LORE
     -- ==========================================
     CosmicVaultDialogue.registerLine({

@@ -60,14 +60,26 @@ function CosmicChroniclesRumormonger.updateServer(timeStep)
     local x, y = sector:getCoordinates()
     local distance = math.sqrt(x * x + y * y)
 
-    local context = {
-        reputation = player:getRelations(faction.index),
-        factionTrait = faction:getTrait("aggressive") and "aggressive" or "peaceful",
-        factionWealth = faction:getTrait("wealthy") and "wealthy" or (faction:getTrait("poor") and "poor" or "average"),
-        distanceToCenter = distance,
-        warHeat = getFactionWarHeat(faction),
-        stationType = getCachedStationType(station)
-    }
+        local factionTrait = "peaceful"
+        if faction:getTrait("aggressive") > 0.5 then
+            factionTrait = "aggressive"
+        end
+
+        local factionWealth = "average"
+        if faction:getTrait("wealthy") > 0.5 then
+            factionWealth = "wealthy"
+        elseif faction:getTrait("poor") > 0.5 then
+            factionWealth = "poor"
+        end
+
+        local context = {
+            reputation = player:getRelations(faction.index),
+            factionTrait = factionTrait,
+            factionWealth = factionWealth,
+            distanceToCenter = distance,
+            warHeat = getFactionWarHeat(faction),
+            stationType = getCachedStationType(station)
+        }
 
     local ambientLine = CosmicVaultDialogue.getValidLine("ambient", context)
 
@@ -153,10 +165,22 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
         local x, y = sector:getCoordinates()
         local distance = math.sqrt(x * x + y * y)
 
+        local factionTrait = "peaceful"
+        if faction:getTrait("aggressive") > 0.5 then
+            factionTrait = "aggressive"
+        end
+
+        local factionWealth = "average"
+        if faction:getTrait("wealthy") > 0.5 then
+            factionWealth = "wealthy"
+        elseif faction:getTrait("poor") > 0.5 then
+            factionWealth = "poor"
+        end
+
         local context = {
             reputation = player:getRelations(faction.index),
-            factionTrait = faction:getTrait("aggressive") and "aggressive" or "peaceful",
-            factionWealth = faction:getTrait("wealthy") and "wealthy" or (faction:getTrait("poor") and "poor" or "average"),
+            factionTrait = factionTrait,
+            factionWealth = factionWealth,
             distanceToCenter = distance,
             warHeat = getFactionWarHeat(faction),
             stationType = getCachedStationType(station)
