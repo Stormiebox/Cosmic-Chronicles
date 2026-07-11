@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cosmic Series\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Don't fly around too crazily while \\\\c(3dd)Torpedoes\\\\c() are chasing you if you want your \\\\c(3dd)PDCs\\\\c() to hit them, as the \\\\c(3dd)PDCs\\\\c() have to aim as well! If you're constantly changing your ship's orientation or speed, \\\\c(3dd)Torpedoes\\\\c() will start flying in curves and are a lot harder to hit."
+msgstr "Cosmic Ascendancy: 50 units of Ascendant Matter can activate a Factory Overdrive, tripling its production for an hour!"
+
+msgid "When defending against \\\\c(3dd)Torpedoes\\\\c(), orient your ship in a way that your \\\\c(3dd)PDCs\\\\c() look at the incoming torpedoes, this will make it easier for them to shoot them down."
+msgstr "Cosmic Overhaul: Smuggler's Markets automatically unbrand stolen goods, but reaching 5,000 unbranded items triggers a massive Sector Lockdown!"
+
+msgid "\\\\c(3dd)Point Defense Cannons\\\\c() still behave like normal turrets and have to focus on a target. Make sure they're turned towards incoming \\\\c(3dd)Torpedoes\\\\c(). Don't fly around erratically or your \\\\c(3dd)PDCs\\\\c() won't have a chance to aim."
+msgstr "Cosmic Overhaul: A Smuggler Governor completely bypasses Cosmic War siege blockades, allowing wartime profiteering."
+
+msgid "Set \\\\c(3dd)Point Defense Cannons\\\\c() to the mode \\\\c(3dd)'Defend'\\\\c() to have them prefer \\\\c(3dd)Torpedoes\\\\c() over \\\\c(3dd)Fighters\\\\c() and \\\\c(3dd)Fighters\\\\c() over other \\\\c(3dd)Ships\\\\c()."
+msgstr "Cosmic Chronicles: The galaxy feels alive. Check the bulletin board for random events, refugee crises, and active bounties."
+
+msgid "\\\\c(3dd)Teleporters\\\\c() can move a limited amount of mass into a rift. If that mass is exceeded the ships will be damaged and might even lose blocks."
+msgstr "Cosmic War: Keep an eye out for dynamic faction battles. Salvaging the wreckage can yield valuable subsystems."
+
+msgid "\\\\c(3dd)Teleporters\\\\c() are only limited by the amount of mass they can transport. You can take any amount of ships into a rift with you, as long as they fulfill the requirements. The ships may also belong to a friend who is on the same mission."
+msgstr "Cosmic Series: Economic warfare is real. Starving factions might resort to piracy or declare war on their neighbors."
+
+msgid "At \\\\c(3dd)Rift Research Centers\\\\c() you can accept missions that take you into rifts."
+msgstr "Cosmic Series: Delivering goods to a blockaded factory or a high-heat War Zone grants a massive +250% income multiplier. High risk, high reward!"
+
+msgid "The leader of a group accepts \\\\c(3dd)Rift Missions\\\\c() for the whole group. This way you can explore rifts together with your friends."
+msgstr "Cosmic Overhaul: The Smuggler's Market pays a 1.5x premium for illegal Eclipse Tech, and 200%-300% markup for classified Rift Research Data."
+
+msgid "Every \\\\c(3dd)Rift Mission\\\\c() has specific requirements that every ship that wants to take part must fulfill."
+msgstr "Cosmic Ascendancy: Ascendant Beacons allow you to permanently simulate a sector 24/7 without being present, but they require a heavy upkeep."
+
+msgid "Upon successfully completing a \\\\c(3dd)Rift Mission\\\\c() you can choose between two \\\\c(3dd)Rewards\\\\c()."
+msgstr "Cosmic Ascendancy: The Eclipse are an ancient, terrifying threat. Defeating their World-Eater yields massive amounts of Ascendant Matter."
+
+msgid "You can alleviate damage caused by \\\\c(3dd)Subspace Distortion\\\\c() in rifts by using specific subsystems. These can be bought at \\\\c(3dd)Rift Research Centers\\\\c() in exchange for \\\\c(3dd)Rift Research Data\\\\c() or obtained as reward for rift missions."
+msgstr "Cosmic Ascendancy: The Ascendancy Forge can craft god-tier weaponry, but requires Ascendant Matter and sacrifices of high-tier subsystems to stabilize."
+
+msgid "Every \\\\c(3dd)Rift Mission\\\\c() has a secondary objective. You don't have to fulfill it to complete the mission, but you'll get additional rewards."
+msgstr "Cosmic Overhaul: Merchant Governors reduce all crew and captain hiring costs by 50% if you are actively enlisted as a Mercenary for their faction."
+
+msgid "Many dangers are lurking in \\\\c(3dd)Rifts\\\\c(), like hazardous \\\\c(3dd)Environmental Effects\\\\c(). The deeper the rift where the mission is located, the stronger these effects."
+msgstr "Cosmic Overhaul: Scavenger Strategy Intel reveals the exact vessel identity of wrecks on the Sector Map, making it easy to find high-value targets."
+
+msgid "Each rift mission has a certain \\\\c(3dd)Extraction\\\\c(). This is the only way to get back out of the rift."
+msgstr "Cosmic Series: Background Charity Missions sent to starving factions natively grant a +50% Reputation multiplier."
+
+msgid "Ships that are left behind in \\\\c(3dd)Rift Missions\\\\c() will get lost. However, they can be recovered at a \\\\c(3dd)Repair Dock\\\\c()."
+msgstr "Cosmic Series: Traveling through an Ion Storm or Nebula will delay operations by 50% unless piloted by an Explorer or Navigator."
+
+msgid "There is \\\\c(3dd)Subspace Distortion\\\\c() in \\\\c(3dd)Rifts\\\\c(). The deeper the rift where the mission is taking place, the stronger it gets. Subspace Distortion will damage your ship, if you enter a rift without protection."
+msgstr "Cosmic Series: A Smuggler captain idling in a sector will passively heal the controlling faction's Famine Score by running black market supplies."
+
+msgid "There are many secrets to discover in Rifts. Use a \\\\c(3dd)Detector Subsystem\\\\c() to help you find them!"
+msgstr "Cosmic Chronicles: Watch the galactic news! Changes in faction stability and wars are reported in real-time."
+
+msgid "You can gather \\\\c(3dd)Research Data\\\\c() in Rifts. The scientists at \\\\c(3dd)Rift Research Centers\\\\c() trade it for special subsystems or buy it from you."
+msgstr "Cosmic Ascendancy: The Eclipse wait just beyond the barrier. Once the Wormhole Guardian falls, they will be unleashed upon the galaxy."
+
+msgid "A \\\\c(3dd)Scientist Captain\\\\c() gathers additional \\\\c(3dd)Rift Research Data\\\\c() in Rifts, which you can then sell at \\\\c(3dd)Rift Research Centers\\\\c() or trade for subsystems."
+msgstr "Cosmic Series: A legendary ship known as 'The Stormbox' is said to wander the cosmos, carrying immense riches..."
+
+msgid "A \\\\c(3dd)Xsotan Hunter Captain\\\\c() attracts an \\\\c(3dd)Alpha Xsotan\\\\c() after a while. You should put a different captain in charge if you're not up for an additional battle."
+msgstr "Cosmic Ascendancy: Eclipse Juggernauts drop Eclipse Datacores. Sell these at a Smuggler's Market for a huge payout, but watch out for authorities!"
+
