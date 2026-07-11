@@ -996,6 +996,157 @@ function CosmicChronicles.registerLore()
         text = "The experimental stealth fighters went missing during a training exercise... maybe their cloaks actually work."%_T,
         conditions = { stationType = "fighterfactory" }
     })
+
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "I've been waiting for docking clearance for three hours! What is the traffic control AI doing?"%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "Careful in sector 7, heard there's a rogue asteroid cluster drifting through the trade lanes."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "If they raise the docking fees one more time, I'm finding a new hub."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "Maintenance crew to hanger bay four, we have a localized gravity anomaly."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "I hear the mining fleets struck an absolute motherlode of Trinium two jumps from here."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "Don't eat the synthetic protein from the lower decks. Trust me."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "Another shipment of energy cells delayed. This economy is hanging by a thread."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "Make sure you calibrate your hyperdrive before jumping. The subspace weather is terrible today."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "I just saw a fully armored dreadnought dock. Wonder what they're preparing for."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "ambient",
+        text = "All personnel, please ensure your environmental seals are locked before entering the airlocks."%_T,
+        conditions = { minReputation = 0 }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Log entry: Hyperdrive efficiency is down 4%. We'll need to stop at a repair dock soon."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "The crew is getting restless. Might need to increase their rationing allowance."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Nav-computer is throwing strange errors, but we're still on course. Hopefully."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Cargo hold is at maximum capacity. We need to offload this before we attract pirates."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Scanners picked up a faint distress signal, but it vanished as quickly as it appeared. We're pressing on."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Another day, another jump. The galaxy feels endlessly vast out here."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Engine temperature is running a bit hot after that last subspace jump."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "Log entry: The new shield generators are installed and holding strong. We're ready for anything."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "I've got a bad feeling about this next sector. The trade routes are suspiciously quiet."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "captain_log",
+        text = "We just passed through a nebula. The visuals were stunning, but it played hell with our sensors."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "I heard a massive pirate syndicate is consolidating power just outside the inner rim."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "A smuggler told me they found an entire sector filled with ancient, dead battleships."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "They say the market for precious metals is about to crash. Better sell while you can."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "Rumor has it there's a new type of alien technology being traded on the black market."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "I've heard whispers of a hidden faction operating entirely in the shadows of the barrier."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "Someone saw a fleet of unknown design tearing through the outer sectors. No one knows who they are."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "The local government is reportedly bankrupt, but they're hiding it from the public."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "They say if you jump into the absolute void between galaxies, you can hear voices."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "A miner came back raving about a crystalline asteroid that regenerated itself. Probably space madness."%_T,
+        conditions = { }
+    })
+    CosmicVaultDialogue.registerLine({
+        modId = "CosmicChronicles", category = "rumor",
+        text = "I heard a legendary bounty hunter is tracking a target in this very system."%_T,
+        conditions = { }
+    })
 end
 
 function CosmicChronicles.registerStoryDialogues()

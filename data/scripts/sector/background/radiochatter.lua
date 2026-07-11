@@ -553,6 +553,16 @@ function RadioChatter.initialize()
         table.insert(self.GeneralShipChatter,"The whole ship...destroyed in seconds."%_t)
         table.insert(self.GeneralShipChatter,"It was protected by some new technology, had something to do with the asteroids around it."%_t)
         table.insert(self.GeneralShipChatter,"We evaded its big laser, but there was no damaging it!"%_t)
+        table.insert(self.GeneralShipChatter, "Mayday, mayday! We have suffered a catastrophic hull breach on deck 3!"%_t)
+        table.insert(self.GeneralShipChatter, "Traffic control, requesting immediate docking clearance. Our stabilizers are failing!"%_t)
+        table.insert(self.GeneralShipChatter, "Attention all vessels, be advised of localized ion storms in the neighboring sector."%_t)
+        table.insert(self.GeneralShipChatter, "This is a broadcast from the Free Trade Coalition. All tariffs have been suspended for the cycle."%_t)
+        table.insert(self.GeneralShipChatter, "Bounty Hunters Guild notice: New high-value targets have been posted in the local network."%_t)
+        table.insert(self.GeneralShipChatter, "Unidentified vessel, you are deviating from the designated trade lanes. Correct your course immediately."%_t)
+        table.insert(self.GeneralShipChatter, "This is Freighter Haul-9, we are under attack! Need immediate assistance!"%_t)
+        table.insert(self.GeneralShipChatter, "Galactic Weather Service reports heavy solar flare activity. Shield your electronics."%_t)
+        table.insert(self.GeneralShipChatter, "Attention, all civilian ships are advised to avoid sector 44-B due to ongoing military exercises."%_t)
+        table.insert(self.GeneralShipChatter, "Emergency broadcast: Quarantine protocols have been enacted on Station Zeta. Do not approach."%_t)
 
     end
 
