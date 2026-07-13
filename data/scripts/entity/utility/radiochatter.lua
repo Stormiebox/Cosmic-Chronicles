@@ -54,6 +54,4 @@ function EntityRadioChatter.initialize(lines, minFrequency, maxFrequency, timeTo
 end
 
 
-function initialize(...)
-    if EntityRadioChatter.initialize then return EntityRadioChatter.initialize(...) end
-end
+

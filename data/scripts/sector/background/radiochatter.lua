@@ -1108,12 +1108,4 @@ end
 callable(RadioChatter, "sync")
 
 
-function getUpdateInterval(...)
-    if RadioChatter.getUpdateInterval then return RadioChatter.getUpdateInterval(...) end
-end
-function initialize(...)
-    if RadioChatter.initialize then return RadioChatter.initialize(...) end
-end
-function updateClient(...)
-    if RadioChatter.updateClient then return RadioChatter.updateClient(...) end
-end
+
