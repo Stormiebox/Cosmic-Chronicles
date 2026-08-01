@@ -48,7 +48,7 @@ mission.globalPhase.onAccomplish = function()
     end
 
     -- [[ Cosmic Chronicles: Boss Death Hint ]] --
-    Sector():broadcastChatMessage("The AI"%_t, 2, "Threat analysis: Xsotan = 8%. The Eclipse = 100%. The Oblivion Engine awakens..."%_t)
+    Sector():broadcastChatMessage("The AI"%_t, 2, "Threat analysis: Xsotan = 8%. The Eclipse = 100%. They are now free..."%_t)
 
     player:invokeFunction("storyquestutility.lua", "onFollowUpQuestAccomplished")
 end
