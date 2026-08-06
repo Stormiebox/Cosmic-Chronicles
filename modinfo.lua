@@ -16,7 +16,7 @@ meta =
     type = "mod",
 
     -- Description of your mod that will be displayed to players
-    description = "A dynamic narrative and living galaxy expansion. Pushes live, dynamic articles to a dedicated Galactic News Network based on your galaxy's state! This version fully integrates with the Cosmic Vault API framework for unified progression, enhanced background simulation safety, and global news reporting.",
+    description = "A dynamic narrative and living galaxy expansion. Pushes live, dynamic articles to a dedicated Galactic News Network based on your galaxy's state! This version fully integrates with the Cosmic Series, enhanced background simulation safety, and global news reporting.",
 
     -- Insert all authors into this list
     authors = {"Stormbox"},
@@ -46,7 +46,7 @@ meta =
         { id = "3727542782", min = "1.0" }, -- Cosmic Vault (Core Required Cosmic Mod)
         { id = "3315794988", min = "1.0" }, -- Cosmic Overhaul (Required Cosmic Mod)
         { id = "3727544356", min = "1.0"}, -- Cosmic War (Required Cosmic Mod)
-        { id = "Avorion",    min = "1.0", max = "5.0" }
+        { id = "Avorion",    min = "1.0", max = "*.*" }
     },
 
     -- Set to true if the mod only has to run on the server. Clients will get notified that the mod is running on the server, but they won't download it to themselves
