@@ -7,6 +7,9 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## v3.0.1 🐛Bug Fix Patch Update!🐛
+- [Bugfixed] **File Path Error:** Corrected a pathing error in include() for the hermit missions.
+
 ## v3.0.0 UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
 
 ### ✨ New Features & 📦 Content Additions

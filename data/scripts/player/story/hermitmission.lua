@@ -13,7 +13,7 @@ end
 local MissionUT = include("missionutility")
 local RecallDeviceUT = include("recalldeviceutility")
 local AdventurerGuide = include("story/adventurerguide")
-local Hermit = include("story/hermit")
+local Hermit = include("data/scripts/entity/story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 include("cosmicvaultdialogue")
