@@ -72,7 +72,10 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
     local entity = Entity()
     local ship = player.craft
     if not ship or not ship:hasComponent(ComponentType.CargoBay) then return end
-    if ship:getNearestDistance(entity) > 50 then return end
+    if ship:getNearestDistance(entity) > 50 then 
+        invokeClientFunction(player, "tooFar")
+        return 
+    end
 
     if ship:getCargoAmount(goodName) >= amount then
         ship:removeCargo(goodName, amount)
@@ -88,13 +91,13 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
         if captain then
             local CaptainClass = include("captainclass")
             if captain:hasClass(CaptainClass.Merchant) then
-                -- Balanced from 75k to 25k
-                repTarget:receive("Hazard Pay"%_t, 25000)
-                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 25,000 credit hazard pay fee for the supplies."%_T)
+                -- Balanced from 75k to 50k
+                repTarget:receive("Hazard Pay"%_t, 50000)
+                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 50,000 credit hazard pay fee for the supplies."%_T)
             elseif captain:hasClass(CaptainClass.Smuggler) then
-                -- Balanced from 100k to 35k
-                repTarget:receive("Smuggled Goods"%_t, 35000)
-                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 35,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
+                -- Balanced from 100k to 75k
+                repTarget:receive("Smuggled Goods"%_t, 75000)
+                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 75,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
             end
         end
 
@@ -115,8 +118,15 @@ function CosmicChroniclesRefugee.showThanksDialog(rumor)
 end
 
 function CosmicChroniclesRefugee.jumpAway()
-    if not onServer() then return end
-    Entity():addScriptOnce("deletejumped.lua")
+    if onServer() then
+        Sector():deleteEntityJumped(Entity())
+    end
+end
+
+function CosmicChroniclesRefugee.tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer so we can transfer the supplies."%_t
+    ScriptUI():showDialog(dialog, false)
 end
 
 return CosmicChroniclesRefugee

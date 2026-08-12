@@ -52,6 +52,7 @@ function triggerLootServer()
     
     -- Multiplayer Exploit Fix: Verify distance on the server before dropping loot!
     if craft:getNearestDistance(entity) > 50 then 
+        invokeClientFunction(player, "tooFar")
         return 
     end
     
@@ -71,7 +72,7 @@ function triggerLootServer()
     
     local bonusMultiplier = 1.0
     if isScavenger or isExplorer then
-        bonusMultiplier = 1.5
+        bonusMultiplier = 2.0
         player:sendChatMessage("Captain", 0, "I managed to decrypt an isolated sub-routine in this cache! We found extra salvage!")
     end
     
@@ -101,3 +102,9 @@ function triggerLootServer()
 end
 
 callable(nil, "triggerLootServer")
+
+function tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer so you can interface with the cache."%_t
+    ScriptUI():showDialog(dialog, false)
+end

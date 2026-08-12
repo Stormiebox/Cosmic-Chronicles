@@ -74,6 +74,7 @@ function triggerServerLoot(lootTier)
     
     -- Multiplayer Exploit Fix: Verify distance on the server
     if craft:getNearestDistance(entity) > 50 then 
+        invokeClientFunction(player, "tooFar")
         return 
     end
     
@@ -103,4 +104,10 @@ function triggerServerLoot(lootTier)
 end
 
 callable(nil, "triggerServerLoot")
+
+function tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer to interface."%_t
+    ScriptUI():showDialog(dialog, false)
+end
 

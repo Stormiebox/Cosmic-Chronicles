@@ -75,6 +75,7 @@ function triggerServerPayout(tier)
     
     -- Multiplayer Exploit Fix: Verify distance on the server
     if craft:getNearestDistance(entity) > 50 then 
+        invokeClientFunction(player, "tooFar")
         return 
     end
     
@@ -111,3 +112,9 @@ function triggerServerPayout(tier)
 end
 
 callable(nil, "triggerServerPayout")
+
+function tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer so we can dock."%_t
+    ScriptUI():showDialog(dialog, false)
+end

@@ -22,7 +22,7 @@ function dropLoot(playerIndex)
 
     -- Drop Credits
     if faction then
-        faction:receive("Looted %1% Credits from Eclipse cache.", math.floor(150000 * scale))
+        faction:receive("Looted %1% Credits from Eclipse cache.", math.floor(250000 * scale))
     end
     
     -- Drop Upgrades

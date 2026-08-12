@@ -148,7 +148,10 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
 
     if faction then
         local craft = player.craft
-        if not craft or craft:getNearestDistance(station) > 250 then return end
+        if not craft or craft:getNearestDistance(station) > 250 then 
+            invokeClientFunction(player, "tooFar")
+            return 
+        end
 
         local threshold = -30000
         local captain = craft:getCaptain()
@@ -205,6 +208,12 @@ function CosmicChroniclesRumormonger.showRumorDialog(rumor)
 
     -- Render the Avorion dialogue UI
     ScriptUI():showDialog(dialog)
+end
+
+function CosmicChroniclesRumormonger.tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer to dock and converse."%_t
+    ScriptUI():showDialog(dialog, false)
 end
 
 

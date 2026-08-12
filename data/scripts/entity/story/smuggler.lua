@@ -138,6 +138,7 @@ function handOverGoods()
         
         -- Multiplayer Exploit Fix: Verify distance on the server
         if not ship or ship:getNearestDistance(entity) > 50 then 
+            invokeClientFunction(player, "tooFar")
             return 
         end
 
@@ -175,6 +176,12 @@ end
 function noGoods()
     local dialog = {}
     dialog.text = "My scanners can't find the goods on your ship. Come back when you have the goods. But I won't wait here forever, so hurry up."%_t
+    ScriptUI():showDialog(dialog, false)
+end
+
+function tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer so I can take the goods."%_t
     ScriptUI():showDialog(dialog, false)
 end
 

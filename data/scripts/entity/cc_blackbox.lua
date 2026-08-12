@@ -71,7 +71,10 @@ function CosmicChroniclesBlackBox.donate()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 250 then return end
+    if not ship or ship:getNearestDistance(entity) > 250 then 
+        invokeClientFunction(player, "tooFar")
+        return 
+    end
     
     extracted = true
 
@@ -99,7 +102,10 @@ function CosmicChroniclesBlackBox.extract()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 250 then return end
+    if not ship or ship:getNearestDistance(entity) > 250 then 
+        invokeClientFunction(player, "tooFar")
+        return 
+    end
     
     extracted = true
 
@@ -228,6 +234,12 @@ function CosmicChroniclesBlackBox.showLogDialog(log)
     local text = "Black Box Recording:\n\n\"${log}\"\n\n*Recording Ends*"%_t % {log = log}
     local dialog = {text = text, answers = {{answer = "Close"%_t}}}
     ScriptUI():showDialog(dialog)
+end
+
+function CosmicChroniclesBlackBox.tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away. Come closer so you can access the cache."%_t
+    ScriptUI():showDialog(dialog, false)
 end
 
 return CosmicChroniclesBlackBox

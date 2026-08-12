@@ -52,9 +52,9 @@ The Rumormonger system doesn't just stop at stations. Cosmic Chronicles extends 
 
 ### 📅 Dynamic Deep Space Events
 
-When you jump into an empty sector, the mod checks the local political climate. If "War Heat" is boiling over, you might stumble into a **Derelict Graveyard**—the immediate, smoking aftermath of a massive fleet battle where you can recover doomed Black Box recordings and system upgrades that actively scale in value the closer you get to the galactic core. If tensions are rising, you might intercept a **Refugee Convoy** begging for food and medical supplies to repair their hyperdrives before a hunter fleet arrives.
+When you jump into an empty sector, the mod checks the local political climate. If "War Heat" is boiling over, you might stumble into a **Derelict Graveyard**—the immediate, smoking aftermath of a massive fleet battle where you can recover doomed Black Box recordings and system upgrades that actively scale in value the closer you get to the galactic core. Scavengers and Explorers extract **100% more value (2x)** and have a higher chance to pull *Exceptional* system upgrades. If tensions are rising, you might intercept a **Refugee Convoy** begging for food and medical supplies to repair their hyperdrives before a hunter fleet arrives.
 
-If you venture deep into the heart of an ancient faction's territory, your ship's computer might warn you about a colossal, cinematic **Cultural Monument**. Taking the time to approach it and read its inscriptions will earn you a massive, permanent (+1500) reputation boost with that faction.
+If you venture deep into the heart of an ancient faction's territory, your ship's computer might warn you about a colossal, cinematic **Cultural Monument**. Taking the time to approach it and read its inscriptions will earn you a massive, permanent (+2500) reputation boost with that faction.
 
 Other deep-space events include intercepting silent **Drifting Ghost Ships**, racing to destroy deeply-embedded **Rogue AI Probes** before they warp out with your sector data, or desperately attempting to extract a **Stranded Diplomat** whose military escort was annihilated.
 

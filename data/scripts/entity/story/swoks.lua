@@ -73,7 +73,10 @@ function startFight()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 50 then return end
+    if not ship or ship:getNearestDistance(entity) > 200 then 
+        invokeClientFunction(player, "tooFar")
+        return 
+    end
     
     local allianceIndex = player.allianceIndex
     for _, pirate in pairs(getPirates()) do
@@ -96,7 +99,10 @@ function payUp()
     local entity = Entity()
     local ship = player.craft
     
-    if not ship or ship:getNearestDistance(entity) > 50 then return end
+    if not ship or ship:getNearestDistance(entity) > 200 then 
+        invokeClientFunction(player, "tooFar")
+        return 
+    end
     
     local faction = Faction(ship.factionIndex)
     local sum = getPayAmount(faction)
@@ -317,4 +323,10 @@ function updateServer()
             Sector():deleteEntityJumped(pirates[1])
         end
     end
+end
+
+function tooFar()
+    local dialog = {}
+    dialog.text = "You're too far away! Come closer and we'll talk!"%_t
+    ScriptUI():showDialog(dialog, false)
 end
