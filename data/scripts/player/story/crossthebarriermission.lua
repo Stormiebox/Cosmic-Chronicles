@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 include("utility")
-
+include("galaxy")
 include("stringutility")
 include("structuredmission")
 include("callable")
@@ -9,7 +9,7 @@ include("randomext")
 
 local SectorSpecifics = include ("sectorspecifics")
 local MissionUT = include("missionutility")
-local Hermit = include("story/hermit")
+local Hermit = include("data/scripts/entity/story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 include("cosmicvaultdialogue")
@@ -162,7 +162,7 @@ function getTeleporterSector(sx, sy)
         end
     end
 
-    include("cosmicvaultdebug").info("Cosmic Chronicles", "Cross barrier mission: Error: couldn't find a teleporter sector")
+    print("Cross barrier mission: Error: couldn't find a teleporter sector")
 end
 
 local locationAskedOnEnd = makeDialogServerCallback("locationAskedOnEnd", 3, function()

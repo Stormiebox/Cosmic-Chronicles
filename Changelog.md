@@ -7,18 +7,30 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## v3.0.3
+
+### 🐛 Bug Fixes & ⚙️ Adjustments
+
+- [Fixed] **Dialogue Syntax Errors:** Patched server-side crashes in the Bottan Smuggler mission caused by improper `invokeFunction` logic when un-quested players attempted to interact.
+- [Changed] **Anti-Exploit Distances:** Recalculated the anti-exploit distance checks across 10+ event scripts. Interaction limits have been expanded (ranging from 500 - 3000 units) to ensure players flying huge ships are no longer falsely flagged as being "too far away."
+- [Changed] **File Cleanup:** Stripped out unneeded script files (like `smugglerdelivery.lua`) that were identical to vanilla, reducing the mod's footprint and preventing future VFS conflicts.
+
+
 ## v3.0.2
+
 ### 🐛 Bug Fixes & ⚖️ Balance Tweaks
-- [Bugfixed] **Bottan Delivery Feedback:** When attempting to hand over goods to the Smuggler during the Easy Delivery mission, players who were too far away (>50km) would experience a silent dialogue closure due to the anti-exploit check. The smuggler will now provide appropriate dialogue feedback explaining you are too far away to hand over the goods.
+
+- [Fixed] **Bottan Delivery Feedback:** When attempting to hand over goods to the Smuggler during the Easy Delivery mission, players who were too far away (>50km) would experience a silent dialogue closure due to the anti-exploit check. The smuggler will now provide appropriate dialogue feedback explaining you are too far away to hand over the goods.
 - [Balanced] **Refugee Convoys (Cosmic Overhaul):** Buffed the Merchant captain hazard pay from `25,000` to `50,000` credits. Buffed the Smuggler captain skimming limits from `35,000` to `75,000` credits.
 - [Balanced] **Echoes of the Frontline (Cosmic Overhaul):** Buffed the Black Box extraction multiplier for Scavenger and Explorer captains from `1.5x` (+50%) to `2.0x` (+100%).
 - [Balanced] **Cinematic Monuments (Cosmic Vault):** Increased the permanent reputation boost awarded for reading a faction's monument from `+1500` to `+2500`.
 - [Balanced] **Corrupted Lore Nodes (Cosmic Ascendancy):** Increased the base credit payout of Eclipse caches from `150,000` to `250,000` base credits to properly compensate for the massive eclipse ships ambush that they spawn.
-- [Bugfixed] **Silent Dialogue Failures:** Resolved a systemic issue affecting 9 different deep-space event scripts (Refugees, Monuments, Ancient Caches, Ghost Ships, Diplomats, Eclipse Caches, Bosses, Black Boxes, and Rumormongers). Previously, clicking a dialog option while out of range would silently abort the interaction. These events now provide a client-side dialogue box explaining that you are too far away.
+- [Fixed] **Silent Dialogue Failures:** Resolved a systemic issue affecting 9 different deep-space event scripts (Refugees, Monuments, Ancient Caches, Ghost Ships, Diplomats, Eclipse Caches, Bosses, Black Boxes, and Rumormongers). Previously, clicking a dialog option while out of range would silently abort the interaction. These events now provide a client-side dialogue box explaining that you are too far away.
 - [Tweaked] **Swoks Boss Interaction:** Expanded the interaction range limit for the Swoks boss fight from `50km` to `200km`.
 
 ## v3.0.1 🐛Bug Fix Patch Update!🐛
-- [Bugfixed] **File Path Error:** Corrected a pathing error in include() for the hermit missions.
+
+- [Fixed] **File Path Error:** Corrected a pathing error in include() for the hermit missions.
 
 ## v3.0.0 UNRELEASED WORKSHOP VERSION (PROJECT UNDER DEVELOPMENT)
 
@@ -63,15 +75,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### 🐛 Bug Fixes & 🛠️ Optimization
 
 - [Optimized] **Performance & TPS Optimization:** Drastically reduced server load during late-game scenarios. Injected a hardcoded `getUpdateInterval` throttle (1.0s) into `buymission.lua` and `hermitmission.lua` to prevent the engine from polling the sector 60 times a second.
-- [Bugfixed] **Truthiness Logic Stabilized:** Applied strict explicit float comparisons (`> 0.5`) inside `cc_factionmonument.lua`, `radiochatter.lua` and other scripts, resolving cases where Avorion Lua engine would implicitly evaluate 0 values as truthy.
-- [Bugfixed] **Cross-Mod API Integration:** Fixed a critical namespace error in `cc_newsboard.lua` where it incorrectly attempted to invoke the `cosmicvaultnews_server.lua` API via the `Server()` object instead of the `Galaxy()` object, completely restoring cross-mod news fetching functionality and resolving engine stack trace crashes.
-- [Bugfixed] **Cosmic Codex Loading Crash:** Fixed missing global definitions (e.g. `entities`, `rangeType`) in the codex files that prevented the encyclopedia from loading correctly and crashed the UI.
-- [Bugfixed] **Dynamic Event Spawn Logic:** Patched structural logic issues in the Ghost Ship, Stock Market, and Eclipse Lore scripts where float probability checks were being compared against `random():getInt()`, ensuring accurate event triggers globally.
-- [Bugfixed] **Eclipse Lore Spawn Rate:** Fixed a math logic bug where `random():getInt() > 0.05` mathematically guaranteed an Eclipse Lore spawn almost 100% of the time, replacing it with `getFloat()` to restore the intended 5% rarity.
-- [Bugfixed] **Data Cache Fallback Crash:** Injected a missing `plangenerator` requirement into `cc_ancientdatacache.lua` to prevent the engine from fatally crashing if the new `.xml` plans fail to load and the game attempts a procedural fallback.
-- [Bugfixed] **Engine Freeze & Lockup Prevention:** Fixed a catastrophic script error inside `spawnrandombosses.lua` where a `while true do` loop lacked a failsafe iteration cap. This previously caused the entire Dedicated Server process to lock up 100% CPU and freeze during late-game boss anomaly generation.
-- [Bugfixed] **Pathing Crash Hazards:** Repaired illegal absolute `include()` path injections (`include("data/scripts/entity/story/hermit")`) inside `crossthebarriermission` and `hermitmission` that could violently crash the server context.
-- [Bugfixed] **Multiplayer Networking:** Added `onClient()` wrappers to the Exodus Wormhole Beacon UI to prevent the local singleplayer thread from self-invoking networking callbacks.
-- [Bugfixed] **Desyncs:** Replaced `math.random` with `random():getInt()` inside `cc_rogueaiprobe.lua` and other event generators. This prevents physics desyncs and invisible collisions in multiplayer.
+- [Fixed] **Truthiness Logic Stabilized:** Applied strict explicit float comparisons (`> 0.5`) inside `cc_factionmonument.lua`, `radiochatter.lua` and other scripts, resolving cases where Avorion Lua engine would implicitly evaluate 0 values as truthy.
+- [Fixed] **Cross-Mod API Integration:** Fixed a critical namespace error in `cc_newsboard.lua` where it incorrectly attempted to invoke the `cosmicvaultnews_server.lua` API via the `Server()` object instead of the `Galaxy()` object, completely restoring cross-mod news fetching functionality and resolving engine stack trace crashes.
+- [Fixed] **Cosmic Codex Loading Crash:** Fixed missing global definitions (e.g. `entities`, `rangeType`) in the codex files that prevented the encyclopedia from loading correctly and crashed the UI.
+- [Fixed] **Dynamic Event Spawn Logic:** Patched structural logic issues in the Ghost Ship, Stock Market, and Eclipse Lore scripts where float probability checks were being compared against `random():getInt()`, ensuring accurate event triggers globally.
+- [Fixed] **Eclipse Lore Spawn Rate:** Fixed a math logic bug where `random():getInt() > 0.05` mathematically guaranteed an Eclipse Lore spawn almost 100% of the time, replacing it with `getFloat()` to restore the intended 5% rarity.
+- [Fixed] **Data Cache Fallback Crash:** Injected a missing `plangenerator` requirement into `cc_ancientdatacache.lua` to prevent the engine from fatally crashing if the new `.xml` plans fail to load and the game attempts a procedural fallback.
+- [Fixed] **Engine Freeze & Lockup Prevention:** Fixed a catastrophic script error inside `spawnrandombosses.lua` where a `while true do` loop lacked a failsafe iteration cap. This previously caused the entire Dedicated Server process to lock up 100% CPU and freeze during late-game boss anomaly generation.
+- [Fixed] **Pathing Crash Hazards:** Repaired illegal absolute `include()` path injections (`include("data/scripts/entity/story/hermit")`) inside `crossthebarriermission` and `hermitmission` that could violently crash the server context.
+- [Fixed] **Multiplayer Networking:** Added `onClient()` wrappers to the Exodus Wormhole Beacon UI to prevent the local singleplayer thread from self-invoking networking callbacks.
+- [Fixed] **Desyncs:** Replaced `math.random` with `random():getInt()` inside `cc_rogueaiprobe.lua` and other event generators. This prevents physics desyncs and invisible collisions in multiplayer.
 
-- [Bugfixed] **VFS Compliance:** Stripped redundant global wrapper functions from namespaced scripts to prevent silent double-execution logic loops and engine crashes.
+- [Fixed] **VFS Compliance:** Stripped redundant global wrapper functions from namespaced scripts to prevent silent double-execution logic loops and engine crashes.

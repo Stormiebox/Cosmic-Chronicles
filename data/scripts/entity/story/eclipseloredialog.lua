@@ -14,7 +14,7 @@ function interactionPossible(playerIndex, option)
     if not player then return false end
     local craft = player.craft
     if not craft then return false end
-    if craft:getNearestDistance(Entity()) > 50 then return false end
+    if craft:getNearestDistance(Entity()) > 500 then return false end
     return true
 end
 
@@ -49,14 +49,14 @@ function triggerLootServer()
     local entity = Entity()
     local player = Player(callingPlayer)
     if not player then return end
-    
+
     local craft = player.craft
     if not craft then return end
-    
+
     -- Multiplayer Exploit Fix: Verify distance on the server
-    if craft:getNearestDistance(entity) > 50 then 
+    if craft:getNearestDistance(entity) > 500 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
 
     -- Invoke the loot drop function on the sibling script
@@ -75,6 +75,6 @@ callable(nil, "triggerLootServer")
 function tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer so you can access the node."%_t
-    ScriptUI():showDialog(dialog, false)
+    ScriptUI():interactShowDialog(dialog, true)
 end
 

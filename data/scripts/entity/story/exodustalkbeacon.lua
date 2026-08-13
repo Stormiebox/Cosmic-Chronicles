@@ -246,7 +246,7 @@ function onPreRenderHud()
     if player.state == PlayerStateType.BuildCraft or player.state == PlayerStateType.BuildTurret or player.state == PlayerStateType.PhotoMode then return end
 
     -- display nearest x
-    if math.floor(appTime()) % 2 == 0 then
+    if os.time() % 2 == 0 then
         local renderer = UIRenderer()
         renderer:renderEntityTargeter(Entity(), ColorRGB(1, 1, 1));
         renderer:display()

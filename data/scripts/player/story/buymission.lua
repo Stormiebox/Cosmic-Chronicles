@@ -4,11 +4,6 @@ include("stringutility")
 include("structuredmission")
 include("callable")
 
-function getUpdateInterval()
-    return 1.0
-end
-
-
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 include("cosmicvaultdialogue")
 include("cosmicvaultmission")

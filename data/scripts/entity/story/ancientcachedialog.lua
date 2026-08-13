@@ -16,7 +16,7 @@ function interactionPossible(playerIndex, option)
     if not player then return false end
     local craft = player.craft
     if not craft then return false end
-    if craft:getNearestDistance(Entity()) > 50 then return false end
+    if craft:getNearestDistance(Entity()) > 500 then return false end
     return true
 end
 
@@ -46,57 +46,57 @@ function triggerLootServer()
     local entity = Entity()
     local player = Player(callingPlayer)
     if not player then return end
-    
+
     local craft = player.craft
     if not craft then return end
-    
+
     -- Multiplayer Exploit Fix: Verify distance on the server before dropping loot!
-    if craft:getNearestDistance(entity) > 50 then 
+    if craft:getNearestDistance(entity) > 500 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
-    
+
     local isScavenger = false
     local isExplorer = false
-    
+
     local captain = craft:getCaptain()
     if captain then
         if captain:hasClass(CaptainClass.Scavenger) then isScavenger = true end
         if captain:hasClass(CaptainClass.Explorer) then isExplorer = true end
     end
-    
+
     local sector = Sector()
     local x, y = sector:getCoordinates()
     local d = math.sqrt(x*x + y*y)
     local scale = math.max(1, (500 - d) / 100)
-    
+
     local bonusMultiplier = 1.0
     if isScavenger or isExplorer then
         bonusMultiplier = 2.0
         player:sendChatMessage("Captain", 0, "I managed to decrypt an isolated sub-routine in this cache! We found extra salvage!")
     end
-    
+
     -- Alliance Fix: Give credits to the faction of the craft, not just the calling player!
     local faction = Faction(craft.factionIndex)
     if faction then
         faction:receive("Extracted %1% Credits from Black Box.", math.floor(75000 * scale * bonusMultiplier))
     end
-    
+
     -- Drop Upgrades
     local generator = UpgradeGenerator()
     local numUpgrades = math.floor(2 * scale)
-    
+
     for i = 1, numUpgrades do
         local rType = RarityType.Rare
         if scale >= 3.0 then rType = RarityType.Exceptional end
         if (isScavenger or isExplorer) and random():test(0.5) then
             rType = RarityType.Exotic
         end
-        
+
         local upgrade = generator:generateSectorSystem(x, y, 0, Rarity(rType))
         sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
     end
-    
+
     sector:createExplosion(entity.translationf, 1.5, false)
     sector:deleteEntity(entity)
 end
@@ -106,5 +106,5 @@ callable(nil, "triggerLootServer")
 function tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer so you can interface with the cache."%_t
-    ScriptUI():showDialog(dialog, false)
+    ScriptUI():interactShowDialog(dialog, true)
 end

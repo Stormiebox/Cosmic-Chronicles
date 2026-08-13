@@ -59,7 +59,7 @@ function onSectorEntered(player, x, y)
 
     if missionData.location then
         if missionData.location.x == x and missionData.location.y == y then
---            include("cosmicvaultdebug").info("Cosmic Chronicles", "entered point: " .. x .. " " .. y)
+--            print ("entered point: " .. x .. " " .. y)
             findNextPoint(x, y)
             placeWayWreckages()
             placeWormholeBeacon(missionData.nextBeaconLocation.x, missionData.nextBeaconLocation.y)
@@ -72,7 +72,7 @@ function onSectorEntered(player, x, y)
     local points = OperationExodus.getRendezVousPoints()
     for _, p in pairs(points) do
         if p.x == x and p.y == y then
---            include("cosmicvaultdebug").info("Cosmic Chronicles", "entered rendez-vous point")
+--            print("entered rendez-vous point")
             findNextPoint(x, y)
             placeWormholeBeacon(missionData.nextBeaconLocation.x, missionData.nextBeaconLocation.y)
             showMissionUpdated()
@@ -82,12 +82,12 @@ function onSectorEntered(player, x, y)
     end
 
 --    if missionData.location then
---        include("cosmicvaultdebug").info("Cosmic Chronicles", "next point: " .. missionData.location.x .. " " .. missionData.location.y)
+--        print ("next point: " .. missionData.location.x .. " " .. missionData.location.y)
 --        for _, corner in pairs(corners) do
---            include("cosmicvaultdebug").info("Cosmic Chronicles", "corner: " .. corner.x .. " " .. corner.y)
+--            print ("corner: " .. corner.x .. " " .. corner.y)
 --        end
 --    else
---        include("cosmicvaultdebug").info("Cosmic Chronicles", "next point: nil")
+--        print ("next point: nil")
 --    end
 
 end
@@ -209,7 +209,7 @@ end
 
 function placeWayWreckages()
 
-    if random():getFloat() < 0.5 then return end
+    if math.random() < 0.5 then return end
 
     local wreckages = {Sector():getEntitiesByType(EntityType.Wreckage)}
     if #wreckages > 0 then return end
@@ -217,7 +217,7 @@ function placeWayWreckages()
     local faction = OperationExodus.getFaction()
     local generator = SectorGenerator(faction:getHomeSectorCoordinates())
 
-    for i = 1, random():getInt(1, 3) do
+    for i = 1, math.random(1, 3) do
         generator:createWreckage(faction)
     end
 

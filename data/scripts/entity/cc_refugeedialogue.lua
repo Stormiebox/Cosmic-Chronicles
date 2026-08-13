@@ -10,13 +10,13 @@ local helped = false
 
 function CosmicChroniclesRefugee.interactionPossible(playerIndex, option)
     if helped then return false end
-    
+
     local player = Player(playerIndex)
     if not player then return false end
     local craft = player.craft
     if not craft then return false end
-    if craft:getNearestDistance(Entity()) > 50 then return false end
-    
+    if craft:getNearestDistance(Entity()) > 500 then return false end
+
     return true
 end
 
@@ -72,9 +72,9 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
     local entity = Entity()
     local ship = player.craft
     if not ship or not ship:hasComponent(ComponentType.CargoBay) then return end
-    if ship:getNearestDistance(entity) > 50 then 
+    if ship:getNearestDistance(entity) > 500 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
 
     if ship:getCargoAmount(goodName) >= amount then
@@ -126,7 +126,7 @@ end
 function CosmicChroniclesRefugee.tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer so we can transfer the supplies."%_t
-    ScriptUI():showDialog(dialog, false)
+    ScriptUI():interactShowDialog(dialog, true)
 end
 
 return CosmicChroniclesRefugee

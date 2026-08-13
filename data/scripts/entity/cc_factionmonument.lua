@@ -11,7 +11,7 @@ function CosmicChroniclesMonument.interactionPossible(playerIndex, option)
     if not player then return false end
     local craft = player.craft
     if not craft then return false end
-    if craft:getNearestDistance(Entity()) > 50 then return false end
+    if craft:getNearestDistance(Entity()) > 500 then return false end
     return true
 end
 
@@ -29,11 +29,11 @@ function CosmicChroniclesMonument.readLore()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 50 then 
+    if not ship or ship:getNearestDistance(entity) > 500 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
-    
+
     local faction = Faction(entity.factionIndex)
     if not faction then return end
 
@@ -44,7 +44,7 @@ function CosmicChroniclesMonument.readLore()
     if faction:getTrait("aggressive") > 0.5 then
         trait1 = "unyielding strength and conquest"%_T
     end
-    
+
     local trait2 = "scavenging the ashes of the old world"%_T
     if faction:getTrait("wealthy") > 0.5 then
         trait2 = "endless prosperity"%_T
@@ -76,7 +76,7 @@ end
 function CosmicChroniclesMonument.tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer so you can read the inscription."%_t
-    ScriptUI():showDialog(dialog, false)
+    ScriptUI():interactShowDialog(dialog, true)
 end
 
 return CosmicChroniclesMonument

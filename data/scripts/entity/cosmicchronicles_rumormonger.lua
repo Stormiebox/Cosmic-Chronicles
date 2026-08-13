@@ -99,7 +99,7 @@ function CosmicChroniclesRumormonger.interactionPossible(playerIndex, option)
     local craft = player.craft
     -- Don't show the dialogue if the player is somehow trying to talk to their own ship
     if craft and craft.index == Entity().index then return false end
-    if craft and craft:getNearestDistance(Entity()) > 250 then return false end
+    if craft and craft:getNearestDistance(Entity()) > 1000 then return false end
 
     -- Base Threshold: Prevent casually asking for rumors from fiercely hostile stations (-30k rep)
     local threshold = -30000
@@ -148,9 +148,9 @@ function CosmicChroniclesRumormonger.getRumorFromServer()
 
     if faction then
         local craft = player.craft
-        if not craft or craft:getNearestDistance(station) > 250 then 
+        if not craft or craft:getNearestDistance(station) > 1000 then
             invokeClientFunction(player, "tooFar")
-            return 
+            return
         end
 
         local threshold = -30000
@@ -213,7 +213,7 @@ end
 function CosmicChroniclesRumormonger.tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer to dock and converse."%_t
-    ScriptUI():showDialog(dialog, false)
+    ScriptUI():interactShowDialog(dialog, true)
 end
 
 

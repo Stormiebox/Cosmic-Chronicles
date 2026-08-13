@@ -73,11 +73,11 @@ function startFight()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 200 then 
+    if not ship or ship:getNearestDistance(entity) > 3000 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
-    
+
     local allianceIndex = player.allianceIndex
     for _, pirate in pairs(getPirates()) do
         local ai = ShipAI(pirate.index)
@@ -98,12 +98,12 @@ function payUp()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    
-    if not ship or ship:getNearestDistance(entity) > 200 then 
+
+    if not ship or ship:getNearestDistance(entity) > 3000 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
-    
+
     local faction = Faction(ship.factionIndex)
     local sum = getPayAmount(faction)
 
@@ -235,15 +235,15 @@ function normalDialog()
             followUp = choices,
         }
     }
-    
+
     local greetingText = "Well hello there. Now who might you be?"%_t
-    
+
     -- [[ Cosmic Chronicles: Dynamic Boss Greeting ]] --
     local dynamicGreeting = CosmicVaultDialogue.getValidLine("swoks_greeting", nil, nil)
     if dynamicGreeting then
         greetingText = dynamicGreeting
     end
-    
+
 
     local dialog =
     {

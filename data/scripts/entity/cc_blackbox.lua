@@ -20,12 +20,12 @@ function CosmicChroniclesBlackBox.interactionPossible(playerIndex, option)
     if not craft then return false end
 
     -- Cosmic Overhaul/Chronicles: Explorer Resonance
-    local maxDistance = 50
+    local maxDistance = 500
     local captain = craft:getCaptain()
     if captain then
         local CaptainClass = include("captainclass")
         if captain:hasClass(CaptainClass.Explorer) then
-            maxDistance = 250
+            maxDistance = 500
         end
     end
 
@@ -71,11 +71,11 @@ function CosmicChroniclesBlackBox.donate()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 250 then 
+    if not ship or ship:getNearestDistance(entity) > 500 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
-    
+
     extracted = true
 
     local factionIndex = Entity():getValue("is_famine_relief")
@@ -102,11 +102,11 @@ function CosmicChroniclesBlackBox.extract()
     local player = Player(callingPlayer)
     local entity = Entity()
     local ship = player.craft
-    if not ship or ship:getNearestDistance(entity) > 250 then 
+    if not ship or ship:getNearestDistance(entity) > 500 then
         invokeClientFunction(player, "tooFar")
-        return 
+        return
     end
-    
+
     extracted = true
 
     -- Generate narrative log text
@@ -239,7 +239,7 @@ end
 function CosmicChroniclesBlackBox.tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer so you can access the cache."%_t
-    ScriptUI():showDialog(dialog, false)
+    ScriptUI():interactShowDialog(dialog, true)
 end
 
 return CosmicChroniclesBlackBox

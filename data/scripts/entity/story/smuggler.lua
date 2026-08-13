@@ -135,11 +135,11 @@ function handOverGoods()
         local player = Player(callingPlayer)
         local ship = Entity(player.craftIndex)
         local entity = Entity()
-        
+
         -- Multiplayer Exploit Fix: Verify distance on the server
-        if not ship or ship:getNearestDistance(entity) > 50 then 
+        if not ship or ship:getNearestDistance(entity) > 3000 then
             invokeClientFunction(player, "tooFar")
-            return 
+            return
         end
 
         if hasGoods() then
@@ -194,10 +194,10 @@ function dialogFinished()
     local player = Player(callingPlayer)
 
     if canFlee then
-        player:invokeFunction("story/smugglerdelivery", "accomplish")
+            player:invokeFunction("story/smugglerdelivery", "accomplish")
         Sector():deleteEntityJumped(Entity())
     else
-        player:invokeFunction("story/smugglerdelivery", "fail")
+            player:invokeFunction("story/smugglerdelivery", "fail")
         onCantJump()
     end
 end

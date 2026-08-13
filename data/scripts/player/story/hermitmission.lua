@@ -5,11 +5,6 @@ include("utility")
 include("stringutility")
 include("structuredmission")
 include("callable")
-
-function getUpdateInterval()
-    return 1.0
-end
-
 local MissionUT = include("missionutility")
 local RecallDeviceUT = include("recalldeviceutility")
 local AdventurerGuide = include("story/adventurerguide")
