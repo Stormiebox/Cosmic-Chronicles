@@ -37,7 +37,7 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
 
     local sector = Sector()
     -- Only trigger these specific narrative events in empty or deep space sectors
-    if #sector:getEntitiesByType(EntityType.Station) > 0 then return end
+    if #{sector:getEntitiesByType(EntityType.Station)} > 0 then return end
 
     -- Prevent infinite farming: ensure narrative events only spawn once per sector
     if sector:getValue("cc_event_spawned") then return end

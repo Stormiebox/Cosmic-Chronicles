@@ -7,6 +7,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## v3.0.4
+
+### 🐛 Bug Fixes
+
+- [Fixed] **Guardian Event Disruption:** Fixed a critical bug in `cc_event_controller.lua` where calculating the entity count of an empty sector would throw a `length of a nil value` exception. This background crash was silently halting the global sector update loop, completely preventing the Wormhole Guardian flavor text and events from triggering upon entering the core.
+- [Fixed] **Xsotan Distress Calls:** Fixed a bug in `cc_diplomatescort.lua` and `cc_refugeeconvoy.lua` where the script would grab "The Xsotan" as the nearest faction when triggered deep inside the galactic core. Refugees and diplomats will no longer accidentally spawn as disguised Xsotan vessels!
+- [Fixed] **Infinite Loot Exploit:** Patched a severe multiplayer exploit in `ancientcachedialog.lua`, `eclipseloredialog.lua`, and `ghostshipdialog.lua` where players could use macros to rapidly spam the dialogue options, forcing the server to drop hundreds of loot instances before the cache entity was fully deleted at the end of the server tick.
+
 ## v3.0.3
 
 ### 🐛 Bug Fixes & ⚙️ Adjustments

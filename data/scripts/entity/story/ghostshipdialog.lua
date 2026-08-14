@@ -78,6 +78,9 @@ function triggerServerLoot(lootTier)
         return
     end
 
+    if entity:getValue("cc_loot_triggered") then return end
+    entity:setValue("cc_loot_triggered", true)
+
     -- Exploit Fix: Verify captain class on the server for special tiers
     local captain = craft:getCaptain()
     if lootTier == 2 and (not captain or not captain:hasClass(CaptainClass.Scavenger)) then return end

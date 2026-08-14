@@ -59,6 +59,9 @@ function triggerLootServer()
         return
     end
 
+    if entity:getValue("cc_loot_triggered") then return end
+    entity:setValue("cc_loot_triggered", true)
+
     -- Invoke the loot drop function on the sibling script
     entity:invokeFunction("data/scripts/entity/story/eclipseloot.lua", "dropLoot", callingPlayer)
 

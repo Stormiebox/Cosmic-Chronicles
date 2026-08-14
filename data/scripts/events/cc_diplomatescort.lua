@@ -13,6 +13,11 @@ end
 function DiplomatEscort.spawn()
     local x, y = Sector():getCoordinates()
     local faction = Galaxy():getNearestFaction(x, y)
+    
+    if not faction or faction.name == "The Xsotan" or faction.name == "The Xsotan"%_t or faction.isPlayer or faction.isAlliance then
+        terminate()
+        return
+    end
 
     local diplomat = ShipGenerator.createFreighterShip(faction, SectorGenerator(x,y):getPositionInSector())
     diplomat.title = "Stranded Diplomat"

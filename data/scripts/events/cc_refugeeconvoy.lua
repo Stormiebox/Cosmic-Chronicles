@@ -9,7 +9,10 @@ function initialize()
     local x, y = sector:getCoordinates()
     local faction = Galaxy():getNearestFaction(x, y)
 
-    if not faction then terminate() return end
+    if not faction or faction.name == "The Xsotan" or faction.name == "The Xsotan"%_t or faction.isPlayer or faction.isAlliance then
+        terminate()
+        return
+    end
 
     -- Spawn 2-3 fleeing refugee ships
     local count = random():getInt(2, 3)

@@ -56,6 +56,9 @@ function triggerLootServer()
         return
     end
 
+    if entity:getValue("cc_loot_triggered") then return end
+    entity:setValue("cc_loot_triggered", true)
+
     local isScavenger = false
     local isExplorer = false
 
