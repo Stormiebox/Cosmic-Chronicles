@@ -92,11 +92,11 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
             local CaptainClass = include("captainclass")
             if captain:hasClass(CaptainClass.Merchant) then
                 -- Balanced from 75k to 50k
-                repTarget:receive("Hazard Pay"%_t, 50000)
+                repTarget.money = repTarget.money + 50000
                 player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 50,000 credit hazard pay fee for the supplies."%_T)
             elseif captain:hasClass(CaptainClass.Smuggler) then
                 -- Balanced from 100k to 75k
-                repTarget:receive("Smuggled Goods"%_t, 75000)
+                repTarget.money = repTarget.money + 75000
                 player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 75,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
             end
         end
@@ -127,6 +127,25 @@ function CosmicChroniclesRefugee.tooFar()
     local dialog = {}
     dialog.text = "You're too far away. Come closer so we can transfer the supplies."%_t
     ScriptUI():interactShowDialog(dialog, true)
+end
+
+function getDialog(...)
+    if CosmicChroniclesRefugee.getDialog then return CosmicChroniclesRefugee.getDialog(...) end
+end
+function interactionPossible(...)
+    if CosmicChroniclesRefugee.interactionPossible then return CosmicChroniclesRefugee.interactionPossible(...) end
+end
+function initUI(...)
+    if CosmicChroniclesRefugee.initUI then return CosmicChroniclesRefugee.initUI(...) end
+end
+function onInteract(...)
+    if CosmicChroniclesRefugee.onInteract then return CosmicChroniclesRefugee.onInteract(...) end
+end
+function onDonateFood(...)
+    if CosmicChroniclesRefugee.onDonateFood then return CosmicChroniclesRefugee.onDonateFood(...) end
+end
+function onDonateMeds(...)
+    if CosmicChroniclesRefugee.onDonateMeds then return CosmicChroniclesRefugee.onDonateMeds(...) end
 end
 
 return CosmicChroniclesRefugee

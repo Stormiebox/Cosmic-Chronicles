@@ -21,14 +21,22 @@ function GhostShipEvent.spawn()
     ghost.title = "Drifting Ghost Ship"
     ghost:addScriptOnce("data/scripts/entity/story/ghostshipdialog.lua")
 
-    -- Strip AI to make it dead
+    -- Strip AI and weapons to make it completely dead
     ghost:removeScript("data/scripts/entity/ai/patrol.lua")
+    ghost:removeScript("data/scripts/entity/ai/freighter.lua")
     
     local ai = ShipAI(ghost.index)
     if ai then
+        ai:stop()
         ai:setPassive()
-        ai:setIdle()
     end
+
+    -- Remove any auto-firing turrets so it doesn't shoot the player
+    local turrets = {ghost:getTurrets()}
+    for _, turret in pairs(turrets) do
+        ghost:removeTurret(turret)
+    end
+
     ghost.crew = Crew()
 
     Sector():broadcastChatMessage("Scanner", 0, "Anomaly detected. Faint, repeating distress signal from a drifting vessel.")

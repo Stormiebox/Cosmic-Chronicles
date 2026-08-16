@@ -7,6 +7,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## v3.0.5
+
+### 🐛 Bug Fixes
+- [Fixed] **AI & Loot Logic:** Fixed various files with faulty AI and loot logic.
+- [Fixed] **Namespace RPC Registries:** Fixed a critical structural flaw across `cosmicchronicles_rumormonger.lua`, `cc_refugeedialogue.lua`, `cc_factionmonument.lua`, and `cc_blackbox.lua` where multiple server dialogue callbacks were using global scope wrappers instead of the required namespace-aware `callable` registries. This previously prevented the Avorion C++ engine from properly routing `invokeServerFunction` calls to these systems, silently aborting station dialogues, monument inscriptions, and deep-space events.
+- [Fixed] **Dynamic Reward Payout Crash:** Patched a severe bug in `cc_refugeedialogue.lua`, `cc_blackbox.lua`, and `diplomatdialog.lua` where dynamic credit rewards (Hazard Pay, Smuggled Goods, and Recovered Credits) utilized the unstable `player:receive()` API overload. The engine would occasionally fatally crash upon attempting to award credits. This has been completely replaced with direct property assignment (`player.money = player.money + ...`), permanently securing the reward payout.
+- [Fixed] **Rogue AI Probe Timer:** Fixed a script pathing error in `cc_rogueaiprobe.lua` where the intended `warpawaytimer.lua` script did not exist. It has been replaced with the engine-native `delayeddelete.lua` utility, ensuring the Rogue AI Probe properly hyperspaces away if not destroyed within 3 minutes.
+
+### 📦 Content Additions
+- [Added] New .xml designs for events, lore and missions.
+
 ## v3.0.4
 
 ### 🐛 Bug Fixes

@@ -236,26 +236,7 @@ function CosmicChroniclesNewsGenerator.restore(data)
 end
 
 
-function getUpdateInterval(...)
-    if CosmicChroniclesNewsGenerator.getUpdateInterval then return CosmicChroniclesNewsGenerator.getUpdateInterval(...) end
-end
-function initialize(...)
-    if CosmicChroniclesNewsGenerator.initialize then return CosmicChroniclesNewsGenerator.initialize(...) end
-end
-function updateServer(...)
-    if CosmicChroniclesNewsGenerator.updateServer then return CosmicChroniclesNewsGenerator.updateServer(...) end
-end
-function secure(...)
-    if CosmicChroniclesNewsGenerator.secure then return CosmicChroniclesNewsGenerator.secure(...) end
-end
-function restore(...)
-    if CosmicChroniclesNewsGenerator.restore then return CosmicChroniclesNewsGenerator.restore(...) end
-end
 
 
--- Global Event Callbacks
-function onBehemothAttackStart(...)
-    if CosmicChroniclesNewsGenerator.onBehemothAttackStart then return CosmicChroniclesNewsGenerator.onBehemothAttackStart(...) end
-end
 
-return CosmicChroniclesNewsGenerator
+

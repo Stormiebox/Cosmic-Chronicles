@@ -27,21 +27,21 @@ function EclipseLoreGenerator.initialize()
     local loreType = random():getInt(1, 3)
     local entity = nil
 
-    local planPath = "data/plans/chronicles/eclipse_beacon.xml"
+    local planPath = "data/plans/chronicles/eclipse_anomaly.xml"
     local eclipsePlan = LoadPlanFromFile(planPath)
 
     if loreType == 1 then
         local plan = eclipsePlan or PlanGenerator.makeStationPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
-        entity.title = "Eclipse Beacon"
+        entity.title = "Ancient Eclipse Beacon"
     elseif loreType == 2 then
         local plan = eclipsePlan or PlanGenerator.makeShipPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
-        entity.title = "Eclipse Shipwreck"
+        entity.title = "Ancient Eclipse Shipwreck"
     else
         local plan = eclipsePlan or PlanGenerator.makeFreighterPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
-        entity.title = "Eclipse Stash"
+        entity.title = "Ancient Eclipse Stash"
     end
 
     -- Add dialog script

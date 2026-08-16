@@ -82,7 +82,9 @@ function triggerLootServer()
     -- Alliance Fix: Give credits to the faction of the craft, not just the calling player!
     local faction = Faction(craft.factionIndex)
     if faction then
-        faction:receive("Extracted %1% Credits from Black Box.", math.floor(75000 * scale * bonusMultiplier))
+        local amount = math.floor(75000 * scale * bonusMultiplier)
+        faction.money = faction.money + amount
+        player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Extracted %1% Credits from Black Box."%_t, amount)
     end
 
     -- Drop Upgrades

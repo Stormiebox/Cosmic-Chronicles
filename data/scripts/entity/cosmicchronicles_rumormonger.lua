@@ -215,13 +215,3 @@ function CosmicChroniclesRumormonger.tooFar()
     dialog.text = "You're too far away. Come closer to dock and converse."%_t
     ScriptUI():interactShowDialog(dialog, true)
 end
-
-
-function getUpdateInterval(...)
-    if CosmicChroniclesRumormonger.getUpdateInterval then return CosmicChroniclesRumormonger.getUpdateInterval(...) end
-end
-function updateServer(...)
-    if CosmicChroniclesRumormonger.updateServer then return CosmicChroniclesRumormonger.updateServer(...) end
-end
-
-return CosmicChroniclesRumormonger

@@ -85,18 +85,20 @@ function triggerServerPayout(tier)
     if tier == 3 and (not captain or not captain:hasClass(CaptainClass.Smuggler)) then return end
 
     local sector = Sector()
-    local faction = Faction(craft.factionIndex)
-    if not faction then return end
+    local buyer = player
+    if craft.factionIndex == player.allianceIndex then
+        buyer = Alliance(player.allianceIndex)
+    end
 
     if tier == 1 then
         player:sendChatMessage("Diplomat", 0, "I've transferred standard extraction fees to your account. Let's move!")
-        faction:receive("Received %1% Credits for VIP Extraction.", 150000)
+        buyer.money = buyer.money + 150000
     elseif tier == 2 then
         player:sendChatMessage("Diplomat", 0, "You're bleeding me dry, but I don't have a choice! Hazard pay transferred.")
-        faction:receive("Received %1% Credits for VIP Extraction.", 450000)
+        buyer.money = buyer.money + 450000
     elseif tier == 3 then
         player:sendChatMessage("Diplomat", 0, "I'll turn a blind eye to your... less than legal operations in exchange for this escape route.")
-        faction:receive("Received %1% Credits for VIP Extraction.", 100000)
+        buyer.money = buyer.money + 100000
 
         -- Smuggler bonus: Illegal Goods (e.g. 50x Unbranded Weapons or similar)
         -- Since adding specific cargo safely requires more logic, we can just drop a high rarity system upgrade as a "bribe"

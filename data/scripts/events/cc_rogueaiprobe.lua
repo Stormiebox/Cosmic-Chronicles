@@ -25,7 +25,7 @@ function RogueAIProbe.spawn()
     probe:addMultiplyableBias(StatsBonuses.FireRate, scale * 5.0 - 1.0)
 
     -- If it isn't killed in 3 minutes, it warps away
-    probe:addScriptOnce("data/scripts/entity/story/warpawaytimer.lua", 180)
+    probe:addScriptOnce("entity/utility/delayeddelete.lua", 180)
 
     Sector():broadcastChatMessage("Scanner", 2, "WARNING: Highly evasive, unidentified Rogue AI signature detected.")
 end

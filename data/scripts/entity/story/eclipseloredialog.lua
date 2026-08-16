@@ -5,7 +5,7 @@ include("callable")
 
 function initialize()
     if onServer() then
-        Entity().title = "Ancient Eclipse Monolith"
+        Entity().title = "Ancient Eclipse Anomaly"
     end
 end
 
