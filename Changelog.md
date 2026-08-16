@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## v3.0.6
+
+### 🔧 Balancing & Gameplay
+
+- [Balance] **Empty Sector Density:** Massively reduced the spawn probabilities for deep space ambient events (Ghost Ships, Datacaches, Refugees, Rogue AI Probes) in `cc_event_controller.lua`. Empty sectors will now remain significantly more barren, returning a sense of eerie isolation to deep space exploration and making rare events feel genuinely special.
+
 ## v3.0.5
 
 ### 🐛 Bug Fixes

@@ -71,19 +71,20 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
         end
 
         -- v3.0.0: New Deep Space Events
+        -- Tuned down significantly to keep empty sectors mostly empty
         local coreDist = math.sqrt(x*x + y*y)
         local roll = random():getInt(1, 100)
 
-        if coreDist <= 150 and roll <= 10 then
+        if coreDist <= 150 and roll <= 5 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_ancientdatacache.lua")
-        elseif roll > 10 and roll <= 18 then
+        elseif roll > 5 and roll <= 8 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_rogueaiprobe.lua")
-        elseif roll > 18 and roll <= 26 then
+        elseif roll > 8 and roll <= 11 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_ghostship.lua")
-        elseif roll > 26 and roll <= 34 then
+        elseif roll > 11 and roll <= 14 then
             sector:setValue("cc_event_spawned", true)
             sector:addScriptOnce("events/cc_diplomatescort.lua")
         end
