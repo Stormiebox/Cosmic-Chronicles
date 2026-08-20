@@ -43,19 +43,8 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
         }
 
         local cv_news = include("cosmicvaultnews")
-    cv_news.publishArticle(article)
+        cv_news.publishArticle(article)
     end
 end
 
-function initialize()
-    CCDestructionTracker.initialize()
-end
-
-
--- Global Event Callbacks
-function onEntityDestroyed(...)
-    if CCDestructionTracker.onEntityDestroyed then return CCDestructionTracker.onEntityDestroyed(...) end
-end
-
 return CCDestructionTracker
-

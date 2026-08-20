@@ -129,23 +129,6 @@ function CosmicChroniclesRefugee.tooFar()
     ScriptUI():interactShowDialog(dialog, true)
 end
 
-function getDialog(...)
-    if CosmicChroniclesRefugee.getDialog then return CosmicChroniclesRefugee.getDialog(...) end
-end
-function interactionPossible(...)
-    if CosmicChroniclesRefugee.interactionPossible then return CosmicChroniclesRefugee.interactionPossible(...) end
-end
-function initUI(...)
-    if CosmicChroniclesRefugee.initUI then return CosmicChroniclesRefugee.initUI(...) end
-end
-function onInteract(...)
-    if CosmicChroniclesRefugee.onInteract then return CosmicChroniclesRefugee.onInteract(...) end
-end
-function onDonateFood(...)
-    if CosmicChroniclesRefugee.onDonateFood then return CosmicChroniclesRefugee.onDonateFood(...) end
-end
-function onDonateMeds(...)
-    if CosmicChroniclesRefugee.onDonateMeds then return CosmicChroniclesRefugee.onDonateMeds(...) end
-end
+
 
 return CosmicChroniclesRefugee

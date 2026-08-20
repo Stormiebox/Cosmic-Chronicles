@@ -79,14 +79,7 @@ function CosmicChroniclesMonument.tooFar()
     ScriptUI():interactShowDialog(dialog, true)
 end
 
-function interactionPossible(...)
-    if CosmicChroniclesMonument.interactionPossible then return CosmicChroniclesMonument.interactionPossible(...) end
-end
-function initUI(...)
-    if CosmicChroniclesMonument.initUI then return CosmicChroniclesMonument.initUI(...) end
-end
-function onInteract(...)
-    if CosmicChroniclesMonument.onInteract then return CosmicChroniclesMonument.onInteract(...) end
-end
+
+
 
 return CosmicChroniclesMonument

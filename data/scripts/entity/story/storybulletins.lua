@@ -17,7 +17,4 @@ end
 
 
 
-
-function initialize(...)
-    if StoryBulletins.initialize then return StoryBulletins.initialize(...) end
-end
+

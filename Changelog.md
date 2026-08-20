@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## v3.0.7
+
+### 🐛 Bug Fixes & Refactoring
+
+- [Fixed] **Event Routing Desync Fix**: Following a strict architecture audit, a widespread event-routing violation was resolved across 6 scripts (`cc_factionmonument.lua`, `cc_refugeedialogue.lua`, `storybulletins.lua`, `cc_newsboard.lua`, `cc_destructiontracker.lua`, and `cosmicchronicles.lua`). These scripts were incorrectly defining global wrappers for standard engine callbacks (like `onInteract`, `initialize`, `onEntityDestroyed`), which shadowed the native namespace hooks. All illegal global wrappers have been permanently stripped so these modules securely and natively bind to the engine via their official namespace.
+
 ## v3.0.6
 
 ### 🔧 Balancing & Gameplay
