@@ -22,7 +22,7 @@ function RogueAIProbe.spawn()
     local d = math.sqrt(x*x + y*y)
     local scale = math.max(1, (500 - d) / 100)
 
-    probe:addMultiplyableBias(StatsBonuses.FireRate, scale * 5.0 - 1.0)
+    probe:addBaseMultiplier(StatsBonuses.FireRate, scale * 5.0 - 1.0)
 
     -- If it isn't killed in 3 minutes, it warps away
     probe:addScriptOnce("entity/utility/delayeddelete.lua", 180)

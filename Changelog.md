@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.0.8]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Fire Rate API Error:** Fixed a core mathematical error inside the Rogue AI Probe event where extreme `FireRate` multipliers were being accidentally applied as flat additive numbers instead of percentages, preventing the probe from properly scaling its weapon attack speed.
+
 ## v3.0.7
 
 ### 🐛 Bug Fixes & Refactoring
