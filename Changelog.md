@@ -140,6 +140,3 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Fixed] **Eclipse Anomaly VFX Crash:** Fixed a dedicated server crash where the Anomaly was incorrectly trying to broadcast a client-only explosion effect on the server thread.
 - [Fixed] **Multiplayer Exploit Prevention:** Added missing RPC callable registrations to prevent a silent error when the server attempted to warn players they were too far away from the Anomaly.
 - [Fixed] **Research Station Hook:** Fixed a VFM script injection failure that was completely overwriting the vanilla `initUI` namespace in `researchstation.lua`, preventing the new Log Fragment turn-in interaction from ever appearing.
-
-### ? Bug Fixes
-- Fixed a Lua error (bad argument to pairs) when looting Ancient Caches, caused by an incorrect offset parameter in the upgrade generator.
