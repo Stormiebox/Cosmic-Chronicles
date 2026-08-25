@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.1.0]
+
+### ⭐ Features
+- **Newsboard Bounties:** The Galactic News Network will now occasionally post physical bounties for pirate leaders with exact coordinates! Hunt them down to claim a massive reward!
+- **Derelict Log Fragments (Rift Exchange):** Ancient Data Caches now yield "Encrypted Log Fragments". You can trade these fragments at any Research Station for large sums of credits and a reputation boost!
+- **Refugee Dialogue Tips (Stash Spawns):** When donating supplies to a Refugee Convoy, there is now a 25% chance they will tip you off to a massive hidden stash of resources and upload the coordinates to your map!
+
 ## [v3.0.8]
 
 ### 🪲 Bug Fixes
@@ -123,3 +130,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - [Fixed] **Desyncs:** Replaced `math.random` with `random():getInt()` inside `cc_rogueaiprobe.lua` and other event generators. This prevents physics desyncs and invisible collisions in multiplayer.
 
 - [Fixed] **VFS Compliance:** Stripped redundant global wrapper functions from namespaced scripts to prevent silent double-execution logic loops and engine crashes.
+- [Fixed] **Eclipse Anomaly Rarity Crash:** Fixed a critical bug where looting an Ancient Eclipse Anomaly would cause the `upgradegenerator.lua` script to crash due to a mismatch in the Rarity parameter arguments.
+- [Fixed] **Eclipse Anomaly VFX Crash:** Fixed a dedicated server crash where the Anomaly was incorrectly trying to broadcast a client-only explosion effect on the server thread.
+- [Fixed] **Multiplayer Exploit Prevention:** Added missing RPC callable registrations to prevent a silent error when the server attempted to warn players they were too far away from the Anomaly.
+- [Fixed] **Research Station Hook:** Fixed a VFM script injection failure that was completely overwriting the vanilla `initUI` namespace in `researchstation.lua`, preventing the new Log Fragment turn-in interaction from ever appearing.
+
+### ? Bug Fixes
+- Fixed a Lua error (bad argument to pairs) when looting Ancient Caches, caused by an incorrect offset parameter in the upgrade generator.

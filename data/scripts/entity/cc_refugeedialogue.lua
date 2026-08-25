@@ -104,6 +104,23 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
         local context = { warHeat = 100 }
         local rumor = CosmicVaultDialogue.getValidLine("rumor", context) or "The enemy is ruthless... stay safe out there."%_T
 
+        if random():test(0.25) then
+            local sx, sy = Sector():getCoordinates()
+            local ox = sx + random():getInt(-10, 10)
+            local oy = sy + random():getInt(-10, 10)
+            player:addKnownSector(SectorView(ox, oy))
+            
+            -- Store coordinate globally
+            local stashes = Server():getValue("cc_hidden_stashes") or ""
+            local stashList = {}
+            for s in string.gmatch(stashes, "([^;]+)") do table.insert(stashList, s) end
+            table.insert(stashList, tostring(ox)..":"..tostring(oy))
+            while #stashList > 20 do table.remove(stashList, 1) end
+            Server():setValue("cc_hidden_stashes", table.concat(stashList, ";"))
+            
+            rumor = "We passed a massive hidden resource stash at sector [" .. tostring(ox) .. ":" .. tostring(oy) .. "]. I've uploaded the coordinates to your map. You should check it out."%_T
+        end
+
         invokeClientFunction(player, "showThanksDialog", rumor)
         deferredCallback(10, "jumpAway") -- Jump to safety after 10 seconds
     end

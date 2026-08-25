@@ -42,6 +42,34 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
     -- Prevent infinite farming: ensure narrative events only spawn once per sector
     if sector:getValue("cc_event_spawned") then return end
 
+    local coordStr = tostring(x)..":"..tostring(y)
+    local activeBounties = Server():getValue("cc_active_bounties") or ""
+    if string.find(activeBounties, coordStr) then
+        -- Remove from list
+        local newList = {}
+        for b in string.gmatch(activeBounties, "([^;]+)") do
+            if b ~= coordStr then table.insert(newList, b) end
+        end
+        Server():setValue("cc_active_bounties", table.concat(newList, ";"))
+        
+        sector:setValue("cc_event_spawned", true)
+        sector:addScriptOnce("events/cc_bounty_ambush.lua")
+        return
+    end
+    
+    local activeStashes = Server():getValue("cc_hidden_stashes") or ""
+    if string.find(activeStashes, coordStr) then
+        local newList = {}
+        for s in string.gmatch(activeStashes, "([^;]+)") do
+            if s ~= coordStr then table.insert(newList, s) end
+        end
+        Server():setValue("cc_hidden_stashes", table.concat(newList, ";"))
+        
+        sector:setValue("cc_event_spawned", true)
+        sector:addScriptOnce("events/cc_hiddenstash.lua")
+        return
+    end
+
     local heat = getSectorWarHeat(x, y)
 
     -- 10% chance to spawn Graveyard if Heat > 40

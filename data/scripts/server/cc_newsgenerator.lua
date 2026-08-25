@@ -130,20 +130,32 @@ function CosmicChroniclesNewsGenerator.generateWarNews()
     end
 
     local hx, hy = faction:getHomeSectorCoordinates()
-    local sectorStr = ""
-    if hx and hy then
-        local ox = hx + random():getInt(-15, 15)
-        local oy = hy + random():getInt(-15, 15)
-        sectorStr = " near sector [" .. ox .. ":" .. oy .. "]"
-    end
+    if not hx or not hy then return end -- Prevent crash if faction has no home sector
 
     if heat > 0.5 then
+        -- Generate exact coordinates for the bounty
+        local ox = hx + random():getInt(-15, 15)
+        local oy = hy + random():getInt(-15, 15)
+        
+        -- Store the bounty in the global server value (max 10 active)
+        local activeBounties = Server():getValue("cc_active_bounties") or ""
+        local bountyList = {}
+        for b in string.gmatch(activeBounties, "([^;]+)") do
+            table.insert(bountyList, b)
+        end
+        table.insert(bountyList, tostring(ox)..":"..tostring(oy))
+        while #bountyList > 10 do table.remove(bountyList, 1) end
+        Server():setValue("cc_active_bounties", table.concat(bountyList, ";"))
+
         CosmicVaultNews.publishArticle({
             title = "MOST WANTED: " .. tostring(faction.name) .. " Issues High-Value Bounty",
-            content = "Due to extreme hostiles operating in their territory, the " .. tostring(faction.name) .. " military has designated a notorious pirate dreadnought as a Tier 1 Threat" .. sectorStr .. ".\n\nAll independent mercenaries are cleared to engage. A massive bounty has been authorized for its destruction.",
+            content = "Due to extreme hostiles operating in their territory, the " .. tostring(faction.name) .. " military has designated a notorious pirate dreadnought as a Tier 1 Threat. Intelligence places the target precisely at sector [" .. tostring(ox) .. ":" .. tostring(oy) .. "].\n\nAll independent mercenaries are cleared to engage. A massive bounty has been authorized for its destruction.",
             category = "Bounty Board"
         })
     else
+        local ox = hx + random():getInt(-15, 15)
+        local oy = hy + random():getInt(-15, 15)
+        local sectorStr = " near sector [" .. ox .. ":" .. oy .. "]"
         CosmicVaultNews.publishArticle({
             title = "Territorial Shift in " .. tostring(faction.name) .. " Space",
             content = "Military outposts report that " .. tostring(faction.name) .. " has successfully pushed the frontline further into enemy space following a decisive victory" .. sectorStr .. ".\n\nScavenger vessels are already moving in to clean up the wreckage of the destroyed staging grounds.",

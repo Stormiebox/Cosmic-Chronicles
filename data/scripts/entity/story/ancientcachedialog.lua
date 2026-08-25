@@ -87,6 +87,11 @@ function triggerLootServer()
         player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Extracted %1% Credits from Black Box."%_t, amount)
     end
 
+    -- Extract Derelict Log Fragments
+    local currentFragments = player:getValue("cc_log_fragments") or 0
+    player:setValue("cc_log_fragments", currentFragments + 1)
+    player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Downloaded 1x Encrypted Log Fragment. A Researcher might pay well for this data."%_t)
+
     -- Drop Upgrades
     local generator = UpgradeGenerator()
     local numUpgrades = math.floor(2 * scale)
@@ -98,7 +103,7 @@ function triggerLootServer()
             rType = RarityType.Exotic
         end
 
-        local upgrade = generator:generateSectorSystem(x, y, 0, Rarity(rType))
+        local upgrade = generator:generateSectorSystem(x, y, Rarity(rType))
         sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
     end
 

@@ -91,7 +91,7 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 
 **Available Events:**
 
-1. **Refugee Convoys:** *(Triggers when War Heat > 40)*. Fleeing civilian ships appear with damaged hyperdrives. Players can open comms and donate Food or Medical Supplies to rescue them, receiving massive reputation boosts and insider rumors in return.
+1. **Refugee Convoys:** *(Triggers when War Heat > 40)*. Fleeing civilian ships appear with damaged hyperdrives. Players can open comms and donate Food or Medical Supplies to rescue them, receiving massive reputation boosts and insider rumors in return. There is also a 25% chance the refugees will tip off the exact coordinates of a massive hidden resource stash!
    - **Captain Synergy:** Merchant captains can aggressively negotiate Hazard Pay; Smugglers can quietly skim supplies for massive credit payouts (75,000-100,000 credits).
 2. **Echoes of the Frontline (Graveyards):** *(Triggers when War Heat > 80)*. Players jumping into an empty sector may stumble upon massive, persistent wreckage fields—the immediate, blazing aftermath of a massive macro-faction fleet clash.
 3. **Black Box Extraction:** Spawns via a custom stash script inside Derelict Graveyards. Players can interact with the Stash to extract the doomed captain's final audio log, alongside high-tier System Upgrades and credits that dynamically scale based on distance to the core.
@@ -100,6 +100,19 @@ A global event controller (`cc_event_controller.lua`) listens for hyperspace jum
 5. **Drifting Ghost Ship:** Players may intercept a faint, repeating distress signal from a derelict freighter drifting silently in space. Boarding/interacting with the ship triggers a narrative dialog script.
 6. **Rogue AI Probe:** Spawns a fast, evasive military probe that scales its shields and damage up to 500% based on proximity to the Galactic Core. If players cannot destroy it within 3 minutes, it activates its hyperdrive and escapes with scanned sector data.
 7. **Stranded Diplomat:** Emergency civilian broadcast detected. A faction's diplomat is stranded in hostile space after their escort was destroyed. Players must extract them before they are captured.
+8. **Ancient Data Caches:** Derelict data banks that yield *Encrypted Log Fragments*. Players can trade these fragments at any Research Station for massive credit and reputation rewards.
+9. **Ancient Eclipse Anomaly:** Intercept strange energy readings pointing to a volatile, physical anomaly. Players must navigate carefully and extract its core to receive incredibly rare System Upgrades before the anomaly destabilizes and detonates!
+
+</details>
+
+<details>
+<summary><h3>Omni-Sensor Intelligence</h3></summary>
+
+The player's onboard ship computer has been upgraded with automated deep-space scanning capabilities. 
+
+**Key Mechanics:**
+- **Auto-Scan on Entry:** Every time a player jumps into a new sector, the Omni-Sensor automatically pings the sector for high-value targets.
+- **Actionable Intelligence:** It will print the exact coordinate locations of any claimable asteroids or hidden resource stashes directly to the player's chat window, saving hours of tedious visual searching.
 
 </details>
 

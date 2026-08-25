@@ -69,11 +69,11 @@ function triggerLootServer()
     player:sendChatMessage("Ship Computer", 0, "Downloaded encrypted schematics and valuables from the cache.")
 
     -- Destroy the stash entity
-    Sector():createExplosion(entity.translationf, 1, false)
     Sector():deleteEntity(entity)
 end
 
 callable(nil, "triggerLootServer")
+callable(nil, "tooFar")
 
 function tooFar()
     local dialog = {}

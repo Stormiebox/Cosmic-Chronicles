@@ -35,10 +35,7 @@ function dropLoot(playerIndex)
         if scale >= 3.0 then rType = RarityType.Exceptional end
         if scale >= 4.5 then rType = RarityType.Exotic end
         
-        local upgrade = generator:generateSectorSystem(x, y, 0, Rarity(rType))
+        local upgrade = generator:generateSectorSystem(x, y, Rarity(rType))
         sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
     end
-    
-    -- Optional visual effect
-    sector:createExplosion(entity.translationf, 2, false)
 end
