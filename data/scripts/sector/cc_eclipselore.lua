@@ -33,14 +33,21 @@ function EclipseLoreGenerator.initialize()
     if loreType == 1 then
         local plan = eclipsePlan or PlanGenerator.makeStationPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
-        entity.title = "Ancient Eclipse Beacon"
     elseif loreType == 2 then
         local plan = eclipsePlan or PlanGenerator.makeShipPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
-        entity.title = "Ancient Eclipse Shipwreck"
     else
         local plan = eclipsePlan or PlanGenerator.makeFreighterPlan(eclipseFaction)
         entity = sector:createWreckage(plan, generator:getPositionInSector())
+    end
+
+    if not valid(entity) then return end
+
+    if loreType == 1 then
+        entity.title = "Ancient Eclipse Beacon"
+    elseif loreType == 2 then
+        entity.title = "Ancient Eclipse Shipwreck"
+    else
         entity.title = "Ancient Eclipse Stash"
     end
 
@@ -53,8 +60,12 @@ function EclipseLoreGenerator.initialize()
 
     entity:setValue("cc_eclipse_loot_scale", scalingFactor)
     entity:addScriptOnce("data/scripts/entity/story/eclipseloot.lua")
+    
 end
 
 function initialize(...)
-    if EclipseLoreGenerator.initialize then return EclipseLoreGenerator.initialize(...) end
+    if EclipseLoreGenerator.initialize then 
+        EclipseLoreGenerator.initialize(...) 
+    end
+    terminate()
 end

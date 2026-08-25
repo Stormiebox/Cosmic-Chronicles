@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.1.1]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Generator Memory Leaks:** Fixed an issue in `cc_eclipselore.lua` and `cc_ancientdatacache.lua` where the generator script would permanently attach to the sector context if it hit an early return trap, causing background memory leaks over time.
+- [Bugfix] **Generator Crash Check:** Added a `valid()` safety check to the Eclipse Lore and Ancient Data Cache generation scripts to ensure the engine fails gracefully instead of crashing if a wreckage plan fails to load.
+
 ## [v3.1.0]
 
 ### ⭐ Features

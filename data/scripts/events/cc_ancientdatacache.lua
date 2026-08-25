@@ -18,6 +18,9 @@ function AncientCache.spawn()
     if not plan then plan = PlanGenerator.makeStationPlan(Galaxy():getPirateFaction(0)) end
 
     local cache = Sector():createWreckage(plan, SectorGenerator(x,y):getPositionInSector())
+    
+    if not valid(cache) then return end
+    
     cache.title = "Ancient Data Cache"
     cache:addScriptOnce("data/scripts/entity/story/ancientcachedialog.lua")
 
@@ -25,5 +28,8 @@ function AncientCache.spawn()
 end
 
 function initialize(...)
-    if AncientCache.initialize then return AncientCache.initialize(...) end
+    if AncientCache.initialize then 
+        AncientCache.initialize(...) 
+    end
+    terminate()
 end
