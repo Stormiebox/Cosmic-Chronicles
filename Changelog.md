@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.1.3]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Hidden Stash Crash & Performance:** Fixed a fatal crash in `cc_hiddenstash.lua` and `cc_blackbox.lua` caused by an invalid `SectorGenerator:getFactionIndex()` engine call. Drastically improved the sector generation performance by pulling the expensive `SectorGenerator` instantiation out of the asteroid spawning loops and properly adding a `terminate()` shutdown method to clear memory. Added proper translation hooks (`%_T`) for the broadcast messages.
+- [Bugfix] **Global Wrapper Cleanup:** Cleaned up `cc_eclipselore.lua` and `cc_hiddenstash.lua` to remove deprecated pseudo-namespace global wrappers and redundant `initialize` wrappers, strictly enforcing the Code Review Protocol to prevent callback conflicts.
+
 ## [v3.1.2]
 
 ### 🪲 Bug Fixes

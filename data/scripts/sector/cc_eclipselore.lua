@@ -4,9 +4,7 @@ package.path = package.path .. ";data/scripts/?.lua"
 local SectorGenerator = include("SectorGenerator")
 local PlanGenerator = include("plangenerator")
 
-local EclipseLoreGenerator = {}
-
-function EclipseLoreGenerator.initialize()
+function initialize()
     if onClient() then return end
 
     local sector = Sector()
@@ -61,11 +59,5 @@ function EclipseLoreGenerator.initialize()
     entity:setValue("cc_eclipse_loot_scale", scalingFactor)
     entity:addScriptOnce("data/scripts/entity/story/eclipseloot.lua")
     
-end
-
-function initialize(...)
-    if EclipseLoreGenerator.initialize then 
-        EclipseLoreGenerator.initialize(...) 
-    end
     terminate()
 end

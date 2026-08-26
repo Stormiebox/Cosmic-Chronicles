@@ -26,7 +26,7 @@ function CosmicChroniclesBlackBox.interactionPossible(playerIndex, option)
     if captain then
         local CaptainClass = include("captainclass")
         if captain:hasClass(CaptainClass.Explorer) then
-            maxDistance = 500
+            maxDistance = 1500
         end
     end
 
@@ -118,7 +118,6 @@ function CosmicChroniclesBlackBox.extract()
     local rewardFactor = Balancing_GetSectorRewardFactor(x, y)
 
     -- Cosmic Overhaul Synergy: Scavengers and Explorers extract far more value from black boxes
-    local ship = player.craft
     local bonusMultiplier = 1.0
     if ship then
         local captain = ship:getCaptain()
@@ -136,7 +135,7 @@ function CosmicChroniclesBlackBox.extract()
     local isEclipseOwned = false
     local controllingFactionIndex = Galaxy():getControllingFaction(x, y)
     if controllingFactionIndex then
-        local faction = Faction(controllingFactionIndex)
+        local faction = Faction(controllingFactionIndex.index)
         if faction and faction.name == "The Eclipse" then
             isEclipseOwned = true
         end
@@ -159,7 +158,7 @@ function CosmicChroniclesBlackBox.extract()
         -- Spawn Ascendancy Ambush
         local cv_encounter = include("cosmicvaultencounter")
         if cv_encounter and cv_encounter.spawnAmbush then
-            cv_encounter.spawnAmbush(controllingFactionIndex, 5000, 3, nil, true)
+            cv_encounter.spawnAmbush(controllingFactionIndex.index, 5000, 3, nil, true)
             player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Warning, "WARNING: Data extraction triggered a quantum distress beacon! Hostile contacts inbound!"%_T)
         end
     end
@@ -184,7 +183,7 @@ function CosmicChroniclesBlackBox.extract()
     -- Drop Rift Research Data
     if random():test(0.25 * bonusMultiplier) then
         local numData = random():getInt(2, 5)
-        receiver:getInventory():add(goods["Rift Research Data"]:good(), numData)
+        Sector():dropCargo(ship.translationf, receiver, nil, goods["Rift Research Data"]:good(), receiver.index, numData)
         player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Rift Research Data from the black box."%_T, numData)
     end
 
@@ -209,11 +208,10 @@ function CosmicChroniclesBlackBox.extract()
 
         if subclassGood then
             local numSub = random():getInt(1, 2)
-            receiver:getInventory():add(subclassGood, numSub)
+            Sector():dropCargo(ship.translationf, receiver, nil, subclassGood, receiver.index, numSub)
             player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Subclass Subsystems from the black box."%_T, numSub)
         end
     end
-
     if amount >= 50000 or rarityValue == RarityType.Legendary then
         local article = {
             title = "Major Discovery",
