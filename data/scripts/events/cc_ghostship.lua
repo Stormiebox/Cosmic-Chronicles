@@ -34,7 +34,7 @@ function GhostShipEvent.spawn()
     -- Remove any auto-firing turrets so it doesn't shoot the player
     local turrets = {ghost:getTurrets()}
     for _, turret in pairs(turrets) do
-        ghost:removeTurret(turret)
+        Sector():deleteEntity(turret)
     end
 
     ghost.crew = Crew()

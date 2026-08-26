@@ -107,7 +107,6 @@ function triggerLootServer()
         sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
     end
 
-    sector:createExplosion(entity.translationf, 1.5, false)
     sector:deleteEntity(entity)
 end
 

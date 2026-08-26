@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.1.2]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Server Crash Prevention:** Fixed a critical server-side crash in `cc_blackbox.lua`, `ghostshipdialog.lua`, and `ancientcachedialog.lua` caused by the script improperly invoking `Sector():createExplosion()` on the dedicated server thread. The visual explosions have been safely decoupled or removed, ensuring the loot containers are successfully deleted at the end of the event.
+- [Bugfix] **Ghost Ship Turret Errors:** Fixed a scripting error in `cc_ghostship.lua` where the engine attempted to call a non-existent `removeTurret` function. Turrets attached to the ghost ship are now safely and natively deleted from the sector.
+
 ## [v3.1.1]
 
 ### 🪲 Bug Fixes

@@ -102,10 +102,7 @@ function triggerServerLoot(lootTier)
         player:sendChatMessage("Explorer", 0, "I've successfully pulled their last known jump coordinates. We found the anomaly's exact location, transferring data bounty! " )
         faction.money = faction.money + 100000
         player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Salvaged 100,000 Credits from Ghost Ship."%_t)
-        -- Can add a rare map or upgrade here if desired
     end
-
-    sector:createExplosion(entity.translationf, 1, false)
     sector:deleteEntity(entity)
 end
 

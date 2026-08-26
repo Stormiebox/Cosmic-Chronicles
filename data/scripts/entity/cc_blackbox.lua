@@ -1,4 +1,5 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
+include("galaxy")
 include("callable")
 include("cosmicvaultdialogue")
 include("stringutility")
@@ -91,7 +92,6 @@ function CosmicChroniclesBlackBox.donate()
             player:sendChatMessage(faction.name, ChatMessageType.Information, "We are eternally grateful for these supplies! You have saved countless lives!"%_T)
         end
     end
-    Sector():createExplosion(Entity().translationf, 1, false)
     Sector():deleteEntity(Entity())
 end
 callable(CosmicChroniclesBlackBox, "donate")
@@ -225,7 +225,6 @@ function CosmicChroniclesBlackBox.extract()
     end
 
     player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted data and recovered credits from the black box."%_T)
-    Sector():createExplosion(Entity().translationf, 1, false)
     Sector():deleteEntity(Entity())
 end
 callable(CosmicChroniclesBlackBox, "extract")
