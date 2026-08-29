@@ -103,7 +103,17 @@ function triggerServerLoot(lootTier)
         faction.money = faction.money + 100000
         player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Salvaged 100,000 Credits from Ghost Ship."%_t)
     end
+    
+    local pos = entity.translationf
+    local radius = entity.radius or 50
+    broadcastInvokeClientFunction("spawnExplosion", pos, radius)
+    Sector():removeScript("events/cc_ghostship.lua")
     sector:deleteEntity(entity)
+end
+
+function spawnExplosion(pos, radius)
+    if onServer() then return end
+    Sector():createExplosion(pos, radius, false)
 end
 
 callable(nil, "triggerServerLoot")

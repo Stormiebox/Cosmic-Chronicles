@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.1.4]
+
+### 🪲 Bug Fixes
+- [Bugfix] **Ghostship Exploit:** Fixed an infinite credit-farming exploit where the Ghostship event would repeatedly trigger upon reloading the sector. The event script is now safely purged from the engine's background simulation immediately upon looting the derelict. 
+- [Feature] **Cinematic Explosions:** Added a massive client-side explosion effect that triggers immediately after looting the ghostship to provide visual feedback before the entity is deleted.
+
 ## [v3.1.3]
 
 ### 🪲 Bug Fixes
