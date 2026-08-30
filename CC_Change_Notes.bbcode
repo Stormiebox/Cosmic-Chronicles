@@ -1,0 +1,232 @@
+[i]Version 3.1.4[/i]
+[hr][/hr]
+[h1]v3.1.4 🐛EVENT LOGIC HOTFIX🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix corrects a major infinite farming exploit with the Ghostship event and restores visual effects based on player feedback![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Ghostship Exploit:[/b] Fixed an infinite credit-farming exploit where the Ghostship event would repeatedly trigger upon reloading the sector. The event script is now safely purged from the engine's background simulation immediately upon looting the derelict.
+[*]🚀 [b]Cinematic Explosions:[/b] Added a client-side explosion effect that triggers immediately after looting the ghostship to provide visual feedback before the entity is deleted.
+[/list]
+
+[i]Version 3.1.3[/i]
+[hr][/hr]
+[h1]v3.1.3 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets fatal crashes and performance issues regarding sector generators![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Hidden Stash Crash & Performance:[/b] Fixed a fatal crash in `cc_hiddenstash.lua` and `cc_blackbox.lua` caused by an invalid engine call. Drastically improved the sector generation performance by pulling the expensive generator instantiation out of the asteroid spawning loops and properly clearing memory after generation.
+[*]🐛 [b]Global Wrapper Cleanup:[/b] Cleaned up `cc_eclipselore.lua` and `cc_hiddenstash.lua` to remove deprecated pseudo-namespace global wrappers and redundant initialize wrappers, strictly enforcing the Code Review Protocol to prevent callback conflicts.
+[/list]
+
+[i]Version 3.1.2[/i]
+[hr][/hr]
+[h1]v3.1.2 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets issues regarding visual effects![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Server Crash Prevention:[/b] Fixed a critical server-side crash in `cc_blackbox.lua`, `ghostshipdialog.lua`, and `ancientcachedialog.lua` caused by the script improperly invoking `Sector():createExplosion()` on the dedicated server thread. The visual explosions have been safely decoupled or removed, ensuring the loot containers are successfully deleted at the end of the event.
+[*]🐛 [b]Ghost Ship Turret Errors:[/b] Fixed a scripting error in `cc_ghostship.lua` where the engine attempted to call a non-existent `removeTurret` function. Turrets attached to the ghost ship are now safely and natively deleted from the sector.
+[/list]
+
+[i]Version 3.1.1[/i]
+[hr][/hr]
+[h1]v3.1.1 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets memory leaks and crashes in generation scripts![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Generator Memory Leaks:[/b] Fixed an issue in `cc_eclipselore.lua` and `cc_ancientdatacache.lua` where the generator script would permanently attach to the sector context if it hit an early return trap, causing background memory leaks over time.
+[*]🐛 [b]Generator Crash Check:[/b] Added a `valid()` safety check to the Eclipse Lore and Ancient Data Cache generation scripts to ensure the engine fails gracefully instead of crashing if a wreckage plan fails to load.
+[/list]
+
+[i]Version 3.1.0[/i]
+[hr][/hr]
+[h1]v3.1.0 ✨FEATURE & 🐛BUGFIX UPDATE![/h1]
+[hr][/hr]
+[b]🛠️ MINOR EXPANSION PATCH[/b]
+[i]Minor Features expansion for Cosmic Chronicles while squashing some bugs![/i]
+
+[b]✨FEATURES[/b]
+[list]
+[*]🔥 [b]Newsboard Bounties:[/b] The Galactic News Network will now occasionally post physical bounties for pirate leaders with exact coordinates! Hunt them down to claim a massive reward!
+[*]🔥 [b]Derelict Log Fragments (Rift Exchange):[/b] Ancient Data Caches now yield "Encrypted Log Fragments". You can trade these fragments at any Research Station for large sums of credits and a reputation boost!
+[*]🔥 [b]Refugee Dialogue Tips (Stash Spawns):[/b] When donating supplies to a Refugee Convoy, there is now a 25% chance they will tip you off to a massive hidden stash of resources and upload the coordinates to your map!
+[/list]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Eclipse Anomaly Rarity Crash:[/b] Fixed a critical bug where looting an Ancient Eclipse Anomaly would cause the `upgradegenerator.lua` script to crash due to a mismatch in the Rarity parameter arguments.
+[*]🐛 [b]Eclipse Anomaly VFX Crash:[/b] Fixed a dedicated server crash where the Anomaly was incorrectly trying to broadcast a client-only explosion effect on the server thread.
+[*]🐛 [b]Multiplayer Exploit Prevention:[/b] Added missing RPC callable registrations to prevent a silent error when the server attempted to warn players they were too far away from the Anomaly.
+[*]🐛 [b]Research Station Hook:[/b] Fixed a VFM script injection failure that was completely overwriting the vanilla `initUI` namespace in `researchstation.lua`, preventing the new Log Fragment turn-in interaction from ever appearing.
+[/list]
+
+[i]Version 3.0.8[/i]
+[hr][/hr]
+[h1]v3.0.8 🐛BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This hotfix targets an internal API math error![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Fire Rate API Error:[/b] Fixed a core mathematical error inside the Rogue AI Probe event where extreme `FireRate` multipliers were being accidentally applied as flat additive numbers instead of percentages, preventing the probe from properly scaling its weapon attack speed.
+[/list]
+
+[i]Version 3.0.7[/i]
+[hr][/hr]
+[h1]🐛V3.0.7 BUGFIX PATCH UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This patch resolves a major event-routing bug across several scripts![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Event Routing Desync Fix:[/b] Fixed scripts that were incorrectly defining standard engine callbacks globally, which shadowed the native hooks and caused event routing failures. They have been permanently stripped so these modules securely and natively bind to the engine!
+[/list]
+
+[i]Version 3.0.6[/i]
+[hr][/hr]
+[h1]🔧V3.0.6 BALANCING UPDATE!🔧[/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This small patch drastically reduces the density of deep space events to make empty sectors feel properly isolated again.[/i]
+
+[b]⚖️BALANCING[/b]
+[list]
+[*]🔧 [b]Empty Sector Density:[/b] Massively reduced the spawn probabilities for deep space ambient events (Ghost Ships, Datacaches, Refugees, Rogue AI Probes) in `cc_event_controller.lua`. Empty sectors will now remain significantly more barren, returning a sense of eerie isolation to deep space exploration and making rare events feel genuinely special.
+[/list]
+
+[i]Version 3.0.5[/i]
+[hr][/hr]
+[h1]🐛V3.0.5 BUGFIX PATCH UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ GAMEPLAY PATCH[/b]
+[i]This patch addresses UI menu interaction crashes and unstable API overloads while adding in new designs![/i]
+
+[b]📦New Designs[/b]
+[list]
+[*][b]New Lore Designs:[/b] New .xml designs for events, lore and missions.
+[/list]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]AI & Loot Logic:[/b]Fixed various files with faulty AI and loot logic.
+[*]🐛 [b]Namespace RPC Registries:[/b] Fixed a critical structural flaw across several scripts, where multiple server dialogue callbacks were using global scope wrappers instead of the required namespace-aware `callable` registries. This previously prevented the Avorion C++ engine from properly routing `invokeServerFunction` calls to these systems, silently aborting station dialogues, monument inscriptions, and deep-space events.
+[*]🐛 [b]Dynamic Reward Payout Crash:[/b] Patched a severe bug in `cc_refugeedialogue.lua`, `cc_blackbox.lua`, and `diplomatdialog.lua` where dynamic credit rewards (Hazard Pay, Smuggled Goods, and Recovered Credits) utilized the unstable `player:receive()` API overload. The engine would occasionally fatally crash upon attempting to award credits. This has been completely replaced with direct property assignment (`player.money = player.money + ...`), permanently securing the reward payout.
+[*]🐛 [b]Rogue AI Probe Timer:[/b] Fixed a script pathing error in `cc_rogueaiprobe.lua` where the intended `warpawaytimer.lua` script did not exist. It has been replaced with the engine-native `delayeddelete.lua` utility, ensuring the Rogue AI Probe properly hyperspaces away if not destroyed within 3 minutes.
+[/list]
+
+[i]Version 3.0.4[/i]
+[hr][/hr]
+[h1]🐛V3.0.4 BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This patch addresses severe background logic crashes preventing events and flavor text from executing in the core.[/i]
+[*]🐛 [b]Guardian Event Disruption:[/b] Fixed a critical bug in `cc_event_controller.lua` where calculating the entity count of an empty sector would throw a `length of a nil value` exception. This background crash was silently halting the global sector update loop, completely preventing the Wormhole Guardian flavor text and events from triggering upon entering the core.
+[*]🐛 [b]Xsotan Distress Calls:[/b] Fixed a bug in `cc_diplomatescort.lua` and `cc_refugeeconvoy.lua` where the script would grab "The Xsotan" as the nearest faction when triggered deep inside the galactic core. Refugees and diplomats will no longer accidentally spawn as disguised Xsotan vessels!
+[*]🐛 [b]Infinite Loot Exploit:[/b] Patched a severe multiplayer exploit in `ancientcachedialog.lua`, `eclipseloredialog.lua`, and `ghostshipdialog.lua` where players could use macros to rapidly spam the dialogue options, forcing the server to drop hundreds of loot instances before the cache entity was fully deleted at the end of the server tick.
+
+[i]Version 3.0.3[/i]
+[hr][/hr]
+[h1]🐛V3.0.3 BUGFIX & ADJUSTMENTS UPDATE!⚙️[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This patch addresses issues with dialogues and redundant files.[/i]
+[*]🐛 [b]Dialogue Syntax Errors:[/b] Patched server-side crashes in the Bottan Smuggler mission caused by improper `invokeFunction` logic when un-quested players attempted to interact.
+[*]⚙️ [b]Anti-Exploit Distances:[/b] Recalculated the anti-exploit distance checks across 10+ event scripts. Interaction limits have been expanded (ranging from 500 - 3000 units) to ensure players flying huge ships are no longer falsely flagged as being "too far away."
+[*]⚙️ [b]File Cleanup:[/b] Stripped out unneeded script files (like `smugglerdelivery.lua`) that were identical to vanilla, reducing the mod's footprint and preventing future VFS conflicts.
+
+[i]Version 3.0.2[/i]
+[hr][/hr]
+[h1]🐛V3.0.2 BUGFIX & BALANCING UPDATE!⚖️[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX & GAME BALANCE PATCH[/b]
+[i]This patch addresses issues with silent dialogues with missions while balancing a few numbers.[/i]
+[*]🐛 [b]Bottan Delivery Feedback:[/b] When attempting to hand over goods to the Smuggler during the Easy Delivery mission, players who were too far away (>50km) would experience a silent dialogue closure due to the anti-exploit check. The smuggler will now provide appropriate dialogue feedback explaining you are too far away to hand over the goods.
+[*]🐛 [b]Silent Dialogue Failures:[/b] Resolved a systemic issue affecting 9 different deep-space event scripts (Refugees, Monuments, Ancient Caches, Ghost Ships, Diplomats, Eclipse Caches, Bosses, Black Boxes, and Rumormongers). Previously, clicking a dialog option while out of range would silently abort the interaction. These events now provide a client-side dialogue box explaining that you are too far away.
+[*]⚖️ [b]Refugee Convoys (Cosmic Overhaul):[/b] Buffed the Merchant captain hazard pay from `25,000` to `50,000` credits. Buffed the Smuggler captain skimming limits from `35,000` to `75,000` credits to match the documentation.
+[*]⚖️ [b]Echoes of the Frontline (Cosmic Overhaul):[/b] Buffed the Black Box extraction multiplier for Scavenger and Explorer captains from `1.5x` (+50%) to `2.0x` (+100%).
+[*]⚖️ [b]Cinematic Monuments (Cosmic Vault):[/b] Increased the permanent reputation boost awarded for reading a faction's monument from `+1500` to `+2500`.
+[*]⚖️ [b]Corrupted Lore Nodes (Cosmic Ascendancy):[/b] Increased the base credit payout of Eclipse caches from `150,000` to `250,000` base credits to properly compensate for the massive Ascendancy ambush that they spawn.
+[*]⚖️ [b]Swoks Boss Interaction:[/b] Expanded the interaction range limit for the Swoks boss fight from `50km` to `200km`.
+
+[i]Version 3.0.1[/i]
+[hr][/hr]
+[h1]🐛V3.0.1 BUGFIX UPDATE!🐛[/h1]
+[hr][/hr]
+[b]🛠️ HOTFIX PATCH[/b]
+[i]This very small patch fixes reported issues regarding hermit missions! Special thanks to gromino (Discord) for reporting this.[/i]
+[*]🐛 [b]File Path Error:[/b] Corrected a pathing error in include() for the hermit missions.
+
+[h1]⭐ [THE ASCENSION ERA] - Cosmic Chronicles Update 3.0.0! ⭐[/h1]
+
+[hr][/hr]
+
+[h3]📡 What's New in The Ascension Era?[/h3]
+Chronicles v3.0.0 vastly expands the dynamic event pool and directly interfaces with the new Ascendancy and Rift DLC ecosystem!
+
+[b]⚠️ NEW SAVE FILE HARD REQUIRED ⚠️[/b]
+Due to the complete overhaul of narrative event hooks, you must start a new galaxy!
+
+[hr][/hr]
+
+✅ [b]NEW NARRATIVE EVENTS, FEATURES & LORE[/b]
+[list]
+[*]🗃️ [b]Classified Rift Tech Smuggling:[/b] Recovered Black Boxes now have a chance to drop highly-classified `Rift Research Data` and `Subclass Subsystems`, extremely valuable on the Black Market.
+[*]⚠️ [b]Corrupted Lore Nodes:[/b] High risk, high reward data caches in Eclipse (Ascendancy) territory offer 2x rewards, but interacting with them instantly triggers a massive Ascendancy ambush fleet!
+[*]📡 [b]Galactic Lore Broadcasts:[/b] Finding a Legendary subsystem or massive credits in a data cache broadcasts your discovery globally via Cosmic Vault News.
+[*]🍲 [b]Famine Relief Anomalies:[/b] Interact with emergency relief caches during severe faction famines to either steal the loot or donate it for massive reputation (+25,000) and instant famine reduction!
+[*]🔍 [b]Explorer Resonance Synergy:[/b] Ships commanded by an Explorer captain gain an insane +400% interaction range on Black Boxes.
+[*]🌌 [b]Post-Boss Anomalies:[/b] Defeating the infamous Bottan Dreadnought naturally spawns a persistent Spatial Rift anomaly for advanced exploration.
+[*]📖 [b]Cosmic Codex Integration:[/b] All deep lore, narrative rulesets, and all 21 core Avorion story quests are fully ported and integrated into the in-game Cosmic Codex.
+[*]📉 [b]Deep Economy Integration & Stock Market:[/b] Ambient Galactic News events (Trade Crisis & Market Boom) natively tie into the economy API, actively spiking or dropping a faction's Famine Score! The News Board also reports on extreme supply/demand disparities.
+[*]💀 [b]Dead Empire Filter:[/b] Galactic News Generation rigorously filters out destroyed empires, preventing ghost factions from broadcasting messages.
+[*]🎙️ [b]Unified Radio & Dynamic Chatter Expansion:[/b] Centralized all ambient radio storytelling! Added over 450+ new immersive dialogue lines with deep lore drops on The Eclipse, Ascendants, and The Commune. Passing ships pull from ~270 unique customized lines!
+[*]🏴‍☠️ [b]Expanded Pirate Threats:[/b] Pirate ambush speech bubbles expanded from a vanilla pool of 9 lines to a massive pool of 59 unique taunts!
+[*]🤫 [b]Rumormonger Intrigues:[/b] Added over 30 new intricate rumors, giving players much more depth when asking stations for the latest galaxy gossip.
+[*]👻 [b]Deep Space Event - The Ghost Ship:[/b] Discover intact derelicts with corrupted logs and hidden compartments. Scavengers find extra loot, Explorers decrypt coordinates.
+[*]🤖 [b]Deep Space Event - Rogue AI Probe:[/b] A fast, evasive anomaly scaling in difficulty near the core. Destroy it before it warps away for rare technology!
+[*]🤝 [b]Deep Space Event - Diplomatic Escort:[/b] Escort a stranded VIP across sectors. Diplomats negotiate massive payouts, Smugglers bypass patrols.
+[*]🏛️ [b]Deep Space Event - Ancient Data Caches:[/b] Discover ancient monolithic vaults near the core to gain permanent buffs and massive Xsotan lore drops.
+[*]🌑 [b]Deep Space Generation - Eclipse Lore:[/b] Find Eclipse Beacons, Shipwrecks, and Stashes yielding deep lore and core-scaled loot in empty sectors via massive customized `.xml` megastructures.
+[/list]
+
+⚙️ [b]CHANGED & BALANCED[/b]
+[list]
+[*]🚀 [b]Standardized Jump Logic:[/b] All AI ships now natively use the engine's `deletejumped.lua` script for flawless hyper-jump escapes instead of simply blinking out of existence.
+[*]💥 [b]Inanimate Object Polish:[/b] Ghost ships, derelicts, and debris events play explosions before despawning and have had their AI controllers stripped to function as actual dead ships.
+[*]⏱️ [b]Galactic Turn Synchronization:[/b] The Stock Market background simulation interval has been synced to the global 20-minute server turn to dramatically improve dedicated server performance.
+[*]⚖️ [b]Narrative Spawn Balancing:[/b] Strict boundaries set for narrative event spawn rates (6% to 12% per sector visit) to prevent overwhelming event chains.
+[*]📏 [b]Interaction Distance Enforcement:[/b] Hardcoded a strict 500m distance constraint onto all callable interaction scripts (Diplomats, Distress Beacons) to prevent long-distance exploit interactions.
+[*]📰 [b]Unified News API:[/b] Refactored multiple legacy news broadcasting systems to securely pass through the new Vault architecture for global validation.
+[*]🔗 [b]Core Dependencies:[/b] Core 5 mods (including Cosmic Vault) are now hard requirements for maximum stability.
+[/list]
+
+🐛 [b]STABILITY, BUG FIXES & OPTIMIZATION[/b]
+[list]
+[*]⚡ [b]Performance & TPS Optimization:[/b] Drastically reduced server load during late-game scenarios. Throttled update intervals on mission scripts to prevent the engine from polling the sector 60 times a second.
+[*]🥶 [b]Engine Freeze & Lockup Prevention:[/b] Fixed a catastrophic script error inside boss anomaly generation that lacked a failsafe cap, permanently locking up Dedicated Server CPUs during the late game!
+[*]🔒 [b]Multiplayer Sync:[/b] Safely replaced all `math.random` instances with deterministic `random():getInt()` inside event generators to prevent server physics desyncs and invisible collisions in multiplayer.
+[*]🧮 [b]Truthiness & Logic Fixes:[/b] Applied strict explicit float comparisons inside faction monuments and radio chatter to resolve truthiness evaluation bugs that destabilized the Lua engine.
+[*]🚀 [b]Pathing Crash Hazards:[/b] Repaired illegal absolute `include()` path injections that could violently crash the server context during mission generation.
+[*]🛠️ [b]Cross-Mod API Integration:[/b] Fixed critical namespace errors where the News Board incorrectly attempted to invoke APIs via the wrong object, restoring cross-mod news fetching and resolving stack trace crashes.
+[*]📖 [b]Cosmic Codex Loading Crash:[/b] Fixed missing global definitions in the codex files that prevented the encyclopedia from loading correctly and crashed the UI.
+[*]🎲 [b]Dynamic Event Spawn Logic:[/b] Patched structural logic issues in Ghost Ship and Stock Market events. Fixed a math bug that mathematically guaranteed Eclipse Lore spawns 100% of the time, restoring the intended 5% rarity.
+[*]📂 [b]Data Cache Fallback Crash:[/b] Injected missing requirements to prevent the engine from fatally crashing if new `.xml` plans fail to load and the game attempts a procedural fallback.
+[*]🌐 [b]Multiplayer Networking:[/b] Added `onClient()` wrappers to Exodus Wormhole Beacons to prevent local singleplayer threads from self-invoking networking callbacks.
+[*]🧹 [b]VFS Compliance:[/b] Stripped redundant global wrapper functions from namespaced scripts to prevent silent double-execution logic loops and engine crashes.
+[/list]
+[b]Bug Fixes[/b]
+- Fixed a Lua error (bad argument to pairs) when looting Ancient Caches, caused by an incorrect offset parameter in the upgrade generator.
