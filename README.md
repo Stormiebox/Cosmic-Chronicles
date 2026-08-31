@@ -9,7 +9,7 @@ Cosmic Chronicles adds a living economy and news network to the galaxy. The Gala
 <details>
 <summary><b>Click to expand features</b></summary>
 
-- **Galactic News Network:** Real-time broadcasts of sector events.
+- **Galactic News Network:** Real-time broadcasts of sector events, with a searchable, filterable, color-coded newsroom UI. Category groups, keyword search, unread tracking, and an instant chat alert + clickable banner for Breaking News (Behemoth incursions, boss kills) so you never miss the big ones.
 - **Stock Market:** Invest in commodities and watch their prices fluctuate dynamically.
 - **Dynamic Local Events:** Gold rushes, trade blockades, and shortages that physically alter sectors and trading profits.
 - **Deep Space Discoveries:** Find massive, bespoke `.xml` monoliths, data caches, and lore fragments hidden in uncharted sectors.

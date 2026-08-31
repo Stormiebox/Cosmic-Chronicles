@@ -106,6 +106,14 @@ All deep lore, stat blocks, and dynamic recipes have been fully integrated into 
 - **Scout Mission Fix:** Patched a massive, long-standing vanilla bug where Scout Missions would completely skip and ignore Faction Headquarters sectors because the native dialogue trees were missing the template definition.
 </details>
 
+### 📰 The Galactic News Network Tab
+Open your Player Window and find the **Galactic News** tab to read everything the Rumormonger and the rest of the Cosmic series are reporting on. It's a proper newsroom now:
+
+- **Category Filter & Search:** Narrow the headline list down to just War & Conflict, Economy, Threats & Crises, Discoveries & Milestones, Captain Stories, or Politics, or type a keyword to search titles and article text directly.
+- **Unread Tracking:** Unread headlines are bolded with a `●` marker, and a running "N Unread" counter in the header tells you at a glance whether you're caught up.
+- **Breaking News:** Galaxy-shaking events -- a Behemoth Incursion, a major boss finally going down -- now trigger an instant chat alert the moment they happen, plus a clickable red banner right in the News tab. You don't have to remember to check anymore.
+- **Headline Ages:** Every story shows how long ago it broke ("5m", "2h", "3d"), so you can tell a fresh crisis from old news.
+
 ### Core Integration
 The Chronicles news network is deeply integrated into the Core 5 mods, reporting on everything from Famines to Ascendancy Sieges.
 
