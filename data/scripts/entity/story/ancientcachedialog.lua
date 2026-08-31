@@ -7,7 +7,7 @@ include("callable")
 
 function initialize()
     if onServer() then
-        Entity().title = "Derelict Black Box"
+        Entity().title = "Derelict Black Box"%_t
     end
 end
 
@@ -21,7 +21,7 @@ function interactionPossible(playerIndex, option)
 end
 
 function initUI()
-    ScriptUI():registerInteraction("Extract Audio Log", "onInteract")
+    ScriptUI():registerInteraction("Extract Audio Log"%_t, "onInteract")
 end
 
 function onInteract()
@@ -30,8 +30,8 @@ end
 
 function Dialog()
     local d0 = {}
-    d0.text = "[STATIC] ...this is Grand Admiral Vance of the First Vanguard... [STATIC] ...we were supposed to hold the line... but they just kept warping in. They didn't even use the gates. [STATIC] ...my entire armada is gone. If anyone finds this... turn back. You cannot fight them."
-    d0.answers = { {answer = "Decrypt attached coordinates and salvage.", onSelect = "triggerLoot"} }
+    d0.text = "[STATIC] ...this is Grand Admiral Vance of the First Vanguard... [STATIC] ...we were supposed to hold the line... but they just kept warping in. They didn't even use the gates. [STATIC] ...my entire armada is gone. If anyone finds this... turn back. You cannot fight them."%_t
+    d0.answers = { {answer = "Decrypt attached coordinates and salvage."%_t, onSelect = "triggerLoot"} }
     return d0
 end
 
@@ -76,7 +76,7 @@ function triggerLootServer()
     local bonusMultiplier = 1.0
     if isScavenger or isExplorer then
         bonusMultiplier = 2.0
-        player:sendChatMessage("Captain", 0, "I managed to decrypt an isolated sub-routine in this cache! We found extra salvage!")
+        player:sendChatMessage("Captain"%_t, 0, "I managed to decrypt an isolated sub-routine in this cache! We found extra salvage!"%_t)
     end
 
     -- Alliance Fix: Give credits to the faction of the craft, not just the calling player!

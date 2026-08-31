@@ -31,5 +31,6 @@ function RogueAIProbe.spawn()
 end
 
 function initialize(...)
-    if RogueAIProbe.initialize then return RogueAIProbe.initialize(...) end
+    if RogueAIProbe.initialize then RogueAIProbe.initialize(...) end
+    terminate()
 end

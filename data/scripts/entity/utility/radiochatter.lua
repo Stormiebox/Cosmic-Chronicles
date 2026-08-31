@@ -11,7 +11,10 @@ function EntityRadioChatter.initialize(lines, minFrequency, maxFrequency, timeTo
     end
 
     -- Now, silently inject our own custom ambient lines into the entity's data pool!
-    if onServer() then
+    -- Guarded by "not _restoring": initialize() re-fires with _restoring=true on every
+    -- sector/database load, and without this guard the custom lines would be appended
+    -- again on every reload, growing data.lines without bound.
+    if onServer() and not _restoring then
         local entity = Entity()
         local faction = Faction(entity.factionIndex)
         if faction then

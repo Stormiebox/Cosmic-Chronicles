@@ -7,6 +7,31 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v3.1.5]
+
+### 🚨 Critical Fixes
+- [Bugfix] **Ghost Ship / Diplomat Escort / Rogue AI Probe Duplication Exploit:** Fixed a class of infinite farming exploits where these three events could be repeatedly re-triggered by reloading the sector before looting, because `terminate()` was never called (or only called on a non-payout branch) after the entity spawned. All three now unconditionally detach their spawner script immediately after spawning, matching the fix pattern already established for the Ghostship event in v3.1.4.
+- [Bugfix] **Bounty Ambush Duplication Exploit:** Fixed a similar exploit in `cc_bounty_ambush.lua` where reloading the sector before killing the boss could spawn additional 2.5M-credit bounty bosses. Added a sector-value spawn guard and moved `terminate()` to fire only after the reward is paid out.
+- [Bugfix] **Pirate Attack VFS Pragma:** Restored the missing `-- namespace PirateAttack` declaration in `pirateattack.lua`, required for the Virtual File System to correctly merge this override with the vanilla script.
+- [Bugfix] **Galactic News Network & Stock Market Never Ran:** Fixed `cosmicchronicles.lua` passing relative (rather than full `data/scripts/...`) paths to `Galaxy():addScriptOnce()` for the News Generator and Stock Market background systems. Both silently failed to attach — `addScriptOnce` fails silently on a bad path — so the features simply never ran. Both now correctly initialize.
+- [Bugfix] **Eclipse Lore Generator Memory Leak:** Fixed `cc_eclipselore.lua` only calling `terminate()` on the successful-spawn branch; every early-return path (already-evaluated sector, entity cap exceeded, the 95%-common no-spawn roll, invalid wreckage) left the generator permanently attached to the sector. `terminate()` now runs unconditionally at the top of `initialize()`, matching the one-shot generator pattern used elsewhere in the engine.
+- [Bugfix] **Radio Chatter Save Bloat:** Fixed `radiochatter.lua` re-injecting its ambient dialogue lines into the persisted station data on every single sector/database reload instead of only on first creation, causing unbounded save-file growth over a long campaign.
+- [Bugfix] **Diplomat Rescue Payout Exploit & Bribe Bug:** Fixed `diplomatdialog.lua` allowing the extraction reward to be claimed multiple times by spam-clicking the dialogue option during the ~4.5 second window before `deletejumped.lua` actually removes the entity. Also fixed the Smuggler-tier illegal tech bribe being dropped for an undefined global instead of the actual buyer.
+- [Feature] **Captain's Log — Actually Implemented:** The file responsible for appending narrative "Captain's Log" text to background command yields (`background/simulation/command.lua`) patched a method (`Command:sendMail`) that doesn't exist in the engine and was never attached to anything — this feature has never worked since it was introduced. Replaced with a same-path VFS override of `background/simulation/simulation.lua` that hooks `Simulation.makeCommand`'s `command.addYield`, matching the exact pattern Cosmic Overhaul itself uses to extend the same file, so the two mods' hooks compose correctly regardless of load order.
+- [Removed] **Dead Files:** Removed `entity/story/storybulletins.lua` (a duplicate of vanilla's own `bulletins.lua`, saved under a filename the VFS never matches — it added no unique content and nothing in the mod depended on it) and `player/background/simulation/command.lua` (superseded by the Captain's Log fix above).
+
+### 🪲 Bug Fixes
+- [Bugfix] **Destruction Tracker Locale Bug:** Fixed `cc_destructiontracker.lua` comparing an untranslated `faction.name` against a runtime-translated (`%_t`) string, which silently failed on any non-English server locale and lost the Pirate/Xsotan flavor text. Also removed a dead trailing `return` left over from a previous cleanup pass.
+- [Bugfix] **Captain Class Mislabeling:** Fixed `cc_newsgenerator.lua` mapping `primaryClass == 1` to "Explorer" in generated news text; per the engine's captain class enum, 1 is Commodore and 6 is Explorer.
+- [Bugfix] **Ghost Ship Dialogue Soft-Lock:** Fixed `ghostshipdialog.lua` setting its loot-claimed flag before validating the captain-class requirement for tiers 2/3, permanently soft-locking the wreck with zero payout if an ineligible captain triggered the wrong tier.
+- [Bugfix] **Exodus Determinism:** Replaced two `math.random()` calls in `exodus.lua`'s wreckage placement with the engine's deterministic `random():getFloat()`/`getInt()`, matching this mod's established multiplayer-sync convention.
+- [Bugfix] **Passing Ships Structural Consistency:** Wrapped an unconditionally-defined function in `passingships.lua` in `if onServer() then ... end` to match vanilla's own structure.
+
+### 🧹 Cleanup
+- [Changed] Fixed a hardcoded `X_success = true` anti-pattern across `cc_event_controller.lua`, `alienattack.lua`, `headhunter.lua`, and `spawntravellingmerchant.lua` that always reported a soft dependency include as successful regardless of whether it actually loaded; now correctly reflects the real `pcall(include, ...)` result.
+- [Changed] Added missing localization markers (`%_t`) in `eclipseloredialog.lua` and `ancientcachedialog.lua`, and removed a dead redundant `callable(nil, "tooFar")` registration in `eclipseloredialog.lua`.
+- [Changed] Removed a dead, unused `local EclipseLoot = {}` table and a dead commented-out `include()` in `factionattackssmugglers.lua`.
+
 ## [v3.1.4]
 
 ### 🪲 Bug Fixes

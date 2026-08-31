@@ -13,8 +13,8 @@ function CosmicChronicles.initialize()
     if onServer() then
         CosmicChronicles.registerLore()
         CosmicChronicles.registerStoryDialogues()
-        Galaxy():addScriptOnce("server/cc_newsgenerator.lua")
-        Galaxy():addScriptOnce("server/background/cc_stockmarket.lua")
+        Galaxy():addScriptOnce("data/scripts/server/cc_newsgenerator.lua")
+        Galaxy():addScriptOnce("data/scripts/server/background/cc_stockmarket.lua")
     end
 end
 

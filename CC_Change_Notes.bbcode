@@ -1,3 +1,23 @@
+[i]Version 3.1.5[/i]
+[hr][/hr]
+[h1]v3.1.5 🛡️STABILITY & EXPLOIT PATCH🛡️[/h1]
+[hr][/hr]
+[b]🛠️ MAJOR STABILITY PATCH[/b]
+[i]A deep stability audit uncovered and fixed several duplication exploits, restored two features that were silently broken since launch, and squashed a handful of smaller bugs along the way![/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]🐛 [b]Duplication Exploits Patched:[/b] Fixed a family of bugs where reloading a sector before finishing certain events (Ghost Ship, Diplomat Escort, Rogue AI Probe, and Bounty Ambush) could let you trigger them again and again for infinite rewards. These events now properly clean themselves up the moment they're resolved.
+[*]📰 [b]Galactic News Network & Stock Market Restored:[/b] Due to a hidden pathing bug, these two systems have never actually been running in the background - meaning news articles and stock prices weren't updating like they should have. This is now fixed!
+[*]📜 [b]Captain's Logs Now Actually Work:[/b] The narrative "Captain's Log" snippets that are supposed to appear on your background command reports were never actually triggering due to a broken hook. This has been completely rebuilt and now works as originally intended!
+[*]🤝 [b]Diplomat Rescue Exploit:[/b] Fixed a bug allowing players to rapidly click the extraction dialogue to receive the reward multiple times from a single stranded diplomat.
+[*]💾 [b]Save File Bloat:[/b] Fixed station radio chatter silently growing your save file every time you revisited a sector.
+[*]🗺️ [b]Eclipse Lore Memory Leak:[/b] Fixed a lingering performance issue where exploring empty sectors could leave background scripts attached longer than necessary.
+[*]🌐 [b]Localization Fix:[/b] Fixed a bug preventing certain destruction-related flavor text from displaying correctly on non-English servers.
+[*]🎖️ [b]Captain Class Display Fix:[/b] Fixed a news generator bug that could mislabel a Commodore-classed captain as an Explorer.
+[*]👻 [b]Ghost Ship Dialogue Fix:[/b] Fixed a rare case where interacting with the Ghost Ship in the wrong order could lock you out of your reward entirely.
+[/list]
+
 [i]Version 3.1.4[/i]
 [hr][/hr]
 [h1]v3.1.4 🐛EVENT LOGIC HOTFIX🐛[/h1]

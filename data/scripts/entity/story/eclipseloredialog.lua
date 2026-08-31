@@ -5,7 +5,7 @@ include("callable")
 
 function initialize()
     if onServer() then
-        Entity().title = "Ancient Eclipse Anomaly"
+        Entity().title = "Ancient Eclipse Anomaly"%_t
     end
 end
 
@@ -19,7 +19,7 @@ function interactionPossible(playerIndex, option)
 end
 
 function initUI()
-    ScriptUI():registerInteraction("Access Database", "onInteract")
+    ScriptUI():registerInteraction("Access Database"%_t, "onInteract")
 end
 
 function onInteract()
@@ -28,12 +28,12 @@ end
 
 function Dialog()
     local logs = {}
-    logs.text = "LOG ENTRY 401: We have been observing the sub-space phenomenon we refer to as 'The Eclipse'. It acts as a massive sink for ambient energy and emits chaotic gravitational waves.\n\nLOG ENTRY 412: The energy signatures are stabilizing. We believe the Eclipse is not a natural occurrence, but an artificial bridge. Something is trying to cross over.\n\nLOG ENTRY 413: Evacuation initiated. God help us all."
-    logs.answers = { {answer = "Download archived schematics and disconnect.", onSelect = "triggerLoot"} }
+    logs.text = "LOG ENTRY 401: We have been observing the sub-space phenomenon we refer to as 'The Eclipse'. It acts as a massive sink for ambient energy and emits chaotic gravitational waves.\n\nLOG ENTRY 412: The energy signatures are stabilizing. We believe the Eclipse is not a natural occurrence, but an artificial bridge. Something is trying to cross over.\n\nLOG ENTRY 413: Evacuation initiated. God help us all."%_t
+    logs.answers = { {answer = "Download archived schematics and disconnect."%_t, onSelect = "triggerLoot"} }
 
     local d0 = {}
-    d0.text = "The ancient terminal sparks to life, projecting a holographic interface. An ancient, fragmented database waits to be accessed."
-    d0.answers = { {answer = "Decrypt Logs", followUp = logs} }
+    d0.text = "The ancient terminal sparks to life, projecting a holographic interface. An ancient, fragmented database waits to be accessed."%_t
+    d0.answers = { {answer = "Decrypt Logs"%_t, followUp = logs} }
 
     return d0
 end
@@ -66,14 +66,13 @@ function triggerLootServer()
     entity:invokeFunction("data/scripts/entity/story/eclipseloot.lua", "dropLoot", callingPlayer)
 
     -- Send a message to the player
-    player:sendChatMessage("Ship Computer", 0, "Downloaded encrypted schematics and valuables from the cache.")
+    player:sendChatMessage("Ship Computer"%_t, 0, "Downloaded encrypted schematics and valuables from the cache."%_t)
 
     -- Destroy the stash entity
     Sector():deleteEntity(entity)
 end
 
 callable(nil, "triggerLootServer")
-callable(nil, "tooFar")
 
 function tooFar()
     local dialog = {}

@@ -5,6 +5,10 @@ local SectorGenerator = include("SectorGenerator")
 local PlanGenerator = include("plangenerator")
 
 function initialize()
+    -- One-shot generation script: detach immediately so an idle instance
+    -- doesn't stay attached to the sector on any early-return path below.
+    terminate()
+
     if onClient() then return end
 
     local sector = Sector()
@@ -58,6 +62,4 @@ function initialize()
 
     entity:setValue("cc_eclipse_loot_scale", scalingFactor)
     entity:addScriptOnce("data/scripts/entity/story/eclipseloot.lua")
-    
-    terminate()
 end

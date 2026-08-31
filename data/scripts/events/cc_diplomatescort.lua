@@ -27,5 +27,6 @@ function DiplomatEscort.spawn()
 end
 
 function initialize(...)
-    if DiplomatEscort.initialize then return DiplomatEscort.initialize(...) end
+    if DiplomatEscort.initialize then DiplomatEscort.initialize(...) end
+    terminate()
 end

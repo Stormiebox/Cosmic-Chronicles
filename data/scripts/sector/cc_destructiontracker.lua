@@ -25,9 +25,9 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
             if faction then
                 if faction.isPlayer or faction.isAlliance then
                     inflictorName = "a hostile Independent Pilot"
-                elseif faction.isAIFaction and faction.name == "Pirates"%_t then
+                elseif faction.isAIFaction and faction.name == "Pirates" then
                     inflictorName = "Pirate Raiders"
-                elseif faction.isAIFaction and faction.name == "Xsotan"%_t then
+                elseif faction.isAIFaction and faction.name == "Xsotan" then
                     inflictorName = "the Xsotan Swarm"
                 else
                     inflictorName = "the " .. faction.name
@@ -46,5 +46,3 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
         cv_news.publishArticle(article)
     end
 end
-
-return CCDestructionTracker

@@ -204,6 +204,7 @@ function CosmicChroniclesBlackBox.extract()
         local cvGoods = include("cosmicvaultgoods")
         cvGoods.registerGood(subclassGoodData)
         local good = goods["Subclass Subsystem"]
+        local subclassGood
         if good then subclassGood = good:good() end
 
         if subclassGood then

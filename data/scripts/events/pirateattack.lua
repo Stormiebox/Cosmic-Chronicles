@@ -1,3 +1,5 @@
+-- namespace PirateAttack
+
 if onClient() then
 
 function PirateAttack.onPiratesGenerated(id)

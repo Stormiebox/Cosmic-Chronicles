@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
 include("randomext")
-local cw_success = true; include("cosmicwarbridge")
+local cw_success = pcall(include, "cosmicwarbridge")
 
 -- Helper to fetch the highest local War Heat from the sector's factions
 local function getSectorWarHeat(x, y)

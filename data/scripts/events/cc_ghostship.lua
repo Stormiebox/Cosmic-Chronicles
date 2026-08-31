@@ -43,5 +43,6 @@ function GhostShipEvent.spawn()
 end
 
 function initialize(...)
-    if GhostShipEvent.initialize then return GhostShipEvent.initialize(...) end
+    if GhostShipEvent.initialize then GhostShipEvent.initialize(...) end
+    terminate()
 end

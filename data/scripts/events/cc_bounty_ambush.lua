@@ -21,8 +21,13 @@ end
 
 function BountyAmbush.spawn()
     local sector = Sector()
+
+    -- Exploit Fix: A boss is already active in this sector (e.g. sector reload before it was killed) - don't stack another.
+    if sector:getValue("cc_bounty_boss_spawned") then return end
+    sector:setValue("cc_bounty_boss_spawned", true)
+
     local x, y = sector:getCoordinates()
-    
+
     local faction = Galaxy():getPirateFaction(SectorGenerator(x, y):getFactionIndex())
     
     local volume = Balancer.getSectorShipVolume(x, y) * 5 -- Boss volume
@@ -54,13 +59,16 @@ end
 function BountyAmbush.onBossDestroyed()
     local sector = Sector()
     local x, y = sector:getCoordinates()
-    
+
     local players = {sector:getPlayers()}
     for _, player in pairs(players) do
         local reward = 2500000 -- 2.5 million credits
         player:receive("Received %1% Credits for claiming the bounty."%_t, reward)
         player:sendChatMessage("Galactic News Network", 0, "Bounty claimed successfully in sector [%1%:%2%].", x, y)
     end
+
+    -- Exploit Fix: Detach this sector script now that the bounty is paid, so a sector reload can't spawn another boss.
+    terminate()
 end
 
 function initialize(...)

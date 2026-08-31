@@ -1,7 +1,7 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
 -- namespace HeadHunter
-local cv_success = true; include("cosmicvaultnews")
+local cv_success = pcall(include, "cosmicvaultnews")
 
 local CC_Original_createEnemies = HeadHunter.createEnemies
 function HeadHunter.createEnemies(faction, useHeadhunters)

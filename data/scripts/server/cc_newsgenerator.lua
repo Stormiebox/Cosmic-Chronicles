@@ -220,7 +220,7 @@ function CosmicChroniclesNewsGenerator.generateCaptainNews()
         if p.craft then
             local captain = p.craft:getCaptain()
             if captain then
-                if captain.primaryClass == 1 then capClass = "Explorer"
+                if captain.primaryClass == 6 then capClass = "Explorer"
                 elseif captain.primaryClass == 2 then capClass = "Smuggler"
                 elseif captain.primaryClass == 3 then capClass = "Merchant"
                 elseif captain.primaryClass == 4 then capClass = "Miner"

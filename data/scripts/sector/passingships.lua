@@ -1,3 +1,5 @@
+if onServer() then
+
 local cc_vanilla_getChatterLinesByShipType = PassingShips.getChatterLinesByShipType
 
 function PassingShips.getChatterLinesByShipType(type)
@@ -323,4 +325,6 @@ function PassingShips.getChatterLinesByShipType(type)
     end
 
     return result
+end
+
 end

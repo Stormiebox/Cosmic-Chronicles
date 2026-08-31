@@ -4,7 +4,11 @@ package.path = package.path .. ";data/scripts/?.lua"
 local CaptainClass = include("captainclass")
 include("callable")
 
+local paidOut = false
+
 function interactionPossible(playerIndex, option)
+    if paidOut then return false end
+
     local player = Player(playerIndex)
     if not player then return false end
     local craft = player.craft
@@ -17,7 +21,7 @@ function interactionPossible(playerIndex, option)
 end
 
 function initUI()
-    ScriptUI():registerInteraction("Open Comm Link", "onInteract")
+    ScriptUI():registerInteraction("Open Comm Link"%_t, "onInteract")
 end
 
 function onInteract()
@@ -40,16 +44,16 @@ function Dialog()
     end
 
     local d0 = {}
-    d0.text = "Thank the stars! My escort was ambushed by hostiles. I am a high-ranking diplomat and I require immediate extraction. If you can take me aboard and get me out of this sector, I will see you properly compensated."
+    d0.text = "Thank the stars! My escort was ambushed by hostiles. I am a high-ranking diplomat and I require immediate extraction. If you can take me aboard and get me out of this sector, I will see you properly compensated."%_t
 
-    d0.answers = { {answer = "Dock your pod. We'll get you out of here.", onSelect = "triggerStandardPayout"} }
+    d0.answers = { {answer = "Dock your pod. We'll get you out of here."%_t, onSelect = "triggerStandardPayout"} }
 
     if hasMerchant then
-        table.insert(d0.answers, {answer = "[Merchant] This is an active warzone. My hazard pay rate just went up 200%. Take it or leave it.", onSelect = "triggerMerchantPayout"})
+        table.insert(d0.answers, {answer = "[Merchant] This is an active warzone. My hazard pay rate just went up 200%. Take it or leave it."%_t, onSelect = "triggerMerchantPayout"})
     end
 
     if hasSmuggler then
-        table.insert(d0.answers, {answer = "[Smuggler] We can bypass local patrols if we forge a new transponder identity for your pod. Let's make a deal.", onSelect = "triggerSmugglerPayout"})
+        table.insert(d0.answers, {answer = "[Smuggler] We can bypass local patrols if we forge a new transponder identity for your pod. Let's make a deal."%_t, onSelect = "triggerSmugglerPayout"})
     end
 
     return d0
@@ -66,6 +70,11 @@ function triggerSmugglerPayout()
 end
 
 function triggerServerPayout(tier)
+    -- Exploit Fix: deletejumped.lua takes ~4.5s to actually remove the entity, so without
+    -- this flag a player could re-open the dialog and spam-click a payout option during
+    -- that window to collect the reward multiple times.
+    if paidOut then return end
+
     local entity = Entity()
     local player = Player(callingPlayer)
     if not player then return end
@@ -84,6 +93,8 @@ function triggerServerPayout(tier)
     if tier == 2 and (not captain or not captain:hasClass(CaptainClass.Merchant)) then return end
     if tier == 3 and (not captain or not captain:hasClass(CaptainClass.Smuggler)) then return end
 
+    paidOut = true
+
     local sector = Sector()
     local buyer = player
     if craft.factionIndex == player.allianceIndex then
@@ -91,13 +102,13 @@ function triggerServerPayout(tier)
     end
 
     if tier == 1 then
-        player:sendChatMessage("Diplomat", 0, "I've transferred standard extraction fees to your account. Let's move!")
+        player:sendChatMessage("Diplomat"%_t, 0, "I've transferred standard extraction fees to your account. Let's move!"%_t)
         buyer.money = buyer.money + 150000
     elseif tier == 2 then
-        player:sendChatMessage("Diplomat", 0, "You're bleeding me dry, but I don't have a choice! Hazard pay transferred.")
+        player:sendChatMessage("Diplomat"%_t, 0, "You're bleeding me dry, but I don't have a choice! Hazard pay transferred."%_t)
         buyer.money = buyer.money + 450000
     elseif tier == 3 then
-        player:sendChatMessage("Diplomat", 0, "I'll turn a blind eye to your... less than legal operations in exchange for this escape route.")
+        player:sendChatMessage("Diplomat"%_t, 0, "I'll turn a blind eye to your... less than legal operations in exchange for this escape route."%_t)
         buyer.money = buyer.money + 100000
 
         -- Smuggler bonus: Illegal Goods (e.g. 50x Unbranded Weapons or similar)
@@ -105,8 +116,8 @@ function triggerServerPayout(tier)
         local UpgradeGenerator = include("upgradegenerator")
         local x, y = sector:getCoordinates()
         local upgrade = UpgradeGenerator():generateSectorSystem(x, y, 0, Rarity(RarityType.Exotic))
-        sector:dropUpgrade(entity.translationf, faction, nil, upgrade)
-        player:sendChatMessage("Smuggler", 0, "They threw in some highly illegal tech as a bribe to keep our mouths shut.")
+        sector:dropUpgrade(entity.translationf, buyer, nil, upgrade)
+        player:sendChatMessage("Smuggler"%_t, 0, "They threw in some highly illegal tech as a bribe to keep our mouths shut."%_t)
     end
 
     -- Visual warp out

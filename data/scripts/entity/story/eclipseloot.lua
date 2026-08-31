@@ -1,8 +1,6 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 local UpgradeGenerator = include("upgradegenerator")
 
-local EclipseLoot = {}
-
 function dropLoot(playerIndex)
     if onClient() then return end
     
