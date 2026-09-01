@@ -21,7 +21,12 @@ if onServer() then
                 local y = math.floor((self.area.lower.y + self.area.upper.y) / 2)
                 context.distanceToCenter = math.sqrt(x * x + y * y)
 
-                local nearestFaction = Galaxy():getNearestFaction(x, y)
+                -- Vanilla's own simulation.lua (merged into this same override chain by the
+                -- VFS) declares "local Galaxy = include(\"galaxy\")" at file scope -- that
+                -- library table shadows the real Galaxy() entity constructor as an upvalue
+                -- for every function appended after it in the merged script, this one
+                -- included. _G.Galaxy() bypasses the shadow and reaches the true global.
+                local nearestFaction = _G.Galaxy():getNearestFaction(x, y)
                 if nearestFaction then
                     local parentFaction = getParentFaction()
                     context.reputation = parentFaction:getRelations(nearestFaction.index)
