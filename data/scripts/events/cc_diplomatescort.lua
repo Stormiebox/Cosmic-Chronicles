@@ -23,6 +23,24 @@ function DiplomatEscort.spawn()
     diplomat.title = "Stranded Diplomat"
     diplomat:addScriptOnce("data/scripts/entity/story/diplomatdialog.lua")
 
+    -- Strip AI and weapons so the "stranded, escort destroyed" ship is actually stranded,
+    -- matching the sibling cc_ghostship.lua convention for a disabled derelict freighter.
+    diplomat:removeScript("data/scripts/entity/ai/patrol.lua")
+    diplomat:removeScript("data/scripts/entity/ai/freighter.lua")
+
+    local ai = ShipAI(diplomat.index)
+    if ai then
+        ai:stop()
+        ai:setPassive()
+    end
+
+    local turrets = {diplomat:getTurrets()}
+    for _, turret in pairs(turrets) do
+        Sector():deleteEntity(turret)
+    end
+
+    diplomat.crew = Crew()
+
     Sector():broadcastChatMessage("Scanner", 0, "Emergency civilian broadcast detected: 'Our escort is destroyed. We require immediate extraction!'")
 end
 
