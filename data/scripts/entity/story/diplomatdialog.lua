@@ -46,6 +46,10 @@ function Dialog()
     local d0 = {}
     d0.text = "Thank the stars! My escort was ambushed by hostiles. I am a high-ranking diplomat and I require immediate extraction. If you can take me aboard and get me out of this sector, I will see you properly compensated."%_t
 
+    -- This base answer is always present, regardless of captain/class - a player
+    -- with no captain, or a captain with no class, must still be able to complete
+    -- the rescue for the (lower) standard reward. Only the two bonus answers below
+    -- are conditional on a specific captain class.
     d0.answers = { {answer = "Dock your pod. We'll get you out of here."%_t, onSelect = "triggerStandardPayout"} }
 
     if hasMerchant then
@@ -88,7 +92,11 @@ function triggerServerPayout(tier)
         return
     end
 
-    -- Exploit Fix: Verify captain class on the server for special tiers
+    -- Exploit Fix: Verify captain class on the server for special tiers.
+    -- Tier 1 (standard payout) is deliberately NOT gated here - a player with no
+    -- captain at all, or a captain of no class, must still be able to complete the
+    -- rescue and receive the (lower) standard reward. Do not add a captain
+    -- requirement to the tier == 1 path; only tiers 2/3 are class-gated bonuses.
     local captain = craft:getCaptain()
     if tier == 2 and (not captain or not captain:hasClass(CaptainClass.Merchant)) then return end
     if tier == 3 and (not captain or not captain:hasClass(CaptainClass.Smuggler)) then return end
