@@ -10,7 +10,6 @@ local AI = include("story/ai")
 local MissionUT = include("missionutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-include("cosmicvaultdialogue")
 include("cosmicvaultmission")
 
 

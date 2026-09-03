@@ -4,7 +4,6 @@ include ("mission")
 include ("stringutility")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-include("cosmicvaultdialogue")
 include("cosmicvaultmission")
 
 The4 = include ("story/the4")

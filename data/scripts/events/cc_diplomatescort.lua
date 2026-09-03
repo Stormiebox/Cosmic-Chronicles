@@ -3,6 +3,7 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 local ShipGenerator = include("shipgenerator")
 local SectorGenerator = include("SectorGenerator")
+include("stringutility")
 
 local DiplomatEscort = {}
 
@@ -20,7 +21,7 @@ function DiplomatEscort.spawn()
     end
 
     local diplomat = ShipGenerator.createFreighterShip(faction, SectorGenerator(x,y):getPositionInSector())
-    diplomat.title = "Stranded Diplomat"
+    diplomat.title = "Stranded Diplomat"%_T
     diplomat:addScriptOnce("data/scripts/entity/story/diplomatdialog.lua")
 
     -- Strip AI and weapons so the "stranded, escort destroyed" ship is actually stranded,
@@ -66,7 +67,7 @@ function DiplomatEscort.spawn()
     -- dialogue text is flavor and doesn't depend on real faction ownership.
     diplomat.factionIndex = 0
 
-    Sector():broadcastChatMessage("Scanner", 0, "Emergency civilian broadcast detected: 'Our escort is destroyed. We require immediate extraction!' Dock and open a comm link to negotiate extraction - towing or attacking the ship risks your reputation with its faction.")
+    Sector():broadcastChatMessage("Scanner"%_T, 0, "Emergency civilian broadcast detected: 'Our escort is destroyed. We require immediate extraction!' Dock and open a comm link to negotiate extraction - towing or attacking the ship risks your reputation with its faction."%_T)
 end
 
 function initialize(...)

@@ -43,8 +43,8 @@ function CC_ResearchStation.payFragmentServer()
     -- Consume 1 fragment
     player:setValue("cc_log_fragments", fragments - 1)
     
-    -- Grant credits
-    player:receive("Received %1% Credits for Encrypted Log Fragment."%_t, 1000000)
+    -- %_T (not %_t): needed for the "%1%" placeholder to resolve to the money argument.
+    player:receive("Received %1% Credits for Encrypted Log Fragment."%_T, 1000000)
     
     -- Grant relations
     local station = Entity()

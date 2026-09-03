@@ -27,10 +27,12 @@ function EntityRadioChatter.initialize(lines, minFrequency, maxFrequency, timeTo
                 factionTrait = "aggressive"
             end
 
+            -- Real Avorion traits are aggressive/brave/greedy/honorable/mistrustful only, so
+            -- wealth is judged from faction.money directly instead of a nonexistent trait.
             local factionWealth = "average"
-            if faction:getTrait("wealthy") > 0.5 then
+            if faction.money > 10000000 then
                 factionWealth = "wealthy"
-            elseif faction:getTrait("poor") > 0.5 then
+            elseif faction.money < 1000000 then
                 factionWealth = "poor"
             end
 
@@ -43,12 +45,14 @@ function EntityRadioChatter.initialize(lines, minFrequency, maxFrequency, timeTo
                 stationType = "ship"
             }
 
+            -- secure() returns the same internal 'data.lines' table reference every call,
+            -- so fetch it once rather than inside the loop below.
+            local data = EntityRadioChatter.secure()
+
             -- We can pull 3 random ambient lines and append them to the entity's chatter array
             for i = 1, 3 do
                 local customLine = CosmicVaultDialogue.getValidLine("ambient", context)
                 if customLine then
-                    -- EntityRadioChatter stores its lines in 'data.lines' internally
-                    local data = EntityRadioChatter.secure()
                     table.insert(data.lines, customLine)
                 end
             end

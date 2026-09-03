@@ -5,9 +5,12 @@ local SectorGenerator = include("SectorGenerator")
 local PlanGenerator = include("plangenerator")
 
 function initialize()
+    -- One-shot generation script: detach immediately so an idle instance doesn't stay
+    -- attached on any early-return path below (client included).
+    terminate()
+
     if onClient() then return end
     spawn()
-    terminate()
 end
 
 function spawn()
@@ -26,7 +29,7 @@ function spawn()
         local container = sector:createWreckage(plan, position)
         container.title = "Hidden Stash"
         
-        container:addScript("entity/stash.lua")
+        container:addScript("data/scripts/entity/stash.lua")
         
         if random():test(0.25) then
             container:addScript("data/scripts/entity/story/ancientcachedialog.lua")

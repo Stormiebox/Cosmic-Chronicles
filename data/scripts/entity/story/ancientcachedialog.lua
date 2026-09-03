@@ -83,8 +83,11 @@ function triggerLootServer()
     local faction = Faction(craft.factionIndex)
     if faction then
         local amount = math.floor(75000 * scale * bonusMultiplier)
-        faction.money = faction.money + amount
-        player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Extracted %1% Credits from Black Box."%_t, amount)
+        -- This description string has no %1%-style placeholder, so %_T vs. a plain string
+        -- makes no observable difference here.
+        faction:receive("Extracted Credits from Black Box.", amount)
+        -- %_T (not %_t): needed for the "%1%" placeholder to resolve across the server-to-client boundary.
+        player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Extracted %1% Credits from Black Box."%_T, amount)
     end
 
     -- Extract Derelict Log Fragments

@@ -47,10 +47,12 @@ function StoryHints.cc_getStoryHintFromServer()
             factionTrait = "aggressive"
         end
 
+        -- Real Avorion traits are aggressive/brave/greedy/honorable/mistrustful only, so
+        -- wealth is judged from faction.money directly instead of a nonexistent trait.
         local factionWealth = "average"
-        if faction:getTrait("wealthy") > 0.5 then
+        if faction.money > 10000000 then
             factionWealth = "wealthy"
-        elseif faction:getTrait("poor") > 0.5 then
+        elseif faction.money < 1000000 then
             factionWealth = "poor"
         end
         

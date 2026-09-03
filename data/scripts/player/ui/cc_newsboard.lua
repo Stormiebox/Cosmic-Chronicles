@@ -310,6 +310,22 @@ end -- end onClient()
 -- SERVER SIDE
 -- ==========================================
 
+-- Wires onNewsPublished (below) to the news-publish callback so this player's news board
+-- gets pushed a live update the moment an article is published.
+-- Guarded with a structural "if onServer()" (not just an internal early-return like the
+-- other server functions below) because CosmicChroniclesNewsBoard.initialize collides by
+-- name with the client-side initialize() defined above (line ~97, inside "if onClient()").
+-- An internal-only guard would still ASSIGN this function to CosmicChroniclesNewsBoard.initialize
+-- unconditionally at module load, silently overwriting the client's UI-building initialize()
+-- on the client and breaking the entire Galactic News tab.
+if onServer() then
+
+function CosmicChroniclesNewsBoard.initialize()
+    Server():registerCallback("onCCNewsPublishArticle", "onNewsPublished")
+end
+
+end
+
 -- Snapshots each article's age (in seconds, as of this sync) so the client never has to
 -- compare its own clock against the server's -- Client().unpausedRuntime and
 -- Server().unpausedRuntime are different clocks with different origins.

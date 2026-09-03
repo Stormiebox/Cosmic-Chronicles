@@ -1,6 +1,10 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 package.path = package.path .. ";data/scripts/?.lua"
 
+local FactionEradicationUtility = include("factioneradicationutility")
+local cv_economy = include("cosmicvaulteconomy")
+local cv_news = include("cosmicvaultnews")
+
 local CosmicChroniclesStockMarket = {}
 
 function CosmicChroniclesStockMarket.initialize()
@@ -16,10 +20,6 @@ function updateServer(timeStep)
 end
 
 function CosmicChroniclesStockMarket.simulateStockMarket()
-    local FactionEradicationUtility = include("factioneradicationutility")
-    local cv_economy = include("cosmicvaulteconomy")
-    local cv_news = include("cosmicvaultnews")
-
     local factions = {}
     local factionStr = Server():getValue("factions")
     if type(factionStr) == "string" and factionStr ~= "" then

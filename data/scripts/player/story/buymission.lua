@@ -5,7 +5,6 @@ include("structuredmission")
 include("callable")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-include("cosmicvaultdialogue")
 include("cosmicvaultmission")
 
 

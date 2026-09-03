@@ -1,3 +1,30 @@
+[i]Version 3.2.2[/i]
+[hr][/hr]
+[h1]v3.2.2 🐛BUGFIX & PERFORMANCE PASS🐛[/h1]
+[hr][/hr]
+[b]🛠️ MAINTENANCE PATCH[/b]
+[i]This patch fixes a spawn-breaking crash, a dialogue crash, several reward bugs, and a handful of smaller issues. No new content, no balance changes beyond fixing numbers that were already wrong.[/i]
+
+[b]🪲BUGFIXES[/b]
+[list]
+[*]💥 [b]Bounty Ambush Never Appeared:[/b] The "Dread Pirate Lord" bounty boss event was silently failing to spawn every single time due to an invalid internal call. It now spawns correctly, complete with its bounty payout.
+[*]💥 [b]Diplomat Bribe Crash:[/b] Picking the Smuggler-tier bribe option while rescuing a stranded diplomat could crash the dialogue. Fixed.
+[*]💰 [b]Credit Reward Reliability:[/b] Standardized how several events (Ancient Data Cache, Ghost Ship, Black Box, Refugee Convoy, Diplomat Rescue) hand out credit rewards, so payouts are granted the same safe, well-tested way everywhere.
+[*]💬 [b]Missing Numbers in Chat Messages:[/b] Fixed several reward and event chat messages that could show a literal "%1%" placeholder instead of the actual credit amount or sector coordinates.
+[*]🗣️ [b]Wealthy/Poor Flavor Text Restored:[/b] Station chatter and rumors that were supposed to reflect whether a faction is rich or poor were never actually able to trigger. They now correctly show up based on the faction's actual wealth.
+[*]🤝 [b]Refugee Convoy & Ghost Ship Reputation Risk:[/b] These two events could carry the same leftover generic-ship dialogue that caused the Diplomat Rescue reputation exploit patched in v3.2.1. Removed from both, matching that fix.
+[*]📰 [b]News Board Live Updates Fixed:[/b] Breaking News was supposed to push straight to your News tab the moment it's published, but the wiring for that was missing. It now updates live as intended, not just when you reopen the tab.
+[*]🎯 [b]Bounty Boss Map Icon:[/b] Fixed a broken map icon on the bounty boss ship.
+[*]⚔️ [b]Destruction Report Fix:[/b] Fixed a case where a station destroyed by environmental causes (not an actual faction) could be misattributed in the destruction tracker.
+[*]🌌 [b]Eclipse Lore Odds Fix:[/b] Fixed a rare case where a busy sector could permanently lose its one shot at spawning the Eclipse Lore anomaly.
+[*]📖 [b]Codex Correction:[/b] Corrected an inflated bonus number in the in-game Codex's Explorer captain description.
+[/list]
+
+[b]⚡PERFORMANCE[/b]
+[list]
+[*]⚡ Trimmed a couple of small inefficiencies in the Stock Market and station radio chatter background systems.
+[/list]
+
 [i]Version 3.2.1[/i]
 [hr][/hr]
 [h1]v3.2.1 🐛BUGFIX UPDATE!🐛[/h1]

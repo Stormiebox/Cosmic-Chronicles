@@ -11,7 +11,6 @@ local AdventurerGuide = include("story/adventurerguide")
 local Hermit = include("data/scripts/entity/story/hermit")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-include("cosmicvaultdialogue")
 include("cosmicvaultmission")
 
 

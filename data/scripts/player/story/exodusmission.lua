@@ -11,7 +11,6 @@ local MissionUT = include("missionutility")
 local SectorGenerator = include("SectorGenerator")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-include("cosmicvaultdialogue")
 include("cosmicvaultmission")
 
 

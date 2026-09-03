@@ -111,19 +111,21 @@ function triggerServerPayout(tier)
 
     if tier == 1 then
         player:sendChatMessage("Diplomat"%_t, 0, "I've transferred standard extraction fees to your account. Let's move!"%_t)
-        buyer.money = buyer.money + 150000
+        buyer:receive("Extraction fee.", 150000)
     elseif tier == 2 then
         player:sendChatMessage("Diplomat"%_t, 0, "You're bleeding me dry, but I don't have a choice! Hazard pay transferred."%_t)
-        buyer.money = buyer.money + 450000
+        buyer:receive("Hazard pay.", 450000)
     elseif tier == 3 then
         player:sendChatMessage("Diplomat"%_t, 0, "I'll turn a blind eye to your... less than legal operations in exchange for this escape route."%_t)
-        buyer.money = buyer.money + 100000
+        buyer:receive("Diplomat's payoff.", 100000)
 
         -- Smuggler bonus: Illegal Goods (e.g. 50x Unbranded Weapons or similar)
         -- Since adding specific cargo safely requires more logic, we can just drop a high rarity system upgrade as a "bribe"
         local UpgradeGenerator = include("upgradegenerator")
         local x, y = sector:getCoordinates()
-        local upgrade = UpgradeGenerator():generateSectorSystem(x, y, 0, Rarity(RarityType.Exotic))
+        -- generateSectorSystem(x, y, rarity_in, rarities_in) -- the 4th arg is only for a
+        -- weighted distribution table; a single desired Rarity goes in the 3rd (rarity_in).
+        local upgrade = UpgradeGenerator():generateSectorSystem(x, y, Rarity(RarityType.Exotic))
         sector:dropUpgrade(entity.translationf, buyer, nil, upgrade)
         player:sendChatMessage("Smuggler"%_t, 0, "They threw in some highly illegal tech as a bribe to keep our mouths shut."%_t)
     end

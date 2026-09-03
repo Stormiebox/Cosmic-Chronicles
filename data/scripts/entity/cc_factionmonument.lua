@@ -45,8 +45,10 @@ function CosmicChroniclesMonument.readLore()
         trait1 = "unyielding strength and conquest"%_T
     end
 
+    -- Real Avorion traits are aggressive/brave/greedy/honorable/mistrustful only, so wealth
+    -- is judged from faction.money directly instead of a nonexistent "wealthy" trait.
     local trait2 = "scavenging the ashes of the old world"%_T
-    if faction:getTrait("wealthy") > 0.5 then
+    if faction.money > 10000000 then
         trait2 = "endless prosperity"%_T
     end
 

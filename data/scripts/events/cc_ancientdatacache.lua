@@ -3,6 +3,8 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 local SectorGenerator = include("SectorGenerator")
 local PlanGenerator = include("plangenerator")
+-- Needed for %_T below; no vanilla file at this path to inherit it from.
+include("stringutility")
 
 local AncientCache = {}
 
@@ -21,10 +23,10 @@ function AncientCache.spawn()
     
     if not valid(cache) then return end
     
-    cache.title = "Ancient Data Cache"
+    cache.title = "Ancient Data Cache"%_T
     cache:addScriptOnce("data/scripts/entity/story/ancientcachedialog.lua")
 
-    Sector():broadcastChatMessage("Scanner", 0, "Extremely old quantum signatures detected nearby. Could it be Xsotan origins?")
+    Sector():broadcastChatMessage("Scanner"%_T, 0, "Extremely old quantum signatures detected nearby. Could it be Xsotan origins?"%_T)
 end
 
 function initialize(...)

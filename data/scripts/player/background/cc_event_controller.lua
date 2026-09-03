@@ -82,7 +82,6 @@ function onSectorEntered(playerIndex, x, y, sectorChangeType)
         sector:addScriptOnce("events/cc_refugeeconvoy.lua")
     else
         -- Determine if we are deep inside AI territory
-        -- Determine if we are deep inside AI territory
         local controllingFaction = Galaxy():getNearestFaction(x, y)
 
         if controllingFaction and controllingFaction.isAIFaction then

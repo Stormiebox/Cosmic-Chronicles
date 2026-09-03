@@ -95,15 +95,15 @@ function triggerServerLoot(lootTier)
 
     if lootTier == 1 then
         player:sendChatMessage("Crew"%_t, 0, "We recovered some credits and loose cargo, but this place gives me the creeps."%_t)
-        faction.money = faction.money + 25000
+        faction:receive("Salvaged Credits from Ghost Ship.", 25000)
         player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Salvaged 25,000 Credits from Ghost Ship."%_t)
     elseif lootTier == 2 then
         player:sendChatMessage("Scavenger"%_t, 0, "Jackpot! They had a shielded under-deck completely untouched by whatever hit them."%_t)
-        faction.money = faction.money + 125000
+        faction:receive("Salvaged Credits from Ghost Ship.", 125000)
         player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Salvaged 125,000 Credits from Ghost Ship."%_t)
     elseif lootTier == 3 then
         player:sendChatMessage("Explorer"%_t, 0, "I've successfully pulled their last known jump coordinates. We found the anomaly's exact location, transferring data bounty!"%_t)
-        faction.money = faction.money + 100000
+        faction:receive("Salvaged Credits from Ghost Ship.", 100000)
         player:sendChatMessage("Ship Computer"%_t, ChatMessageType.Information, "Salvaged 100,000 Credits from Ghost Ship."%_t)
     end
     

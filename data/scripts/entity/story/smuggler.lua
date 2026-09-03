@@ -3,8 +3,6 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 Dialog = include ("dialogutility")
 include ("stringutility")
 include ("callable")
-include ("faction")
-include ("randomext")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
 local CosmicVaultDialogue = include("cosmicvaultdialogue")
@@ -249,8 +247,6 @@ function onCantJump()
     end
 
     -- worsen relations to all present players and alliances
-    local smugglerFaction = Faction()
-
     local factions = {Sector():getPresentFactions()}
     for _, factionIndex in pairs(factions) do
         local faction = Faction(factionIndex)

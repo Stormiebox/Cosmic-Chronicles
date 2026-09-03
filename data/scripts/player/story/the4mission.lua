@@ -6,7 +6,6 @@ local MissionUT = include("missionutility")
 local The4 = include("story/the4")
 
 -- [[ Cosmic Chronicles: Vault API Injection ]] --
-include("cosmicvaultdialogue")
 include("cosmicvaultmission")
 
 

@@ -20,7 +20,8 @@ function CCDestructionTracker.onEntityDestroyed(entityIndex, lastDamageInflictor
         local inflictor = Entity(lastDamageInflictor)
         local inflictorName = "Unknown Forces"
         
-        if valid(inflictor) and inflictor.factionIndex then
+        -- factionIndex 0 means no faction/environmental; > 0 excludes it (0 is truthy in Lua).
+        if valid(inflictor) and inflictor.factionIndex > 0 then
             local faction = Faction(inflictor.factionIndex)
             if faction then
                 if faction.isPlayer or faction.isAlliance then

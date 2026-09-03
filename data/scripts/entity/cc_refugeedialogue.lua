@@ -92,11 +92,11 @@ function CosmicChroniclesRefugee.donate(goodName, amount)
             local CaptainClass = include("captainclass")
             if captain:hasClass(CaptainClass.Merchant) then
                 -- Balanced from 75k to 50k
-                repTarget.money = repTarget.money + 50000
+                repTarget:receive("Merchant hazard pay fee."%_T, 50000)
                 player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 50,000 credit hazard pay fee for the supplies."%_T)
             elseif captain:hasClass(CaptainClass.Smuggler) then
                 -- Balanced from 100k to 75k
-                repTarget.money = repTarget.money + 75000
+                repTarget:receive("Skimmed valuables from the refugee convoy."%_T, 75000)
                 player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 75,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
             end
         end

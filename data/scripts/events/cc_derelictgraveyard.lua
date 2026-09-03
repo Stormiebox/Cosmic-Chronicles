@@ -4,13 +4,17 @@ local SectorGenerator = include("SectorGenerator")
 include("stringutility")
 
 function initialize()
+    -- One-shot generation script: detach immediately so an idle instance doesn't stay
+    -- attached on any early-return path below (client included).
+    terminate()
+
     if onClient() then return end
 
     local sector = Sector()
     local x, y = sector:getCoordinates()
     local faction = Galaxy():getNearestFaction(x, y)
 
-    if not faction then terminate() return end
+    if not faction then return end
 
     -- Spawn ships and immediately destroy them to let Avorion's physics engine handle the wreckage scatter
     local count = random():getInt(3, 5)
@@ -38,6 +42,4 @@ function initialize()
     }
     local cv_news = include("cosmicvaultnews")
     cv_news.publishArticle(article)
-
-    terminate()
 end

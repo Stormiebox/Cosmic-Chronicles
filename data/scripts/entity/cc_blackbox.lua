@@ -151,7 +151,7 @@ function CosmicChroniclesBlackBox.extract()
     -- Balanced from 75k-150k down to 15k-35k base
     local amount = math.floor(random():getInt(15000, 35000) * rewardFactor * bonusMultiplier)
     local receiver = Faction(ship.factionIndex) or player
-    receiver.money = receiver.money + amount
+    receiver:receive("Recovered Credits from the cache."%_T, amount)
     player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Recovered %1% credits from the cache."%_T, amount)
 
     if isEclipseOwned then

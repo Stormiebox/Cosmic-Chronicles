@@ -18,9 +18,10 @@ function dropLoot(playerIndex)
         faction = Faction(player.craft.factionIndex)
     end
 
-    -- Drop Credits
+    -- Drop Credits. %_T lets the "%1%" placeholder resolve to the money argument; faction is
+    -- always a player or their alliance here, so a client always exists to translate for.
     if faction then
-        faction:receive("Looted %1% Credits from Eclipse cache.", math.floor(250000 * scale))
+        faction:receive("Looted %1% Credits from Eclipse cache."%_T, math.floor(250000 * scale))
     end
     
     -- Drop Upgrades

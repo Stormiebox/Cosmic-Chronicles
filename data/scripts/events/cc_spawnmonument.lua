@@ -3,13 +3,17 @@ local PlanGenerator = include("plangenerator")
 include("stringutility")
 
 function initialize()
+    -- One-shot generation script: detach immediately so an idle instance doesn't stay
+    -- attached on any early-return path below (client included).
+    terminate()
+
     if onClient() then return end
 
     local sector = Sector()
     local x, y = sector:getCoordinates()
     local faction = Galaxy():getNearestFaction(x, y)
 
-    if not faction then terminate() return end
+    if not faction then return end
 
     -- Generate a massive procedural station based on the faction's architectural style
     local planPath = "data/plans/chronicles/cosmic_monument.xml"
@@ -42,6 +46,4 @@ function initialize()
     }
     local cv_news = include("cosmicvaultnews")
     cv_news.publishArticle(article)
-
-    terminate()
 end

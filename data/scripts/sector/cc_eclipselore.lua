@@ -15,10 +15,11 @@ function initialize()
     local x, y = sector:getCoordinates()
 
     if sector:getValue("cc_eclipselore_evaluated") then return end
-    sector:setValue("cc_eclipselore_evaluated", true)
 
-    -- Only spawn in empty sectors or unpopulated sectors
+    -- Only spawn in empty/unpopulated sectors. Mark evaluated only past this check, since a
+    -- busy sector always gets saved to disk and would otherwise permanently lose the roll.
     if sector.numEntities > 100 then return end
+    sector:setValue("cc_eclipselore_evaluated", true)
 
     -- 5% chance to spawn an Eclipse Lore Object
     if random():getFloat() > 0.05 then return end

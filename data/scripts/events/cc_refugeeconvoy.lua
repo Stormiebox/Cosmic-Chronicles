@@ -3,6 +3,10 @@ local ShipGenerator = include("shipgenerator")
 include("stringutility")
 
 function initialize()
+    -- One-shot generation script: detach immediately so an idle instance doesn't stay
+    -- attached on any early-return path below (client included).
+    terminate()
+
     if onClient() then return end
 
     local sector = Sector()
@@ -10,7 +14,6 @@ function initialize()
     local faction = Galaxy():getNearestFaction(x, y)
 
     if not faction or faction.name == "The Xsotan" or faction.name == "The Xsotan"%_t or faction.isPlayer or faction.isAlliance then
-        terminate()
         return
     end
 
@@ -19,6 +22,9 @@ function initialize()
     for i = 1, count do
         local ship = ShipGenerator.createFreighterShip(faction, MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(random():getInt(-500, 500), random():getInt(-500, 500), random():getInt(-500, 500))))
         ship.title = "Refugee Transport"%_T
+        -- createFreighterShip always attaches civilship.lua, which registers its own competing
+        -- interactions and can worsen relations via its threaten() path.
+        ship:removeScript("data/scripts/entity/civilship.lua")
         ship:addScriptOnce("entity/cc_refugeedialogue.lua")
         ship:addScriptOnce("entity/deleteonplayersleft.lua")
     end
@@ -31,6 +37,4 @@ function initialize()
     }
     local cv_news = include("cosmicvaultnews")
     cv_news.publishArticle(article)
-
-    terminate()
 end
