@@ -54,20 +54,7 @@ function DiplomatEscort.spawn()
 
     diplomat.crew = Crew()
 
-    -- Strip real faction ownership after spawn: `faction` above was only ever
-    -- needed for the spawn-eligibility check (not Xsotan/player/alliance) and
-    -- diplomatdialog.lua's own payout logic never references the diplomat's
-    -- faction again, so this ship staying a real, tracked asset of an ally
-    -- faction for its whole lifetime serves no gameplay purpose - it just
-    -- means any vanilla interaction that doesn't go through the dialog (tow,
-    -- forced boarding) reads to the game as stealing from that faction and
-    -- applies a real reputation penalty against them. 0 is vanilla's own
-    -- "no faction" sentinel (see e.g. entity/antismuggle.lua's
-    -- `if ship.factionIndex == 0 then goto continue end`). The diplomat's
-    -- dialogue text is flavor and doesn't depend on real faction ownership.
-    diplomat.factionIndex = 0
-
-    Sector():broadcastChatMessage("Scanner"%_T, 0, "Emergency civilian broadcast detected: 'Our escort is destroyed. We require immediate extraction!' Dock and open a comm link to negotiate extraction - towing or attacking the ship risks your reputation with its faction."%_T)
+    Sector():broadcastChatMessage("Scanner"%_T, 0, "Emergency civilian broadcast detected: 'Our escort is destroyed. We require immediate extraction!' Approach and open a comm link to negotiate extraction - towing or attacking the ship risks your reputation with its faction."%_T)
 end
 
 function initialize(...)

@@ -129,6 +129,9 @@ function CosmicChroniclesNewsBoard.initialize()
 
     self.refreshButton = self.tab:createButton(Rect(margin + 470, row2Top, margin + 590, row2Bottom), "Refresh"%_t, "onRefreshClicked")
 
+    self.markAllReadButton = self.tab:createButton(Rect(margin + 605, row2Top, margin + 785, row2Bottom), "Mark All As Read"%_t, "onMarkAllReadClicked")
+    self.markAllReadButton.tooltip = "Mark every currently loaded article as read"%_t
+
     -- Row 3: breaking-news banner (hidden unless there's an unread breaking article)
     self.breakingButton = self.tab:createButton(Rect(margin, row3Top, topWidth - margin, row3Bottom), "", "onBreakingClicked")
     self.breakingButton.visible = false
@@ -162,6 +165,17 @@ end
 
 function CosmicChroniclesNewsBoard.onRefreshClicked()
     invokeServerFunction("requestNewsSync")
+end
+
+-- Quick fix for players who let news pile up for hours and only want to clear the backlog
+-- instead of clicking each headline individually. seenArticles is purely client-local (same
+-- as the per-article "click to mark read" path below), so this doesn't survive a relog/reload
+-- any better than normal read-tracking does -- that's a separate, already-known limitation.
+function CosmicChroniclesNewsBoard.onMarkAllReadClicked()
+    for _, article in ipairs(self.currentNewsArray) do
+        seenArticles[articleKey(article)] = true
+    end
+    CosmicChroniclesNewsBoard.populateUI()
 end
 
 function CosmicChroniclesNewsBoard.onFilterChanged()
@@ -242,6 +256,10 @@ function CosmicChroniclesNewsBoard.updateUnreadAndBreaking()
         else
             self.breakingButton.visible = false
         end
+    end
+
+    if self.markAllReadButton then
+        self.markAllReadButton.active = unreadCount > 0
     end
 end
 
