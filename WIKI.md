@@ -1,6 +1,12 @@
 # 🪐 Cosmic Chronicles: Detailed Features
 
+![Version](https://img.shields.io/badge/version-1.8.0-6f42c1?style=flat-square)
+![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
+
 Welcome to the **Cosmic Chronicles** wiki. This page is the full technical reference for the narrative and lore expansion module in the **Cosmic** mod series.
+
+> [!TIP]
+> If you just want a friendly tour of what the mod does, read [`PLAYER_GUIDE.md`](PLAYER_GUIDE.md) instead. See [`README.md`](README.md) for installation.
 
 **Cosmic Chronicles**:
 
@@ -198,3 +204,11 @@ Per `modinfo.lua`, Cosmic Chronicles hard-requires:
 - Custom stations and modded factions are supported by falling back to `generic` lore categories when a unique trait can't be identified.
 
 </details>
+
+---
+
+<div align="center">
+
+[⬆ Back to top](https://github.com/Stormiebox/Cosmic-Chronicles/wiki/Features-and-Enhancements) · [🌌 README](https://github.com/Stormiebox/Cosmic-Chronicles) · [📘 Player Guide](https://github.com/Stormiebox/Cosmic-Chronicles/wiki/Players-Guide-The-Living-Galaxy)
+
+</div>

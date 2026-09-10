@@ -1,8 +1,14 @@
 # 🪐 Cosmic Chronicles: Player Guide
 
+![Version](https://img.shields.io/badge/version-3.2.3-6f42c1?style=flat-square)
+![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
+
 Have you ever docked at a station and wondered what the locals are actually thinking? In the vast, procedurally generated universe of Avorion, space can feel a little quiet. **Cosmic Chronicles** was built to change that, turning the cold math of background simulations into stories.
 
 This guide walks through what Cosmic Chronicles does and how it differs from the base game, in plain English.
+
+> [!TIP]
+> For exact numbers and mechanic-by-mechanic detail, see [`WIKI.md`](WIKI.md). See [`README.md`](README.md) for installation.
 
 ## 📜 Contents
 
@@ -112,3 +118,11 @@ A few things run quietly under the hood so the galaxy stays consistent for every
 - All the deep lore, stat blocks, and mechanics documented here are also readable in-game from the Cosmic Codex tab, so there's no need to alt-tab to a wiki mid-session.
 
 **Cosmic Chronicles** doesn't just add words to the screen. It listens to the invisible math behind the wars and economies around you, and turns that math into stories you can actually read.
+
+---
+
+<div align="center">
+
+[⬆ Back to top](https://github.com/Stormiebox/Cosmic-Chronicles/wiki/Players-Guide-The-Living-Galaxy) · [🌌 README](https://github.com/Stormiebox/Cosmic-Chronicles) · [⚙️ Wiki](https://github.com/Stormiebox/Cosmic-Chronicles/wiki/Features-and-Enhancements)
+
+</div>

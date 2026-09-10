@@ -2,6 +2,15 @@
 
 *A dynamic narrative and living-galaxy expansion for Avorion.*
 
+![Version](https://img.shields.io/badge/version-3.2.3-6f42c1?style=flat-square)
+![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
+![License](https://img.shields.io/badge/license-GPLv3-informational?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey?style=flat-square)
+![Requires](https://img.shields.io/badge/requires-Core%204-success?style=flat-square)
+
+> [!TIP]
+> New here? [`PLAYER_GUIDE.md`](PLAYER_GUIDE.md) is a friendly gameplay tour. [`WIKI.md`](WIKI.md) has the full technical reference with exact numbers.
+
 ## 📖 Overview
 
 Cosmic Chronicles turns the background math of the Cosmic series into a galaxy that talks back. Station chatter reacts to War Heat and faction wealth instead of looping the same ten vanilla lines. Deep space hides refugee convoys, derelict graveyards, and ancient ruins tied to the state of the world around them. And the Galactic News Network reports on all of it (wars, economies, discoveries, and the rare, galaxy-shaking moments that deserve a Breaking News banner) in a searchable, filterable newsroom tab.
@@ -36,12 +45,10 @@ Cosmic Chronicles is built on the shared **Cosmic Vault** APIs:
 
 ## ⚙️ Requirements
 
-Per `modinfo.lua`, this mod hard-requires:
-
 - **Avorion** 1.0+
-- **Cosmic Vault**
-- **Cosmic Overhaul**
-- **Cosmic War**
+- **Required:** `Cosmic Vault`, `Cosmic Overhaul`, `Cosmic War`, and `Cosmic Ascendancy` — Cosmic Chronicles is one of the Core 4, and the Core 4 require each other plus Vault.
+
+`modinfo.lua` directly declares Vault, Overhaul, and War; Ascendancy is required through Cosmic Chronicles' Steam Workshop "Require Items" listing instead, the same way the rest of the Core 4 require each other — Avorion throws a circular-dependency error if the Core 4 try to cross-declare each other's `modinfo.lua` in every direction.
 
 ## 🚀 Installation
 
@@ -53,4 +60,16 @@ Per `modinfo.lua`, this mod hard-requires:
 
 ## 📚 Documentation
 
-For detailed mechanics and lore, check the in-game **Cosmic Codex**, or read [`WIKI.md`](WIKI.md) for the technical reference and [`PLAYER_GUIDE.md`](PLAYER_GUIDE.md) for a plain-English walkthrough.
+| Document | For | Covers |
+|---|---|---|
+| [`PLAYER_GUIDE.md`](https://github.com/Stormiebox/Cosmic-Chronicles/wiki/Players-Guide-The-Living-Galaxy) | Players | A plain-English walkthrough of every feature. |
+| [`WIKI.md`](https://github.com/Stormiebox/Cosmic-Chronicles/wiki/Features-and-Enhancements) | Anyone who wants the exact numbers | Complete technical reference. |
+| **Cosmic Codex** *(in-game)* | Players | Mechanics and lore, readable without leaving the game. |
+
+---
+
+<div align="center">
+
+**🪐 Cosmic Chronicles** — part of the [Cosmic Series](https://github.com/Stormiebox) · built by **Stormbox**
+
+</div>
