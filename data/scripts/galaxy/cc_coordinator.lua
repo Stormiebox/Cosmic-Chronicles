@@ -1129,12 +1129,17 @@ function ChronicleCoordinator.applyRepair(repairId, action, administratorPlayerI
             if nextState then
                 local event = self.records.events.events[finding.itemId]
                 if event and event.revision == finding.observedRevision then
-                    local changed = mutateEvent(finding.itemId, function(current)
-                        current.state = nextState
-                        current.lastError = nil
-                        current.repairRequired = nil
-                        return true
-                    end)
+                    -- Goes through the same validated entry point as the normal event
+                    -- lifecycle, under the "repair" owner. EVENT_TRANSITIONS carries an
+                    -- explicit failed_permanent escape hatch for exactly this admin path.
+                    -- lastError/repairRequired are cleared to false (not omitted) so the
+                    -- Transition fields loop actually overwrites the old evidence instead
+                    -- of skipping a nil-valued key.
+                    local changed = ChronicleCoordinator.requestEventTransition("repair",
+                        finding.itemId, finding.observedRevision, nextState,
+                        {lastError = false, repairRequired = false})
+                    -- requestEventTransition already calls ChronicleNews.ResolveEvent for
+                    -- terminal states, so no separate sync call is needed here.
                     if changed then applied = applied + 1 end
                 end
             end

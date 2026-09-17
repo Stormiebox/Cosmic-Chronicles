@@ -73,9 +73,14 @@ end
 function ChronicleSectorObserver.updateServer(timeStep)
     local sector = Sector()
     local currentTime = Server().unpausedRuntime
-    local behemoth = sector:getEntitiesByScriptValue("behemoth_boss", true)
-    if behemoth and valid(behemoth) and not behemoth:hasScript(BEHEMOTH_TRACKER) then
-        behemoth:addScriptOnce(BEHEMOTH_TRACKER)
+    -- getEntitiesByScriptValue returns multiple values (all matches), so it must be captured
+    -- into a table with {...} like every other call site in this file -- a bare single-value
+    -- capture here silently dropped every match past the first.
+    local behemoths = {sector:getEntitiesByScriptValue("behemoth_boss", true)}
+    for _, behemoth in ipairs(behemoths) do
+        if valid(behemoth) and not behemoth:hasScript(BEHEMOTH_TRACKER) then
+            behemoth:addScriptOnce(BEHEMOTH_TRACKER)
+        end
     end
     for eventId, pending in pairs(self.pendingDestroyedEvents) do
         if currentTime >= pending.checkAt then

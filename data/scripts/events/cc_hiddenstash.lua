@@ -4,6 +4,8 @@ package.path = package.path .. ";data/scripts/?.lua"
 local SectorGenerator = include("SectorGenerator")
 local PlanGenerator = include("plangenerator")
 local EventContract = include("cc_event_contract")
+-- Needed for the %_T broadcast below; nothing else this file includes reaches it.
+include("stringutility")
 
 function initialize(eventId, seed)
     -- One-shot generation script: detach immediately so an idle instance doesn't stay

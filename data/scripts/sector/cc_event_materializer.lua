@@ -87,7 +87,9 @@ function ChronicleEventMaterializer.updateServer(timeStep)
         local eventScript = EVENT_SCRIPTS[self.eventType]
         if not eventScript then retry("unsupported_event_type") return end
         self.spawnRequested = true
-        Sector():addScriptOnce(eventScript, self.eventId, self.seed)
+        -- eventType lets a shared event script (e.g. cc_ancientdatacache.lua, reused by
+        -- both ancient_data_cache and eclipse_lore_anomaly) tell which narrative it's spawning.
+        Sector():addScriptOnce(eventScript, self.eventId, self.seed, self.eventType)
         return
     end
 

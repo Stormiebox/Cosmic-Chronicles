@@ -9,13 +9,35 @@ include("stringutility")
 
 local AncientCache = {}
 
-function AncientCache.initialize(eventId, seed)
-    if onServer() then AncientCache.spawn(eventId, seed) end
+-- Both ancient_data_cache and eclipse_lore_anomaly materialize through this script; eventType
+-- picks which flavor text/title plays out. Built inside a function, not as a file-scope table,
+-- so the %_T lookups only ever run with the UI localization metatable available.
+local function flavorFor(eventType)
+    if eventType == "eclipse_lore_anomaly" then
+        return {
+            valid = true,
+            title = "Corrupted Archive Signal"%_T,
+            scanner = "Scanner"%_T,
+            message = "Verified Eclipse activity has exposed a corrupted archive signal. Approach with caution."%_T,
+        }
+    end
+    return {
+        valid = false,
+        title = "Ancient Data Cache"%_T,
+        scanner = "Scanner"%_T,
+        message = "Extremely old quantum signatures detected nearby. Could it be Xsotan origins?"%_T,
+    }
 end
 
-function AncientCache.spawn(eventId, seed)
+function AncientCache.initialize(eventId, seed, eventType)
+    if onServer() then AncientCache.spawn(eventId, seed, eventType) end
+end
+
+function AncientCache.spawn(eventId, seed, eventType)
     if type(eventId) ~= "string" then return end
-    EventContract.Begin(eventId, "ancient_data_cache", 1)
+    local flavor = flavorFor(eventType)
+    local taggedType = flavor.valid and eventType or "ancient_data_cache"
+    EventContract.Begin(eventId, taggedType, 1)
     local x, y = Sector():getCoordinates()
 
     local planPath = "data/plans/chronicles/ancient_data_cache.xml"
@@ -23,18 +45,18 @@ function AncientCache.spawn(eventId, seed)
     if not plan then plan = PlanGenerator.makeStationPlan(Galaxy():getPirateFaction(0)) end
 
     local cache = Sector():createWreckage(plan, SectorGenerator(x,y):getPositionInSector())
-    
+
     if not valid(cache) then EventContract.Fail(eventId, "cache_creation_failed") return end
 
     if type(eventId) == "string" then
-        EventContract.Tag(cache, eventId, "ancient_data_cache")
+        EventContract.Tag(cache, eventId, taggedType)
     end
-    cache.title = "Ancient Data Cache"%_T
+    cache.title = flavor.title
     cache:addScriptOnce("data/scripts/entity/cc_blackbox.lua")
 
     EventContract.Complete(eventId, 1)
 
-    Sector():broadcastChatMessage("Scanner"%_T, 0, "Extremely old quantum signatures detected nearby. Could it be Xsotan origins?"%_T)
+    Sector():broadcastChatMessage(flavor.scanner, 0, flavor.message)
 end
 
 function initialize(...)

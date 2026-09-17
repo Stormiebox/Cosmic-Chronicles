@@ -55,7 +55,9 @@ function ChronicleInteractionController.Transition(entity, current, nextState, f
         ChronicleState.INTERACTION_TRANSITIONS, fields or {},
         ChronicleInteractionController.Now())
     if not transitioned then return nil, transitionError end
-    transitioned.revision = current.revision
+    -- Store() always recomputes .revision from `current` (the DB write's own revision
+    -- counter), so ChronicleState.Transition's internal increment on `transitioned` is
+    -- discarded here rather than assigned; no need to reset it back first.
     return ChronicleInteractionController.Store(entity, current, transitioned)
 end
 

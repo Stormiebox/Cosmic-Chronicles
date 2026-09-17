@@ -104,6 +104,40 @@ Chronicles itself. Cosmic Starfall remains outside this integration.
 - [Bugfix] **Rogue Probe Expiry Could Strand Its Event:** The timeout path tried to transition
   `resolving → expired`, which the frozen state machine correctly rejects. Expiry now follows the
   direct allowed `active → expired` transition before the probe leaves the sector.
+- [Bugfix] **Administrative Repair On Events Never Updated News (`cc_coordinator.lua`):** Retrying,
+  mark-completing, or abandoning an EVENT-kind repair finding through `/chroniclesrepair apply`
+  wrote the new state but never told `ChronicleNews`, so an administratively resolved event's
+  article stayed stuck on its old status. Terminal outcomes now call `ChronicleNews.ResolveEvent`,
+  matching the normal (non-repair) event lifecycle in `requestEventTransition`. This path still
+  uses a raw state write rather than `ChronicleState.Transition`, deliberately: repair findings can
+  target a `failed_permanent` event, and `EVENT_TRANSITIONS` has no outgoing transitions from that
+  state, so routing this admin path through the shared FSM would silently break repairing a
+  permanently-failed event. That gap (this one admin path bypasses FSM whitelist validation) is
+  unresolved and worth a dedicated look later.
+- [Bugfix] **Administrative Event Repair Now Goes Through The FSM (`cc_coordinator.lua`,
+  `cc_state.lua`):** Closed the gap noted directly above. `EVENT_TRANSITIONS.failed_permanent` now
+  explicitly allows `retryable`/`succeeded`/`abandoned` as an admin-repair escape hatch, and
+  `applyRepair`'s EVENT-kind branch calls the existing `requestEventTransition("repair", ...)` entry
+  point (its `allowedOwners` already had a `repair` slot that nothing called) instead of writing
+  `current.state` directly. `requestEventTransition` already syncs `ChronicleNews` for terminal
+  outcomes, so the separate `ChronicleNews.ResolveEvent` call this admin path added is no longer
+  needed there. Repairing `repair_required` events behaves the same as before; repairing
+  `failed_permanent` events now goes through the same validated path instead of bypassing the FSM.
+- [Feature] **Distinct Eclipse Lore Anomaly Content (`cc_event_materializer.lua`,
+  `cc_ancientdatacache.lua`):** `eclipse_lore_anomaly` materialized with identical flavor text to
+  `ancient_data_cache` because the shared spawner script never received which event type it was
+  spawning. The materializer now passes `eventType` through `addScriptOnce`, and the spawner uses
+  it to give Eclipse anomalies their own title and Scanner broadcast (matching the Eclipse News
+  copy) and to tag the resulting entity/event-contract record with the real event type instead of
+  a hardcoded `"ancient_data_cache"`. The plain `ancient_data_cache` path is unchanged.
+- [Investigation] **Dialogue Catalog Audit:** Checked `cc_dialogue_catalog.lua` for vanilla Avorion
+  text accidentally migrated in during the Dialogue v2 rewrite. No verbatim or near-verbatim vanilla
+  lines were found (checked against the full vanilla localization template and vanilla script
+  source). The catalog currently holds roughly 195 distinct lines, well short of the 300+ originally
+  authored lines expected — this looks like un-migrated/lost original content from the pre-v4
+  vanilla-path replacements (see "Thirty-Four Vanilla-Path Replacements Retired" above) rather than
+  contamination, but the missing lines were not located and need a manual pass against any pre-v4
+  backups.
 - [Verification] **Offline Gate Completed:** Sixteen Chronicle fixtures pass 1,260 assertions; the
   prior Vault record, materialization, market, typed-turret, weather, Rift, and anomaly suites also
   pass. All surviving changed Lua files compile and the five affected mods pass the Avorion linter.

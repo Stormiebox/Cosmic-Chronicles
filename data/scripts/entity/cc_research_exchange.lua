@@ -69,7 +69,9 @@ local function transition(nextState, fields)
     local transitioned, transitionError = ChronicleState.Transition(self.record, nextState,
         ChronicleState.INTERACTION_TRANSITIONS, fields or {}, now())
     if not transitioned then return nil, transitionError end
-    transitioned.revision = self.record.revision
+    -- store() always recomputes .revision from self.record (the DB write's own revision
+    -- counter), so ChronicleState.Transition's internal increment on `transitioned` is
+    -- discarded here rather than assigned; no need to reset it back first.
     return store(transitioned)
 end
 

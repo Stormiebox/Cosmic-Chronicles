@@ -33,7 +33,10 @@ ChronicleState.EVENT_TRANSITIONS = {
     resolving = {succeeded = true, failed_permanent = true, repair_required = true},
     repair_required = {pending = true, prepared = true, retryable = true, active = true,
         resolving = true, succeeded = true, abandoned = true, failed_permanent = true},
-    succeeded = {}, expired = {}, abandoned = {}, failed_permanent = {},
+    succeeded = {}, expired = {}, abandoned = {},
+    -- Normally terminal, but admin repair can still pull an event back out of a
+    -- permanent failure via requestEventTransition's "repair" owner.
+    failed_permanent = {retryable = true, succeeded = true, abandoned = true},
 }
 
 ChronicleState.RECEIPT_TRANSITIONS = {
