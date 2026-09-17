@@ -3,26 +3,34 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 local ShipGenerator = include("shipgenerator")
 local SectorGenerator = include("SectorGenerator")
+local EventContract = include("cc_event_contract")
 include("stringutility")
 
 local DiplomatEscort = {}
 
-function DiplomatEscort.initialize()
-    if onServer() then DiplomatEscort.spawn() end
+function DiplomatEscort.initialize(eventId, seed)
+    if onServer() then DiplomatEscort.spawn(eventId, seed) end
 end
 
-function DiplomatEscort.spawn()
+function DiplomatEscort.spawn(eventId, seed)
+    if type(eventId) ~= "string" then return end
+    EventContract.Begin(eventId, "stranded_diplomat", 1)
     local x, y = Sector():getCoordinates()
     local faction = Galaxy():getNearestFaction(x, y)
     
     if not faction or faction.name == "The Xsotan" or faction.name == "The Xsotan"%_t or faction.isPlayer or faction.isAlliance then
+        EventContract.Fail(eventId, "eligible_faction_unavailable")
         terminate()
         return
     end
 
     local diplomat = ShipGenerator.createFreighterShip(faction, SectorGenerator(x,y):getPositionInSector())
+    if not valid(diplomat) then EventContract.Fail(eventId, "diplomat_creation_failed") return end
+    if type(eventId) == "string" then
+        EventContract.Tag(diplomat, eventId, "stranded_diplomat")
+    end
     diplomat.title = "Stranded Diplomat"%_T
-    diplomat:addScriptOnce("data/scripts/entity/story/diplomatdialog.lua")
+    diplomat:addScriptOnce("data/scripts/entity/cc_diplomat.lua")
 
     -- Strip AI and weapons so the "stranded, escort destroyed" ship is actually stranded,
     -- matching the sibling cc_ghostship.lua convention for a disabled derelict freighter.
@@ -53,6 +61,8 @@ function DiplomatEscort.spawn()
     end
 
     diplomat.crew = Crew()
+
+    EventContract.Complete(eventId, 1)
 
     Sector():broadcastChatMessage("Scanner"%_T, 0, "Emergency civilian broadcast detected: 'Our escort is destroyed. We require immediate extraction!' Approach and open a comm link to negotiate extraction - towing or attacking the ship risks your reputation with its faction."%_T)
 end

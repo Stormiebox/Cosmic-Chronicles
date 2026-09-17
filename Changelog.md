@@ -7,6 +7,109 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## Never remove, overwrite or write above this
 
+## [v4.0.0] - Living Galaxy Structural Overhaul
+
+This release rebuilds Cosmic Chronicles around persistent, server-owned News, player state, event
+records, and repairable transitions. It also turns Galactic News Network into the shared presentation
+layer for verified reports from Cosmic Vault, Cosmic War, Cosmic Overhaul, Cosmic Ascendancy, and
+Chronicles itself. Cosmic Starfall remains outside this integration.
+
+### 📰 Galactic News Network
+
+- [Feature] **Persistent Per-Player News State (`cc_player_controller.lua`, `cc_newsboard.lua`):**
+  Read markers, Mark All As Read, followed threads, saved leads, and notification preferences now
+  live in each player's versioned server record. They survive reconnects, UI reloads, save reloads,
+  and server restarts without sharing one player's choices with another player or alliance member.
+  This closes the known v3.2.3 read-state limitation.
+- [Feature] **News v2 Feed And Archive:** Rebuilt the board around Vault's paged News v2 query
+  contract. The live feed and Chronicle view display source, topic, severity, status, location,
+  thread context, age, unread state, and verified resolution outcomes. Search, source/topic/status
+  filters, nearby filtering, older-page loading, thread following, and saved map leads operate from
+  canonical server snapshots rather than a client-local article array.
+- [UI] **Clearer Two-Pane News Layout:** Preserved the familiar headline-list/detail-panel design
+  while adding Live Feed, Chronicle, and Saved Leads tabs, explicit loading/empty/error text,
+  non-color unread markers, connection and unread counts, a breaking-news strip, and controls for
+  breaking, nearby-danger, and regular chat notifications.
+- [Reliability] **Stable Article And Thread Identity (`cc_news.lua`):** Chronicle events publish,
+  update, and resolve one stable report after their owning state changes. Repeated callbacks coalesce
+  instead of duplicating headlines; expired and withdrawn reports use Vault's supported terminal
+  states; structured event results are normalized to the bounded text outcome stored by News v2.
+
+### 🏗️ Persistent Narrative State
+
+- [Refactor] **One Galaxy Coordinator And One Player Controller (`cc_coordinator.lua`,
+  `cc_player_controller.lua`):** Galaxy events, narrative rules, materialization leases, reward
+  receipts, migration evidence, and repair audits now have one server-side owner. Each player's
+  read state, leads, milestone evidence, rewards, and preferences remain independently owned by that
+  player. Records include schema versions, revisions, timestamps, provenance, and visible repair
+  reasons.
+- [Reliability] **Prepared, Verified, Receipted Transitions:** Chronicle events and rewards persist
+  intent before an external side effect and verify the result afterward. Failed creation never
+  counts as success, unloaded sectors are not treated as missing entities, retries are bounded, and
+  an interrupted ambiguous reward or materialization stops for administrator review instead of
+  replaying automatically.
+- [Migration] **Evidence-Based v3 Migration:** The old feed, event coordinates, boss and faction
+  observations, stock-market state, and player progress migrate without deleting their legacy
+  values. Verifiable state is imported once; malformed coordinates, uncertain spawns, and unclear
+  reward windows become explicit repair findings rather than being guessed forward. Imported legacy
+  articles are conservatively unread because v3 never persisted per-player read evidence.
+- [Feature] **Status And Repair Commands (`chroniclesstatus.lua`, `chroniclesrepair.lua`):** Added a
+  read-only status snapshot and administrator-only dry-run scan, revision-checked apply, and audit
+  history workflow for events, receipts, queues, and player state.
+
+### 🌌 Living-Galaxy Events And Dialogue
+
+- [Refactor] **Verified Chronicle Event Materialization (`cc_event_materializer.lua`):** Ancient
+  caches, graveyards, stranded diplomats, ghost ships, hidden stashes, refugee convoys, rogue
+  probes, monuments, Eclipse lore, and bounty encounters are queued by exact coordinate and tagged
+  with immutable event IDs. Multi-entity creation is verified before activation, failed work is
+  retried without false victory, and interaction/reward callbacks must match the current record.
+- [Reliability] **Transactional Interactions And Rewards:** Black Boxes, lore caches, diplomats,
+  refugees, ghost ships, research exchanges, monuments, hidden stashes, bounty rewards, and player
+  milestone bonuses use deterministic receipts. Repeated callbacks cannot pay or consume the same
+  outcome twice; an interruption after an unprovable side effect becomes repair-required.
+- [Feature] **Shared Dialogue v2 Rumors (`cc_dialogue_catalog.lua`,
+  `cosmicchronicles_rumormonger.lua`):** Ambient and rumor lines now query Vault's server-owned
+  Dialogue v2 catalog with serializable context for reputation, faction character and wealth,
+  distance, station type, captain class, nearby news, weather, Rift activity, war heat, and Eclipse
+  state. Weighted deterministic selection and recent-line exclusions reduce repetition without
+  trusting client-supplied facts.
+- [Feature] **Verified Narrative Rules And Milestones (`cc_narrative_rules.lua`):** Chronicle
+  entries and personal milestones derive from confirmed source facts with cooldowns and stable
+  identities. Chronicles presents the story but never changes War, economy, weather, Rift, or
+  Ascendancy state to manufacture a headline.
+
+### 🔗 Cosmic Suite Integration
+
+- [Integration] **Shared News From Every Supported Cosmic Source:** Vault publishes verified market,
+  territory, weather, and Rift lifecycle reports; War publishes battles, missions, casualties,
+  ceasefires, sieges, and corridor events; Overhaul publishes economy, factory, weather, resource,
+  and optional personal Captain's Log reports; Ascendancy publishes encounter, territory, Beacon,
+  defense, and lore reports. Each source retains ownership of its gameplay state and uses stable
+  source IDs through its own adapter.
+- [Compatibility] **Vault Owns Storage; Chronicles Owns Presentation:** Vault no longer depends on a
+  Chronicles UI or entity path. News v1 callbacks remain available as a temporary compatibility
+  transport, while all migrated Cosmic publishers use News v2 directly. Dialogue v1 exports also
+  remain callable.
+- [Compatibility] **Thirty-Four Vanilla-Path Replacements Retired:** Chronicles now retains only its
+  existing thin galaxy-server and player-init bootstrap extensions. Former direct vanilla mission,
+  event, dialogue, merchant, and simulation injections were replaced by additive Chronicle
+  observers, catalog entries, News reports, rumors, and player-owned milestone evaluation.
+
+### 🪲 Final Review Fixes
+
+- [Bugfix] **Lua 5.1-Safe Cross-Script Return Handling:** Replaced Lua 5.2-only `table.pack` and
+  `table.unpack` calls in Chronicle bridges with nil-preserving helpers compatible with Avorion's
+  Lua runtime.
+- [Bugfix] **Rogue Probe Expiry Could Strand Its Event:** The timeout path tried to transition
+  `resolving → expired`, which the frozen state machine correctly rejects. Expiry now follows the
+  direct allowed `active → expired` transition before the probe leaves the sector.
+- [Verification] **Offline Gate Completed:** Sixteen Chronicle fixtures pass 1,260 assertions; the
+  prior Vault record, materialization, market, typed-turret, weather, Rift, and anomaly suites also
+  pass. All surviving changed Lua files compile and the five affected mods pass the Avorion linter.
+  In-game UI, multiplayer, callback timing, restart, Linux-server, and performance checks remain in
+  the dedicated live-QA phase.
+
 ## [v3.2.3]
 
 ### ⭐ New Features

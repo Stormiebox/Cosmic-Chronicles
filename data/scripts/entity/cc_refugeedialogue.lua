@@ -1,23 +1,35 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
+package.path = package.path .. ";data/scripts/?.lua"
+
+local CaptainClass = include("captainclass")
+local Interaction = include("cc_interaction_controller")
 include("callable")
-include("cosmicvaultdialogue")
-include("stringutility")
+include("faction")
 include("relations")
+include("stringutility")
 
 -- namespace CosmicChroniclesRefugee
 CosmicChroniclesRefugee = {}
-local helped = false
+local self = CosmicChroniclesRefugee
+local OWNER = "data/scripts/entity/cc_refugeedialogue.lua"
+local RECIPES = {food = {good = "Food", amount = 50},
+    medicine = {good = "Medical Supplies", amount = 50}}
+self.record = nil
+self.blocked = nil
 
-function CosmicChroniclesRefugee.interactionPossible(playerIndex, option)
-    if helped then return false end
+function CosmicChroniclesRefugee.initialize()
+    if onServer() then
+        self.record, self.blocked = Interaction.Load(Entity(), {
+            eventId = Entity():getValue("cc_event_id") or ("refugee:" .. tostring(Entity().id)),
+            interactionType = "refugee_aid", ownerFactionIndex = Entity().factionIndex})
+    end
+end
 
-    local player = Player(playerIndex)
-    if not player then return false end
-    local craft = player.craft
-    if not craft then return false end
-    if craft:getNearestDistance(Entity()) > 500 then return false end
-
-    return true
+function CosmicChroniclesRefugee.interactionPossible(playerIndex)
+    local targetPlayer = Player(playerIndex)
+    return targetPlayer and targetPlayer.craft
+        and targetPlayer.craft:getNearestDistance(Entity()) <= 500
+        and (not onServer() or (self.record and self.record.state == "available"))
 end
 
 function CosmicChroniclesRefugee.initUI()
@@ -25,127 +37,128 @@ function CosmicChroniclesRefugee.initUI()
 end
 
 function CosmicChroniclesRefugee.onInteract()
-    ScriptUI():showDialog(CosmicChroniclesRefugee.getDialog())
-end
-
-function CosmicChroniclesRefugee.getDialog()
-    local dialog = {}
-    dialog.text = "Thank the stars you stopped! We barely escaped the last sector and our engines are damaged. We are critically low on supplies. Do you have any Food or Medical Supplies to spare?"%_t
-    dialog.answers = {}
-
-    local player = Player()
-    local ship = player.craft
-
-    if ship and ship:hasComponent(ComponentType.CargoBay) then
-        local food = ship:getCargoAmount("Food")
-        local meds = ship:getCargoAmount("Medical Supplies")
-
-        if food >= 50 then
-            table.insert(dialog.answers, {answer = "Here is 50 Food."%_t, onSelect = "onDonateFood"})
+    local craft = Player().craft
+    local answers = {}
+    if craft and craft:hasComponent(ComponentType.CargoBay) then
+        if craft:getCargoAmount("Food") >= 50 then
+            answers[#answers + 1] = {answer = "Transfer 50 Food."%_t,
+                onSelect = "chooseFood"}
         end
-        if meds >= 50 then
-            table.insert(dialog.answers, {answer = "Here is 50 Medical Supplies."%_t, onSelect = "onDonateMeds"})
+        if craft:getCargoAmount("Medical Supplies") >= 50 then
+            answers[#answers + 1] = {answer = "Transfer 50 Medical Supplies."%_t,
+                onSelect = "chooseMedicine"}
         end
     end
-
-    if #dialog.answers == 0 then
-        table.insert(dialog.answers, {answer = "I'm sorry, I don't have anything to spare right now."%_t})
-    else
-        table.insert(dialog.answers, {answer = "I can't help you right now."%_t})
-    end
-
-    return dialog
+    answers[#answers + 1] = {answer = "I cannot help right now."%_t}
+    ScriptUI():showDialog({text = "Our engines are damaged and our supplies are exhausted."%_t,
+        answers = answers})
 end
 
-function CosmicChroniclesRefugee.onDonateFood() invokeServerFunction("donate", "Food", 50) end
-function CosmicChroniclesRefugee.onDonateMeds() invokeServerFunction("donate", "Medical Supplies", 50) end
+function CosmicChroniclesRefugee.chooseFood() invokeServerFunction("donate", "food") end
+function CosmicChroniclesRefugee.chooseMedicine() invokeServerFunction("donate", "medicine") end
 
-function CosmicChroniclesRefugee.donate(goodName, amount)
+local function buildOutcome(eventId, craft)
+    local credits = 0
+    local captain = craft:getCaptain()
+    if captain and captain:hasClass(CaptainClass.Merchant) then credits = 50000
+    elseif captain and captain:hasClass(CaptainClass.Smuggler) then credits = 75000 end
+    local x, y = Sector():getCoordinates()
+    local rand = Random(Seed(eventId .. ":refugee-aid"))
+    local lead
+    if rand:test(0.25) then
+        lead = {x = x + rand:getInt(-10, 10), y = y + rand:getInt(-10, 10),
+            seed = rand:getInt(1, 2147483646)}
+    end
+    return {reputation = 2500, credits = credits, lead = lead}
+end
+
+function CosmicChroniclesRefugee.donate(recipeId)
     if not onServer() then return end
-    if helped then return end
+    local recipe = RECIPES[recipeId]
+    local buyer, craft, targetPlayer = getInteractingFaction(callingPlayer)
+    if not recipe or not buyer or not craft or not targetPlayer
+            or not craft:hasComponent(ComponentType.CargoBay)
+            or craft:getNearestDistance(Entity()) > 500 or self.blocked or not self.record
+            or self.record.state ~= "available" then return end
+    local event = Interaction.InvokeCoordinator("getEvent", self.record.eventId)
+    if not event or event.state ~= "active" then return end
+    if craft:getCargoAmount(recipe.good) < recipe.amount then return end
 
-    -- SECURITY PATCH: Prevent ACE (Arbitrary Code Execution) vulnerability where clients can send negative amounts or invalid goods
-    if goodName ~= "Food" and goodName ~= "Medical Supplies" then return end
-    if type(amount) ~= "number" or amount <= 0 then return end
-
-    local player = Player(callingPlayer)
-    local entity = Entity()
-    local ship = player.craft
-    if not ship or not ship:hasComponent(ComponentType.CargoBay) then return end
-    if ship:getNearestDistance(entity) > 500 then
-        invokeClientFunction(player, "tooFar")
+    local outcome = buildOutcome(self.record.eventId, craft)
+    local snapshot = {good = recipe.good, amount = recipe.amount,
+        reputation = outcome.reputation, credits = outcome.credits, lead = outcome.lead,
+        factionIndex = Entity().factionIndex}
+    local receipt, _, created = Interaction.PrepareReceipt(OWNER, Entity(), "refugee_aid",
+        targetPlayer.index, {eventId = self.record.eventId, recipeId = recipeId,
+            cargoBefore = craft:getCargoAmount(recipe.good), factionIndex = buyer.index}, snapshot)
+    if not receipt then return end
+    if not created then
+        if receipt.state == "prepared" then
+            self.record = Interaction.RequireRepair(Entity(), self.record, OWNER,
+                targetPlayer.index, receipt, "interrupted_refugee_aid") or self.record
+        end
         return
     end
-
-    if ship:getCargoAmount(goodName) >= amount then
-        ship:removeCargo(goodName, amount)
-        helped = true
-
-        -- Balanced from 10000 relation gain to 2500
-        local faction = Faction(entity.factionIndex)
-        local repTarget = Faction(ship.factionIndex) or player
-        if faction then changeRelations(repTarget, faction, 2500, RelationChangeType.General) end
-
-        -- Cosmic Overhaul Synergy: Merchants and Smugglers extract monetary value from the crisis
-        local captain = ship:getCaptain()
-        if captain then
-            local CaptainClass = include("captainclass")
-            if captain:hasClass(CaptainClass.Merchant) then
-                -- Balanced from 75k to 50k
-                repTarget:receive("Merchant hazard pay fee."%_T, 50000)
-                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Merchant captain negotiated a 50,000 credit hazard pay fee for the supplies."%_T)
-            elseif captain:hasClass(CaptainClass.Smuggler) then
-                -- Balanced from 100k to 75k
-                repTarget:receive("Skimmed valuables from the refugee convoy."%_T, 75000)
-                player:sendChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Your Smuggler captain quietly skimmed 75,000 credits worth of valuables from the refugee convoy during the transfer."%_T)
+    local debitPrepared, prepareError = Interaction.Transition(Entity(), self.record,
+        "debit_prepared", {claimantPlayerIndex = targetPlayer.index,
+            operationId = receipt.receiptId, receiptId = receipt.receiptId,
+            costSnapshot = {good = recipe.good, amount = recipe.amount},
+            rewardSnapshot = snapshot, preparedAt = Interaction.Now()})
+    if not debitPrepared then
+        Interaction.FinishReceipt(OWNER, targetPlayer.index, receipt, "repair_required",
+            receipt.resultEvidence, prepareError)
+        return
+    end
+    self.record = debitPrepared
+    local debited = pcall(function() craft:removeCargo(recipe.good, recipe.amount) end)
+    if not debited then
+        self.record = Interaction.RequireRepair(Entity(), self.record, OWNER,
+            targetPlayer.index, receipt, "refugee_cargo_debit_failed") or self.record
+        return
+    end
+    self.record = Interaction.Transition(Entity(), self.record, "reward_prepared") or self.record
+    local delivered = pcall(function()
+        local faction = Faction(Entity().factionIndex)
+        if faction then changeRelations(buyer, faction, outcome.reputation,
+            RelationChangeType.General) end
+        if outcome.credits > 0 then buyer:receive("Refugee convoy assistance.", outcome.credits) end
+        if outcome.lead then
+            local queued, queueError = Interaction.InvokeCoordinator("queueDerivedEvent", OWNER,
+                self.record.eventId, "hidden_stash", outcome.lead.x, outcome.lead.y,
+                receipt.receiptId, {seed = outcome.lead.seed})
+            if not queued then error(queueError or "lead_queue_failed") end
+            if not targetPlayer:getKnownSector(outcome.lead.x, outcome.lead.y) then
+                local view = SectorView()
+                view:setCoordinates(outcome.lead.x, outcome.lead.y)
+                view.note = "Chronicle lead: refugee resource cache"
+                if view.tagIconPath == "" then
+                    view.tagIconPath = "data/textures/icons/cc_galacticnews_rss.png"
+                end
+                targetPlayer:addKnownSector(view)
             end
         end
-
-        local context = { warHeat = 100 }
-        local rumor = CosmicVaultDialogue.getValidLine("rumor", context) or "The enemy is ruthless... stay safe out there."%_T
-
-        if random():test(0.25) then
-            local sx, sy = Sector():getCoordinates()
-            local ox = sx + random():getInt(-10, 10)
-            local oy = sy + random():getInt(-10, 10)
-            player:addKnownSector(SectorView(ox, oy))
-            
-            -- Store coordinate globally
-            local stashes = Server():getValue("cc_hidden_stashes") or ""
-            local stashList = {}
-            for s in string.gmatch(stashes, "([^;]+)") do table.insert(stashList, s) end
-            table.insert(stashList, tostring(ox)..":"..tostring(oy))
-            while #stashList > 20 do table.remove(stashList, 1) end
-            Server():setValue("cc_hidden_stashes", table.concat(stashList, ";"))
-            
-            rumor = "We passed a massive hidden resource stash at sector [" .. tostring(ox) .. ":" .. tostring(oy) .. "]. I've uploaded the coordinates to your map. You should check it out."%_T
-        end
-
-        invokeClientFunction(player, "showThanksDialog", rumor)
-        deferredCallback(10, "jumpAway") -- Jump to safety after 10 seconds
+    end)
+    if not delivered then
+        self.record = Interaction.RequireRepair(Entity(), self.record, OWNER,
+            targetPlayer.index, receipt, "refugee_outcome_failed") or self.record
+        return
     end
+    local completed = Interaction.FinishReceipt(OWNER, targetPlayer.index, receipt,
+        "succeeded", {outcome = outcome, deliveredAt = Interaction.Now()})
+    if not completed then
+        self.record = Interaction.RequireRepair(Entity(), self.record, OWNER,
+            targetPlayer.index, nil, "refugee_receipt_completion_failed") or self.record
+        return
+    end
+    self.record = Interaction.Transition(Entity(), self.record, "resolving") or self.record
+    self.record = Interaction.Transition(Entity(), self.record, "succeeded",
+        {completedAt = Interaction.Now()}) or self.record
+    Interaction.ResolveEvent(Entity(), "The refugee convoy received emergency supplies.", outcome)
+    targetPlayer:sendChatMessage("Refugee Convoy"%_t, ChatMessageType.Information,
+        outcome.lead and "Thank you. We uploaded a resource-cache lead to your map."%_t
+            or "Thank you. These supplies will save lives."%_t)
+    Entity():addScriptOnce("deletejumped.lua")
 end
+
 callable(CosmicChroniclesRefugee, "donate")
-
-function CosmicChroniclesRefugee.showThanksDialog(rumor)
-    if not onClient() then return end
-    local text = "Thank you so much! You saved our lives. By the way, be careful... ${rumor}"%_t % {rumor = rumor}
-    local dialog = {text = text, answers = {{answer = "Safe travels."%_t}}}
-    ScriptUI():showDialog(dialog)
-end
-
-function CosmicChroniclesRefugee.jumpAway()
-    if onServer() then
-        Sector():deleteEntityJumped(Entity())
-    end
-end
-
-function CosmicChroniclesRefugee.tooFar()
-    local dialog = {}
-    dialog.text = "You're too far away. Come closer so we can transfer the supplies."%_t
-    ScriptUI():interactShowDialog(dialog, true)
-end
-
-
-
 return CosmicChroniclesRefugee

@@ -13,19 +13,20 @@
 
 ## 📖 Overview
 
-Cosmic Chronicles turns the background math of the Cosmic series into a galaxy that talks back. Station chatter reacts to War Heat and faction wealth instead of looping the same ten vanilla lines. Deep space hides refugee convoys, derelict graveyards, and ancient ruins tied to the state of the world around them. And the Galactic News Network reports on all of it (wars, economies, discoveries, and the rare, galaxy-shaking moments that deserve a Breaking News banner) in a searchable, filterable newsroom tab.
+Cosmic Chronicles turns verified events from the Cosmic series into a galaxy that talks back. Station chatter reacts to conflict, weather, Rift activity, Eclipse activity, faction wealth, geography, and player reputation. Deep-space stories grow from real wars, crises, hazards, and discoveries. The Galactic News Network keeps those reports in a searchable newsroom with persistent personal read state.
 
 ## ✨ Features
 
 <details>
 <summary><b>Click to expand features</b></summary>
 
-- **The Rumormonger:** context-aware station chatter and rumors that read War Heat, faction wealth, geography, and your own reputation before deciding what to say. Over 60 unique lines, plus in-character tutorial tips.
-- **Galactic News Network:** a searchable, filterable, color-coded newsroom. Seven category groups, live keyword search, a 3-column sortable headline table, session unread tracking, relative headline ages, and a Breaking News system (instant chat alert plus a clickable red banner) reserved for the events that actually matter: Behemoth incursions, boss kills, and a brand-new tracker that reports when an AI empire is wiped out entirely.
-- **Deep Space Events:** Refugee Convoys, Derelict Graveyards with Black Box extraction, Cinematic Monuments, Ancient Data Caches, Rogue AI Probes, Stranded Diplomats, Ghost Ships, and Ancient Eclipse Anomalies, each shaped by the current War Heat and faction state.
+- **The Rumormonger:** context-aware station chatter and rumors selected from a shared, versioned catalog. Recent-line memory limits repetition, while nearby News, War Heat, weather, Rift conditions, Eclipse state, geography, faction traits, and reputation shape what fits.
+- **Galactic News Network:** Live Feed, Chronicle, and Saved Leads views with source/topic/status filters, search, four-column headlines, developing story threads, locations, outcomes, and persistent individual/Mark All read state. Source and severity text keep the interface readable without relying on color alone.
+- **Deep Space Events:** Refugee Convoys, Derelict Graveyards with Black Box extraction, Cinematic Monuments, Ancient Data Caches, Rogue AI Probes, Stranded Diplomats, Ghost Ships, and Ancient Eclipse Anomalies. Events are queued from verified facts, materialized on natural sector entry, and correlated by stable event IDs.
 - **Captain's Logs:** Cosmic Overhaul mission reports get a narrative log appended, written to match where the captain actually went.
 - **Captain Synergies:** Scavengers and Explorers pull more value out of Black Boxes, Merchants and Smugglers profit differently from a refugee rescue, and Smugglers and Explorers can talk their way past a hostile station.
-- **Deep Integration:** ties into Cosmic War (War Heat, bounty and ceasefire reporting) and Cosmic Overhaul (background commands, economy) so the News Network and Rumormonger reflect what's actually happening in your galaxy.
+- **Safe persistence:** event materialization, interaction costs, rewards, publications, and milestone bonuses use receipts. An interrupted result that cannot be proved becomes visible repair work instead of repeating a charge or reward.
+- **Deep Integration:** Vault, War, Overhaul, Ascendancy, and Chronicles publish through one News lifecycle. Starfall is not part of this integration.
 
 </details>
 
@@ -36,10 +37,10 @@ Cosmic Chronicles turns the background math of the Cosmic series into a galaxy t
 
 Cosmic Chronicles is built on the shared **Cosmic Vault** APIs:
 
-- **Economy impact:** ambient News events (Trade Crises, Market Booms) call into `cv_economy` to raise or lower a faction's Famine Score.
-- **Dead Empire Filter:** every News broadcast runs through `FactionEradicationUtility` so destroyed empires can't transmit.
-- **Post-Boss Anomalies:** defeating the Bottan Dreadnought triggers `cv_anomalies` to spawn a persistent Spatial Rift.
-- **Unified News schema:** every article, including the new `breaking` flag, passes through `CosmicVaultNews.publishArticle` for validation shared across the whole series.
+- **News v2:** Vault stores stable source/event identities, developing threads, revisions, audience, location, expiry, and outcomes. Retries update the same report instead of duplicating it.
+- **Dialogue v2:** Vault owns the shared catalog across Avorion's separate script VMs. Chronicles adds player-specific repetition memory and presentation.
+- **Materialization queues:** Chronicle events are recorded before anything spawns and complete only after tagged entities and scripts are verified.
+- **Records and repair:** JSON-backed Vault records keep Chronicle state within Avorion's primitive custom-value rules. `/chroniclesstatus` reads canonical health; administrators can dry-run and apply explicit repairs with `/chroniclesrepair`.
 
 </details>
 

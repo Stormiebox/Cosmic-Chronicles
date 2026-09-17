@@ -1,209 +1,121 @@
 # 🪐 Cosmic Chronicles: Detailed Features
 
-![Version](https://img.shields.io/badge/version-1.8.0-6f42c1?style=flat-square)
 ![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
 
-Welcome to the **Cosmic Chronicles** wiki. This page is the full technical reference for the narrative and lore expansion module in the **Cosmic** mod series.
+Cosmic Chronicles is the narrative and presentation layer of the Cosmic series. It reports verified events, supplies contextual dialogue, and creates bounded Chronicle-owned aftermath encounters without taking ownership of another mod's mechanics.
 
 > [!TIP]
-> If you just want a friendly tour of what the mod does, read [`PLAYER_GUIDE.md`](PLAYER_GUIDE.md) instead. See [`README.md`](README.md) for installation.
+> Read [`PLAYER_GUIDE.md`](PLAYER_GUIDE.md) for a gameplay tour and [`README.md`](README.md) for installation.
 
-**Cosmic Chronicles**:
+## Contents
 
-- Acts as the narrative wrapper for the background simulations running in **Cosmic War** and **Cosmic Overhaul**.
-- Provides dynamic lore through station interactions and deep-space events.
-- Reports on the state of the galaxy through the Galactic News Network.
+- [Ownership and architecture](#ownership-and-architecture)
+- [Galactic News Network](#galactic-news-network)
+- [Rumors and Captain's Logs](#rumors-and-captains-logs)
+- [Narrative rules and events](#narrative-rules-and-events)
+- [Persistence and migration](#persistence-and-migration)
+- [Status and repair](#status-and-repair)
+- [Compatibility](#compatibility)
 
----
+## Ownership and architecture
 
-## 📜 Table of Contents
+Cosmic Vault owns the shared News v2 store, Dialogue v2 catalog, JSON record helpers, and exact-coordinate materialization queues. Cosmic War owns wars and their results. Cosmic Overhaul owns its simulation, commands, stations, and economy features. Cosmic Ascendancy owns the Eclipse campaign, encounters, territory, Beacon, and Forge. Chronicles reads their public records or stable news facts and owns only its UI, personal news state, rumors, projections, events, interactions, and rewards.
 
-- [Mod Identity & Design Goals](#-mod-identity--design-goals)
-- [Architecture Summary](#-architecture-summary)
-- [Full Feature Breakdown](#-full-feature-breakdown)
-- [Cosmic Vault & Series Integration](#-cosmic-vault--series-integration)
-- [Dependencies & Compatibility](#-dependencies--compatibility)
+The Chronicle coordinator is the sole writer of:
 
----
+- `cc_state_v2`: migration, source cursors, rule cooldowns, scheduler, external observations, and service health.
+- `cc_events_v2`: Chronicle event identity, provenance, coordinates, seed, materialization evidence, lifecycle, participants, and outcome.
+- `cc_receipts_v1`: rule, publication, milestone, interaction, and event-reward receipts.
+- `cc_repair_audit_v1`: dry-run scans, chosen actions, observed revisions, and repair history.
 
-## 🎯 Mod Identity & Design Goals
+Each player's controller is the sole writer of `cc_player_v2`, which stores personal read state, followed threads, leads, notification settings, recent dialogue IDs, milestone migration evidence, and repair state. Interactive Chronicle entities own their local `cc_interaction_v1` record.
 
-<details>
-<summary><b>View Mod Identity & Core Goals</b></summary>
+Clients submit intent only. Costs, rewards, source ownership, coordinates, results, timestamps, and repair evidence are resolved on the server.
 
-**Primary focus:** injecting dynamic text, dialogue, and narrative events into the galaxy based on backend simulation state.
+## Galactic News Network
 
-**Core goals:**
+Vault assigns every article a stable `publisherId:eventId`, sequence, revision, lifecycle, and optional thread, location, audience, lead, expiry, outcome, and provenance. Identical retries coalesce. Updates and resolutions require the owning publisher and expected revision.
 
-1. **Contextual lore.** Rumors and dialogue reflect the current state of the sector (War Heat, faction wealth, distance from the core) instead of firing at random.
-2. **Synergy.** Translate the hard math of `Cosmic Overhaul` and `Cosmic War` into stories a player can read.
-3. **Immersion.** Add background chatter, derelict logs, and civilian interactions that enrich the world without interrupting play.
-4. **Mod-friendly API.** Use `Cosmic Vault`'s dialogue registry so other mods can inject their own lore into the Chronicles ecosystem.
+The Galactic News tab keeps the existing teal two-pane newsroom identity and provides:
 
-</details>
+- **Live Feed:** current and developing reports.
+- **Chronicle:** reports published by Chronicles and their outcomes.
+- **Saved Leads:** the player's stored location leads and current state.
+- Source, topic, status/nearby, and bounded text filters.
+- Source, topic, headline, and age columns with written severity markers.
+- A detail pane with source, byline, lifecycle, location, thread, body, and outcome.
+- Follow/unfollow, save/remove lead, and add-to-map actions when the report supports them.
+- Cursor-based older-page loading and feed-revision `not_modified` responses.
 
----
+An article is read when its sequence is at or below the player's `readThroughSequence` or its stable ID is in the bounded sparse read set. **Mark All Read** advances the cursor to the latest article currently accessible to that player and prunes redundant IDs. Read state, follows, leads, and notification preferences are personal even for alliance members and persist through reconnects and save reloads.
 
-## 🏗️ Architecture Summary
+Critical reports may produce a rate-limited breaking chat alert. Weather and Rift topics are excluded from this chat path because Vault's environment presenter already owns immediate in-sector warnings, sound, visuals, and danger UI.
 
-<details>
-<summary><b>View Architecture Details</b></summary>
+## Rumors and Captain's Logs
 
-The mod uses a centralized dialogue API (`CosmicVaultDialogue`) to register localized strings by type (`ambient`, `rumor`, `captain_log`).
+Dialogue v2 lives in one Vault manager rather than separate module-local tables in each Avorion script VM. Chronicles registers stable line IDs with serializable conditions and queries the catalog using current context:
 
-When an event or interaction happens, the mod builds a **Context Table** describing the current sector (`warHeat = 80`, `stationType = "shipyard"`, `economy = "wealthy"`) and asks the Vault API for a matching string. The Vault filters out any line that doesn't fit the context and returns one that does. Hard hooks are wrapped in `pcall(include)` to keep a missing soft dependency from taking down the sector script.
+- War Heat and nearby News publishers/topics/severities.
+- Weather types and Rift escalation.
+- Eclipse state from Ascendancy's public snapshot.
+- Station type, faction trait and wealth, distance to center, reputation, and captain class.
 
-Cosmic Chronicles ships as a hard dependency alongside Cosmic Vault, Cosmic Overhaul, and Cosmic War (see [Dependencies & Compatibility](#-dependencies--compatibility) for the exact version requirements from `modinfo.lua`). Cross-mod calls assume all three are present and do not fall back to a reduced feature set if one is missing.
+The player record excludes the latest 20 heard line IDs, which limits immediate repetition across visits and reconnects. Loaded sectors use one shared 45-second chatter schedule rather than one independent poll per station. The interactive Rumormonger uses the same context and catalog.
 
-</details>
+Captain's Logs are appended inside Cosmic Overhaul's existing background-simulation extension. Chronicles no longer ships a competing `simulation.lua` file. A command report remains personal to the owning player unless its owner explicitly publishes a wider fact.
 
----
+## Narrative rules and events
 
-## ⚙️ Full Feature Breakdown
+Static, validated rules project verified source facts into Chronicle-owned content. Initial families cover:
 
-<details>
-<summary><h3>The Rumormonger System</h3></summary>
+- War battles, sieges, retreats, and humanitarian reports.
+- Vault/Overhaul market, famine, factory, and weather facts.
+- Vault/War Rift facts.
+- Ascendancy Eclipse, World-Eater, Citadel, and territory facts.
 
-Adds dynamic background chatter and interactive rumor-gathering to NPC stations, backed by a registry of 60+ unique, localized lore strings.
+Each article revision/rule pair has one deterministic receipt. The selection roll is stable across restarts, and regional output families use a one-hour cooldown. Rules never write War heat, market state, famine, weather effects, Rift escalation, Ascendancy progression, territory, or rewards.
 
-**Key mechanics:**
+Chronicle events include Refugee Convoys, Derelict Graveyards and Black Boxes, Hidden Stashes, Ancient Data Caches, Rogue AI Probes, Stranded Diplomats, Ghost Ships, Cultural Monuments, and qualifying Eclipse lore anomalies.
 
-- **Ambient chatter:** stations run a 35-second background chatter loop, broadcasting floating overhead text based on their type and the current situation (global sector cooldown 30 seconds, 50% speech probability).
-- **Interaction:** players can dock and ask "Any rumors?" for a dynamic tip.
-- **Tutorialization:** the Rumormonger occasionally teaches players a mechanic (Merchant synergies, Trash Manager filters) through gameplay rather than a tooltip.
-- **Contextual awareness:** the Rumormonger reads:
-  - **Station type:** 12+ vanilla station scripts, pre-cached in `init.lua` for performance.
-  - **War Heat:** pulled live from the Cosmic War bridge.
-  - **Faction wealth:** `wealthy` vs. `poor` economies produce different lines.
-  - **Geography:** some lines (Deep Core lore, for instance) won't spawn near the Outer Rim.
-  - **Player reputation:** stations refuse to gossip below −30,000 reputation, so hostile military outposts stay in character.
-  - **Captain synergy:** Smuggler and Explorer captains can extract rumors down to −60,000 reputation. They know how to buy a drink quietly, even in hostile ports.
+An event record and queue entry exist before sector work begins. Materialization waits for natural player entry, uses the stored seed, tags every entity with the immutable event ID, verifies exact expected entity counts and scripts, and only then marks the event active. A clean failure retries with backoff up to five claims. Partial or ambiguous materialization requires repair. An unloaded sector or missing lookup never counts as a destroyed encounter.
 
-</details>
+Interactions use fixed server-side recipes and a prepared transition before cargo debit or reward delivery. A successful result receives a deterministic receipt. A restart in an unprovable debit/reward window becomes `repair_required` rather than replaying the operation.
 
-<details>
-<summary><h3>Captain's Logs</h3></summary>
+## Persistence and migration
 
-Hooks directly into the Cosmic Overhaul background command simulation.
+All versioned tables are JSON-backed through Cosmic Vault because Avorion custom values accept primitives, not Lua tables.
 
-**Key mechanics:**
+Migration is evidence-driven and leaves legacy values untouched for rollback:
 
-- When a captain finishes a map command (Scout, Mine, Trade, etc.) and mails the player a report, a narrative "Captain's Log" is appended to the bottom of the message.
-- **Context validation:** logs reflect the faction and sector where the operation took place. Trading in a high-War-Heat sector produces logs about military patrols and close calls with blockades.
-- Implemented as a same-path VFS override of `background/simulation/simulation.lua`, hooking `Simulation.makeCommand`'s `command.addYield`. That's the same pattern Cosmic Overhaul itself uses, so both mods' hooks compose regardless of load order.
+- Legacy News records are imported by Vault with deterministic provenance.
+- The old client-only seen list cannot be recovered; imported reports begin unread until the player reads them or uses persistent Mark All.
+- `cc_active_bounties` and `cc_hidden_stashes` are parsed as exact signed `x:y` tokens. Same-coordinate conflicts become repair findings.
+- Old sector spawn/loot flags become consumed tombstones or ambiguous evidence; they never replay an encounter or reward.
+- Existing vanilla mission evidence is recorded as `legacy_outcome_unknown` and does not automatically pay an old Chronicle bonus.
+- A newly observed irreversible milestone may prepare one receipted v2 bonus. An old ambiguous bonus requires an explicit administrator reissue.
 
-</details>
+## Status and repair
 
-<details>
-<summary><h3>Dynamic Narrative Events & Interactions</h3></summary>
+`/chroniclesstatus` is read-only and reports canonical manager health, migration, event and receipt totals, and personal unread/follow/lead state.
 
-A global event controller (`cc_event_controller.lua`) listens for hyperspace jumps and spawns events based on the local geopolitical climate.
+`/chroniclesrepair` is administrator-only:
 
-**Available events:**
+```text
+/chroniclesrepair scan [all|news|player <index>|events|interactions|dialogue|queues]
+/chroniclesrepair status [repairId]
+/chroniclesrepair apply <repairId> <resume|retry|mark-complete|reissue|abandon>
+/chroniclesrepair history [repairId]
+```
 
-1. **Refugee Convoys** *(War Heat > 40).* Civilian ships with damaged hyperdrives appear and ask for Food or Medical Supplies. Donating grants reputation and a rumor, plus a 25% chance the refugees tip off the coordinates of a hidden resource stash.
-   - **Captain synergy:** a Merchant captain negotiates a flat 50,000-credit hazard pay fee; a Smuggler quietly skims 75,000 credits worth of valuables from the convoy's cargo during the transfer.
-2. **Echoes of the Frontline (Graveyards)** *(War Heat > 80).* Players jumping into an empty sector may find a massive, persistent wreckage field: the immediate aftermath of a fleet clash between major factions.
-3. **Black Box Extraction.** Spawns via a stash script inside Derelict Graveyards. Interacting extracts the doomed captain's final audio log, a system upgrade, and credits that scale with distance to the core.
-   - **Captain synergy:** a Scavenger captain extracts up to 50% more value (1.5x); an Explorer captain extracts up to 25% more (1.25x). Both also raise the odds of the upgrade rolling Rare or even Legendary rarity.
-   - **Corrupted Lore Nodes:** if the wreckage sits in Eclipse territory, the reward doubles (2x), but extracting it instantly spawns an Ascendancy ambush.
-   - **Classified Rift Tech:** black boxes also carry a chance to yield `Rift Research Data` and `Subclass Subsystems`, both high-value contraband on the black market. Scavenger and Explorer bonuses raise these odds too.
-4. **Cinematic Monuments** *(deep inside AI territory).* Colossal, 2.5x-scaled procedural monuments. A Ship Computer broadcast warns players on entry; reading the inscription grants a permanent **+2,500 reputation** boost with the local faction.
-5. **Drifting Ghost Ship.** A faint, repeating distress signal from a derelict freighter. Boarding it triggers a narrative dialogue.
-6. **Rogue AI Probe.** A fast, evasive military probe that scales its shields and damage the closer it is to the Galactic Core. If it survives 3 minutes, it hyperspaces away with scanned sector data.
-7. **Stranded Diplomat.** A faction's diplomat is stranded after their escort is destroyed. Extract them before they're captured.
-8. **Ancient Data Caches.** Derelict data banks that yield *Encrypted Log Fragments*, tradeable at any Research Station for credits and reputation.
-9. **Ancient Eclipse Anomaly.** A volatile physical anomaly. Extracting its core yields rare system upgrades, but it can detonate if mishandled.
+`scan` never changes state. `apply` checks administrator privileges, the recorded revisions, each finding's permitted actions, and appends an audit entry. Reissuing a potentially delivered milestone reward is never automatic.
 
-</details>
+## Compatibility
 
-<details>
-<summary><h3>Omni-Sensor Intelligence</h3></summary>
+Chronicles keeps only two shared vanilla script paths: the minimal galaxy and player bootstraps needed to attach its owners. Entity initialization, sector initialization, research stations, radio chatter, passing ships, event copies, story mission copies, story dialogue copies, Behemoth spawning, and the simulation wrapper have additive replacements or deliberate retirement handling.
 
-The player's ship computer gets automated deep-space scanning.
+No new vanilla path is added. Starfall is outside this integration and receives no publisher, rule, reference, or changed file.
 
-**Key mechanics:**
-
-- **Auto-scan on entry:** every jump into a new sector triggers an Omni-Sensor ping for high-value targets.
-- **Actionable intelligence:** exact coordinates for claimable asteroids or hidden resource stashes print straight to chat, cutting out manual searching.
-
-</details>
-
-<details>
-<summary><h3>Galactic News Network</h3></summary>
-
-The News Board (`cc_newsboard.lua`, `cc_newsgenerator.lua`) reports on events across the whole Cosmic series through the shared `CosmicVaultNews` API, currently fed by 4+ mods publishing 30+ distinct, unnormalized category strings ("War Crime", "Trade Crisis", "Galactic Milestone", and so on). The News tab was rebuilt around that reality.
-
-**Category grouping.** Every observed category maps onto seven stable, color-coded top-level groups: War & Conflict, Economy, Threats & Crises, Discoveries & Milestones, Captain Stories, Politics, and General. A category that doesn't have an explicit mapping falls back to a keyword match, so a brand-new category from any mod still lands somewhere sensible instead of vanishing from the filter.
-
-**Filtering and search.** A category dropdown and a live search box (matching vanilla's own Encyclopedia search pattern) narrow the headline list instead of forcing a scroll through an unsorted feed. Search matches both title and article text.
-
-**Headline table.** The single-column list is now a 3-column, sortable-by-glance table (Category, Headline, Age), color-coded by group.
-
-**Unread tracking.** Session-local: unread headlines are bolded and marked with a `●`, and a header counter reads "N Unread" (or "All caught up" once you've read everything).
-
-**Breaking News.** The highest-priority articles set a `breaking` flag that `CosmicVaultNews`' schema already tolerates without any change to the shared API. Only genuinely rare, galaxy-scale events use it: a Behemoth Incursion, a one-time boss defeat, an empire's collapse. That keeps the banner meaningful instead of firing constantly. A breaking article triggers both an immediate galaxy-wide chat alert and a clickable red banner atop the News tab; clicking it jumps straight to the article.
-
-**Headline ages.** Every story shows a relative age ("5m", "2h", "3d"), computed server-side on each sync rather than sent as a raw timestamp. `Client().unpausedRuntime` and `Server().unpausedRuntime` are different clocks with different origins, so comparing them client-side would produce nonsense.
-
-**Discovery News.** A fourth ambient generator reports uncharted signals, derelict fleets, ancient ruins, and rare stellar phenomena near a random active faction's territory. Adding it meant rebalancing the odds across the four generators (War, Economy, Captain Feats, Discovery), so each now fires roughly a quarter of the time.
-
-**EMPIRE HAS FALLEN.** A lightweight tracker watches every known AI faction and detects the exact moment one transitions from active to eradicated, using the same `FactionEradicationUtility` check every generator here already relies on. The moment a tracked faction falls, it publishes a Breaking News article naming the empire. It only reports a transition it actually observed (a faction already gone before the tracker ever saw it active isn't retroactively announced), and its tracking state persists across server restarts. Previously this was one of the biggest events a galaxy can have, and it went completely unreported outside a plain chat line from a third-party dependency.
-
-**Cosmic War integration.** Fully completing a War Bounty License and AI factions actually reaching a ceasefire are both reported to the News Network now too (see Cosmic War's own changelog for the mechanics on that side).
-
-</details>
-
----
-
-## 🌌 Cosmic Vault & Series Integration
-
-<details>
-<summary><b>View Integration Details</b></summary>
-
-### Cosmic Codex Integration
-All deep lore, stat blocks, and mechanical documentation are readable in-game from the Cosmic Codex tab, so there's no need to tab out to a wiki.
-
-### Cosmic Vault Hooks
-- **Deep Economy Integration:** ambient News events (Trade Crisis, Market Boom) tie into the `CosmicVaultEconomy` API, raising or lowering a faction's Famine Score.
-- **Dead Empire Filter:** all News generation runs through `FactionEradicationUtility` to keep destroyed empires from broadcasting.
-- **Post-Boss Anomalies:** destroying the Bottan Dreadnought invokes `CosmicVaultAnomalies` to spawn a persistent `SpatialRift`.
-- **Unified News API:** every News broadcast path goes through `CosmicVaultNews.publishArticle` for global validation, including the new `breaking` field, which is now formally part of the shared schema rather than an implicit convention this mod invented (see Cosmic Vault's own changelog).
-
-### Network Safety & Anti-Cheat
-- **Deterministic randomization:** unstable `math.random` calls have been systematically replaced with Avorion's `random():getInt()`, keeping multiplayer servers in sync during large fleet spawns.
-- **Callable validation:** background and UI scripts verify execution context server-side before processing a request, closing several remote-call exploits.
-
-### Vanilla Bug Fixes
-- **Scout Mission fix:** a long-standing vanilla bug that made Scout Missions skip Faction Headquarters sectors (a missing dialogue template) is patched.
-
-</details>
-
----
-
-## 🔌 Dependencies & Compatibility
-
-<details>
-<summary><h3>Required Mods</h3></summary>
-
-Per `modinfo.lua`, Cosmic Chronicles hard-requires:
-
-- **Avorion**
-- **Cosmic Vault** — dialogue API and context parser.
-- **Cosmic Overhaul** — background Captain's Log hooks, dynamic economy stats, and captain-class synergy detection.
-- **Cosmic War** — War Heat data and conflict events.
-
-</details>
-
-<details>
-<summary><h3>Compatibility Notes</h3></summary>
-
-- File paths stay strictly within Avorion's VFS boundaries (`entity/`, `events/`, `player/`).
-- Engine-safe randomization (`random():getInt()`) is enforced across the mod for multiplayer sync.
-- Event controllers are uniquely prefixed (`cc_`) to avoid VFS overlap with other mods.
-- Custom stations and modded factions are supported by falling back to `generic` lore categories when a unique trait can't be identified.
-
-</details>
+The mod requires Cosmic Vault, Cosmic Overhaul, Cosmic War, and Cosmic Ascendancy through the Core 4 relationship. It supports singleplayer and dedicated multiplayer with personal news/reward state for each player, including alliance members.
 
 ---
 

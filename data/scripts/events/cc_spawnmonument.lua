@@ -1,8 +1,9 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 local PlanGenerator = include("plangenerator")
+local EventContract = include("cc_event_contract")
 include("stringutility")
 
-function initialize()
+function initialize(eventId, seed)
     -- One-shot generation script: detach immediately so an idle instance doesn't stay
     -- attached on any early-return path below (client included).
     terminate()
@@ -10,10 +11,12 @@ function initialize()
     if onClient() then return end
 
     local sector = Sector()
+    if type(eventId) ~= "string" then return end
+    EventContract.Begin(eventId, "cultural_monument", 1)
     local x, y = sector:getCoordinates()
     local faction = Galaxy():getNearestFaction(x, y)
 
-    if not faction then return end
+    if not faction then EventContract.Fail(eventId, "faction_unavailable") return end
 
     -- Generate a massive procedural station based on the faction's architectural style
     local planPath = "data/plans/chronicles/cosmic_monument.xml"
@@ -31,19 +34,18 @@ function initialize()
     desc.title = "Cultural Monument"%_T
 
     local station = sector:createEntity(desc)
+    if not valid(station) then EventContract.Fail(eventId, "monument_creation_failed") return end
+    if type(eventId) == "string" then
+        EventContract.Tag(station, eventId, "cultural_monument")
+    end
     station:addScriptOnce("entity/cc_factionmonument.lua")
 
     -- Use the vanilla API property to ensure it cannot be destroyed by stray pirate attacks
     station.invincible = true
 
+    EventContract.Complete(eventId, 1)
+
     -- Alert the player that something interesting is in the sector
     Sector():broadcastChatMessage("Ship Computer"%_T, ChatMessageType.Information, "Sensors are detecting a massive, ancient architectural structure in this sector."%_T)
 
-    local article = {
-        title = "Ancient Cultural Monument Sighted",
-        content = "Sensors have picked up massive architectural signatures emitting strange energy patterns from sector [" .. x .. ":" .. y .. "]. Historians and explorers are rushing to the sector to analyze the ancient " .. faction.name .. " structure.",
-        category = "Exploration"
-    }
-    local cv_news = include("cosmicvaultnews")
-    cv_news.publishArticle(article)
 end

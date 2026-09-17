@@ -37,17 +37,17 @@ It has zero awareness of what's actually happening in the galaxy:
 
 Cosmic Chronicles introduces the **Rumormonger**. Instead of handing a station a static list and walking away, it actively watches the galaxy in real time.
 
-Every 35 seconds, the mod checks the state of the sector before anyone is allowed to speak:
+The sector uses one shared 45-second chatter schedule. Before a line is chosen, the mod checks:
 
 1. **Who is listening?** What's your reputation? Hero, neutral trader, or hated pirate?
 2. **What is the economy doing?** Wealthy, average, or poor?
 3. **Where are we?** Near the galactic core, or out on the lawless rim?
-4. **Is there a war?** It asks *Cosmic War* how high the political tension is right now.
+4. **What is happening nearby?** It reads War Heat, active news, weather, Rift conditions, and Eclipse state.
 5. **Who is speaking?** Casino, shipyard, or smuggler's market?
 
 Once it has that context, it searches the shared lore database via **Cosmic Vault**, throws out anything that doesn't fit the current situation, and broadcasts a line that does. Sometimes that line is a tip that teaches you a deeper mechanic (the Trash Manager, Captain synergies) without breaking immersion.
 
-Because of this context-awareness, the galaxy reacts to you:
+Because of this context-awareness, the galaxy reacts to you. The last 20 lines you heard are also remembered so reconnecting does not immediately restart the same small loop:
 
 - **High War Heat:** military outposts talk about mobilizing fleets, civilians panic about trade sanctions.
 - **Bad reputation:** smugglers tip you off on unbranding stolen goods, security forces warn you to keep your transponder clean.
@@ -61,7 +61,7 @@ The Rumormonger doesn't stop at stations. Cosmic Chronicles extends the same awa
 
 ### Dynamic Deep Space Events
 
-Jump into an empty sector and the mod checks the local political climate. If War Heat is boiling over, you might find a **Derelict Graveyard**: the smoking aftermath of a fleet battle, with Black Box recordings and system upgrades that scale in value the closer you are to the core. A Scavenger captain recovers up to 50% more value from a Black Box, an Explorer up to 25% more, and both improve your odds of pulling a Rare or Legendary system upgrade. If the wreckage happens to sit in Eclipse territory, the reward doubles, but extracting it instantly draws an Ascendancy ambush. Black boxes can also carry `Rift Research Data` and `Subclass Subsystems`, both worth real money on the black market.
+Verified reports from Vault, War, Overhaul, and Ascendancy can create a bounded Chronicle projection. The event is stored first and waits for a player to enter its sector naturally; Chronicles does not load distant sectors just to spawn or inspect it. If War reports a major battle, you might find a **Derelict Graveyard**: the smoking aftermath, with Black Box recordings and system upgrades that scale in value closer to the core. A Scavenger captain recovers up to 50% more value from a Black Box, an Explorer up to 25% more, and both improve rare-loot odds. Black boxes can also carry `Rift Research Data` and `Subclass Subsystems`.
 
 If tensions are rising rather than boiling, you might intercept a **Refugee Convoy** asking for food or medical supplies to repair their hyperdrive before a hunter fleet arrives. Donating has a 25% chance of a tip-off to a hidden resource stash.
 
@@ -91,23 +91,28 @@ If you use *Cosmic Overhaul*, you can send captains on background missions (Mini
 
 ## 📰 The Galactic News Network Tab
 
-Open your Player Window and find the **Galactic News** tab to read everything the Rumormonger and the rest of the Cosmic series are reporting on. It's a proper newsroom:
+Open your Player Window and find the **Galactic News** tab. It contains three views:
 
-- **Category filter & search:** narrow the headline list to War & Conflict, Economy, Threats & Crises, Discoveries & Milestones, Captain Stories, or Politics, or type a keyword to search titles and article text directly.
-- **Unread tracking:** unread headlines are bolded with a `●` marker, and a running "N Unread" counter in the header tells you at a glance whether you're caught up.
-- **Breaking News:** galaxy-shaking events (a Behemoth Incursion, a major boss finally going down, an empire's total collapse) trigger an instant chat alert the moment they happen, plus a clickable red banner right in the News tab. You don't have to remember to check.
+- **Live Feed:** current and developing reports from Vault, War, Overhaul, Ascendancy, and Chronicles.
+- **Chronicle:** Chronicle-owned stories and their outcomes.
+- **Saved Leads:** personal location leads you chose to keep.
+
+The newsroom also provides:
+
+- **Source, topic, status, nearby, and search filters:** narrow the feed without trusting the client to decide what you are allowed to see.
+- **Persistent unread tracking:** individual reads and **Mark All Read** are saved on the server per player. They survive reconnects and save reloads. Mark All covers every report you can currently access, not only the active filter.
+- **Developing stories:** related reports share one thread, so an advisory, active crisis, and resolution remain connected.
+- **Saved locations:** reports with a location can become a personal lead. Adding one to the map preserves any richer sector knowledge you already have.
+- **Breaking News:** critical non-weather reports can trigger a rate-limited chat alert and banner. Vault remains the only immediate in-sector weather/Rift danger presenter, so the same hazard is not announced twice.
 - **Headline ages:** every story shows how long ago it broke ("5m", "2h", "3d"), so you can tell a fresh crisis from old news.
-- **Discovery News:** a new ambient story type covers uncharted signals, derelict fleets, ancient ruins, and rare stellar phenomena turning up near active factions. Pure flavor, no mechanical effect, just more reasons to read.
-- **EMPIRE HAS FALLEN:** when an AI faction is wiped out entirely, the News Network now says so, with a dedicated Breaking article naming the fallen empire. That used to be one of the biggest things that could happen in a galaxy, and nobody reported it.
-- **Cosmic War on the board:** finishing a War Bounty License or watching two AI factions actually agree to a ceasefire both show up here now too.
+- **Accessible priority:** source and severity appear as text as well as color.
 
 ## 🌌 Cosmic Vault Synergy
 
-- **Deep economy warfare:** ambient News events (Trade Crisis, Market Boom) aren't just cosmetic. They tie into the Cosmic Vault Economy API, raising or lowering a faction's Famine Score.
-- **Dead Empire Filter:** News generation checks the Vault before it lets a faction speak, so destroyed empires can't broadcast messages from beyond the grave.
-- **Post-Boss Anomalies:** destroying the Bottan Dreadnought spawns a persistent Spatial Rift anomaly for advanced exploration.
-- **Famine Relief:** emergency relief caches show up during severe faction famines. Steal the contents for personal loot, or donate them for **+25,000 reputation** and an instant famine reduction.
-- **Galactic Lore Broadcasts:** find a Legendary system upgrade or a huge credit haul in a data cache, and the News Network reports your discovery to the whole galaxy.
+- **Verified news:** a headline reports a successful owning-system transition; Chronicles no longer starts a market event or changes famine merely to justify a story.
+- **Regional hazards:** weather and Rift reports keep their coordinates and lifecycle, while Vault continues to own damage, effects, sound, warnings, and escalation.
+- **Safe event spawning:** Vault's exact-coordinate queue keeps failed or partial Chronicle spawns retryable or repair-visible rather than silently consuming them.
+- **Shared dialogue:** the server-owned Dialogue catalog lets all script contexts see the same stable lines.
 
 ## Behind the Scenes
 
@@ -115,6 +120,8 @@ A few things run quietly under the hood so the galaxy stays consistent for every
 
 - Every dice roll that affects gameplay uses Avorion's own deterministic randomization instead of ordinary Lua random calls, so a multiplayer server doesn't drift out of sync during a big fleet spawn.
 - Background and UI scripts check who's actually allowed to trigger them, closing off a class of exploit where a modified client could fake a "free" action.
+- Interaction charges and rewards are prepared before the external effect. If a restart leaves the result unknowable, the interaction locks for administrator review instead of charging or paying twice.
+- `/chroniclesstatus` shows service health and canonical event totals. Server administrators can use `/chroniclesrepair scan`, `status`, `apply`, and `history`; scanning never changes state.
 - All the deep lore, stat blocks, and mechanics documented here are also readable in-game from the Cosmic Codex tab, so there's no need to alt-tab to a wiki mid-session.
 
 **Cosmic Chronicles** doesn't just add words to the screen. It listens to the invisible math behind the wars and economies around you, and turns that math into stories you can actually read.

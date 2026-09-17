@@ -1,221 +1,198 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 include("callable")
-include("cosmicvaultdialogue")
+include("stringutility")
+
+local Weather = include("cosmicvaultweather")
+local Rift = include("cosmicvaultrift")
+local News = include("cosmicvaultnews")
+local warAvailable, War = pcall(include, "cosmicwarbridge")
 
 -- namespace CosmicChroniclesRumormonger
 CosmicChroniclesRumormonger = {}
 
-local cw_success = true; include("cosmicwarbridge")
+local PLAYER_CONTROLLER = "data/scripts/player/background/cc_player_controller.lua"
+local ASCENDANCY_COORDINATOR = "data/scripts/galaxy/ca_state_coordinator.lua"
 
--- Helper function to fetch War Heat safely
-local function getFactionWarHeat(faction)
-    local realWarHeat = 0
-
-    if cw_success and CosmicWarBridge and CosmicWarBridge.getFactionWarHeat then
-        local rawHeat = CosmicWarBridge.getFactionWarHeat(faction.index) or 0
-        realWarHeat = math.floor(rawHeat * 100)
-    elseif faction:getValue("cw_enabled") then
-        local rawHeat = faction:getValue("cw_war_heat") or 0
-        realWarHeat = math.floor(rawHeat * 100)
+local function stationType(entity)
+    local cached = entity:getValue("cc_station_type")
+    if type(cached) == "string" then return cached end
+    local types = {
+        {"data/scripts/entity/merchants/shipyard.lua", "shipyard"},
+        {"data/scripts/entity/merchants/repairdock.lua", "repairdock"},
+        {"data/scripts/entity/merchants/equipmentdock.lua", "equipmentdock"},
+        {"data/scripts/entity/merchants/militaryoutpost.lua", "militaryoutpost"},
+        {"data/scripts/entity/merchants/smugglersmarket.lua", "smugglersmarket"},
+        {"data/scripts/entity/merchants/casino.lua", "casino"},
+        {"data/scripts/entity/merchants/scrapyard.lua", "scrapyard"},
+        {"data/scripts/entity/merchants/researchstation.lua", "researchstation"},
+        {"data/scripts/entity/merchants/turretfactory.lua", "turretfactory"},
+        {"data/scripts/entity/merchants/tradingpost.lua", "tradingpost"},
+        {"data/scripts/entity/merchants/resourcedepot.lua", "resourcedepot"},
+        {"data/scripts/entity/merchants/fighterfactory.lua", "fighterfactory"},
+    }
+    cached = "generic"
+    for _, definition in ipairs(types) do
+        if entity:hasScript(definition[1]) then cached = definition[2] break end
     end
-    return realWarHeat
+    entity:setValue("cc_station_type", cached)
+    return cached
 end
 
-local function getCachedStationType(entity)
-    return entity:getValue("cc_station_type") or "generic"
+local function playerInSector(playerIndex)
+    for _, candidate in pairs({Sector():getPlayers()}) do
+        if candidate and candidate.index == playerIndex then return candidate end
+    end
 end
 
--- Lowered update frequency so players see custom Cosmic chatter more often (ticks every 35 seconds)
--- TODO: Continue testing if frequency needs to be increased or lowered
-function CosmicChroniclesRumormonger.getUpdateInterval()
-    return 35
+local function warHeat(faction)
+    if warAvailable and War and War.getFactionWarHeat then
+        return math.floor((tonumber(War.getFactionWarHeat(faction.index)) or 0) * 100)
+    end
+    return 0
 end
 
--- Background loop to randomly broadcast ambient chatter overhead
-function CosmicChroniclesRumormonger.updateServer(timeStep)
-    -- Increased to 50% so custom Cosmic Chronicles lore surfaces more often to compete with vanilla chatter
-    -- TODO: Continue testing to ensure it isn't overshadowing vanilla dialogue lines
-    if random():getInt(1, 100) > 50 then return end
+local function eclipseFacts(playerIndex)
+    local facts = {}
+    local status, snapshot = Galaxy():invokeFunction(ASCENDANCY_COORDINATOR,
+        "getCanonicalSnapshot", playerIndex)
+    if status ~= 0 or type(snapshot) ~= "table" then return facts end
+    local state = snapshot.state
+    local eclipse = state and state.eclipse
+    if type(eclipse) == "table" then
+        if eclipse.unleashed then facts.unleashed = true end
+        if eclipse.fullyAwake then facts.fully_awake = true end
+        if eclipse.fallenEmpire then facts.fallen_empire = true end
+    end
+    return facts
+end
 
-    local sector = Sector()
-    local currentTime = Server().unpausedRuntime
-    local lastChatter = sector:getValue("cc_last_chatter") or 0
+local function nearbyFacts(playerIndex, x, y)
+    local publishers, topics, severities = {}, {}, {}
+    local page = News.Query({pageSize = 25, audiencePlayerIndex = playerIndex,
+        location = {x = x, y = y, radius = 20}})
+    for _, article in ipairs(page and page.items or {}) do
+        publishers[article.publisherId] = true
+        topics[article.topic] = true
+        severities[article.severity] = true
+    end
+    return publishers, topics, severities
+end
 
-    -- GLOBAL SECTOR COOLDOWN: Reduced from 45s to 30s to increase frequency of background world-building
-    -- TODO: Continue testing to ensure it isn't spamming
-    if currentTime - lastChatter < 30 then return end
-
-    local players = {sector:getPlayers()}
-
-    -- Save performance: don't calculate lore if no one is in the sector
-    if #players == 0 then return end
-
+local function buildContext(targetPlayer)
     local station = Entity()
     local faction = Faction(station.factionIndex)
-    if not faction then return end
-
-    -- Pick a random player in the sector to evaluate conditions against (e.g., good rep vs bad rep)
-    local player = players[random():getInt(1, #players)]
-
-    local x, y = sector:getCoordinates()
-    local distance = math.sqrt(x * x + y * y)
-
-        local factionTrait = "peaceful"
-        if faction:getTrait("aggressive") > 0.5 then
-            factionTrait = "aggressive"
+    if not faction then return nil, "missing_faction" end
+    local x, y = Sector():getCoordinates()
+    local weatherTypes = {}
+    local riftActive = false
+    local weather = Weather.ListWeatherAt(x, y)
+    for _, condition in ipairs(weather or {}) do
+        if type(condition.weatherType) == "string" then
+            weatherTypes[condition.weatherType] = true
+            if condition.weatherType == "RiftInstability" then riftActive = true end
         end
-
-        -- Real Avorion traits are aggressive/brave/greedy/honorable/mistrustful only, so
-        -- wealth is judged from faction.money directly instead of a nonexistent trait.
-        local factionWealth = "average"
-        if faction.money > 10000000 then
-            factionWealth = "wealthy"
-        elseif faction.money < 1000000 then
-            factionWealth = "poor"
-        end
-
-        local context = {
-            reputation = player:getRelations(faction.index),
-            factionTrait = factionTrait,
-            factionWealth = factionWealth,
-            distanceToCenter = distance,
-            warHeat = getFactionWarHeat(faction),
-            stationType = getCachedStationType(station)
-        }
-
-    local ambientLine = CosmicVaultDialogue.getValidLine("ambient", context)
-
-    if ambientLine then
-        -- Lock the token bucket so no other station can speak for the next 45 seconds
-        sector:setValue("cc_last_chatter", currentTime)
-
-        -- Broadcast as Chatter. In Avorion, this automatically appears as overhead floating text above the sender!
-        sector:broadcastChatMessage(station, ChatMessageType.Chatter, ambientLine)
     end
+    local riftSnapshot = Rift.GetEscalationSnapshot()
+    if riftSnapshot and tonumber(riftSnapshot.escalation) and riftSnapshot.escalation > 0
+            and weatherTypes.RiftInstability then riftActive = true end
+    local publisherIds, topics, severities = nearbyFacts(targetPlayer.index, x, y)
+    local trait = faction:getTrait("aggressive") > 0.5 and "aggressive" or "peaceful"
+    local wealth = faction.money > 10000000 and "wealthy"
+        or faction.money < 1000000 and "poor" or "average"
+    local captainClass
+    local craft = targetPlayer.craft
+    local captain = craft and craft:getCaptain()
+    if captain then captainClass = tostring(captain.primaryClass) end
+    return {
+        reputation = targetPlayer:getRelations(faction.index),
+        factionTrait = trait,
+        factionWealth = wealth,
+        distanceToCenter = math.sqrt(x * x + y * y),
+        warHeat = warHeat(faction),
+        stationType = stationType(station),
+        publisherIds = publisherIds,
+        topics = topics,
+        severities = severities,
+        weatherTypes = weatherTypes,
+        riftActive = riftActive,
+        eclipseStates = eclipseFacts(targetPlayer.index),
+        captainClass = captainClass,
+    }, nil
 end
 
--- Determines if the "Ask for rumors" option shows up when interacting with the station
--- TODO: Ensure this guard actually functions often and in high populated servers and server runtime
+local function selectLine(targetPlayer, category)
+    local context, contextError = buildContext(targetPlayer)
+    if not context then return nil, contextError end
+    local identity = tostring(Entity().index)
+    local identitySeed = 0
+    for index = 1, #identity do
+        identitySeed = (identitySeed * 33 + identity:byte(index)) % 2147483647
+    end
+    local seed = math.floor(Server().unpausedRuntime) + targetPlayer.index + identitySeed
+    local status, selected, selectError = targetPlayer:invokeFunction(PLAYER_CONTROLLER,
+        "selectDialogue", targetPlayer.index, category, context, seed)
+    if status ~= 0 then return nil, "controller_unavailable" end
+    if not selected then return nil, selectError end
+    return selected.text, nil, selected.lineId
+end
+
+function CosmicChroniclesRumormonger.initialize()
+    if onServer() and Entity().isStation then stationType(Entity()) end
+end
+
 function CosmicChroniclesRumormonger.interactionPossible(playerIndex, option)
-    local player = Player(playerIndex)
-    local craft = player.craft
-    -- Don't show the dialogue if the player is somehow trying to talk to their own ship
-    if craft and craft.index == Entity().index then return false end
-    if craft and craft:getNearestDistance(Entity()) > 1000 then return false end
-
-    -- Base Threshold: Prevent casually asking for rumors from fiercely hostile stations (-30k rep)
-    local threshold = -30000
-
-    -- Cosmic Overhaul Synergy: Smugglers and Explorers know how to quietly buy drinks and extract
-    -- information even in hostile ports, extending their rumor access significantly.
-    if craft then
-        local captain = craft:getCaptain()
-        if captain then
-            local CaptainClass = include("captainclass")
-            if captain:hasClass(CaptainClass.Smuggler) or captain:hasClass(CaptainClass.Explorer) then
-                threshold = -60000
-            end
-        end
-    end
-
-    local faction = Faction(Entity().factionIndex)
-    if faction and player:getRelations(faction.index) <= threshold then return false end
-
-    return true
+    local targetPlayer = Player(playerIndex)
+    local station = Entity()
+    if not targetPlayer or not targetPlayer.craft then return false end
+    if targetPlayer.craft.index == station.index
+            or targetPlayer.craft:getNearestDistance(station) > 1000 then return false end
+    local faction = Faction(station.factionIndex)
+    if not faction then return false end
+    return targetPlayer:getRelations(faction.index) > -30000
 end
 
--- Initializes the client-side interaction menu
 function CosmicChroniclesRumormonger.initUI()
     ScriptUI():registerInteraction("Any rumors?"%_t, "onAskRumors")
 end
 
--- Triggered on the Client when the player clicks the menu option
 function CosmicChroniclesRumormonger.onAskRumors()
-    -- Show a waiting dialog to prevent the interaction window from closing!
-    local dialog = { text = "Let me think for a moment..."%_t, answers = {} }
-    ScriptUI():showDialog(dialog)
-
-    -- Ping the server to find an appropriate rumor based on secret server-side states
+    ScriptUI():showDialog({text = "Let me think for a moment..."%_t, answers = {}})
     invokeServerFunction("getRumorFromServer")
+end
+
+function CosmicChroniclesRumormonger.getAmbientLine(playerIndex)
+    if not onServer() then return nil, "server_only" end
+    local targetPlayer = playerInSector(playerIndex)
+    if not targetPlayer then return nil, "player_not_present" end
+    return selectLine(targetPlayer, "ambient")
 end
 
 function CosmicChroniclesRumormonger.getRumorFromServer()
     if not onServer() then return end
-
-    local player = Player(callingPlayer)
+    local targetPlayer = playerInSector(callingPlayer)
     local station = Entity()
-    local faction = Faction(station.factionIndex)
-
-    local rumor = nil
-
-    if faction then
-        local craft = player.craft
-        if not craft or craft:getNearestDistance(station) > 1000 then
-            invokeClientFunction(player, "tooFar")
-            return
-        end
-
-        local threshold = -30000
-        local captain = craft:getCaptain()
-        if captain then
-            local CaptainClass = include("captainclass")
-            if captain:hasClass(CaptainClass.Smuggler) or captain:hasClass(CaptainClass.Explorer) then
-                threshold = -60000
-            end
-        end
-
-        if player:getRelations(faction.index) <= threshold then return end
-
-        local sector = Sector()
-        local x, y = sector:getCoordinates()
-        local distance = math.sqrt(x * x + y * y)
-
-        local factionTrait = "peaceful"
-        if faction:getTrait("aggressive") > 0.5 then
-            factionTrait = "aggressive"
-        end
-
-        -- Real Avorion traits are aggressive/brave/greedy/honorable/mistrustful only, so
-        -- wealth is judged from faction.money directly instead of a nonexistent trait.
-        local factionWealth = "average"
-        if faction.money > 10000000 then
-            factionWealth = "wealthy"
-        elseif faction.money < 1000000 then
-            factionWealth = "poor"
-        end
-
-        local context = {
-            reputation = player:getRelations(faction.index),
-            factionTrait = factionTrait,
-            factionWealth = factionWealth,
-            distanceToCenter = distance,
-            warHeat = getFactionWarHeat(faction),
-            stationType = getCachedStationType(station)
-        }
-
-        rumor = CosmicVaultDialogue.getValidLine("rumor", context)
+    if not targetPlayer or not targetPlayer.craft
+            or targetPlayer.craft:getNearestDistance(station) > 1000 then
+        if targetPlayer then invokeClientFunction(targetPlayer, "tooFar") end
+        return
     end
-
-    if not rumor then
-        rumor = "I don't have any gossip right now, friend. The sector has been quiet."
-    end
-
-    invokeClientFunction(player, "showRumorDialog", tostring(rumor))
+    local rumor = selectLine(targetPlayer, "rumor")
+        or "I don't have any gossip right now, friend. The sector has been quiet."
+    invokeClientFunction(targetPlayer, "showRumorDialog", tostring(rumor))
 end
-callable(CosmicChroniclesRumormonger, "getRumorFromServer")
 
--- Triggered on the Client. Receives the string from the server and renders the text box.
 function CosmicChroniclesRumormonger.showRumorDialog(rumor)
     if not onClient() then return end
-
-    local dialog = { text = rumor%_t, answers = { {answer = "Interesting. Thanks."%_t} } }
-
-    -- Render the Avorion dialogue UI
-    ScriptUI():showDialog(dialog)
+    ScriptUI():showDialog({text = tostring(rumor),
+        answers = {{answer = "Interesting. Thanks."%_t}}})
 end
 
 function CosmicChroniclesRumormonger.tooFar()
-    local dialog = {}
-    dialog.text = "You're too far away. Come closer to dock and converse."%_t
-    ScriptUI():interactShowDialog(dialog, true)
+    if not onClient() then return end
+    ScriptUI():interactShowDialog({
+        text = "You're too far away. Come closer to converse."%_t}, true)
 end
+
+callable(CosmicChroniclesRumormonger, "getRumorFromServer")
+
+return CosmicChroniclesRumormonger
