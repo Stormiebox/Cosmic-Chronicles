@@ -83,12 +83,17 @@ function ChronicleInteractionController.ResolveEvent(entity, summary, resultEvid
     if event.state ~= "active" then return nil, "event_not_active" end
     local resolving, resolvingError = ChronicleInteractionController.InvokeCoordinator(
         "requestEventTransition", "event_resolver", eventId, event.revision, "resolving",
-        {outcome = {kind = "interaction", entityId = tostring(entity.id), summary = summary}})
+        {outcome = {kind = "interaction", entityId = tostring(entity.id), summary = summary},
+            -- false, not nil/omitted: ChronicleState.Transition copies fields via pairs(),
+            -- which never sees a nil-valued key, so omitting these would leave a stale
+            -- lastError/repairRequired from an earlier retry cycle on this now-healthy event.
+            lastError = false, repairRequired = false})
     if not resolving then return nil, resolvingError end
     return ChronicleInteractionController.InvokeCoordinator("requestEventTransition",
         "event_resolver", eventId, resolving.revision, "succeeded",
         {outcome = {kind = "interaction", entityId = tostring(entity.id),
-            summary = summary, result = resultEvidence}})
+            summary = summary, result = resultEvidence},
+            lastError = false, repairRequired = false})
 end
 
 function ChronicleInteractionController.RequireRepair(entity, current, owner, playerIndex,

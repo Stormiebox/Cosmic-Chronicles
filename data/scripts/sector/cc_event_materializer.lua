@@ -114,7 +114,10 @@ function ChronicleEventMaterializer.updateServer(timeStep)
             attempts = 1, entityIds = entityIds, verifiedAt = Server().unpausedRuntime}
         local active, activeError = invokeCoordinator("requestEventTransition",
             "event_materializer", self.eventId, self.eventRevision, "active",
-            {materialization = materialization})
+            -- false, not nil: pairs()-based field copy in ChronicleState.Transition never
+            -- sees a nil-valued key, so omitting these would leave a stale lastError/
+            -- repairRequired from an earlier retry cycle on this now-healthy event.
+            {materialization = materialization, lastError = false, repairRequired = false})
         if not active then retry(activeError or "active_transition_failed") return end
         local x, y = Sector():getCoordinates()
         local completed, completeError = Territory.CompleteMaterialization(

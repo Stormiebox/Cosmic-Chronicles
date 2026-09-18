@@ -3,7 +3,7 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 local CaptainClass = include("captainclass")
 local Interaction = include("cc_interaction_controller")
-include("callable")
+include("data/scripts/lib/callable")
 include("faction")
 include("relations")
 include("stringutility")
@@ -120,7 +120,7 @@ function CosmicChroniclesRefugee.donate(recipeId)
     local delivered = pcall(function()
         local faction = Faction(Entity().factionIndex)
         if faction then changeRelations(buyer, faction, outcome.reputation,
-            RelationChangeType.General) end
+            RelationChangeType.GoodsTrade) end
         if outcome.credits > 0 then buyer:receive("Refugee convoy assistance.", outcome.credits) end
         if outcome.lead then
             local queued, queueError = Interaction.InvokeCoordinator("queueDerivedEvent", OWNER,

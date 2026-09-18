@@ -22,8 +22,8 @@ function initialize(eventId, seed)
     local planPath = "data/plans/chronicles/cosmic_monument.xml"
     local plan = LoadPlanFromFile(planPath)
     if not plan then plan = PlanGenerator.makeStationPlan(faction) end
-    plan:scale(vec3(1.5, 1.5, 1.5)) -- Scaled down from 2.5 to prevent C++ physics thread hangs, still looks massive!
-    -- TODO: Continue keeping an eye on this monument if it needs to be scaled down further.
+    -- Keep the scale factor modest: a much larger monument plan risks hanging the C++ physics thread.
+    plan:scale(vec3(1.5, 1.5, 1.5))
     local desc = StationDescriptor()
     desc.factionIndex = faction.index
     desc:setMovePlan(plan)

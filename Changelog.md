@@ -98,6 +98,20 @@ Chronicles itself. Cosmic Starfall remains outside this integration.
 
 ### 🪲 Final Review Fixes
 
+- [Bugfix] **Invented `RelationChangeType.General` Replaced With Real Vanilla Enum Members
+  (`cc_blackbox.lua`, `cc_factionmonument.lua`, `cc_refugeedialogue.lua`,
+  `cc_research_exchange.lua`):** `RelationChangeType.General` does not exist in vanilla's real enum
+  (`Default, CraftDestroyed, ShieldsDamaged, HullDamaged, Boarding, CombatSupport, Smuggling,
+  Raiding, GeneralIllegal, ServiceUsage, ResourceTrade, GoodsTrade, EquipmentTrade, WeaponsTrade,
+  Commerce, Tribute`, confirmed against `data/scripts/lib/relations.lua`), so every reference
+  silently indexed to `nil`. `changeRelations()`'s own `changeType = changeType or
+  RelationChangeType.Default` absorbed it without crashing, but the transaction lost the trait
+  multiplier, chatter category, and hard-cap category the real enum member would have applied.
+  Replaced with the enum member matching each transaction: `ResourceTrade` for the Black Box's
+  famine-relief donation, `Default` for the Faction Monument's flat lore-reading respect bonus
+  (no trade or combat component to categorize it under), `GoodsTrade` for the Refugee Dialogue's
+  Food/Medical Supplies donation, and `ServiceUsage` for the Research Exchange's log-fragment
+  redemption.
 - [Bugfix] **Lua 5.1-Safe Cross-Script Return Handling:** Replaced Lua 5.2-only `table.pack` and
   `table.unpack` calls in Chronicle bridges with nil-preserving helpers compatible with Avorion's
   Lua runtime.
@@ -138,11 +152,50 @@ Chronicles itself. Cosmic Starfall remains outside this integration.
   vanilla-path replacements (see "Thirty-Four Vanilla-Path Replacements Retired" above) rather than
   contamination, but the missing lines were not located and need a manual pass against any pre-v4
   backups.
+- [Bugfix] **Dialogue Catalog No Longer Registers At File Top Level (`cc_dialogue_catalog.lua`,
+  `cc_coordinator.lua`, `cosmicchronicles.lua`):** `registerLore()`/`registerStoryDialogues()` were
+  invoked unconditionally at the bottom of `cc_dialogue_catalog.lua`, running the instant the module
+  was `include()`d rather than from a real runtime callback. Every line inside those functions uses
+  `%_T`, and evaluating `%_t`/`%_T` during initial script evaluation (before `onServer()`,
+  `Server()`, and `Galaxy()` are live) crashes a dedicated server on startup — being inside a
+  `function` doesn't help if that function is called immediately at module scope, since the timing
+  is identical to true global scope. No crash was ever observed here, but the risk was latent.
+  Population is now exposed as a guarded `Catalog.ensurePopulated()` that only runs once per server
+  session, and both `ChronicleCoordinator.registerVaultContracts()` (called from
+  `ChronicleCoordinator.initialize()`/`updateServer()`) and the legacy `cosmicchronicles.lua`
+  compatibility shim's `registerLore()` call it before touching `Catalog.entries`. Registration is
+  unchanged in effect — it still happens exactly once, with the same entries — only the timing moved
+  to genuine runtime.
+- [Bugfix] **Rogue AI Probe Fire Rate Rescaled To Match Its Own 1x-5x Comment
+  (`cc_rogueaiprobe.lua`):** `addBaseMultiplier` takes a delta into a percentage pool, so the old
+  `scale * 5.0 - 1.0` formula produced +400% at the sector edge up to +2400% at the core — five
+  times more extreme than the `scale` variable's own "1 (edge) to 5 (core)" comment implied. The
+  multiplier now uses `scale - 1.0` directly, giving the intended 1x (no bonus) to 5x fire-rate
+  range.
+- [Bugfix] **More Stale `lastError`/`repairRequired` Evidence Cleared On Success Transitions
+  (`cc_event_materializer.lua`, `cc_bounty_ambush.lua`, `cc_sector_observer.lua`):** Same pattern
+  already fixed once in `cc_interaction_controller.lua`: a success evidence table that omits
+  `lastError`/`repairRequired` (or sets them via an `x and y or nil` idiom that evaluates to `nil`)
+  never actually clears them, because `ChronicleState.Transition`'s `pairs()`-based field copy
+  never sees a nil-valued key. Three more transitions could carry a stale error/repair note forward
+  from an earlier retry cycle: the `materializing → active` success transition, the bounty ambush's
+  non-ambiguous boss-kill resolution, and the sector observer's `retryable → materializing` retry
+  attempt. All three now explicitly pass `false` for both fields on their success path.
 - [Verification] **Offline Gate Completed:** Sixteen Chronicle fixtures pass 1,260 assertions; the
   prior Vault record, materialization, market, typed-turret, weather, Rift, and anomaly suites also
   pass. All surviving changed Lua files compile and the five affected mods pass the Avorion linter.
   In-game UI, multiplayer, callback timing, restart, Linux-server, and performance checks remain in
   the dedicated live-QA phase.
+- [Docs] **In-Game Codex Corrected For Accuracy (`infoCc.lua`):** Several Full Feature Breakdown
+  articles described mechanics that never shipped or had drifted from the live numbers — a War Heat
+  threshold that doesn't exist for Refugee Convoys/Graveyards (they're actually driven by Cosmic War
+  news matching plus a cooldown and a fixed roll), a Rumormonger chatter cadence and reputation
+  threshold that didn't match `cc_sector_observer.lua`/`cosmicchronicles_rumormonger.lua`, Black Box
+  Captain Synergy multipliers and an "Exceptional" rarity tier that was never a real `RarityType`,
+  three Cosmic Vault Synergy bullets describing the long-retired `cc_stockmarket.lua` economy hooks
+  as if they were live, a fabricated "Scout Mission Fix" vanilla bugfix claim, and a Stock
+  Market/"Gold Rush" economy pitch for a system that no longer mutates anything. Rewrote each article
+  to match what the code actually does today.
 
 ## [v3.2.3]
 

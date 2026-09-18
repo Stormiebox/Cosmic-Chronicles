@@ -3,7 +3,7 @@ package.path = package.path .. ";data/scripts/?.lua"
 
 local CaptainClass = include("captainclass")
 local Interaction = include("cc_interaction_controller")
-include("callable")
+include("data/scripts/lib/callable")
 include("faction")
 include("stringutility")
 

@@ -1280,7 +1280,16 @@ function CosmicChronicles.registerStoryDialogues()
     })
 end
 
-CosmicChronicles.registerLore()
-CosmicChronicles.registerStoryDialogues()
+-- Population is deferred to a real runtime call (see Catalog.ensurePopulated) rather than
+-- running here at file top level: every dialogue line above uses %_T, and evaluating %_T
+-- during initial script evaluation (i.e. before onServer()/Server()/Galaxy() are live) crashes
+-- a dedicated server. Callers invoke ensurePopulated() from genuine runtime code instead.
+local populated = false
+function Catalog.ensurePopulated()
+    if populated then return end
+    populated = true
+    CosmicChronicles.registerLore()
+    CosmicChronicles.registerStoryDialogues()
+end
 
 return Catalog

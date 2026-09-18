@@ -38,7 +38,7 @@ function spawn(eventId, seed)
             spawned[#spawned + 1] = container
         end
         if valid(container) then
-        container.title = "Hidden Stash"
+        container.title = "Hidden Stash"%_T
         
         container:addScript("data/scripts/entity/stash.lua")
         

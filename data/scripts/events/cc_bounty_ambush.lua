@@ -57,8 +57,8 @@ function BountyAmbush.spawn(eventId, seed)
     if not valid(boss) then EventContract.Fail(eventId, "boss_creation_failed") return end
     EventContract.Tag(boss, eventId, "bounty_ambush")
     spawned[#spawned + 1] = boss
-    boss.title = "Dread Pirate Lord"
-    boss.name = "Bounty Target"
+    boss.title = "Dread Pirate Lord"%_T
+    boss.name = "Bounty Target"%_T
     boss.crew = boss.idealCrew
     boss:addScript("icon.lua", "data/textures/icons/pixel/double_skull_big.png")
     ShipUtility.addArmedTurretsToCraft(boss, 3)
@@ -142,8 +142,11 @@ function BountyAmbush.onBossDestroyed(entityId)
             bossId = self.bossId, participants = participants,
             summary = ambiguous and "The bounty target was destroyed; reward delivery needs review."
                 or "The bounty target was destroyed and eligible pilots were paid."},
-            lastError = ambiguous and "reward_delivery_ambiguous" or nil,
-            repairRequired = ambiguous and "One or more bounty rewards cannot be proven." or nil})
+            -- false, not nil, on the success side: pairs()-based field copy in
+            -- ChronicleState.Transition never sees a nil-valued key, so an "or nil" here
+            -- would leave a stale lastError/repairRequired from an earlier retry cycle.
+            lastError = ambiguous and "reward_delivery_ambiguous" or false,
+            repairRequired = ambiguous and "One or more bounty rewards cannot be proven." or false})
     if not ambiguous then terminate() end
 end
 

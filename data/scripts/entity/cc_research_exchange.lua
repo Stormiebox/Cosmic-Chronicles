@@ -1,5 +1,5 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
-include("callable")
+include("data/scripts/lib/callable")
 include("faction")
 include("relations")
 include("stringutility")
@@ -179,7 +179,7 @@ function ChronicleResearchExchange.exchangeServer()
         buyer:receive("Encrypted Log Fragment", REWARD_CREDITS)
         local stationFaction = Faction(Entity().factionIndex)
         if stationFaction then changeRelations(buyer, stationFaction,
-            REWARD_REPUTATION, RelationChangeType.General) end
+            REWARD_REPUTATION, RelationChangeType.ServiceUsage) end
     end)
     if not delivered then
         transition("repair_required", {lastError = "reward_delivery_failed",

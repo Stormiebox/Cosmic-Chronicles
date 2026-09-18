@@ -17,6 +17,9 @@ end
 
 function CosmicChronicles.registerLore()
     if not onServer() then return nil, "server_only" end
+    -- Guarded no-op if the coordinator already populated the catalog; needed here too since
+    -- this legacy shim can run its own registerLore() before the coordinator's initialize().
+    Catalog.ensurePopulated()
     local _, publisherError = Dialogue.RegisterPublisher(Catalog.publisher)
     if publisherError then return nil, publisherError end
     return Dialogue.RegisterEntries(Catalog.publisher.publisherId, Catalog.entries)

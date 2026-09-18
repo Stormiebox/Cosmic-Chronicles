@@ -2,7 +2,7 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 
 local Interaction = include("cc_interaction_controller")
 local ChronicleState = include("cc_state")
-include("callable")
+include("data/scripts/lib/callable")
 include("faction")
 include("relations")
 include("stringutility")
@@ -75,7 +75,7 @@ function CosmicChroniclesMonument.readLore()
     end
     self.record = prepared
     local delivered = pcall(function()
-        changeRelations(buyer, faction, result.reputation, RelationChangeType.General)
+        changeRelations(buyer, faction, result.reputation, RelationChangeType.Default)
     end)
     if not delivered then
         self.record = Interaction.RequireRepair(Entity(), self.record, OWNER,

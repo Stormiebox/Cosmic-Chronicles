@@ -128,6 +128,10 @@ local function setHealth(newsHealth, dialogueHealth, lastError)
 end
 
 local function registerVaultContracts()
+    -- Populates Catalog.entries on first call, at genuine runtime (this function only ever
+    -- runs from initialize()/updateServer(), both post-onServer()). Guarded, so the repeated
+    -- calls from updateServer()'s registrationDue retry are harmless no-ops.
+    DialogueCatalog.ensurePopulated()
     local _, newsError = News.RegisterPublisher(DialogueCatalog.publisher)
     local dialoguePublisher, dialoguePublisherError = Dialogue.RegisterPublisher(
         DialogueCatalog.publisher)

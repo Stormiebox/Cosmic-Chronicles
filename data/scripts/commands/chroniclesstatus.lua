@@ -29,16 +29,18 @@ function execute(sender, commandName, ...)
         tostring(health.dialogueManager or "unknown"),
         tostring(cursors.newsRevision or 0),
         tostring(migration.state or "unknown")))
+    local eventStates = snapshot.eventStates or {}
     reply(player, string.format(
         "Events — pending: %d, prepared: %d, active: %d, repair: %d",
-        snapshot.eventStates.pending or 0, snapshot.eventStates.prepared or 0,
-        snapshot.eventStates.active or 0, snapshot.eventStates.repair_required or 0))
+        eventStates.pending or 0, eventStates.prepared or 0,
+        eventStates.active or 0, eventStates.repair_required or 0))
     local playerStatus, personal, personalError = player:invokeFunction(PLAYER_CONTROLLER,
         "getPlayerSnapshot", player.index)
     if playerStatus == 0 and personal then
+        local news = personal.news or {}
         reply(player, string.format("Personal — unread: %d, followed threads: %d, saved leads: %d",
             personal.unreadCount or 0,
-            tableCount(personal.news.followedThreads), tableCount(personal.leads)))
+            tableCount(news.followedThreads), tableCount(personal.leads)))
     elseif personalError then
         reply(player, "Personal Chronicle state unavailable: " .. tostring(personalError))
     end

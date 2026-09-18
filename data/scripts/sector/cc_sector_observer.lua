@@ -187,7 +187,11 @@ function ChronicleSectorObserver.observePlayerEntry(playerIndex, x, y)
     materialization.attempts = claim.attempts
     local transitioned, transitionError = invokeCoordinator("requestEventTransition",
         "sector_observer", event.eventId, event.revision, "materializing",
-        {materialization = materialization})
+        -- This can fire from the "retryable" state (checked above), which carries a
+        -- lastError from the prior failed attempt. false, not nil: pairs()-based field
+        -- copy in ChronicleState.Transition never sees a nil-valued key, so omitting
+        -- these would leave that stale error/repair text on the new attempt.
+        {materialization = materialization, lastError = false, repairRequired = false})
     if not transitioned then
         Territory.RetryMaterialization("chronicles_event", x, y, claimant,
             transitionError or "coordinator_transition_failed", 60)

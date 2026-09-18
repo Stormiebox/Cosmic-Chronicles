@@ -1,5 +1,5 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
-include("callable")
+include("data/scripts/lib/callable")
 include("stringutility")
 
 local Weather = include("cosmicvaultweather")
@@ -56,13 +56,15 @@ local function eclipseFacts(playerIndex)
     local status, snapshot = Galaxy():invokeFunction(ASCENDANCY_COORDINATOR,
         "getCanonicalSnapshot", playerIndex)
     if status ~= 0 or type(snapshot) ~= "table" then return facts end
-    local state = snapshot.state
-    local eclipse = state and state.eclipse
+    -- getCanonicalSnapshot returns the raw ca_state_v2 record (see CAState.NewGalaxyState):
+    -- "eclipse" and "territory" are top-level fields on it, not nested under a "state" key.
+    local eclipse = snapshot.eclipse
     if type(eclipse) == "table" then
-        if eclipse.unleashed then facts.unleashed = true end
-        if eclipse.fullyAwake then facts.fully_awake = true end
-        if eclipse.fallenEmpire then facts.fallen_empire = true end
+        if eclipse.state and eclipse.state ~= "dormant" then facts.unleashed = true end
+        if eclipse.state == "fully_awake" then facts.fully_awake = true end
     end
+    local territory = snapshot.territory
+    if type(territory) == "table" and territory.fallenEmpire then facts.fallen_empire = true end
     return facts
 end
 

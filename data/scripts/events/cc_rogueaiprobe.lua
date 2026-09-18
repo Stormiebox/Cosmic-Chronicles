@@ -31,7 +31,7 @@ function RogueAIProbe.spawn(eventId, seed)
     local d = math.sqrt(x*x + y*y)
     local scale = math.max(1, (500 - d) / 100)
 
-    probe:addBaseMultiplier(StatsBonuses.FireRate, scale * 5.0 - 1.0)
+    probe:addBaseMultiplier(StatsBonuses.FireRate, scale - 1.0)
 
     -- The Chronicle tracker owns the timeout so escape and destruction remain distinct.
     probe:addScriptOnce("entity/cc_probe_tracker.lua", eventId, 180)

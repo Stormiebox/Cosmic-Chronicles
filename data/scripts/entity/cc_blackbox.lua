@@ -4,7 +4,7 @@ package.path = package.path .. ";data/scripts/?.lua"
 local CaptainClass = include("captainclass")
 local Interaction = include("cc_interaction_controller")
 local ChronicleGoods = include("cc_goods")
-include("callable")
+include("data/scripts/lib/callable")
 include("faction")
 include("galaxy")
 include("goods")
@@ -139,7 +139,7 @@ function CosmicChroniclesBlackBox.resolve(action)
             if not faction then error("faction_unavailable") end
             local economy = include("cosmicvaulteconomy")
             economy.addFamineScore(reward.factionIndex, reward.famineDelta)
-            changeRelations(buyer, faction, reward.reputation, RelationChangeType.General)
+            changeRelations(buyer, faction, reward.reputation, RelationChangeType.ResourceTrade)
         else
             buyer:receive("Recovered Credits from the cache.", reward.credits)
             targetPlayer:setValue("cc_log_fragments",
