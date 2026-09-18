@@ -130,10 +130,11 @@ local function sanitizeIntent(intent)
     if type(intent.ifRevision) == "number" and not query.beforeSequence then
         query.ifRevision = math.floor(intent.ifRevision)
     end
-    if type(intent.publisherId) == "string" and #intent.publisherId <= 48 then
+    -- An empty string is the "All Sources"/"All Topics" combo entry, meaning no filter.
+    if type(intent.publisherId) == "string" and #intent.publisherId > 0 and #intent.publisherId <= 48 then
         query.publisherIds = {[intent.publisherId] = true}
     end
-    if type(intent.topic) == "string" and #intent.topic <= 32 then
+    if type(intent.topic) == "string" and #intent.topic > 0 and #intent.topic <= 32 then
         query.topics = {[intent.topic] = true}
     end
     if type(intent.threadId) == "string" and #intent.threadId <= 160 then
