@@ -63,9 +63,19 @@ local function finiteInteger(value)
         and value ~= -math.huge and value % 1 == 0
 end
 
+-- json.decode() tags every table it returns with {__jsontype = "object" | "array"} unless it is
+-- told not to. That tag is plain data, so it must not make a saved record look non-serializable.
+local function isJsonMarker(metatable)
+    if type(metatable) ~= "table" then return false end
+    local key, kind = next(metatable)
+    return key == "__jsontype" and (kind == "object" or kind == "array")
+        and next(metatable, key) == nil
+end
+
 function ChronicleState.DeepCopy(value, seen)
     if type(value) ~= "table" then return value end
-    if getmetatable(value) ~= nil then return nil, "non_serializable" end
+    local metatable = getmetatable(value)
+    if metatable ~= nil and not isJsonMarker(metatable) then return nil, "non_serializable" end
     seen = seen or {}
     if seen[value] then return nil, "non_serializable" end
     seen[value] = true

@@ -14,10 +14,6 @@ if onClient() then
     self.activeView = "live"
     self.requestId = 0
 
-    local SOURCE_NAMES = {
-        cosmic_vault = "VAULT", cosmic_war = "WAR", cosmic_overhaul = "OVERHAUL",
-        cosmic_chronicles = "GNN", cosmic_ascendancy = "ASCENDANCY",
-    }
     local TOPIC_COLORS = {
         conflict = ColorRGB(1.0, 0.35, 0.35), economy = ColorRGB(1.0, 0.85, 0.2),
         threat = ColorRGB(1.0, 0.5, 0.1), discovery = ColorRGB(0.3, 0.8, 1.0),
@@ -37,8 +33,10 @@ if onClient() then
         return tostring(math.floor(age / 86400)) .. "d"
     end
 
+    -- Every report in the feed is published by the Galactic News Network; the mod that supplied it
+    -- is only a filter ("desk"), and the byline is the reporter's name.
     local function sourceName(article)
-        return SOURCE_NAMES[article.publisherId] or string.upper(article.publisherId or "UNKNOWN")
+        return "GNN"
     end
 
     local function stateText(errorCode, view)
@@ -56,12 +54,12 @@ if onClient() then
     end
 
     local function addSourceEntries(combo)
-        combo:addEntry("", "All Sources")
-        combo:addEntry("cosmic_vault", "Cosmic Vault")
-        combo:addEntry("cosmic_war", "Cosmic War")
-        combo:addEntry("cosmic_overhaul", "Cosmic Overhaul")
-        combo:addEntry("cosmic_chronicles", "Cosmic Chronicles")
-        combo:addEntry("cosmic_ascendancy", "Cosmic Ascendancy")
+        combo:addEntry("", "All Desks")
+        combo:addEntry("cosmic_vault", "Markets & Weather")
+        combo:addEntry("cosmic_war", "War Desk")
+        combo:addEntry("cosmic_overhaul", "Trade Desk")
+        combo:addEntry("cosmic_chronicles", "Chronicles Desk")
+        combo:addEntry("cosmic_ascendancy", "Eclipse Desk")
     end
 
     local function addTopicEntries(combo)
@@ -206,7 +204,7 @@ if onClient() then
             article.state or "active", locationText)
         local outcome = type(article.outcome) == "string"
             and ("\n\nOutcome: " .. article.outcome) or ""
-        view.body.text = string.format("Reported by %s • %s ago\nThread: %s\n\n%s%s",
+        view.body.text = string.format("Reported by %s, Galactic News Network • %s ago\nThread: %s\n\n%s%s",
             article.author or "Unknown", formatAge(article.ageSeconds),
             article.threadId or "Standalone report", article.content or "", outcome)
         view.follow.active = article.threadId ~= nil
@@ -446,7 +444,7 @@ if onClient() then
             leadCount = leadCount + 1
             self.leadsList:addRow(lead.leadId)
             local row = self.leadsList.rows - 1
-            self.leadsList:setEntryNoCallback(0, row, SOURCE_NAMES[lead.ownerId] or lead.ownerId,
+            self.leadsList:setEntryNoCallback(0, row, "GNN",
                 false, false, ColorRGB(0.55, 0.85, 0.82))
             self.leadsList:setEntryNoCallback(1, row,
                 string.format("Sector [%d:%d]", lead.x, lead.y), false, false, ColorRGB(1, 1, 1))
