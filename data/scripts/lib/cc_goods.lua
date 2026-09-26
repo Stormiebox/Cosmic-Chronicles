@@ -22,13 +22,4 @@ function ChronicleGoods.RegisterAll()
     return true
 end
 
-function ChronicleGoods.GetDefinitions()
-    local result = {}
-    for index, definition in ipairs(GOODS) do
-        result[index] = {}
-        for key, value in pairs(definition) do result[index][key] = value end
-    end
-    return result
-end
-
 return ChronicleGoods

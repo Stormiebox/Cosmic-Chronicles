@@ -5,18 +5,13 @@ local News = include("cosmicvaultnews")
 local Dialogue = include("cosmicvaultdialogue")
 local ChronicleState = include("cc_state")
 local VanillaEvidence = include("cc_vanilla_evidence")
+local invokeCoordinator = include("cc_coordinator_client").Invoke
 
 -- namespace ChroniclePlayerController
 ChroniclePlayerController = {}
 local self = ChroniclePlayerController
-local unpackValues = table.unpack or unpack
-
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
 
 local OWNER = "data/scripts/player/background/cc_player_controller.lua"
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
 local SECTOR_OBSERVER = "data/scripts/sector/cc_sector_observer.lua"
 local LEGACY_EVENT_CONTROLLER = "data/scripts/player/background/cc_event_controller.lua"
 local MAX_QUERY_PAGES = 11
@@ -101,12 +96,6 @@ local function initializeRecord()
     record.migration.provenance.clientSeenArticles = "unrecoverable_imported_unread"
     self.record = {revision = -1}
     return storeRecord(record)
-end
-
-local function invokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
 end
 
 local function authorized(playerIndex)
@@ -407,8 +396,8 @@ end
 
 function ChroniclePlayerController.initialize()
     if not onServer() then return end
-    local valid, validationError = VanillaEvidence.Validate()
-    if not valid then self.blocked = validationError return end
+    local catalogValid, validationError = VanillaEvidence.Validate()
+    if not catalogValid then self.blocked = validationError return end
     if not initializeRecord() then return end
     player():registerCallback("onSectorEntered", "onSectorEntered")
     player():registerCallback("onScriptAdded", "onScriptAdded")

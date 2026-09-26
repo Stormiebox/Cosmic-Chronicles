@@ -1,24 +1,14 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
+local invokeCoordinator = include("cc_coordinator_client").Invoke
+
 -- namespace ChronicleProbeTracker
 ChronicleProbeTracker = {}
 local self = ChronicleProbeTracker
-local unpackValues = table.unpack or unpack
-
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
 self.eventId = nil
 self.timeout = 180
 self.elapsed = 0
 self.escaping = false
-
-local function invokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
-end
 
 local function resolve(nextState, summary)
     local event = invokeCoordinator("getEvent", self.eventId)

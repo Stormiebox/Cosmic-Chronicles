@@ -48,9 +48,7 @@ function AncientCache.spawn(eventId, seed, eventType)
 
     if not valid(cache) then EventContract.Fail(eventId, "cache_creation_failed") return end
 
-    if type(eventId) == "string" then
-        EventContract.Tag(cache, eventId, taggedType)
-    end
+    EventContract.Tag(cache, eventId, taggedType)
     cache.title = flavor.title
     cache:addScriptOnce("data/scripts/entity/cc_blackbox.lua")
 

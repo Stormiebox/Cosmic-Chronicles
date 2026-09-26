@@ -281,11 +281,6 @@ function ChronicleState.NewInteraction(options, currentTime)
     }, nil
 end
 
-function ChronicleState.RevisionMatches(record, expectedRevision)
-    return type(record) == "table" and finiteInteger(expectedRevision)
-        and record.revision == expectedRevision
-end
-
 function ChronicleState.Transition(record, nextState, transitions, fields, currentTime)
     if type(record) ~= "table" or type(record.state) ~= "string"
             or type(nextState) ~= "string" or type(transitions) ~= "table" then

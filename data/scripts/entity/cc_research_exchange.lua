@@ -6,18 +6,13 @@ include("stringutility")
 
 local Data = include("cosmicvaultdata")
 local ChronicleState = include("cc_state")
+local invokeCoordinator = include("cc_coordinator_client").Invoke
 
 -- namespace ChronicleResearchExchange
 ChronicleResearchExchange = {}
 local self = ChronicleResearchExchange
-local unpackValues = table.unpack or unpack
-
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
 
 local OWNER = "data/scripts/entity/cc_research_exchange.lua"
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
 local REWARD_CREDITS = 1000000
 local REWARD_REPUTATION = 1500
 
@@ -26,12 +21,6 @@ self.blocked = nil
 
 local function now()
     return Server().unpausedRuntime
-end
-
-local function invokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
 end
 
 local function store(record)
@@ -77,9 +66,9 @@ end
 
 local function resolvePlayer()
     local buyer, ship, targetPlayer = getInteractingFaction(callingPlayer)
-    if not buyer or not ship or not targetPlayer then return nil, nil, nil, "invalid_interactor" end
-    if ship:getNearestDistance(Entity()) > 1000 then return nil, nil, nil, "too_far" end
-    return buyer, ship, targetPlayer, nil
+    if not buyer or not ship or not targetPlayer then return nil end
+    if ship:getNearestDistance(Entity()) > 1000 then return nil end
+    return buyer, targetPlayer
 end
 
 function ChronicleResearchExchange.initialize()
@@ -118,7 +107,7 @@ end
 
 function ChronicleResearchExchange.exchangeServer()
     if not onServer() then return end
-    local buyer, ship, targetPlayer, playerError = resolvePlayer()
+    local buyer, targetPlayer = resolvePlayer()
     if not targetPlayer then return end
     if self.blocked or not self.record or self.record.state ~= "available" then return end
     local fragments = tonumber(targetPlayer:getValue("cc_log_fragments")) or 0
@@ -130,7 +119,7 @@ function ChronicleResearchExchange.exchangeServer()
 
     local resultEvidence = {credits = REWARD_CREDITS, reputation = REWARD_REPUTATION,
         stationFactionIndex = Entity().factionIndex, factionIndex = buyer.index}
-    local receipt, receiptError, created = invokeCoordinator("prepareInteractionReceipt",
+    local receipt, _, created = invokeCoordinator("prepareInteractionReceipt",
         OWNER, tostring(Entity().id), "research_exchange", targetPlayer.index,
         {fragmentsBefore = fragments, entityId = tostring(Entity().id),
             receiptDiscriminator = "cycle:" .. tostring(self.record.cycle or 1)}, resultEvidence)

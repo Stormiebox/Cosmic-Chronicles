@@ -24,9 +24,7 @@ function GhostShipEvent.spawn(eventId, seed)
 
     local ghost = ShipGenerator.createFreighterShip(faction, SectorGenerator(x,y):getPositionInSector())
     if not valid(ghost) then EventContract.Fail(eventId, "ghost_ship_creation_failed") return end
-    if type(eventId) == "string" then
-        EventContract.Tag(ghost, eventId, "ghost_ship")
-    end
+    EventContract.Tag(ghost, eventId, "ghost_ship")
     ghost.title = "Drifting Ghost Ship"%_T
     ghost:addScriptOnce("data/scripts/entity/cc_ghostship.lua")
 

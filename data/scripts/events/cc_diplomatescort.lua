@@ -26,9 +26,7 @@ function DiplomatEscort.spawn(eventId, seed)
 
     local diplomat = ShipGenerator.createFreighterShip(faction, SectorGenerator(x,y):getPositionInSector())
     if not valid(diplomat) then EventContract.Fail(eventId, "diplomat_creation_failed") return end
-    if type(eventId) == "string" then
-        EventContract.Tag(diplomat, eventId, "stranded_diplomat")
-    end
+    EventContract.Tag(diplomat, eventId, "stranded_diplomat")
     diplomat.title = "Stranded Diplomat"%_T
     diplomat:addScriptOnce("data/scripts/entity/cc_diplomat.lua")
 

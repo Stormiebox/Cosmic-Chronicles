@@ -1,13 +1,8 @@
 local Data = include("cosmicvaultdata")
 local ChronicleState = include("cc_state")
+local CoordinatorClient = include("cc_coordinator_client")
 
 local ChronicleInteractionController = {}
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
-local unpackValues = table.unpack or unpack
-
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
 
 local function copy(value)
     return ChronicleState.DeepCopy(value)
@@ -17,11 +12,7 @@ function ChronicleInteractionController.Now()
     return Server().unpausedRuntime
 end
 
-function ChronicleInteractionController.InvokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
-end
+ChronicleInteractionController.InvokeCoordinator = CoordinatorClient.Invoke
 
 function ChronicleInteractionController.Store(entity, current, record)
     record.revision = (current and current.revision or -1) + 1

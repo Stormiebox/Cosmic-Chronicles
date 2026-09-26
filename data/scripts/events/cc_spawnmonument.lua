@@ -35,9 +35,7 @@ function initialize(eventId, seed)
 
     local station = sector:createEntity(desc)
     if not valid(station) then EventContract.Fail(eventId, "monument_creation_failed") return end
-    if type(eventId) == "string" then
-        EventContract.Tag(station, eventId, "cultural_monument")
-    end
+    EventContract.Tag(station, eventId, "cultural_monument")
     station:addScriptOnce("entity/cc_factionmonument.lua")
 
     -- Use the vanilla API property to ensure it cannot be destroyed by stray pirate attacks

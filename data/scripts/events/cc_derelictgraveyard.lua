@@ -23,8 +23,10 @@ function initialize(eventId, seed)
     local count = random():getInt(3, 5)
     for i = 1, count do
         local ship = ShipGenerator.createMilitaryShip(faction, MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(random():getInt(-500, 500), random():getInt(-500, 500), random():getInt(-500, 500))))
-        ship.durability = 1
-        ship:destroy(ship.index) -- Instantly destroy the ship to generate standard wreckage and explosion VFX
+        if valid(ship) then
+            ship.durability = 1
+            ship:destroy(ship.index) -- Instantly destroy the ship to generate standard wreckage and explosion VFX
+        end
     end
 
     -- Spawn a Black Box stash for players to recover the final log
@@ -32,9 +34,7 @@ function initialize(eventId, seed)
     local position = MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(random():getInt(-50, 50), random():getInt(-50, 50), random():getInt(-50, 50)))
     local stash = generator:createStash(position)
     if not valid(stash) then EventContract.Fail(eventId, "black_box_creation_failed") return end
-    if type(eventId) == "string" then
-        EventContract.Tag(stash, eventId, "graveyard")
-    end
+    EventContract.Tag(stash, eventId, "graveyard")
     stash.title = "Flight Recorder (Black Box)"%_T
     stash:removeScript("stash.lua")
     stash:addScriptOnce("entity/cc_blackbox.lua")

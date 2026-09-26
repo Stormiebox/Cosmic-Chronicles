@@ -1,17 +1,12 @@
 package.path = package.path .. ";data/scripts/lib/?.lua"
 
 local Territory = include("cosmicvaultterritory")
+local invokeCoordinator = include("cc_coordinator_client").Invoke
 
 -- namespace ChronicleSectorObserver
 ChronicleSectorObserver = {}
 local self = ChronicleSectorObserver
-local unpackValues = table.unpack or unpack
 
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
-
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
 local MATERIALIZER = "data/scripts/sector/cc_event_materializer.lua"
 local RUMORMONGER = "data/scripts/entity/cosmicchronicles_rumormonger.lua"
 local RESEARCH_EXCHANGE = "data/scripts/entity/cc_research_exchange.lua"
@@ -32,12 +27,6 @@ local function attachEntity(entity)
     if not valid(entity) then return end
     if entity.isStation then attachStation(entity) end
     if entity:getValue("behemoth_boss") == true then entity:addScriptOnce(BEHEMOTH_TRACKER) end
-end
-
-local function invokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
 end
 
 local function observeLegacy(x, y)

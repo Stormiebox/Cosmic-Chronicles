@@ -1,5 +1,6 @@
 # 🪐 Cosmic Chronicles: Detailed Features
 
+![Version](https://img.shields.io/badge/version-4.0.0-6f42c1?style=flat-square)
 ![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
 
 Cosmic Chronicles is the narrative and presentation layer of the Cosmic series. It reports verified events, supplies contextual dialogue, and creates bounded Chronicle-owned aftermath encounters without taking ownership of another mod's mechanics.

@@ -33,18 +33,16 @@ function spawn(eventId, seed)
         local position = generator:getPositionInSector()
         
         local container = sector:createWreckage(plan, position)
-        if valid(container) and type(eventId) == "string" then
+        if valid(container) then
             EventContract.Tag(container, eventId, "hidden_stash")
             spawned[#spawned + 1] = container
-        end
-        if valid(container) then
-        container.title = "Hidden Stash"%_T
-        
-        container:addScript("data/scripts/entity/stash.lua")
-        
-        if random():test(0.25) then
-            container:addScript("data/scripts/entity/cc_blackbox.lua")
-        end
+            container.title = "Hidden Stash"%_T
+
+            container:addScript("data/scripts/entity/stash.lua")
+
+            if random():test(0.25) then
+                container:addScript("data/scripts/entity/cc_blackbox.lua")
+            end
         end
     end
 

@@ -1,6 +1,6 @@
 # 🪐 Cosmic Chronicles: Player Guide
 
-![Version](https://img.shields.io/badge/version-3.2.3-6f42c1?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.0.0-6f42c1?style=flat-square)
 ![Avorion](https://img.shields.io/badge/Avorion-2.5.13-2f81f7?style=flat-square)
 
 Have you ever docked at a station and wondered what the locals are actually thinking? In the vast, procedurally generated universe of Avorion, space can feel a little quiet. **Cosmic Chronicles** was built to change that, turning the cold math of background simulations into stories.

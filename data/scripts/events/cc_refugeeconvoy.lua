@@ -27,17 +27,15 @@ function initialize(eventId, seed)
     local spawned = {}
     for i = 1, count do
         local ship = ShipGenerator.createFreighterShip(faction, MatrixLookUpPosition(-vec3(1,0,0), vec3(0,1,0), vec3(random():getInt(-500, 500), random():getInt(-500, 500), random():getInt(-500, 500))))
-        if valid(ship) and type(eventId) == "string" then
+        if valid(ship) then
             EventContract.Tag(ship, eventId, "refugee_convoy")
             spawned[#spawned + 1] = ship
-        end
-        if valid(ship) then
-        ship.title = "Refugee Transport"%_T
-        -- createFreighterShip always attaches civilship.lua, which registers its own competing
-        -- interactions and can worsen relations via its threaten() path.
-        ship:removeScript("data/scripts/entity/civilship.lua")
-        ship:addScriptOnce("entity/cc_refugeedialogue.lua")
-        ship:addScriptOnce("entity/deleteonplayersleft.lua")
+            ship.title = "Refugee Transport"%_T
+            -- createFreighterShip always attaches civilship.lua, which registers its own competing
+            -- interactions and can worsen relations via its threaten() path.
+            ship:removeScript("data/scripts/entity/civilship.lua")
+            ship:addScriptOnce("entity/cc_refugeedialogue.lua")
+            ship:addScriptOnce("entity/deleteonplayersleft.lua")
         end
     end
 

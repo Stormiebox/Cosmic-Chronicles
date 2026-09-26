@@ -181,11 +181,14 @@ Chronicles itself. Cosmic Starfall remains outside this integration.
   from an earlier retry cycle: the `materializing → active` success transition, the bounty ambush's
   non-ambiguous boss-kill resolution, and the sector observer's `retryable → materializing` retry
   attempt. All three now explicitly pass `false` for both fields on their success path.
-- [Verification] **Offline Gate Completed:** Sixteen Chronicle fixtures pass 1,260 assertions; the
+- [Verification] **Offline Gate Completed:** Seventeen Chronicle fixtures pass 1,283 assertions; the
   prior Vault record, materialization, market, typed-turret, weather, Rift, and anomaly suites also
   pass. All surviving changed Lua files compile and the five affected mods pass the Avorion linter.
   In-game UI, multiplayer, callback timing, restart, Linux-server, and performance checks remain in
-  the dedicated live-QA phase.
+  the dedicated live-QA phase. The seventeenth fixture (`test_retention.lua`) covers the retention
+  entry below; `test_dialogue_catalog.lua` now calls `Catalog.ensurePopulated()`, and the
+  interactions, player-controller, and materializer fixtures load the new `cc_coordinator_client.lua`
+  through their fake `include` maps.
 - [Docs] **In-Game Codex Corrected For Accuracy (`infoCc.lua`):** Several Full Feature Breakdown
   articles described mechanics that never shipped or had drifted from the live numbers — a War Heat
   threshold that doesn't exist for Refugee Convoys/Graveyards (they're actually driven by Cosmic War
@@ -196,6 +199,104 @@ Chronicles itself. Cosmic Starfall remains outside this integration.
   as if they were live, a fabricated "Scout Mission Fix" vanilla bugfix claim, and a Stock
   Market/"Gold Rush" economy pitch for a system that no longer mutates anything. Rewrote each article
   to match what the code actually does today.
+- [Reliability] **Chronicle Events Now Expire And Finished Records Are Pruned
+  (`cc_coordinator.lua`):** `expiresAt` was stored on every event and never applied, although the
+  design promised that expiry abandons unmaterialized work. Nothing removed finished events or
+  receipts either, so `ChronicleState.LIMITS` (256 events, 1,024 receipts) would eventually be hit:
+  `createEvent` and `prepareRuleReceipt` then return `event_limit_reached` / `receipt_limit_reached`,
+  `processArticle` fails on every article that needs a new receipt, News health reads `degraded`, and
+  the narrative-rule engine stays dead until an administrator intervenes. Receipts are keyed per
+  article revision per rule, so an active War or Vault feed fills the receipt limit faster than the
+  raw article count suggests. An unmaterialized event also held its coordinate forever through
+  `findCoordinateEvent`. A maintenance pass now runs every 30 unpaused seconds from `updateServer`:
+  - Events in `pending`, `prepared`, or `retryable` whose `expiresAt` has passed transition to
+    `abandoned` (the only terminal state all three may enter under `EVENT_TRANSITIONS`) with an
+    `expired` outcome. Events that already exist in a sector are left to their own scripts.
+  - Before that transition the event's Vault `chronicles_event` queue entry is claimed and completed
+    (`releaseQueueEntry`). Vault's `PruneMaterializations` only removes `succeeded` entries, and
+    `QueueMaterialization` rejects a different payload for any existing entry regardless of state, so
+    leaving the entry pending would have made every later event at that coordinate fail with
+    `payload_conflict`. Completing it lets the coordinate age out through Vault's normal seven-day
+    tombstone. An entry that is already finished or was never queued counts as released; an entry in
+    `repair_required`/`failed_permanent`, or a `retryable` entry that is not yet due, keeps its event
+    unchanged and is retried on a later pass.
+  - `succeeded`, `expired`, and `abandoned` events are removed after 24 unpaused hours, or oldest
+    first whenever the record is within 16 of the 256-event limit. `failed_permanent` events are never
+    pruned because `collectRepairFindings` lists them for administrators.
+  - At the end of each completed news reconcile, `narrative_rule` receipts in `succeeded` or
+    `abandoned` state, at least one hour old, are removed when their source article has left the
+    reconcile window or now has a newer revision, so a pruned receipt can never be reprocessed. The
+    window is only used when every online audience was read (more than 16 online players, or one
+    failed audience query, skips the pruning for that cycle). Prepared, repair-required, and failed
+    receipts and every payout, interaction, and milestone receipt are never pruned, since they are the
+    double-payment guard.
+  - `queueDerivedEvent` now gives an event without an explicit expiry a six-hour lifetime. The
+    refugee-lead hidden stash carried none, so it would otherwise never lapse. Rule-driven hidden
+    stashes keep their existing three-hour expiry. The 24-hour, one-hour, six-hour, and 16-event
+    values are constants at the top of the file.
+  Covered by `test_retention.lua` (expiry, queue release, repair-state queue entry left alone, legacy
+  events without an expiry, retention age, limit headroom, `failed_permanent` kept, each receipt
+  class, derived expiry). Not yet exercised in game.
+- [Bugfix] **Bounty Ambush Reward Lost After A Sector Reload, And A Failed Spawn Could Never Retry
+  (`cc_bounty_ambush.lua`):** The boss's `onDestroyed` callback was registered on the boss entity
+  inside `spawn()` only. Callbacks are not saved, and when a sector reloads from disk the engine calls
+  `initialize()` with no arguments (the `_restoring` global is set) before `restore()`. A boss killed
+  after the sector had unloaded and reloaded therefore never reached `onBossDestroyed`: no reward was
+  paid, and the event stayed `active` because `cc_sector_observer.lua` deliberately skips
+  `bounty_ambush` in its own destroyed handling. The callback is now a sector-level `onDestroyed`
+  registered in `initialize()` on every load, and `onBossDestroyed` returns unless the destroyed entity
+  matches the recorded `bossId` (a sector-wide callback fires for every destroyed entity, so a missing
+  `bossId` must not match). `initialize()` no longer spawns or overwrites `eventId` when `_restoring`.
+  `_restoring` use follows vanilla (`entity/ai/patrol.lua`, `entity/crewtransport.lua`,
+  `entity/utility/delayeddelete.lua`). The two failure paths, `boss_creation_failed` and
+  `partial_bounty_spawn`, now call `terminate()`. Before, the script stayed attached and the
+  materializer's retry called `addScriptOnce`, which returns the idle instance without running
+  `initialize()`, so a first failed spawn could never recover and the event used up its five attempts.
+- [Bugfix] **Materializer Ended Itself On Sector Reload (`cc_event_materializer.lua`):** After a reload
+  from disk `initialize()` receives no arguments, fails its argument check, and called `terminate()`
+  before `restore()` could refill `eventId`, `claimant`, and `spawnRequested`. A materialization that
+  was in flight when its sector unloaded was dropped and the event stayed `materializing`.
+  `initialize()` now returns early when `_restoring` is set and lets `restore()` rebuild the state.
+- [Bugfix] **`getEvent`, `getReceipt`, And `getRepairStatus` Always Returned `not_found` As Their Error
+  (`cc_coordinator.lua`):** Each ended in `x and copy(x) or nil, x and nil or "not_found"`. `x and nil`
+  is always falsy, so the second return value was `"not_found"` even when the record existed. Callers
+  that only tested the first value were unaffected, which hid it. All four sites (`getRepairStatus` has
+  two) now return explicitly.
+- [Bugfix] **Galactic News Topic Filter Passed `gsub`'s Match Count As A Color
+  (`player/ui/cc_newsboard.lua`):** `combo:addEntry(topic, topic:gsub("^%l", string.upper))` passes both
+  of `gsub`'s return values because it is the last argument, and `ValueComboBox:addEntry(value, entry,
+  color)` takes a color third. The call is now parenthesized. A sweep of every `gsub` call in the mod
+  found no other trailing-argument case (`string.lower(string.gsub(...))` in `cc_state.lua` is safe,
+  since `string.lower` ignores extra arguments).
+- [Bugfix] **Rumormonger Cached `generic` As A Station's Type Permanently
+  (`cosmicchronicles_rumormonger.lua`):** `stationType()` stored its fallback `generic` in
+  `cc_station_type`. A station observed before its merchant scripts attach (one created while the
+  sector is loaded) kept that value forever and never received its shipyard, casino, or trading-post
+  rumors. Only a matched type is cached now; `generic` is recomputed on each call.
+- [UI] **Refugee Ships That Can No Longer Be Helped Now Say So (`cc_refugeedialogue.lua`):** All ships
+  of one convoy share one event, so once the first is helped the event is `succeeded` and the others
+  returned from `donate` without a word. They now send "The convoy has already received emergency
+  aid." The one-aid-per-convoy rule itself is unchanged.
+- [Refactor] **One Coordinator Client (`lib/cc_coordinator_client.lua`):** Seven scripts each carried
+  their own copy of `packValues`, `unpackValues`, and an `invokeCoordinator` wrapper around
+  `Galaxy():invokeFunction` (`cc_bounty_ambush.lua`, `cc_event_materializer.lua`,
+  `cc_sector_observer.lua`, `cc_probe_tracker.lua`, `cc_research_exchange.lua`,
+  `cc_interaction_controller.lua`, `cc_player_controller.lua`). They now share
+  `CoordinatorClient.Invoke`, and the controller's public `InvokeCoordinator` points at it. Behavior is
+  identical: a nonzero status returns `nil, "coordinator_unavailable"`, otherwise the coordinator's
+  results follow with nils preserved. `cc_newsboard.lua`'s `invokeController` (player-scoped) and the
+  two command scripts' direct calls are different call shapes and were left as they are.
+- [Cleanup] **Dead Code And Unused Locals:** Removed `ChronicleState.RevisionMatches` and
+  `ChronicleGoods.GetDefinitions`, which had no reference anywhere in the suite, the fixtures, or the
+  docs. Removed `playerError`, `receiptError`, and the unused `ship` return from
+  `cc_research_exchange.lua`'s `resolvePlayer`, whose error strings nothing read. Removed the
+  `type(eventId) == "string"` re-checks that followed an early return already guaranteeing it in
+  `cc_ancientdatacache.lua`, `cc_diplomatescort.lua`, `cc_ghostship.lua`, `cc_hiddenstash.lua`,
+  `cc_refugeeconvoy.lua`, `cc_rogueaiprobe.lua`, `cc_spawnmonument.lua`, and
+  `cc_derelictgraveyard.lua`, and merged the two `if valid(...)` blocks in `cc_hiddenstash.lua` and
+  `cc_refugeeconvoy.lua`, which also fixes their indentation. `cc_derelictgraveyard.lua` now checks
+  `valid(ship)` before setting `durability` and calling `destroy`. Renamed a local `valid` in
+  `cc_player_controller.lua`'s `initialize` that shadowed the global `valid()`.
 
 ## [v3.2.3]
 

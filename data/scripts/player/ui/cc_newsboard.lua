@@ -68,7 +68,9 @@ if onClient() then
         combo:addEntry("", "All Topics")
         for _, topic in ipairs({"conflict", "economy", "threat", "discovery", "politics",
             "humanitarian", "weather", "rift", "captain", "general"}) do
-            combo:addEntry(topic, topic:gsub("^%l", string.upper))
+            -- gsub returns (text, count) and addEntry's third parameter is a color, so the
+            -- call is parenthesised to pass only the capitalised text.
+            combo:addEntry(topic, (topic:gsub("^%l", string.upper)))
         end
     end
 

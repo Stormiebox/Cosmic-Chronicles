@@ -8,27 +8,16 @@ local PlanGenerator = include("plangenerator")
 local Balancer = include("galaxy")
 local ShipUtility = include("shiputility")
 local EventContract = include("cc_event_contract")
+local invokeCoordinator = include("cc_coordinator_client").Invoke
 include("stringutility")
 
 -- namespace BountyAmbush
 BountyAmbush = {}
 local self = BountyAmbush
-local unpackValues = table.unpack or unpack
 
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
-
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
 local REWARD = 2500000
 self.eventId = nil
 self.bossId = nil
-
-local function invokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
-end
 
 local function cleanup(entities)
     for _, entity in ipairs(entities) do
@@ -36,9 +25,15 @@ local function cleanup(entities)
     end
 end
 
+-- Runs on every load of this script. After a reload from disk the engine calls initialize()
+-- with no arguments (_restoring is set) and then restore(), so the spawn only happens on the
+-- first run, while the callback below has to be registered again every time.
 function BountyAmbush.initialize(eventId, seed)
+    if not onServer() then return end
+    Sector():registerCallback("onDestroyed", "onBossDestroyed")
+    if _restoring then return end
     self.eventId = eventId
-    if onServer() then BountyAmbush.spawn(eventId, seed) end
+    BountyAmbush.spawn(eventId, seed)
 end
 
 function BountyAmbush.spawn(eventId, seed)
@@ -54,7 +49,13 @@ function BountyAmbush.spawn(eventId, seed)
     local plan = PlanGenerator.makeShipPlan(faction, volume)
     local spawned = {}
     local boss = sector:createShip(faction, "", plan, SectorGenerator(x, y):getPositionInSector())
-    if not valid(boss) then EventContract.Fail(eventId, "boss_creation_failed") return end
+    -- A failed spawn detaches the script so the materializer's retry can attach it fresh;
+    -- addScriptOnce would otherwise return the idle instance without running initialize().
+    if not valid(boss) then
+        EventContract.Fail(eventId, "boss_creation_failed")
+        terminate()
+        return
+    end
     EventContract.Tag(boss, eventId, "bounty_ambush")
     spawned[#spawned + 1] = boss
     boss.title = "Dread Pirate Lord"%_T
@@ -76,18 +77,19 @@ function BountyAmbush.spawn(eventId, seed)
     if #spawned ~= expectedCount then
         cleanup(spawned)
         EventContract.Fail(eventId, "partial_bounty_spawn")
+        terminate()
         return
     end
     self.bossId = tostring(boss.id)
-    boss:registerCallback("onDestroyed", "onBossDestroyed")
     EventContract.Complete(eventId, #spawned)
     sector:broadcastChatMessage(boss.title, ChatMessageType.Chatter,
         "So, you're the one trying to collect the bounty? You've walked into your own grave!"%_T)
 end
 
+-- Sector-wide callback: fires for every destroyed entity, so only the recorded boss counts.
 function BountyAmbush.onBossDestroyed(entityId)
-    if not onServer() or type(self.eventId) ~= "string" then return end
-    if self.bossId and entityId and tostring(entityId) ~= self.bossId then return end
+    if not onServer() or type(self.eventId) ~= "string" or not self.bossId then return end
+    if tostring(entityId) ~= self.bossId then return end
     local event = invokeCoordinator("getEvent", self.eventId)
     if not event or event.state ~= "active" then return end
     local players = {Sector():getPlayers()}

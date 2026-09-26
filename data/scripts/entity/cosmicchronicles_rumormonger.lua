@@ -30,12 +30,15 @@ local function stationType(entity)
         {"data/scripts/entity/merchants/resourcedepot.lua", "resourcedepot"},
         {"data/scripts/entity/merchants/fighterfactory.lua", "fighterfactory"},
     }
-    cached = "generic"
     for _, definition in ipairs(types) do
-        if entity:hasScript(definition[1]) then cached = definition[2] break end
+        if entity:hasScript(definition[1]) then
+            entity:setValue("cc_station_type", definition[2])
+            return definition[2]
+        end
     end
-    entity:setValue("cc_station_type", cached)
-    return cached
+    -- "generic" is not cached: a station created in a loaded sector can be observed before
+    -- its merchant scripts are attached, and a cached fallback would hide its real type.
+    return "generic"
 end
 
 local function playerInSector(playerIndex)

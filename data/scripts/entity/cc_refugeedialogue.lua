@@ -81,7 +81,14 @@ function CosmicChroniclesRefugee.donate(recipeId)
             or craft:getNearestDistance(Entity()) > 500 or self.blocked or not self.record
             or self.record.state ~= "available" then return end
     local event = Interaction.InvokeCoordinator("getEvent", self.record.eventId)
-    if not event or event.state ~= "active" then return end
+    if not event then return end
+    -- All ships of one convoy share a single event, so once it has resolved the rest are
+    -- not served; the player is told instead of the offer silently doing nothing.
+    if event.state ~= "active" then
+        targetPlayer:sendChatMessage("Refugee Convoy"%_t, ChatMessageType.Information,
+            "The convoy has already received emergency aid."%_t)
+        return
+    end
     if craft:getCargoAmount(recipe.good) < recipe.amount then return end
 
     local outcome = buildOutcome(self.record.eventId, craft)

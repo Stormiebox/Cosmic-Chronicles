@@ -21,9 +21,7 @@ function RogueAIProbe.spawn(eventId, seed)
 
     local probe = ShipGenerator.createMilitaryShip(faction, SectorGenerator(x,y):getPositionInSector())
     if not valid(probe) then EventContract.Fail(eventId, "probe_creation_failed") return end
-    if type(eventId) == "string" then
-        EventContract.Tag(probe, eventId, "rogue_ai_probe")
-    end
+    EventContract.Tag(probe, eventId, "rogue_ai_probe")
     probe.title = "Rogue AI Probe"%_T
     probe:addScriptOnce("data/scripts/entity/ai/patrol.lua")
 

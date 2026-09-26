@@ -2,17 +2,12 @@ package.path = package.path .. ";data/scripts/lib/?.lua"
 
 local Territory = include("cosmicvaultterritory")
 local EventContract = include("cc_event_contract")
+local invokeCoordinator = include("cc_coordinator_client").Invoke
 
 -- namespace ChronicleEventMaterializer
 ChronicleEventMaterializer = {}
 local self = ChronicleEventMaterializer
-local unpackValues = table.unpack or unpack
 
-local function packValues(...)
-    return {n = select("#", ...), ...}
-end
-
-local COORDINATOR = "data/scripts/galaxy/cc_coordinator.lua"
 local EVENT_SCRIPTS = {
     ancient_data_cache = "data/scripts/events/cc_ancientdatacache.lua",
     bounty_ambush = "data/scripts/events/cc_bounty_ambush.lua",
@@ -33,12 +28,6 @@ self.claimant = nil
 self.eventRevision = nil
 self.elapsed = 0
 self.spawnRequested = false
-
-local function invokeCoordinator(functionName, ...)
-    local values = packValues(Galaxy():invokeFunction(COORDINATOR, functionName, ...))
-    if values[1] ~= 0 then return nil, "coordinator_unavailable" end
-    return unpackValues(values, 2, values.n)
-end
 
 local function retry(errorText)
     local x, y = Sector():getCoordinates()
@@ -66,6 +55,9 @@ end
 
 function ChronicleEventMaterializer.initialize(eventId, eventType, seed, claimant, eventRevision)
     if not onServer() then return end
+    -- A reload from disk calls initialize() without arguments; restore() refills the state
+    -- instead, so the argument check below only applies to a fresh attachment.
+    if _restoring then return end
     self.eventId = eventId
     self.eventType = eventType
     self.seed = seed or 0

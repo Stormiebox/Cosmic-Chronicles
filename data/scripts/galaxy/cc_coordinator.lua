@@ -20,8 +20,18 @@ local RECONCILE_INTERVAL = 10
 local RECONCILE_ARTICLES_PER_TICK = 8
 local MAX_QUERY_PAGES = 11
 local MAX_AUDIENCE_SCANS = 16
+local MAINTENANCE_INTERVAL = 30
+local MAINTENANCE_BATCH = 64
+local EVENT_RETENTION = 24 * 60 * 60
+local EVENT_HEADROOM = 16
+local RECEIPT_MIN_AGE = 60 * 60
+local DERIVED_EVENT_LIFETIME = 6 * 60 * 60
 local TERMINAL_EVENTS = {succeeded = true, expired = true, abandoned = true,
     failed_permanent = true}
+-- Events that never reached a sector: they can lapse without leaving anything behind.
+local UNMATERIALIZED_EVENTS = {pending = true, prepared = true, retryable = true}
+-- failed_permanent is terminal but stays put, because repair scans list it for an administrator.
+local PRUNABLE_EVENTS = {succeeded = true, expired = true, abandoned = true}
 local INTERACTION_OWNERS = {
     ["data/scripts/entity/cc_research_exchange.lua"] = true,
     ["data/scripts/entity/cc_blackbox.lua"] = true,
@@ -47,6 +57,8 @@ self.blocked = {}
 self.pendingArticleIds = {}
 self.reconcileQueue = nil
 self.reconcileTarget = nil
+self.reconcileWindow = nil
+self.nextMaintenanceAt = 0
 self.registrationDue = true
 self.migrationDue = true
 
@@ -405,11 +417,15 @@ local function buildReconcileQueue()
     if not globalArticles then return nil, globalError end
     for articleId, article in pairs(globalArticles) do combined[articleId] = article end
 
+    -- The window is only trustworthy for pruning when every online audience was read.
+    local windowComplete = true
     local players = {Server():getOnlinePlayers()}
+    if #players > MAX_AUDIENCE_SCANS then windowComplete = false end
     for index = 1, math.min(#players, MAX_AUDIENCE_SCANS) do
         local player = players[index]
         if player then
             local visible = queryAudience(player.index)
+            if not visible then windowComplete = false end
             for articleId, article in pairs(visible or {}) do combined[articleId] = article end
         end
     end
@@ -420,7 +436,12 @@ local function buildReconcileQueue()
     self.pendingArticleIds = {}
 
     local queue = {}
-    for _, article in pairs(combined) do queue[#queue + 1] = article end
+    local window = {}
+    for articleId, article in pairs(combined) do
+        queue[#queue + 1] = article
+        window[articleId] = article.revision
+    end
+    self.reconcileWindow = windowComplete and window or nil
     table.sort(queue, function(left, right)
         if left.sequence == right.sequence then return left.articleId < right.articleId end
         return left.sequence < right.sequence
@@ -548,6 +569,102 @@ local function processArticle(article)
     return true
 end
 
+-- Drops finished rule receipts whose source article revision can no longer be reprocessed:
+-- the article has left the reconcile window, or it now has a newer revision. Receipts that are
+-- prepared, failed or awaiting repair, and every payout receipt, are never touched.
+local function pruneStaleRuleReceipts(window)
+    if not window or not self.records.receipts or self.blocked.receipts then return end
+    local currentTime = now()
+    commit("receipts", function(record)
+        local removed = 0
+        for receiptId, receipt in pairs(record.receipts) do
+            if removed >= MAINTENANCE_BATCH then break end
+            if receipt.operationKind == "narrative_rule"
+                    and (receipt.state == "succeeded" or receipt.state == "abandoned")
+                    and currentTime - (receipt.completedAt or receipt.preparedAt or 0)
+                        >= RECEIPT_MIN_AGE then
+                local source = receipt.sourceEvidence or {}
+                if window[source.articleId] ~= source.articleRevision then
+                    record.receipts[receiptId] = nil
+                    removed = removed + 1
+                end
+            end
+        end
+        return removed > 0
+    end)
+end
+
+-- Finishes the Vault queue entry of an event that will never materialize. Vault only prunes
+-- succeeded entries, so completing it (rather than leaving it pending) lets the coordinate age
+-- out normally instead of conflicting with every later event queued there. Entries already
+-- finished or never queued count as released; entries in a repair-visible state are left
+-- for an administrator, and the event stays with them.
+local function releaseQueueEntry(event)
+    local claimant = "chronicles:expire:" .. event.eventId
+    local claim, claimError = Territory.ClaimMaterialization("chronicles_event",
+        event.x, event.y, claimant, 60)
+    if claim then
+        local completed = Territory.CompleteMaterialization("chronicles_event",
+            event.x, event.y, claimant, {eventId = event.eventId, expired = true})
+        return completed ~= nil
+    end
+    return claimError == "missing" or claimError == "succeeded" or claimError == "abandoned"
+end
+
+-- Lapses unmaterialized events past their expiry and prunes finished ones, so the fixed event
+-- limit cannot fill up with history. Events already in a sector are left to their own scripts.
+local function maintainEvents()
+    if not self.records.events or self.blocked.events then return end
+    local currentTime = now()
+    local lapsing = {}
+    for eventId, event in pairs(self.records.events.events) do
+        if #lapsing >= MAINTENANCE_BATCH then break end
+        if UNMATERIALIZED_EVENTS[event.state] and type(event.expiresAt) == "number"
+                and event.expiresAt <= currentTime and releaseQueueEntry(event) then
+            lapsing[#lapsing + 1] = eventId
+        end
+    end
+    commit("events", function(record)
+        local changed = false
+        for _, eventId in ipairs(lapsing) do
+            local event = record.events[eventId]
+            if event and UNMATERIALIZED_EVENTS[event.state] then
+                local abandoned = ChronicleState.Transition(event, "abandoned",
+                    ChronicleState.EVENT_TRANSITIONS, {outcome = {kind = "expired",
+                        summary = "The event expired before it could materialize."}},
+                    currentTime)
+                if abandoned then
+                    record.events[eventId] = abandoned
+                    changed = true
+                end
+            end
+        end
+
+        local prunable = {}
+        for eventId, event in pairs(record.events) do
+            if PRUNABLE_EVENTS[event.state] then
+                prunable[#prunable + 1] = {id = eventId, at = event.updatedAt or 0}
+            end
+        end
+        table.sort(prunable, function(left, right)
+            if left.at == right.at then return left.id < right.id end
+            return left.at < right.at
+        end)
+        local total = count(record.events)
+        local removed = 0
+        for _, candidate in ipairs(prunable) do
+            local aged = currentTime - candidate.at >= EVENT_RETENTION
+            local crowded = total > ChronicleState.LIMITS.events - EVENT_HEADROOM
+            if removed >= MAINTENANCE_BATCH or not (aged or crowded) then break end
+            record.events[candidate.id] = nil
+            total = total - 1
+            removed = removed + 1
+            changed = true
+        end
+        return changed
+    end)
+end
+
 local function reconcileNews()
     if not self.records.state or not self.records.receipts or not self.records.events then
         return nil, "record_unavailable"
@@ -585,8 +702,10 @@ local function reconcileNews()
             record.lastError = nil
             return true
         end)
+        pruneStaleRuleReceipts(self.reconcileWindow)
         self.reconcileQueue = nil
         self.reconcileTarget = nil
+        self.reconcileWindow = nil
     end
     return true
 end
@@ -673,6 +792,10 @@ function ChronicleCoordinator.updateServer(timeStep)
     if self.blocked.rules then return end
     local state = self.records.state
     if not state then return end
+    if now() >= self.nextMaintenanceAt then
+        self.nextMaintenanceAt = now() + MAINTENANCE_INTERVAL
+        maintainEvents()
+    end
     if next(self.pendingArticleIds) or self.reconcileQueue
             or now() >= (state.scheduler.nextReconcileAt or 0) then
         reconcileNews()
@@ -730,7 +853,8 @@ end
 function ChronicleCoordinator.getEvent(eventId)
     if type(eventId) ~= "string" then return nil, "invalid_arguments" end
     local event = self.records.events and self.records.events.events[eventId]
-    return event and copy(event) or nil, event and nil or "not_found"
+    if not event then return nil, "not_found" end
+    return copy(event), nil
 end
 
 function ChronicleCoordinator.queueDerivedEvent(owner, parentEventId, eventType, x, y,
@@ -750,7 +874,7 @@ function ChronicleCoordinator.queueDerivedEvent(owner, parentEventId, eventType,
     if not derivedId then return nil, idError end
     local event, eventError = createEvent({eventId = derivedId, eventType = eventType,
         x = x, y = y, seed = tonumber(triggerEvidence.seed) or 0,
-        expiresAt = triggerEvidence.expiresAt,
+        expiresAt = triggerEvidence.expiresAt or (now() + DERIVED_EVENT_LIFETIME),
         trigger = {kind = "derived_interaction", parentEventId = parentEventId,
             evidence = triggerEvidence}})
     if not event then return nil, eventError end
@@ -867,7 +991,8 @@ end
 function ChronicleCoordinator.getReceipt(receiptId)
     if type(receiptId) ~= "string" then return nil, "invalid_arguments" end
     local receipt = self.records.receipts and self.records.receipts.receipts[receiptId]
-    return receipt and copy(receipt) or nil, receipt and nil or "not_found"
+    if not receipt then return nil, "not_found" end
+    return copy(receipt), nil
 end
 
 function ChronicleCoordinator.transitionPlayerReceipt(owner, playerIndex, receiptId,
@@ -1084,13 +1209,15 @@ function ChronicleCoordinator.getRepairStatus(repairId)
     if not repairs then return nil, "record_unavailable" end
     if repairId then
         local scan = repairs.scans[repairId]
-        return scan and copy(scan) or nil, scan and nil or "not_found"
+        if not scan then return nil, "not_found" end
+        return copy(scan), nil
     end
     local latest
     for _, scan in pairs(repairs.scans) do
         if not latest or (scan.createdAt or 0) > (latest.createdAt or 0) then latest = scan end
     end
-    return latest and copy(latest) or nil, latest and nil or "not_found"
+    if not latest then return nil, "not_found" end
+    return copy(latest), nil
 end
 
 function ChronicleCoordinator.getRepairHistory(repairId)
